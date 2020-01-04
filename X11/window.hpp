@@ -105,6 +105,14 @@ public:
 			XWarpPointer(m_Window->m_Display, None, m_Window->m_Section, 0, 0, 0, 0, _position.x, _position.y);
 		}
 		Vec2<int> GetPosition() const {
+			int xReturned, yReturned;
+
+			int tmpInt; ::Window tmpRoot, tmpWin;
+			XQueryPointer(m_Window->m_Display, m_Window->m_Section, &tmpRoot, &tmpWin, &tmpInt, &tmpInt, &xReturned, &yReturned, (unsigned int*)&tmpInt);
+			
+			return OWL::Vec2<int>(xReturned, yReturned);
+		}
+		Vec2<int> GetPositionFromEvent() const {
 			return m_Position;
 		}
 

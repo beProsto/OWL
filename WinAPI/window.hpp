@@ -7,9 +7,8 @@
 #include <vector>
 
 #include "WinAPI.hpp"
-/*
 #include "context.hpp"
-*/
+
 namespace OWL {
 namespace WinAPI {
 class Window {
@@ -63,6 +62,9 @@ public:
 
 		}
 		Vec2<int> GetPosition() const {
+			return Vec2<int>(0);
+		}
+		Vec2<int> GetPositionFromEvent() const {
 			return Vec2<int>(0);
 		}
 
