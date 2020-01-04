@@ -37,7 +37,6 @@ int Main(const std::vector<std::string>&);
 /* WinAPI */
 struct WinAPI_Data {
 	void* hInstance;
-	void* hPrevInstance;
 	int nCmdShow;	
 };
 WinAPI_Data* g_WinAPI_Data;
@@ -53,7 +52,6 @@ typedef WinAPI::Window Window;
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 	g_WinAPI_Data = new WinAPI_Data;
 	g_WinAPI_Data->hInstance = hInstance;
-	g_WinAPI_Data->hPrevInstance = hPrevInstance;
 	g_WinAPI_Data->nCmdShow = nCmdShow;
 
 	std::vector<std::string> passed;
