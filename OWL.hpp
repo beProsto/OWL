@@ -88,25 +88,6 @@ int main(int argc, char** argv) {
 }
 
 
-#elif defined __APPLE__
-/* Mac stuff */
-#include "Unsupported/window.hpp"
-
-namespace OWL {
-typedef Unsupported::Context Context;
-typedef Unsupported::SoftwareContext SoftwareContext;
-typedef Unsupported::Window Window;
-}
-
-int main(int argc, char** argv) {
-	std::vector<std::string> passed;
-	for(unsigned int i = 0; i < argc; i++) {
-		passed.push_back(argv[i]);
-	}
-	return Main(passed);
-}
-
-
 #endif
 
 #endif/*_OWL_OWL_HPP_HEADER_FILE_GUARD*/
