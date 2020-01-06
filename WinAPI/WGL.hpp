@@ -1,0 +1,6 @@
+#ifndef _OWL_WINAPI_WGL_HPP_HEADER_FILE_GUARD
+#define _OWL_WINAPI_WGL_HPP_HEADER_FILE_GUARD
+
+/* This file will include WGL */
+
+#endif/*_OWL_WINAPI_WGL_HPP_HEADER_FILE_GUARD*/
