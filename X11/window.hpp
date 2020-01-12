@@ -298,7 +298,7 @@ public:
 
 			Gamepad[i].m_JS = open(std::string("/dev/input/js" + std::to_string(i)).c_str(), O_NONBLOCK);
 			if (Gamepad[i].m_JS == -1) {
-				Debug::Out::Print("Could not open joystick[" + std::to_string(i) + "]!\n", Debug::Out::ERROR);
+				Debug::Out::Print("Could not open joystick[" + std::to_string(i) + "]!\n", Debug::Out::ERR);
 			}
 		}
 		m_Context = _context;
@@ -307,7 +307,7 @@ public:
 
 		m_Display = XOpenDisplay(0);
 		if(m_Display == nullptr) {
-			Debug::Out::Print("Display couldn't open!\n", Debug::Out::Type::ERROR);
+			Debug::Out::Print("Display couldn't open!\n", Debug::Out::Type::ERR);
 			assert(false);
 		}
 		m_ScreenID = DefaultScreen(m_Display);
@@ -445,7 +445,7 @@ public:
 
 				Gamepad[i].m_JS = open(std::string("/dev/input/js" + std::to_string(i)).c_str(), O_NONBLOCK);
 				if (Gamepad[i].m_JS == -1) {
-					Debug::Out::Print("Could not open joystick[" + std::to_string(i) + "]!\n", Debug::Out::ERROR);
+					Debug::Out::Print("Could not open joystick[" + std::to_string(i) + "]!\n", Debug::Out::ERR);
 				}
 			}
 		}
@@ -558,7 +558,7 @@ private:
 			if(errno == ENODEV || _self.Gamepad[i].m_JS == -1) {
 				_self.Gamepad[i].m_JS = open(std::string("/dev/input/js" + std::to_string(i)).c_str(), O_NONBLOCK);
 				if(_self.Gamepad[i].m_JS == -1) {
-					Debug::Out::Print("Could not open joystick[" + std::to_string(i) + "]!\n", Debug::Out::ERROR);
+					Debug::Out::Print("Could not open joystick[" + std::to_string(i) + "]!\n", Debug::Out::ERR);
 				}
 			}
 		}
