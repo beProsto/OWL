@@ -57,9 +57,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	std::vector<std::string> passed;
 	
 	{ /* Scope, so that variables created here will be freed when they are not needed */
-		istringstream passedStr(lpCmdLine);
+		std::istringstream passedStr(lpCmdLine);
 		std::string arg;
-		while(std::getline(passedStr, arg, " ")) {
+		while(std::getline(passedStr, arg, ' ')) {
 			passed.push_back(arg);
 		}
 	}

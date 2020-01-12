@@ -57,7 +57,7 @@ protected:
 			};
 			m_Visual = glXChooseVisual(m_Display, *m_ScreenID, attribsGLX);
 			if(m_Visual == nullptr) {
-				Debug::Out::Print("Couldn't choose visual!\n", Debug::Out::Type::ERROR);
+				Debug::Out::Print("Couldn't choose visual!\n", Debug::Out::Type::ERR);
 				return false;
 			}
 
@@ -86,7 +86,7 @@ protected:
 			return true;
 		}
 		else {
-			Debug::Out::Print("Context being created when it already was!\n", Debug::Out::Type::ERROR);
+			Debug::Out::Print("Context being created when it already was!\n", Debug::Out::Type::ERR);
 			return false;
 		}
 	}

@@ -104,7 +104,7 @@ protected:
 			return true;
 		}
 		else {
-			Debug::Out::Print("Context being created when it already was!\n", Debug::Out::Type::ERROR);
+			Debug::Out::Print("Context being created when it already was!\n", Debug::Out::Type::ERR);
 			return false;
 		}
 	}

@@ -9,9 +9,9 @@ class Out {
 public:
 	enum Type {
 		COMM = 0,
-		ERROR = 1
+		ERR = 1,
 	};
-	static void Print(const std::string& _a, Type _t = Type::COMM) {
+	static void Print(const std::string& _a, unsigned int _t = Type::COMM) {
 		#ifndef DEBUG_OUT_SET_OFF
 		#ifndef DEBUG_OUT_SET_COMM_OFF
 		if(_t == Type::COMM) {
@@ -19,12 +19,12 @@ public:
 			return;	
 		}
 		#endif/*DEBUG_OUT_SET_COMM_OFF*/
-		#ifndef DEBUG_OUT_SET_ERROR_OFF
-		if(_t == Type::ERROR) {
+		#ifndef DEBUG_OUT_SET_ERR_OFF
+		if(_t == Type::ERR) {
 			std::cerr << _a;
 			return;	
 		}
-		#endif/*DEBUG_OUT_SET_ERROR_OFF*/
+		#endif/*DEBUG_OUT_SET_ERR_OFF*/
 		#endif/*DEBUG_OUT_SET_OFF*/
 	}
 };

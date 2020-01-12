@@ -77,8 +77,7 @@ protected:
 			m_Created = true;
 			return true;
 		}
-		else {
-			Debug::Out::Print("Context being created when it already was!\n", Debug::Out::Type::ERROR);
+		else {Debug::Out::Print("Context being created when it already was!\n", Debug::Out::Type::ERR);
 			return false;
 		}
 	}
@@ -87,6 +86,8 @@ protected:
 
 protected:
 	Vec2<unsigned int> m_Size;
+	char* m_Data;
+	bool m_Created;
 
 	friend class Window;
 };

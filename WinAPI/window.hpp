@@ -110,11 +110,11 @@ public:
 
 	public:
 		enum Key {
-			ShiftLeft = VK_LShift,
-			ShiftRight = VK_RShift,
-			CtrlLeft = VK_LControl,
-			CtrlRight = VK_RControl,
-			Enter = VK_Return,
+			ShiftLeft = VK_LSHIFT,
+			ShiftRight = VK_RSHIFT,
+			CtrlLeft = VK_LCONTROL,
+			CtrlRight = VK_RCONTROL,
+			Enter = VK_RETURN,
 			CapsLock = VK_CAPITAL,
 			Tab = VK_TAB,
 			Apostrophe = VK_OEM_7,
