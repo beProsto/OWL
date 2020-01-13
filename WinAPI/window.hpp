@@ -68,24 +68,31 @@ public:
 	public:
 		MouseEvent(Window* _window = nullptr) {
 			m_Window = _window;
+			m_Visible = true;
 		}
 		~MouseEvent() {
 
 		}
 
 		void SetVisibility(bool _visible) {
-
+			ShowCursor(_visible);
+			m_Visible = _visible;
 		}
 		bool IsVisible() const {
-			return false;
+			return m_Visible;
 		}
 
 		void SetPosition(const Vec2<int>& _position) {
-
+			POINT p;
+			p.x = _position.x;
+			p.y = _position.y;
+			ClientToScreen(m_Window->m_Hwnd, &p);
+			SetCursorPos(p.x, p.y);
 		}
 		Vec2<int> GetPosition() const {
 			POINT p;
 			GetCursorPos(&p);
+			ScreenToClient(m_Window->m_Hwnd, &p);
 			return Vec2<int>(p.x, p.y);
 		}
 		const Vec2<int>& GetPositionFromEvent() const {
@@ -113,6 +120,7 @@ public:
 		Window* m_Window;
 		int m_Wheel;
 		Vec2<int> m_Position;
+		bool m_Visible;
 
 		friend class Window;
 	};
