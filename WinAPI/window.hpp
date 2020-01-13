@@ -25,7 +25,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
         default:
         	return DefWindowProc(hwnd, msg, wParam, lParam);
     }
-
     return 0;
 }
 
@@ -35,18 +34,21 @@ public:
 	public:
 		GamepadEvent(Window* _window = nullptr) {
 			m_Window = _window;
+			m_LeftStick = Vec2<float>(0.0f);
+			m_RightStick = Vec2<float>(0.0f);
 		}
 		~GamepadEvent() {
+
 		}
 
 		bool IsButtonPressed(unsigned int _buttonID) const {
 			return false;
 		}
 		const Vec2<float>& GetLeftStick() const {
-			return Vec2<float>(0.0f);
+			return m_LeftStick;
 		}
 		const Vec2<float>& GetRightStick() const {
-			return Vec2<float>(0.0f);
+			return m_RightStick;
 		}
 		float GetLeftTrigger() const {
 			return 0.0f;
@@ -57,6 +59,8 @@ public:
 
 	protected:
 		Window* m_Window;
+		Vec2<float> m_LeftStick;
+		Vec2<float> m_RightStick;
 
 		friend class Window;
 	};
@@ -79,11 +83,13 @@ public:
 		void SetPosition(const Vec2<int>& _position) {
 
 		}
-		const Vec2<int>& GetPosition() const {
-			return Vec2<int>(0);
+		Vec2<int> GetPosition() const {
+			POINT p;
+			GetCursorPos(&p);
+			return Vec2<int>(p.x, p.y);
 		}
 		const Vec2<int>& GetPositionFromEvent() const {
-			return Vec2<int>(0);
+			return m_Position;
 		}
 
 		int GetWheelRotation() const {
@@ -91,7 +97,7 @@ public:
 		}
 		
 		bool IsButtonPressed(unsigned int _button) const {
-			return false;
+			return GetKeyState(_button) & 0x100;
 		}
 
 	public:
@@ -106,6 +112,7 @@ public:
 	protected:
 		Window* m_Window;
 		int m_Wheel;
+		Vec2<int> m_Position;
 
 		friend class Window;
 	};
@@ -328,7 +335,7 @@ public:
 	}
 	Vec2<unsigned int> GetSize() const {
 		RECT rect;
-		GetWindowRect(m_Hwnd, &rect);
+		GetClientRect(m_Hwnd, &rect);
 		return Vec2<unsigned int>(rect.right - rect.left, rect.bottom - rect.top);
 	}
 
@@ -508,6 +515,13 @@ private:
 			}
 
 			_self.Keyboard.m_KeyData = {m, _self.m_Event.wParam};
+		}
+		else if(_self.m_Event.message == WM_MOUSEMOVE) {
+			_self.Mouse.m_Position.x = MAKEPOINTS(_self.m_Event.lParam).x;
+			_self.Mouse.m_Position.y = MAKEPOINTS(_self.m_Event.lParam).y;
+		}
+		else if(_self.m_Event.message == WM_MOUSEWHEEL) {
+			_self.Mouse.m_Wheel = GET_WHEEL_DELTA_WPARAM(_self.m_Event.wParam);
 		}
 	}
 

@@ -112,7 +112,7 @@ public:
 			
 			return OWL::Vec2<int>(xReturned, yReturned);
 		}
-		Vec2<int> GetPositionFromEvent() const {
+		const Vec2<int>& GetPositionFromEvent() const {
 			return m_Position;
 		}
 
