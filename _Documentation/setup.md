@@ -14,6 +14,12 @@ A quick tutorial on how to setup OWL.
 	- If using OpenGL
 		- `-lGL -lGLX`
 - If on windows:
-	- (For now unsupported)
+	- `-lgdi32`
+	- `-luser32`
+	- `-lcomctl32`
+	- `-lkernel32`
+	- I found out, that if you are using mingw-w64 compiler with msys2, you don't have to use these flags
+	- If using OpenGL
+		- (For now unsupported)
 - If on mac:
 	- (For now unsupported)
