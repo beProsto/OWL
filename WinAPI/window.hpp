@@ -11,6 +11,24 @@
 
 namespace OWL {
 namespace WinAPI {
+
+LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+    switch(msg) {
+		case WM_CLOSE:
+			DestroyWindow(hwnd);
+			break;
+			
+		case WM_DESTROY:
+			PostQuitMessage(0);
+			break;
+			
+        default:
+        	return DefWindowProc(hwnd, msg, wParam, lParam);
+    }
+
+    return 0;
+}
+
 class Window {
 public:
 	class GamepadEvent {
@@ -61,10 +79,10 @@ public:
 		void SetPosition(const Vec2<int>& _position) {
 
 		}
-		Vec2<int> GetPosition() const {
+		const Vec2<int>& GetPosition() const {
 			return Vec2<int>(0);
 		}
-		Vec2<int> GetPositionFromEvent() const {
+		const Vec2<int>& GetPositionFromEvent() const {
 			return Vec2<int>(0);
 		}
 
@@ -100,8 +118,8 @@ public:
 
 		}
 		
-		bool IsKeyPressed(unsigned int _key) const {
-			return false;
+		bool IsKeyPressed(int _key) const {
+			return GetKeyState(_key) & 0xFFFF0000;
 		}
 
 		KeyData GetKeyData() const {
@@ -237,6 +255,39 @@ public:
 		m_Context = _context;
 		m_Running = true;
 		m_FullScreen = false;
+		m_Title = _title;
+
+		m_ClassName = "WinAPI_Window_ClassName";
+
+		m_Window.cbSize = sizeof(WNDCLASSEX);
+		m_Window.style = 0;
+		m_Window.lpfnWndProc = WndProc;
+		m_Window.cbClsExtra = 0;
+		m_Window.cbWndExtra = 0;
+		m_Window.hInstance = g_WinAPI_Data->hInstance;
+		m_Window.hIcon = nullptr;
+		m_Window.hCursor = nullptr;
+		m_Window.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+		m_Window.lpszMenuName = nullptr;
+		m_Window.lpszClassName = m_ClassName;
+		m_Window.hIconSm = nullptr;
+	
+		if(!RegisterClassEx(&m_Window))
+		{
+			Debug::Out::Print("Error registering the window!", Debug::Out::Type::ERR);
+			return;
+		}
+
+		m_Hwnd = CreateWindowEx(WS_EX_CLIENTEDGE, m_ClassName, &m_Title[0], WS_OVERLAPPEDWINDOW, _position.x, _position.y, _size.x, _size.y, NULL, NULL, g_WinAPI_Data->hInstance, NULL);
+	
+		if(m_Hwnd == NULL)
+		{
+			Debug::Out::Print("Error creating the window!", Debug::Out::Type::ERR);
+			return;
+		}
+	
+		ShowWindow(m_Hwnd, g_WinAPI_Data->nCmdShow);
+		UpdateWindow(m_Hwnd);
 	}
 	~Window() {
 		delete[] Gamepad;
@@ -262,22 +313,29 @@ public:
 	}
 
 	Window& SetPosition(const Vec2<int>& _position) {
+		SetWindowPos(m_Hwnd, 0, _position.x, _position.y, 0, 0, SWP_NOSIZE);
 		return *this;
 	}
 	Vec2<int> GetPosition() const {
-		return Vec2<int>(0);
+		RECT rect;
+		GetWindowRect(m_Hwnd, &rect);
+		return Vec2<int>(rect.left, rect.top);
 	}
 
 	Window& SetSize(const Vec2<unsigned int>& _size) {
+		SetWindowPos(m_Hwnd, 0, 0, 0, _size.x, _size.y, SWP_NOMOVE);
 		return *this;
 	}
 	Vec2<unsigned int> GetSize() const {
-		return Vec2<unsigned int>(0);
+		RECT rect;
+		GetWindowRect(m_Hwnd, &rect);
+		return Vec2<unsigned int>(rect.right - rect.left, rect.bottom - rect.top);
 	}
 
 	Window& SetTitle(const std::string& _title) {
 		if(m_Title != _title) {
 			m_Title = _title;
+			SetWindowText(m_Hwnd, &m_Title[0]);
 		}
 		return *this;
 	}
@@ -323,14 +381,136 @@ private:
 	static void EventLoopPollEvents(Window& _self) {
 		_self.Keyboard.m_KeyData = {"", 0};
 		_self.Mouse.m_Wheel = 0;
+
+		if(GetMessage(&_self.m_Event, 0, 0, 0)) {
+			TranslateMessage(&_self.m_Event);
+			DispatchMessage(&_self.m_Event);
+			
+			PollEventsStandard(_self);
+		}
+		else {
+			_self.Close();
+		}
 	}
 	static void GameLoopPollEvents(Window& _self) {
 		_self.Keyboard.m_KeyData = {"", 0};
 		_self.Mouse.m_Wheel = 0;
-	}
-	static void PollEventsStandard(Window& _self) {	
 
+		while(PeekMessage(&_self.m_Event, 0, 0, 0, PM_REMOVE))
+		{
+			if(_self.m_Event.message == WM_QUIT) {
+				_self.Close();
+			}
+			TranslateMessage(&_self.m_Event);
+			DispatchMessage(&_self.m_Event);
+
+			PollEventsStandard(_self);
+		}
 	}
+
+	static void PollEventsStandard(Window& _self) {
+		if(_self.m_Event.message == WM_KEYDOWN) {
+			std::string m(1, '\0');
+			char a = MapVirtualKey(_self.m_Event.wParam, MAPVK_VK_TO_CHAR);
+			if(_self.Keyboard.IsKeyPressed(VK_SHIFT) && a >= 65 && a <= 90) {
+				m[m.size() - 1] = a;
+			}
+			else if(a >= 65 && a <= 90) {
+				m[m.size() - 1] = a + 32;
+			}
+			else if(_self.Keyboard.IsKeyPressed(VK_SHIFT) && a == '`') {
+				m[m.size() - 1] = '~';
+			}
+			else if(_self.Keyboard.IsKeyPressed(VK_SHIFT) && a == '1') {
+				m[m.size() - 1] = '!';
+			}
+			else if(_self.Keyboard.IsKeyPressed(VK_SHIFT) && a == '2') {
+				m[m.size() - 1] = '@';
+			}
+			else if(_self.Keyboard.IsKeyPressed(VK_SHIFT) && a == '3') {
+				m[m.size() - 1] = '#';
+			}
+			else if(_self.Keyboard.IsKeyPressed(VK_SHIFT) && a == '4') {
+				m[m.size() - 1] = '$';
+			}
+			else if(_self.Keyboard.IsKeyPressed(VK_SHIFT) && a == '5') {
+				m[m.size() - 1] = '%';
+			}
+			else if(_self.Keyboard.IsKeyPressed(VK_SHIFT) && a == '6') {
+				m[m.size() - 1] = '^';
+			}
+			else if(_self.Keyboard.IsKeyPressed(VK_SHIFT) && a == '7') {
+				m[m.size() - 1] = '&';
+			}
+			else if(_self.Keyboard.IsKeyPressed(VK_SHIFT) && a == '8') {
+				m[m.size() - 1] = '*';
+			}
+			else if(_self.Keyboard.IsKeyPressed(VK_SHIFT) && a == '9') {
+				m[m.size() - 1] = '(';
+			}
+			else if(_self.Keyboard.IsKeyPressed(VK_SHIFT) && a == '0') {
+				m[m.size() - 1] = ')';
+			}
+			else if(_self.Keyboard.IsKeyPressed(VK_SHIFT) && a == '-') {
+				m[m.size() - 1] = '_';
+			}
+			else if(_self.Keyboard.IsKeyPressed(VK_SHIFT) && a == '=') {
+				m[m.size() - 1] = '+';
+			}
+			else if(_self.Keyboard.IsKeyPressed(VK_SHIFT) && a == '[') {
+				m[m.size() - 1] = '{';
+			}
+			else if(_self.Keyboard.IsKeyPressed(VK_SHIFT) && a == ']') {
+				m[m.size() - 1] = '}';
+			}
+			else if(_self.Keyboard.IsKeyPressed(VK_SHIFT) && a == '\\') {
+				m[m.size() - 1] = '|';
+			}
+			else if(_self.Keyboard.IsKeyPressed(VK_SHIFT) && a == ';') {
+				m[m.size() - 1] = ':';
+			}
+			else if(_self.Keyboard.IsKeyPressed(VK_SHIFT) && a == '\'') {
+				m[m.size() - 1] = '"';
+			}
+			else if(_self.Keyboard.IsKeyPressed(VK_SHIFT) && a == ',') {
+				m[m.size() - 1] = '<';
+			}
+			else if(_self.Keyboard.IsKeyPressed(VK_SHIFT) && a == '.') {
+				m[m.size() - 1] = '>';
+			}
+			else if(_self.Keyboard.IsKeyPressed(VK_SHIFT) && a == '/') {
+				m[m.size() - 1] = '?';
+			}
+			else {
+				m[m.size() - 1] = a;
+			}
+
+			if(_self.m_Event.wParam == VK_TAB) {
+				m[m.size() - 1] = '\t';
+			}
+			else if(_self.m_Event.wParam == VK_ESCAPE) {
+				m[m.size() - 1] = '\e';
+			}
+			else if(_self.m_Event.wParam == VK_BACK) {
+				m[m.size() - 1] = '\b';
+			}
+			else if(_self.m_Event.wParam == VK_RETURN) {
+				m[m.size() - 1] = '\n';
+			}
+			else if(_self.m_Event.wParam == VK_SHIFT) {
+				m = "";
+			}
+			else if(_self.m_Event.wParam == VK_CONTROL) {
+				m = "";
+			}
+			else if(_self.m_Event.wParam == VK_MENU) {
+				m = "";
+			}
+
+			_self.Keyboard.m_KeyData = {m, _self.m_Event.wParam};
+		}
+	}
+
 
 public:
 	MouseEvent Mouse;
@@ -348,6 +528,11 @@ protected:
 	std::string m_Title;
 	bool m_Running;
 	bool m_FullScreen;
+
+	LPSTR m_ClassName;
+	WNDCLASSEX m_Window;
+	HWND m_Hwnd;
+	MSG m_Event;
 };
 
 }

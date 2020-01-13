@@ -35,8 +35,9 @@ int Main(const std::vector<std::string>&);
 
 #ifdef _WIN32
 /* WinAPI */
+#include "WinAPI/WinAPI.hpp"
 struct WinAPI_Data {
-	void* hInstance;
+	HINSTANCE hInstance;
 	int nCmdShow;	
 };
 WinAPI_Data* g_WinAPI_Data;
