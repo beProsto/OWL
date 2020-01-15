@@ -21,8 +21,11 @@ public:
 	}
 
 protected:
-	virtual bool Create() {
+	virtual bool Create(HWND _hwnd) {
 		return false;
+	}
+	virtual void Destroy() {
+		
 	}
 
 	friend class Window;
@@ -72,14 +75,20 @@ public:
 	}
 
 protected:
-	bool Create() {
+	bool Create(HWND _hwnd) {
 		if(!m_Created) {
 			m_Created = true;
+
+			m_Hwnd = _hwnd;
+
 			return true;
 		}
 		else {Debug::Out::Print("Context being created when it already was!\n", Debug::Out::Type::ERR);
 			return false;
 		}
+	}
+	void Destroy() {
+		
 	}
 
 	friend class Window;
@@ -88,6 +97,8 @@ protected:
 	Vec2<unsigned int> m_Size;
 	char* m_Data;
 	bool m_Created;
+
+	HWND m_Hwnd;
 
 	friend class Window;
 };

@@ -17,6 +17,7 @@ public:
 
 public:
 	GLContext& SwapBuffers() {
+		::SwapBuffers(m_Hdc);
 		return *this;
 	}
 
@@ -25,9 +26,31 @@ public:
 	}
 
 protected:
-	bool Create() {
+	bool Create(HWND _hwnd) {
 		if(!m_Created) {
 			m_Created = true;
+
+			m_Hwnd = _hwnd;
+			m_Hdc = GetDC(m_Hwnd);
+			
+			PIXELFORMATDESCRIPTOR pfd;
+    		int iFormat;
+			
+			ZeroMemory(&pfd, sizeof (pfd));
+			pfd.nSize = sizeof(pfd);
+			pfd.nVersion = 1;
+			pfd.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
+			pfd.iPixelType = PFD_TYPE_RGBA;
+			pfd.cColorBits = 32;
+			pfd.cDepthBits = 24;
+			pfd.cStencilBits = 8;
+			pfd.iLayerType = PFD_MAIN_PLANE;
+			iFormat = ChoosePixelFormat(m_Hdc, &pfd);
+			SetPixelFormat(m_Hdc, iFormat, &pfd);
+
+			m_Hrc = wglCreateContext(m_Hdc);
+			wglMakeCurrent(m_Hdc, m_Hrc);
+
 			return true;
 		}
 		else {
@@ -35,11 +58,20 @@ protected:
 			return false;
 		}
 	}
+	void Destroy() {
+		wglMakeCurrent(NULL, NULL);
+		wglDeleteContext(m_Hrc);
+		ReleaseDC(m_Hwnd, m_Hdc);
+	}
 
 	friend class Window;
 
 protected:
 	bool m_Created;
+
+	HWND m_Hwnd;
+	HDC m_Hdc;
+	HGLRC m_Hrc;
 
 	friend class Window;
 };

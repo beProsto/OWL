@@ -15,11 +15,10 @@ namespace WinAPI {
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     switch(msg) {
 		case WM_CLOSE:
-			DestroyWindow(hwnd);
+			PostQuitMessage(0);
 			break;
 			
 		case WM_DESTROY:
-			PostQuitMessage(0);
 			break;
 			
         default:
@@ -280,25 +279,27 @@ public:
 		m_Window.cbClsExtra = 0;
 		m_Window.cbWndExtra = 0;
 		m_Window.hInstance = g_WinAPI_Data->hInstance;
-		m_Window.hIcon = nullptr;
-		m_Window.hCursor = nullptr;
+		m_Window.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+		m_Window.hCursor = LoadCursor(NULL, IDC_ARROW);
 		m_Window.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 		m_Window.lpszMenuName = nullptr;
 		m_Window.lpszClassName = m_ClassName;
 		m_Window.hIconSm = nullptr;
 	
-		if(!RegisterClassEx(&m_Window))
-		{
+		if(!RegisterClassEx(&m_Window)) {
 			Debug::Out::Print("Error registering the window!", Debug::Out::Type::ERR);
 			return;
 		}
 
 		m_Hwnd = CreateWindowEx(WS_EX_CLIENTEDGE, m_ClassName, &m_Title[0], WS_OVERLAPPEDWINDOW, _position.x, _position.y, _size.x, _size.y, NULL, NULL, g_WinAPI_Data->hInstance, NULL);
 	
-		if(m_Hwnd == NULL)
-		{
+		if(m_Hwnd == NULL) {
 			Debug::Out::Print("Error creating the window!", Debug::Out::Type::ERR);
 			return;
+		}
+
+		if(m_Context != nullptr) {
+			m_Context->Create(m_Hwnd);
 		}
 	
 		ShowWindow(m_Hwnd, g_WinAPI_Data->nCmdShow);
@@ -306,6 +307,10 @@ public:
 	}
 	~Window() {
 		delete[] Gamepad;
+		DestroyWindow(m_Hwnd);
+		if(m_Context != nullptr) {
+			m_Context->Destroy();
+		}
 	}
 
 	Window& PollEvents() {
