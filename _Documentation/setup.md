@@ -7,19 +7,20 @@ A quick tutorial on how to setup OWL.
 - `Clone or download`
 	- `Download ZIP`
 3. copy one of the examples from `OWL/_Examples/` directory
-4. compile with flags:
-- `-std=c++17`
+4. compile with flags (in the exact same order):
 - If on linux:
 	- `-lX11`
 	- If using OpenGL
-		- `-lGL -lGLX`
+		- `-lGL` 
+		- `-lGLX`
 - If on windows:
+	- If using OpenGL
+		- `-lopengl32 `
+		- `-lglu32`
 	- `-lgdi32`
 	- `-luser32`
 	- `-lcomctl32`
 	- `-lkernel32`
-	- I found out, that if you are using mingw-w64 compiler with msys2, you don't have to use these flags
-	- If using OpenGL
-		- (For now unsupported)
 - If on mac:
 	- (For now unsupported)
+- `-std=c++17`
