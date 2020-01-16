@@ -60,7 +60,25 @@ public:
 		}	
 		return *this;
 	}
-	SoftwareContext& BlitToScreen() {
+	SoftwareContext& BlitToScreen() {	
+		/* Our data is in RGBA format, but WinAPI requires BGRA format for some reason */
+		/* We have to swap red and blue */
+		for(size_t i = 0; i < m_Size.x * m_Size.y * 4; i += 4) {
+			char red = m_Data[i];
+			m_Data[i] = m_Data[i+2]; /* blue */
+			m_Data[i+2] = red; /* red */
+		}
+		
+		HDC hdcMem = CreateCompatibleDC(m_Hdc);
+		HBITMAP hBitmap = CreateBitmap(m_Size.x, m_Size.y, 1, 32, m_Data);
+		HBITMAP oldBitmap = (HBITMAP)SelectObject(hdcMem, hBitmap);
+		
+		BitBlt(m_Hdc, 0, 0, m_Size.x, m_Size.y, hdcMem, 0, 0, SRCCOPY);
+
+		SelectObject(hdcMem, oldBitmap);
+		DeleteObject(hBitmap);
+		DeleteDC(hdcMem);
+
 		return *this;
 	}
 	Vec4<char>* GetPixelData() {
@@ -80,6 +98,7 @@ protected:
 			m_Created = true;
 
 			m_Hwnd = _hwnd;
+			m_Hdc = GetDC(m_Hwnd);
 
 			return true;
 		}
@@ -88,17 +107,21 @@ protected:
 		}
 	}
 	void Destroy() {
-		
+		if(m_Created) {
+			ReleaseDC(m_Hwnd, m_Hdc);
+		}
 	}
 
 	friend class Window;
 
 protected:
-	Vec2<unsigned int> m_Size;
-	char* m_Data;
 	bool m_Created;
 
+	Vec2<unsigned int> m_Size;
+	char* m_Data;
+
 	HWND m_Hwnd;
+	HDC m_Hdc;
 
 	friend class Window;
 };

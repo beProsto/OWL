@@ -298,6 +298,8 @@ public:
 			return;
 		}
 
+		SetSize(_size);
+
 		if(m_Context != nullptr) {
 			m_Context->Create(m_Hwnd);
 		}
@@ -343,7 +345,17 @@ public:
 	}
 
 	Window& SetSize(const Vec2<unsigned int>& _size) {
-		SetWindowPos(m_Hwnd, 0, 0, 0, _size.x, _size.y, SWP_NOMOVE);
+		if(GetSize() != _size) {
+			OWL::Vec2<unsigned int> finalSize;
+
+			SetWindowPos(m_Hwnd, 0, 0, 0, _size.x, _size.y, SWP_NOMOVE);
+
+			finalSize = GetSize();
+			if(finalSize != _size) {
+				finalSize = _size + (_size - finalSize);
+				SetWindowPos(m_Hwnd, 0, 0, 0, finalSize.x, finalSize.y, SWP_NOMOVE);
+			}
+		}
 		return *this;
 	}
 	Vec2<unsigned int> GetSize() const {
