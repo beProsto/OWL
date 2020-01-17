@@ -26,6 +26,6 @@ A quick tutorial on how to setup OWL.
 - `-std=c++17`
 
 ## How it should look on linux:
-`g++ main.cpp -lX11 -lGL -lGLX -std=c++17 -o app.exe`
+`g++ main.cpp -lX11 -lGL -lGLX -std=c++17 -o app`
 ## How it should look on windows:
 `g++ main.cpp -lopengl32 -lglu32 -lgdi32 -luser32 -lcomctl32 -lkernel32 -std=c++17 -o app.exe`
