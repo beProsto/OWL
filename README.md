@@ -3,8 +3,11 @@
 ## OWL is intended to be a simple, multiplatform windowing library, based on Xlib, WinAPI and (maybe) Cocoa.
 ## OWL will of course support Direct3D, OpenGL and Vulkan. :D
 
-*For now only supports:*
+*Supports:*
 - Xlib
+	- Software graphics
+	- OpenGL graphics
+- WinAPI
 	- Software graphics
 	- OpenGL graphics
 
