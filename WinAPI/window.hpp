@@ -386,6 +386,26 @@ public:
 	Window& SetFullScreen(bool _fullScreen) {
 		if(m_FullScreen != _fullScreen) {
 			m_FullScreen = _fullScreen;
+
+			if(m_FullScreen) {
+				LONG style = GetWindowLong(m_Hwnd, GWL_STYLE);
+				LONG exStyle = GetWindowLong(m_Hwnd, GWL_EXSTYLE);
+				
+				SetWindowLong(m_Hwnd, GWL_STYLE, style & ~(WS_CAPTION | WS_THICKFRAME));
+				SetWindowLong(m_Hwnd, GWL_EXSTYLE, exStyle & ~(WS_EX_DLGMODALFRAME | WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE | WS_EX_STATICEDGE));
+
+				SendMessage(m_Hwnd, WM_SYSCOMMAND, SC_MAXIMIZE, 0);
+			}
+			else {
+				LONG style = GetWindowLong(m_Hwnd, GWL_STYLE);
+				LONG exStyle = GetWindowLong(m_Hwnd, GWL_EXSTYLE);
+				
+				SetWindowLong(m_Hwnd, GWL_STYLE, style | (WS_CAPTION | WS_THICKFRAME));
+				SetWindowLong(m_Hwnd, GWL_EXSTYLE, exStyle | (WS_EX_DLGMODALFRAME | WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE | WS_EX_STATICEDGE));
+
+				SendMessage(m_Hwnd, WM_SYSCOMMAND, SC_RESTORE, 0);
+			}
+
 		}
 		return *this;
 	}
