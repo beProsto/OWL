@@ -388,6 +388,8 @@ public:
 			m_FullScreen = _fullScreen;
 
 			if(m_FullScreen) {
+				m_WasMaximized = IsZoomed(m_Hwnd);
+
 				LONG style = GetWindowLong(m_Hwnd, GWL_STYLE);
 				LONG exStyle = GetWindowLong(m_Hwnd, GWL_EXSTYLE);
 				
@@ -405,6 +407,9 @@ public:
 				SetWindowLong(m_Hwnd, GWL_EXSTYLE, exStyle | (WS_EX_DLGMODALFRAME | WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE | WS_EX_STATICEDGE));
 
 				SendMessage(m_Hwnd, WM_SYSCOMMAND, SC_RESTORE, 0);
+				if(m_WasMaximized) {
+					SendMessage(m_Hwnd, WM_SYSCOMMAND, SC_MAXIMIZE, 0);
+				}
 			}
 
 		}
@@ -588,6 +593,7 @@ protected:
 	std::string m_Title;
 	bool m_Running;
 	bool m_FullScreen;
+	bool m_WasMaximized;
 
 	LPSTR m_ClassName;
 	WNDCLASSEX m_Window;
