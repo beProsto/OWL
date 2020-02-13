@@ -333,6 +333,7 @@ public:
 		XSetWMProtocols(m_Display, m_Section, &m_WMDelete, 1);
 	}
 	~Window() {
+		m_Context->Destroy();
 		delete[] Gamepad;
 		XDestroyIC(m_XIC);
 		XCloseIM(m_XIM);

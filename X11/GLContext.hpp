@@ -12,12 +12,7 @@ public:
 		m_Created = false;
 	}
 	~GLContext() {
-		if(m_Created) {
-			glXDestroyContext(m_Display, m_GLContext);
-			XFree(m_Visual);
-			
-			XFreeColormap(m_Display, m_WindowAttribs.colormap);
-		}
+
 	}
 
 public:
@@ -88,6 +83,14 @@ protected:
 		else {
 			Debug::Out::Print("Context being created when it already was!\n", Debug::Out::Type::ERR);
 			return false;
+		}
+	}
+	void Destroy() {
+		if(m_Created) {
+			glXDestroyContext(m_Display, m_GLContext);
+			XFree(m_Visual);
+			
+			XFreeColormap(m_Display, m_WindowAttribs.colormap);
 		}
 	}
 

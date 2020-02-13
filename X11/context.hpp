@@ -26,6 +26,9 @@ protected:
 	virtual bool Create(::Display* _display, int* _screenID, ::Window* _section, const Vec2<int>& _position, const Vec2<unsigned int>& _size) {
 		return false;
 	}
+	virtual void Destroy() {
+		
+	}
 
 	friend class Window;
 };
@@ -37,7 +40,6 @@ public:
 	}
 	~SoftwareContext() {
 		if(m_Created) {
-			XDestroyImage(m_Image);
 			delete[] m_Data;
 		}
 	}
@@ -106,6 +108,11 @@ protected:
 		else {
 			Debug::Out::Print("Context being created when it already was!\n", Debug::Out::Type::ERR);
 			return false;
+		}
+	}
+	void Destroy() {
+		if(m_Created) {
+			XDestroyImage(m_Image);
 		}
 	}
 
