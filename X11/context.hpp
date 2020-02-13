@@ -50,6 +50,7 @@ public:
 			m_Size = _newSize;
 			delete[] m_Data;
 			m_Data = new char[m_Size.x * m_Size.y * 4];
+			XFree(m_Image);
 			m_Image = XCreateImage(m_Display, m_Visual, DefaultDepth(m_Display, *m_ScreenID), ZPixmap, 0, m_Data, m_Size.x, m_Size.y, 32, 0);
 		}
 		return *this;
@@ -112,7 +113,7 @@ protected:
 	}
 	void Destroy() {
 		if(m_Created) {
-			XDestroyImage(m_Image);
+			XFree(m_Image);
 		}
 	}
 
