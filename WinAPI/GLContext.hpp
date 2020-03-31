@@ -34,7 +34,7 @@ protected:
 			m_Hdc = GetDC(m_Hwnd);
 			
 			PIXELFORMATDESCRIPTOR pfd;
-    		int iFormat;
+			int iFormat;
 			
 			ZeroMemory(&pfd, sizeof (pfd));
 			pfd.nSize = sizeof(pfd);

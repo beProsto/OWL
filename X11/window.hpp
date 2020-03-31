@@ -90,7 +90,7 @@ public:
 
 				bitmapNoData = XCreateBitmapFromData(m_Window->m_Display, m_Window->m_Section, noData, 8, 8);
 				invisibleCursor = XCreatePixmapCursor(m_Window->m_Display, bitmapNoData, bitmapNoData, 
-				                                     &black, &black, 0, 0);
+													 &black, &black, 0, 0);
 				XDefineCursor(m_Window->m_Display, m_Window->m_Section, invisibleCursor);
 				XFreeCursor(m_Window->m_Display, invisibleCursor);
 				XFreePixmap(m_Window->m_Display, bitmapNoData);
@@ -158,10 +158,10 @@ public:
 		bool IsKeyPressed(unsigned int _key) const {
 			bool returnedBool = false;
 
-		    char keys[1024];
-		    XQueryKeymap(m_Window->m_Display, keys);
-		    ::KeyCode key = XKeysymToKeycode(m_Window->m_Display, _key);
-		    returnedBool = !!(keys[key>>3] & (1<<(key&7)));
+			char keys[1024];
+			XQueryKeymap(m_Window->m_Display, keys);
+			::KeyCode key = XKeysymToKeycode(m_Window->m_Display, _key);
+			returnedBool = !!(keys[key>>3] & (1<<(key&7)));
 
 			return returnedBool;
 		}
@@ -314,18 +314,18 @@ public:
 
 		m_Context->Create(m_Display, &m_ScreenID, &m_Section, _position, _size);
 
-	    XSetLocaleModifiers("");
-	    m_XIM = XOpenIM(m_Display, 0, 0, 0);
-	    if(!m_XIM){
-	        XSetLocaleModifiers("@im=none");
-	        m_XIM = XOpenIM(m_Display, 0, 0, 0);
-	    }
-	    m_XIC = XCreateIC(m_XIM,
-	                        XNInputStyle,   XIMPreeditNothing | XIMStatusNothing,
-	                        XNClientWindow, m_Section,
-	                        XNFocusWindow,  m_Section,
-	                        NULL);
-	    XSetICFocus(m_XIC);
+		XSetLocaleModifiers("");
+		m_XIM = XOpenIM(m_Display, 0, 0, 0);
+		if(!m_XIM){
+			XSetLocaleModifiers("@im=none");
+			m_XIM = XOpenIM(m_Display, 0, 0, 0);
+		}
+		m_XIC = XCreateIC(m_XIM,
+							XNInputStyle,   XIMPreeditNothing | XIMStatusNothing,
+							XNClientWindow, m_Section,
+							XNFocusWindow,  m_Section,
+							NULL);
+		XSetICFocus(m_XIC);
 
 		SetTitle(_title);
 
