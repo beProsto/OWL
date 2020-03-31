@@ -58,11 +58,16 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	std::vector<std::string> passed;
 	
 	{ /* Scope, so that variables created here will be freed when they are not needed */
-		std::istringstream passedStr(lpCmdLine);
-		std::string arg;
-		while(std::getline(passedStr, arg, ' ')) {
-			passed.push_back(arg);
+		int cnt = 0;
+		wchar_t** cmdl = CommandLineToArgvW(GetCommandLineW(), &cnt);
+		for(unsigned int i = 0; i < cnt; i++) {
+			int strsize = WideCharToMultiByte(CP_UTF8, 0, cmdl[i], -1, 0, 0, NULL, NULL); //CP_ACP
+			char* strstr = new char[strsize];
+			WideCharToMultiByte(CP_UTF8, 0, cmdl[i], -1, strstr , strsize, NULL, NULL);
+			passed.push_back(strstr);
+			delete[] strstr;
 		}
+		LocalFree(cmdl);
 	}
 
 	return Main(passed);
