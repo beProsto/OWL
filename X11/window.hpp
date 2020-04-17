@@ -386,6 +386,10 @@ public:
 
 		return sizeReturned;
 	}
+	float GetAspect() const {
+		Vec2<unsigned int> size = GetSize();
+		return static_cast<float>(size.x) / static_cast<float>(size.y);
+	}
 
 	Window& SetTitle(const std::string& _title) {
 		if(m_Title != _title) {
