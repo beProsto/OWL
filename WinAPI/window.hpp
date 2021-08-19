@@ -35,13 +35,18 @@ public:
 			m_Window = _window;
 			m_LeftStick = Vec2<float>(0.0f);
 			m_RightStick = Vec2<float>(0.0f);
+			m_LeftTrigger = 0.0f;
+			m_LeftTrigger = 0.0f;
+			for(unsigned int i = 0; i < 15; i++) {
+				m_Buttons[i] = false;
+			}
 		}
 		~GamepadEvent() {
 
 		}
 
 		bool IsButtonPressed(unsigned int _buttonID) const {
-			return false;
+			return m_Buttons[_buttonID];
 		}
 		const Vec2<float>& GetLeftStick() const {
 			return m_LeftStick;
@@ -50,16 +55,19 @@ public:
 			return m_RightStick;
 		}
 		float GetLeftTrigger() const {
-			return 0.0f;
+			return m_LeftTrigger;
 		}
 		float GetRightTrigger() const {
-			return 0.0f;
+			return m_RightStick;
 		}
 
 	protected:
 		Window* m_Window;
 		Vec2<float> m_LeftStick;
 		Vec2<float> m_RightStick;
+		float m_LeftTrigger;
+		float m_RightTrigger;
+		bool m_Buttons[15];
 
 		friend class Window;
 	};
