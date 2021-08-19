@@ -48,6 +48,9 @@ public:
 		bool IsButtonPressed(unsigned int _buttonID) const {
 			return m_Buttons[_buttonID];
 		}
+		unsigned int GetButtonsAmmount() const {
+			return 15;
+		}
 		const Vec2<float>& GetLeftStick() const {
 			return m_LeftStick;
 		}
