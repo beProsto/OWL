@@ -4,7 +4,7 @@ It's used for handling polled gamepad events.
 
 It has 5 functions:
 - IsButtonPressed() - Takes in an index of the button you want to check, and returns it's state as a `bool`.
-- GetButtonsAmmount() - Returns the ammount of buttons on the gamepad.
+- GetButtonsAmmount() - Returns the ammount of buttons on the gamepad as an `unsigned int`.
 - GetLeftStick() - Returns the left stick's state as a `Vec2<float>`.
 - GetRightStick() - Returns the right stick's state as a `Vec2<float>`.
 - GetLeftTrigger() - Returns the state of the left trigger as a `float`.
