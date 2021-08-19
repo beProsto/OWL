@@ -283,6 +283,22 @@ public:
 		Gamepad = new GamepadEvent[m_MaxGamepads];
 		for(unsigned int i = 0; i < m_MaxGamepads; i++) {
 			Gamepad[i].m_Window = this;
+
+			// Setting up the controller's state
+			XINPUT_STATE state;
+			ZeroMemory(&state, sizeof(XINPUT_STATE));
+
+			// Simply get the state of the controller from XInput.
+			dwResult = XInputGetState(i, &state);
+
+			if(dwResult == ERROR_SUCCESS) {
+				// Controller is connected
+				Gamepad[i].m_Connected = true;
+			}
+			else {
+				// Controller is not connected
+				Gamepad[i].m_Connected = false;
+			}
 		}
 		m_Context = _context;
 		m_Running = true;
