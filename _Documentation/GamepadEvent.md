@@ -9,6 +9,7 @@ It has 5 functions:
 - GetRightStick() - Returns the right stick's state as a `Vec2<float>`.
 - GetLeftTrigger() - Returns the state of the left trigger as a `float`.
 - GetRightTrigger() - Returns the state of the right trigger as a `float`.
+- IsConnected() - Returns the state of being connected as a `bool`.
 
 __Example of usage:__
 ```cpp

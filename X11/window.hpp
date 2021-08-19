@@ -34,6 +34,10 @@ public:
 			close(m_JS);
 		}
 
+		bool IsConnected() const {
+			return (m_JS != -1);
+		}
+
 		bool IsButtonPressed(unsigned int _buttonID) const {
 			return m_Buttons[_buttonID];
 		}

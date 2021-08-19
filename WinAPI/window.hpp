@@ -40,9 +40,14 @@ public:
 			for(unsigned int i = 0; i < 15; i++) {
 				m_Buttons[i] = false;
 			}
+			m_Connected = false;
 		}
 		~GamepadEvent() {
 
+		}
+
+		bool IsConnected() const {
+			return m_Connected;
 		}
 
 		bool IsButtonPressed(unsigned int _buttonID) const {
@@ -71,6 +76,8 @@ public:
 		float m_LeftTrigger;
 		float m_RightTrigger;
 		bool m_Buttons[15];
+
+		bool m_Connected;
 
 		friend class Window;
 	};
