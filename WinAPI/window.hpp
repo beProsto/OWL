@@ -275,7 +275,7 @@ public:
 	};
 
 public:
-	Window(Context* _context, const std::string& _title = "OWL WinAPI Window", const Vec2<int>& _position = Vec2<int>(0), const Vec2<unsigned int>& _size = Vec2<unsigned int>(640, 360), const EventLoopType& _eventLoopType = EventLoopType::EventLoop) {
+	Window(Context* _context, const std::string& _title = "OWL WinAPI Window", const Vec2<int>& _position = Vec2<int>(0), const Vec2<unsigned int>& _size = Vec2<unsigned int>(640, 360), const EventLoopType& _eventLoopType = EventLoopType::GameLoop) {
 		SetEventLoopType(_eventLoopType);
 		Mouse.m_Window = this;
 		Keyboard.m_Window = this;
