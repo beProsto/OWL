@@ -66,7 +66,7 @@ public:
 			return m_LeftTrigger;
 		}
 		float GetRightTrigger() const {
-			return m_RightStick;
+			return m_RightTrigger;
 		}
 
 	protected:
@@ -289,7 +289,7 @@ public:
 			ZeroMemory(&state, sizeof(XINPUT_STATE));
 
 			// Simply get the state of the controller from XInput.
-			dwResult = XInputGetState(i, &state);
+			DWORD dwResult = XInputGetState(i, &state);
 
 			if(dwResult == ERROR_SUCCESS) {
 				// Controller is connected

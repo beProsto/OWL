@@ -4,5 +4,6 @@
 /* This file will include WinAPI */
 #include <windows.h>
 #include <Winuser.h>
+#include <xinput.h>
 
 #endif/*_OWL_WINAPI_WINAPI_HPP_HEADER_FILE_GUARD*/
