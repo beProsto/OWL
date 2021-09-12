@@ -15,7 +15,7 @@ A quick tutorial on how to setup OWL.
 		- `-lGLX`
 - If on windows:
 	- If using OpenGL
-		- `-lopengl32 `
+		- `-lopengl32`
 		- `-lglu32`
 	- `-lgdi32`
 	- `-luser32`
