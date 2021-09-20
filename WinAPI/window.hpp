@@ -298,6 +298,7 @@ public:
 			else {
 				// Controller is not connected
 				Gamepad[i].m_Connected = false;
+				Debug::Out::Print("Could not open joystick[" + std::to_string(i) + "]!\n", Debug::Out::ERR);
 			}
 		}
 		m_Context = _context;
@@ -466,6 +467,23 @@ public:
 
 			for(unsigned int i = 0; i < m_MaxGamepads; i++) {
 				Gamepad[i].m_Window = this;
+				
+				// Setting up the controller's state
+				XINPUT_STATE state;
+				ZeroMemory(&state, sizeof(XINPUT_STATE));
+
+				// Simply get the state of the controller from XInput.
+				DWORD dwResult = XInputGetState(i, &state);
+
+				if(dwResult == ERROR_SUCCESS) {
+					// Controller is connected
+					Gamepad[i].m_Connected = true;
+				}
+				else {
+					// Controller is not connected
+					Gamepad[i].m_Connected = false;
+					Debug::Out::Print("Could not open joystick[" + std::to_string(i) + "]!\n", Debug::Out::ERR);
+				}
 			}
 		}
 	}
@@ -502,6 +520,8 @@ private:
 
 			PollEventsStandard(_self);
 		}
+
+		PollEventsGamepad(_self);
 	}
 
 	static void PollEventsStandard(Window& _self) {
@@ -611,6 +631,25 @@ private:
 		}
 		else if(_self.m_Event.message == WM_MOUSEWHEEL) {
 			_self.Mouse.m_Wheel = GET_WHEEL_DELTA_WPARAM(_self.m_Event.wParam);
+		}
+	}
+
+	static void PollEventsGamepad(Window& _self) {
+		for(unsigned int i = 0; i < _self.m_MaxGamepads; i++) {
+			// Setting up the controller's state
+			XINPUT_STATE state;
+			ZeroMemory(&state, sizeof(XINPUT_STATE));
+			// Simply get the state of the controller from XInput.
+			DWORD dwResult = XInputGetState(i, &state);
+			if(dwResult == ERROR_SUCCESS) {
+				// Controller is connected
+				_self.Gamepad[i].m_Connected = true;
+			}
+			else {
+				// Controller is not connected
+				_self.Gamepad[i].m_Connected = false;
+				Debug::Out::Print("Could not open joystick[" + std::to_string(i) + "]!\n", Debug::Out::ERR);
+			}
 		}
 	}
 
