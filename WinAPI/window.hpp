@@ -5,6 +5,7 @@
 #include <iostream>
 #include <cassert>
 #include <vector>
+#include <cmath>
 
 #include "WinAPI.hpp"
 #include "context.hpp"
@@ -634,6 +635,26 @@ private:
 		}
 	}
 
+	static inline OWL::Vec2f _STICK_NORM(float _x, float _y) { // ripped straight out of the xinput docs lol
+		float magnitude = std::sqrt(_x*_x + _y*_y);
+
+		float normalizedLX = _x / magnitude;
+		float normalizedLY = _y / magnitude;
+
+		float normalizedMagnitude = 0;
+
+		if (magnitude > 7849) {
+			if (magnitude > 32767) magnitude = 32767;
+			magnitude -= 7849;
+			normalizedMagnitude = magnitude / (32767 - 7849);
+		}
+		else {
+			magnitude = 0.0;
+			normalizedMagnitude = 0.0;
+		}
+
+		return OWL::Vec2f(normalizedLX * normalizedMagnitude, normalizedLY * normalizedMagnitude);
+	}
 	static void PollEventsGamepad(Window& _self) {
 		for(unsigned int i = 0; i < _self.m_MaxGamepads; i++) {
 			// Setting up the controller's state
@@ -644,6 +665,15 @@ private:
 			if(dwResult == ERROR_SUCCESS) {
 				// Controller is connected
 				_self.Gamepad[i].m_Connected = true;
+
+				float lX = state.Gamepad.sThumbLX;
+				float lY = state.Gamepad.sThumbLY;
+				
+				float rX = state.Gamepad.sThumbRX;
+				float rY = state.Gamepad.sThumbRY;
+
+				_self.Gamepad[i].m_LeftStick = _STICK_NORM(lX, lY);
+				_self.Gamepad[i].m_RightStick = _STICK_NORM(rX, rY);
 			}
 			else {
 				// Controller is not connected
