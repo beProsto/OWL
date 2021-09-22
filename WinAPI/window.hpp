@@ -635,7 +635,7 @@ private:
 		}
 	}
 
-	static inline OWL::Vec2f _STICK_NORM(float _x, float _y) { // ripped straight out of the xinput docs lol
+	static inline OWL::Vec2f _STICK_NORM(float _x, float _y) { // I SWEAR I will implement this in the X11 one i just need to know where to actually even put this lol
 		float magnitude = std::sqrt(_x*_x + _y*_y);
 
 		float normalizedLX = _x / magnitude;
@@ -659,25 +659,15 @@ private:
 		for(unsigned int i = 0; i < _self.m_MaxGamepads; i++) {
 			// Setting up the controller's state
 			XINPUT_STATE state;
-			ZeroMemory(&state, sizeof(XINPUT_STATE));
+			ZeroMemory(&state, sizeof(XINPUT_STATE)); // why? what's the difference if i don't? it's not allocated on the heap so it technically should zero itself out by.. itself... But then why do the docs tell me to do this?
 			// Simply get the state of the controller from XInput.
-			DWORD dwResult = XInputGetState(i, &state);
-			if(dwResult == ERROR_SUCCESS) {
+			if(_self.Gamepad[i].m_Connected = (XInputGetState(i, &state) == ERROR_SUCCESS)) {
 				// Controller is connected
-				_self.Gamepad[i].m_Connected = true;
-
-				float lX = state.Gamepad.sThumbLX;
-				float lY = state.Gamepad.sThumbLY;
-				
-				float rX = state.Gamepad.sThumbRX;
-				float rY = state.Gamepad.sThumbRY;
-
-				_self.Gamepad[i].m_LeftStick = _STICK_NORM(lX, lY);
-				_self.Gamepad[i].m_RightStick = _STICK_NORM(rX, rY);
+				_self.Gamepad[i].m_LeftStick = _STICK_NORM(state.Gamepad.sThumbLX, state.Gamepad.sThumbLY);
+				_self.Gamepad[i].m_RightStick = _STICK_NORM(state.Gamepad.sThumbRX, state.Gamepad.sThumbRY);
 			}
 			else {
 				// Controller is not connected
-				_self.Gamepad[i].m_Connected = false;
 				Debug::Out::Print("Could not open joystick[" + std::to_string(i) + "]!\n", Debug::Out::ERR);
 			}
 		}
