@@ -100,6 +100,8 @@ protected:
 			m_Hwnd = _hwnd;
 			m_Hdc = GetDC(m_Hwnd);
 
+			m_Data = new char[0];
+			
 			return true;
 		}
 		else {Debug::Out::Print("Context being created when it already was!\n", Debug::Out::Type::ERR);
