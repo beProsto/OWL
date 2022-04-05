@@ -21,6 +21,7 @@ A quick tutorial on how to setup OWL.
 	- `-luser32`
 	- `-lcomctl32`
 	- `-lkernel32`
+	- `-lshell32`
 	- `-lxinput`
 - If on mac:
 	- (For now unsupported)
