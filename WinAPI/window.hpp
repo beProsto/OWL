@@ -624,7 +624,7 @@ private:
 				m = "";
 			}
 
-			_self.Keyboard.m_KeyData = {m, _self.m_Event.wParam};
+			_self.Keyboard.m_KeyData = {m, (unsigned int)_self.m_Event.wParam};
 		}
 		else if(_self.m_Event.message == WM_MOUSEMOVE) {
 			_self.Mouse.m_Position.x = MAKEPOINTS(_self.m_Event.lParam).x;
@@ -665,6 +665,28 @@ private:
 				// Controller is connected
 				_self.Gamepad[i].m_LeftStick = _STICK_NORM(state.Gamepad.sThumbLX, state.Gamepad.sThumbLY);
 				_self.Gamepad[i].m_RightStick = _STICK_NORM(state.Gamepad.sThumbRX, state.Gamepad.sThumbRY);
+				
+				_self.Gamepad[i].m_LeftTrigger = (float)state.Gamepad.bLeftTrigger / 255;
+				_self.Gamepad[i].m_RightTrigger = (float)state.Gamepad.bRightTrigger / 255;
+
+				_self.Gamepad[i].m_Buttons[0] = (state.Gamepad.wButtons & XINPUT_GAMEPAD_A) != 0;
+				_self.Gamepad[i].m_Buttons[1] = (state.Gamepad.wButtons & XINPUT_GAMEPAD_B) != 0;
+				_self.Gamepad[i].m_Buttons[2] = (state.Gamepad.wButtons & XINPUT_GAMEPAD_X) != 0;
+				_self.Gamepad[i].m_Buttons[3] = (state.Gamepad.wButtons & XINPUT_GAMEPAD_Y) != 0;
+				
+				_self.Gamepad[i].m_Buttons[4] = (state.Gamepad.wButtons & XINPUT_GAMEPAD_START) != 0;
+				_self.Gamepad[i].m_Buttons[5] = (state.Gamepad.wButtons & XINPUT_GAMEPAD_BACK) != 0;
+
+				_self.Gamepad[i].m_Buttons[6] = (state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER) != 0;
+				_self.Gamepad[i].m_Buttons[7] = (state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER) != 0;
+
+				_self.Gamepad[i].m_Buttons[8] = (state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_THUMB) != 0;
+				_self.Gamepad[i].m_Buttons[9] = (state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_THUMB) != 0;
+
+				_self.Gamepad[i].m_Buttons[10] = (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) != 0;
+				_self.Gamepad[i].m_Buttons[11] = (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN) != 0;
+				_self.Gamepad[i].m_Buttons[12] = (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT) != 0;
+				_self.Gamepad[i].m_Buttons[13] = (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT) != 0;
 			}
 			else {
 				// Controller is not connected
