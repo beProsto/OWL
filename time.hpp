@@ -4,7 +4,10 @@
 #include <chrono>
 #include <thread>
 #include <time.h>
+
+#ifndef _WIN32
 #include <sys/time.h>
+#endif
 
 namespace OWL {
 void Sleep(unsigned int _milliseconds) {
