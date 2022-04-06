@@ -23,6 +23,8 @@ public:
 			m_Window = _window;
 			m_LeftStick = Vec2<float>(0.0f);
 			m_RightStick = Vec2<float>(0.0f);
+			m_LeftStickInternal = Vec2<float>(0.0f);
+			m_RightStickInternal  = Vec2<float>(0.0f);
 			m_LeftTrigger = 0.0f;
 			m_LeftTrigger = 0.0f;
 			for(unsigned int i = 0; i < 15; i++) {
@@ -59,6 +61,8 @@ public:
 		}
 
 	protected:
+		Vec2<float> m_LeftStickInternal;
+		Vec2<float> m_RightStickInternal;
 		Vec2<float> m_LeftStick;
 		Vec2<float> m_RightStick;
 		float m_LeftTrigger;
@@ -542,11 +546,11 @@ private:
 		}
 	}
 	
-	static inline OWL::Vec2f _STICK_NORM(float _x, float _y) { // I SWEAR I will implement this in the X11 one i just need to know where to actually even put this lol
-		float magnitude = std::sqrt(_x*_x + _y*_y);
+	static inline OWL::Vec2f _STICK_NORM(OWL::Vec2f _pos) { // I SWEAR I will implement this in the X11 one i just need to know where to actually even put this lol
+		float magnitude = std::sqrt(_pos.x*_pos.x + _pos.y*_pos.y);
 
-		float normalizedLX = _x / magnitude;
-		float normalizedLY = _y / magnitude;
+		float normalizedLX = _pos.x / magnitude;
+		float normalizedLY = -_pos.y / magnitude;
 
 		float normalizedMagnitude = 0;
 
@@ -570,25 +574,29 @@ private:
 				}
 				else if(_self.m_JSEvent.type == JS_EVENT_AXIS) {
 					if(_self.m_JSEvent.number == 0) {
-						_self.Gamepad[i].m_LeftStick.x = (float)_self.m_JSEvent.value / 32767.0f;
+						_self.Gamepad[i].m_LeftStickInternal.x = (float)_self.m_JSEvent.value;
 					}
 					else if(_self.m_JSEvent.number == 1) {
-						_self.Gamepad[i].m_LeftStick.y = (float)_self.m_JSEvent.value / 32767.0f;
+						_self.Gamepad[i].m_LeftStickInternal.y = (float)_self.m_JSEvent.value;
 					}
 					else if(_self.m_JSEvent.number == 2) {
 						_self.Gamepad[i].m_LeftTrigger = (float)_self.m_JSEvent.value / 32767.0f / 2.0f + 0.5f;
 					}
 					else if(_self.m_JSEvent.number == 3) {
-						_self.Gamepad[i].m_RightStick.x = (float)_self.m_JSEvent.value / 32767.0f;
+						_self.Gamepad[i].m_RightStickInternal.x = (float)_self.m_JSEvent.value;
 					}
 					else if(_self.m_JSEvent.number == 4) {
-						_self.Gamepad[i].m_RightStick.y = (float)_self.m_JSEvent.value / 32767.0f;
+						_self.Gamepad[i].m_RightStickInternal.y = (float)_self.m_JSEvent.value;
 					}
 					else if(_self.m_JSEvent.number == 5) {
 						_self.Gamepad[i].m_RightTrigger = (float)_self.m_JSEvent.value / 32767.0f / 2.0f + 0.5f;
 					}
 				}
 			}
+
+			_self.Gamepad[i].m_LeftStick = _STICK_NORM(_self.Gamepad[i].m_LeftStickInternal);
+			_self.Gamepad[i].m_RightStick = _STICK_NORM(_self.Gamepad[i].m_RightStickInternal);
+
 			if(errno == ENODEV || _self.Gamepad[i].m_JS == -1) {
 				_self.Gamepad[i].m_JS = open(std::string("/dev/input/js" + std::to_string(i)).c_str(), O_NONBLOCK);
 				if(_self.Gamepad[i].m_JS == -1) {
