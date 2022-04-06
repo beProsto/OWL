@@ -8,6 +8,7 @@
 #include <linux/joystick.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <cmath>
 
 #include "X11.hpp"
 #include "context.hpp"
@@ -540,6 +541,27 @@ private:
 			}
 		}
 	}
+	
+	static inline OWL::Vec2f _STICK_NORM(float _x, float _y) { // I SWEAR I will implement this in the X11 one i just need to know where to actually even put this lol
+		float magnitude = std::sqrt(_x*_x + _y*_y);
+
+		float normalizedLX = _x / magnitude;
+		float normalizedLY = _y / magnitude;
+
+		float normalizedMagnitude = 0;
+
+		if (magnitude > 7849) {
+			if (magnitude > 32767) magnitude = 32767;
+			magnitude -= 7849;
+			normalizedMagnitude = magnitude / (32767 - 7849);
+		}
+		else {
+			magnitude = 0.0;
+			normalizedMagnitude = 0.0;
+		}
+
+		return OWL::Vec2f(normalizedLX * normalizedMagnitude, normalizedLY * normalizedMagnitude);
+	}
 	static void PollEventsGamepad(Window& _self) {
 		for(unsigned int i = 0; i < _self.m_MaxGamepads; i++) {
 			while(read(_self.Gamepad[i].m_JS, &_self.m_JSEvent, sizeof(_self.m_JSEvent)) > 0) {
@@ -554,7 +576,7 @@ private:
 						_self.Gamepad[i].m_LeftStick.y = (float)_self.m_JSEvent.value / 32767.0f;
 					}
 					else if(_self.m_JSEvent.number == 2) {
-						_self.Gamepad[i].m_LeftTrigger = (float)_self.m_JSEvent.value / 32767.0f;
+						_self.Gamepad[i].m_LeftTrigger = (float)_self.m_JSEvent.value / 32767.0f / 2.0f + 0.5f;
 					}
 					else if(_self.m_JSEvent.number == 3) {
 						_self.Gamepad[i].m_RightStick.x = (float)_self.m_JSEvent.value / 32767.0f;
@@ -563,7 +585,7 @@ private:
 						_self.Gamepad[i].m_RightStick.y = (float)_self.m_JSEvent.value / 32767.0f;
 					}
 					else if(_self.m_JSEvent.number == 5) {
-						_self.Gamepad[i].m_RightTrigger = (float)_self.m_JSEvent.value / 32767.0f;
+						_self.Gamepad[i].m_RightTrigger = (float)_self.m_JSEvent.value / 32767.0f / 2.0f + 0.5f;
 					}
 				}
 			}
