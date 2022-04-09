@@ -70,6 +70,25 @@ public:
 			return m_RightTrigger;
 		}
 
+	public:
+		enum Button {
+			A = 0,
+			B = 1,
+			X = 2,
+			Y = 3,
+			Start = 12,
+			Back = 13,
+			ShoulderLeft = 10,
+			ShoulderRight = 11,
+			ThumbLeft = 8,
+			ThumbRight = 9,
+			DPadUp = 6,
+			DPadDown = 7,			
+			DPadLeft = 4,
+			DPadRight = 5,
+			Logo = 14
+		};
+
 	protected:
 		Window* m_Window;
 		Vec2<float> m_LeftStick;

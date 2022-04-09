@@ -59,6 +59,25 @@ public:
 		float GetRightTrigger() const {
 			return m_RightTrigger;
 		}
+	
+	public:
+		enum Button {
+			A = 0,
+			B = 1,
+			X = 2,
+			Y = 3,
+			ShoulderLeft = 4,
+			ShoulderRight = 5,
+			Back = 6,
+			Start = 7,
+			Logo = 8,
+			ThumbLeft = 9,
+			ThumbRight = 10,
+			DPadLeft = 11,
+			DPadRight = 12,
+			DPadUp = 13,
+			DPadDown = 14
+		};
 
 	protected:
 		Vec2<float> m_LeftStickInternal;
@@ -594,8 +613,10 @@ private:
 				}
 			}
 
-			_self.Gamepad[i].m_LeftStick = _STICK_NORM(_self.Gamepad[i].m_LeftStickInternal);
-			_self.Gamepad[i].m_RightStick = _STICK_NORM(_self.Gamepad[i].m_RightStickInternal);
+			if(_self.Gamepad[i].m_LeftStickInternal != Vec2f(0))
+				_self.Gamepad[i].m_LeftStick = _STICK_NORM(_self.Gamepad[i].m_LeftStickInternal);
+			if(_self.Gamepad[i].m_RightStickInternal != Vec2f(0))
+				_self.Gamepad[i].m_RightStick = _STICK_NORM(_self.Gamepad[i].m_RightStickInternal);
 
 			if(errno == ENODEV || _self.Gamepad[i].m_JS == -1) {
 				_self.Gamepad[i].m_JS = open(std::string("/dev/input/js" + std::to_string(i)).c_str(), O_NONBLOCK);
