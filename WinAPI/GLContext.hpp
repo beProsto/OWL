@@ -25,6 +25,10 @@ public:
 		return ContextType_OpenGL;
 	}
 
+	static void(*GetProcAddress(unsigned char* name))() {
+		return wglGetProcAddress(name);
+	}
+
 protected:
 	bool Create(HWND _hwnd) {
 		if(!m_Created) {
