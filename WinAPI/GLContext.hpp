@@ -25,9 +25,21 @@ public:
 		return ContextType_OpenGL;
 	}
 
-	static long long int(*GetProcAddress(const char* name))() {
-		return wglGetProcAddress(name);
-	}
+    typedef void(*FuncPtr)();
+    static void(*GetProcAddress(const char* name))() {
+        void *p = (void *)wglGetProcAddress(name);
+        if(
+            p == 0 ||
+            (p == (void*)0x1) || 
+            (p == (void*)0x2) || 
+            (p == (void*)0x3) ||
+            (p == (void*)-1)
+        ) {
+            p = (void *)::GetProcAddress(g_WinAPI_Data->hOpengl32Module, name);
+        }
+
+        return (FuncPtr)p;
+    }
 
 protected:
 	bool Create(HWND _hwnd) {
@@ -55,6 +67,8 @@ protected:
 			m_Hrc = wglCreateContext(m_Hdc);
 			wglMakeCurrent(m_Hdc, m_Hrc);
 
+            g_WinAPI_Data->hOpengl32Module = LoadLibraryA("opengl32.dll");
+			
 			return true;
 		}
 		else {

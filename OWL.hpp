@@ -38,7 +38,8 @@ int Main(const std::vector<std::string>&);
 #include "WinAPI/WinAPI.hpp"
 struct WinAPI_Data {
 	HINSTANCE hInstance;
-	int nCmdShow;	
+	int nCmdShow;
+	HMODULE hOpengl32Module;
 };
 WinAPI_Data* g_WinAPI_Data;
 
