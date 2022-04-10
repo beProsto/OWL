@@ -680,7 +680,7 @@ private:
 			XINPUT_STATE state;
 			ZeroMemory(&state, sizeof(XINPUT_STATE)); // why? what's the difference if i don't? it's not allocated on the heap so it technically should zero itself out by.. itself... But then why do the docs tell me to do this?
 			// Simply get the state of the controller from XInput.
-			if(_self.Gamepad[i].m_Connected = (XInputGetState(i, &state) == ERROR_SUCCESS)) {
+			if((_self.Gamepad[i].m_Connected = (XInputGetState(i, &state) == ERROR_SUCCESS))) {
 				// Controller is connected
 				_self.Gamepad[i].m_LeftStick = _STICK_NORM(state.Gamepad.sThumbLX, state.Gamepad.sThumbLY);
 				_self.Gamepad[i].m_RightStick = _STICK_NORM(state.Gamepad.sThumbRX, state.Gamepad.sThumbRY);
@@ -733,7 +733,7 @@ protected:
 	bool m_FullScreen;
 	bool m_WasMaximized;
 
-	LPSTR m_ClassName;
+	const char* m_ClassName;
 	WNDCLASSEX m_Window;
 	HWND m_Hwnd;
 	MSG m_Event;
