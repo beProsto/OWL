@@ -25,6 +25,10 @@ public:
 		return ContextType_OpenGL;
 	}
 
+	static void(*GetProcAddress(unsigned char* name))() {
+		return glXGetProcAddress(name);
+	}
+
 protected:
 	bool Create(::Display* _display, int* _screenID, ::Window* _section, const Vec2<int>& _position, const Vec2<unsigned int>& _size) {
 		if(!m_Created) {
@@ -72,10 +76,10 @@ protected:
 			XClearWindow(m_Display, *m_Section);
 			XMapRaised(m_Display, *m_Section);
 
-			Debug::Out::Print("GL Vendor: " + std::string((const char*)glGetString(GL_VENDOR)) + "\n");
-			Debug::Out::Print("GL Renderer: " + std::string((const char*)glGetString(GL_RENDERER)) + "\n");
-			Debug::Out::Print("GL Version: " + std::string((const char*)glGetString(GL_VERSION)) + "\n");
-			Debug::Out::Print("GLSL Version: " + std::string((const char*)glGetString(GL_SHADING_LANGUAGE_VERSION)) + "\n");
+			// Debug::Out::Print("GL Vendor: " + std::string((const char*)glGetString(GL_VENDOR)) + "\n");
+			// Debug::Out::Print("GL Renderer: " + std::string((const char*)glGetString(GL_RENDERER)) + "\n");
+			// Debug::Out::Print("GL Version: " + std::string((const char*)glGetString(GL_VERSION)) + "\n");
+			// Debug::Out::Print("GLSL Version: " + std::string((const char*)glGetString(GL_SHADING_LANGUAGE_VERSION)) + "\n");
 
 			m_Created = true;
 			return true;
