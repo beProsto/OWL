@@ -61,12 +61,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	{ /* Scope, so that variables created here will be freed when they are not needed */
 		int cnt = 0;
 		wchar_t** cmdl = CommandLineToArgvW(GetCommandLineW(), &cnt);
-		for(unsigned int i = 0; i < cnt; i++) {
-			int strsize = WideCharToMultiByte(CP_UTF8, 0, cmdl[i], -1, 0, 0, NULL, NULL); //CP_ACP
-			char* strstr = new char[strsize];
-			WideCharToMultiByte(CP_UTF8, 0, cmdl[i], -1, strstr , strsize, NULL, NULL);
-			passed.push_back(strstr);
-			delete[] strstr;
+		if(cnt > 0) {
+			unsigned int count = cnt;
+			for(unsigned int i = 0; i < count; i++) {
+				int strsize = WideCharToMultiByte(CP_UTF8, 0, cmdl[i], -1, 0, 0, NULL, NULL); //CP_ACP
+				char* strstr = new char[strsize];
+				WideCharToMultiByte(CP_UTF8, 0, cmdl[i], -1, strstr , strsize, NULL, NULL);
+				passed.push_back(strstr);
+				delete[] strstr;
+			}
 		}
 		LocalFree(cmdl);
 	}
