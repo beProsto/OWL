@@ -25,7 +25,7 @@ public:
 		return ContextType_OpenGL;
 	}
 
-	static long long int(*GetProcAddress(unsigned char* name))() {
+	static long long int(*GetProcAddress(const char* name))() {
 		return wglGetProcAddress(name);
 	}
 
