@@ -97,7 +97,11 @@ int main(int argc, char** argv) {
 	return Main(passed);
 }
 
+#else
+
+#error OWL: Unsupported platform! (Only linux and windows supported currently!)
 
 #endif
+
 
 #endif/*_OWL_OWL_HPP_HEADER_FILE_GUARD*/
