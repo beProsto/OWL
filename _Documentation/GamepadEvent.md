@@ -3,7 +3,23 @@
 It's used for handling polled gamepad events.
 
 It has 5 functions:
-- IsButtonPressed() - Takes in an index of the button you want to check, and returns it's state as a `bool`.
+- IsButtonPressed() - Takes in the button you want to check, and returns it's state as a `bool`.
+	- The buttons available are based on the XBOX360 controller layout:
+		- `A`
+		- `B`
+		- `X`
+		- `Y`
+		- `Start`
+		- `Back`
+		- `ShoulderLeft`
+		- `ShoulderRight`
+		- `ThumbLeft`
+		- `ThumbRight`
+		- `DPadUp`
+		- `DPadDown`	
+		- `DPadLeft`
+		- `DPadRight`
+		- `Logo`
 - GetButtonsAmmount() - Returns the ammount of buttons on the gamepad as an `unsigned int`.
 - GetLeftStick() - Returns the left stick's state as a `Vec2<float>`.
 - GetRightStick() - Returns the right stick's state as a `Vec2<float>`.
@@ -15,6 +31,6 @@ __Example of usage:__
 ```cpp
 std::cout << "Left Stick State = {" << window.Gamepad[0].GetLeftStick().x << ", " <<  window.Gamepad[0].GetLeftStick().y << "}\n";
 std::cout << "Left Trigger State = " << window.Gamepad[0].GetLeftTrigger() << "\n";
-std::cout << "Button[0] State = " << window.Gamepad[0].IsButtonPressed(0) << "\n";
+std::cout << "Right Shoulder Button's State = " << window.Gamepad[0].IsButtonPressed(OWL::Window::GamepadEvent::ShoulderLeft) << "\n";
 std::cout << "There are " << window.Gamepad[0].GetButtonsAmmount() << " buttons on the gamepad.\n";
 ```
