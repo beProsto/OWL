@@ -625,7 +625,7 @@ private:
 				m[m.size() - 1] = '\t';
 			}
 			else if(_self.m_Event.wParam == VK_ESCAPE) {
-				m[m.size() - 1] = '\e';
+				m[m.size() - 1] = (char)27;
 			}
 			else if(_self.m_Event.wParam == VK_BACK) {
 				m[m.size() - 1] = '\b';
