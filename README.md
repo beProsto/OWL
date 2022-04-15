@@ -10,5 +10,3 @@
 - WinAPI
 	- Software graphics
 	- OpenGL graphics
-
-#### *For those who want to see this library in action on their Apple Mac machines, [this](https://support.apple.com/en-us/HT201341) might help.*
