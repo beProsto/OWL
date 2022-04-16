@@ -13,10 +13,13 @@ endif
 
 OWL_FLAGS = -I../include $(LINK_OWL)
 
-everything: GUIApplicationExample$(EXE) ModernOpenGLExample$(EXE)
+everything: GUIApplicationExample$(EXE) ModernOpenGLExample$(EXE) SimpleWindowExample$(EXE)
 
 GUIApplicationExample$(EXE): ../examples/GUIApplicationExample/main.cpp
 	$(CXX) ../examples/GUIApplicationExample/main.cpp $(OWL_FLAGS) $(CXX_FLAGS) -o GUIApplicationExample$(EXE)
 
 ModernOpenGLExample$(EXE): ../examples/ModernOpenGLExample/main.cpp
 	$(CXX) ../examples/ModernOpenGLExample/main.cpp $(OWL_FLAGS) $(CXX_FLAGS) -o ModernOpenGLExample$(EXE)
+
+SimpleWindowExample$(EXE): ../examples/SimpleWindowExample/main.cpp
+	$(CXX) ../examples/SimpleWindowExample/main.cpp $(OWL_FLAGS) $(CXX_FLAGS) -o SimpleWindowExample$(EXE)

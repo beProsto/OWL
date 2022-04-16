@@ -1,7 +1,10 @@
-![OWL Logo](logo.png)
-# OWL (Open Windowing Library)
-## OWL is intended to be a simple, multiplatform windowing library, based on Xlib, WinAPI and (maybe) Cocoa.
-## OWL will of course support Direct3D, OpenGL and Vulkan. :D
+<img align="left" width="100" height="100" style="image-rendering: crisp-edges; image-rendering: pixelated"  src="logo.png">
+
+## OWL (Open Windowing Library)
+
+OWL is intended to be a simple, multiplatform windowing library, based on Xlib, WinAPI and (maybe) Cocoa.
+
+OWL will of course support Direct3D, OpenGL and Vulkan. :D
 
 *Supports:*
 - Xlib
