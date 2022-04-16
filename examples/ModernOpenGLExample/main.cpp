@@ -1,24 +1,55 @@
 #include <cmath>
-#include <GL/glew.h>
-#include "OWL/OWL.hpp"
-#include "OWL/GLContext.hpp"
-#include "OWL/time.hpp"
+// #include <GL/glew.h>
+#include <OWL/OWL.hpp>
+#include <OWL/GLContext.hpp>
+#include <OWL/time.hpp>
+
+#define GL_FUNC_LOAD(rettype, name, ...) \
+	typedef rettype(*name##F)(__VA_ARGS__); \
+	name##F name = (name##F)OWL::GLContext::GetProcAddress(#name);
+
+#define GL_FRAGMENT_SHADER 0x8B30
+#define GL_VERTEX_SHADER 0x8B31
+#define GL_COMPILE_STATUS 0x8B81
+#define GL_ARRAY_BUFFER 0x8892
+#define GL_STATIC_DRAW 0x88E4
 
 int Main(const std::vector<std::string>& args) {
 	OWL::GLContext context;
 	OWL::Window window(&context, "Modern OpenGL in OWL Example", OWL::Vec2i(0), OWL::Vec2ui(480, 460));
-	OWL::FPSLimiter fps(30);
+	OWL::FPSLimiter fps(60);
 	OWL::Timer time;
 
 	window.SetEventLoopType(OWL::EventLoopType::GameLoop);
 
-	if(glewInit() == GLEW_OK) {
-		Debug::Out::Print("GLEW Initialized succesfully!\n");
-	}
-	else {
-		Debug::Out::Print("GLEW Cannot be initialized!\n", Debug::Out::ERR);
-		return 1;
-	}
+	// load OpenGL functions using the macro defined above (uses the OWL::GLContext's GetProcAddress function):
+	GL_FUNC_LOAD(unsigned int, glCreateShader, unsigned int)
+	GL_FUNC_LOAD(void, glShaderSource, unsigned int, unsigned int, const char**, unsigned int)
+	GL_FUNC_LOAD(void, glCompileShader, unsigned int)
+	GL_FUNC_LOAD(void, glGetShaderiv, unsigned int, unsigned int, int*)
+	GL_FUNC_LOAD(void, glGetShaderInfoLog, unsigned int, unsigned int, unsigned int, char*)
+	GL_FUNC_LOAD(unsigned int, glCreateProgram)
+	GL_FUNC_LOAD(void, glAttachShader, unsigned int, unsigned int)
+	GL_FUNC_LOAD(void, glLinkProgram, unsigned int)
+	GL_FUNC_LOAD(void, glValidateProgram, unsigned int)
+	GL_FUNC_LOAD(void, glDeleteShader, unsigned int)
+	GL_FUNC_LOAD(void, glUseProgram, unsigned int)
+	GL_FUNC_LOAD(void, glDeleteProgram, unsigned int)
+	GL_FUNC_LOAD(void, glGenVertexArrays, unsigned int, unsigned int*)
+	GL_FUNC_LOAD(void, glBindVertexArray, unsigned int)
+	GL_FUNC_LOAD(void, glGenBuffers, unsigned int, unsigned int*)
+	GL_FUNC_LOAD(void, glBindBuffer, unsigned int, unsigned int)
+	GL_FUNC_LOAD(void, glDeleteVertexArrays, unsigned int, unsigned int*)
+	GL_FUNC_LOAD(void, glDeleteBuffers, unsigned int, unsigned int*)
+	GL_FUNC_LOAD(void, glBufferData, unsigned int, unsigned int, void*, unsigned int)
+	GL_FUNC_LOAD(void, glVertexAttribPointer, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, void*)
+	GL_FUNC_LOAD(void, glEnableVertexAttribArray, unsigned int)
+	GL_FUNC_LOAD(void, glViewport, unsigned int, unsigned int, unsigned int, unsigned int)
+	GL_FUNC_LOAD(void, glClearColor, float, float, float, float)
+	GL_FUNC_LOAD(void, glClear, unsigned int)
+	GL_FUNC_LOAD(int, glGetUniformLocation, unsigned int, const char*)
+	GL_FUNC_LOAD(void, glUniform2f, unsigned int, float, float)
+	GL_FUNC_LOAD(void, glDrawArrays, unsigned int, unsigned int, unsigned int)
 
 	float t = 0.0f;
 
@@ -37,9 +68,10 @@ int Main(const std::vector<std::string>& args) {
 	out vec4 v_Color;\n\
 	\n\
 	uniform vec2 u_Offset;\n\
+	uniform vec2 u_Aspect;\n\
 	\n\
 	void main() {\n\
-	\tgl_Position = vec4(a_Position + vec3(u_Offset, 0.0f), 1.0f);\n\
+	\tgl_Position = vec4(a_Position * vec3(u_Aspect, 1.0f) + vec3(u_Offset, 0.0f), 1.0f);\n\
 	\tv_Color = vec4(a_Color, 1.0f);\n\
 	}\n";
 
@@ -133,6 +165,7 @@ int Main(const std::vector<std::string>& args) {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glUniform2f(glGetUniformLocation(shaderID, "u_Offset"), mp.x, mp.y);
+		glUniform2f(glGetUniformLocation(shaderID, "u_Aspect"), 1.0f/window.GetAspect(), 1.0f);
 
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 
