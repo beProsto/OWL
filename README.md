@@ -1,4 +1,4 @@
-<img align="left" width="100" height="100" style="image-rendering: crisp-edges; image-rendering: pixelated"  src="./docs/logo.png">
+<img align="left" width="64" height="64" style="image-rendering: crisp-edges; image-rendering: pixelated"  src="./docs/logo.png">
 
 ## OWL (Open Windowing Library)
 
