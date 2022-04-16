@@ -10,3 +10,10 @@
 - WinAPI
 	- Software graphics
 	- OpenGL graphics
+
+If you wish to see the examples working, simply head over to the `build` directory and use `make`.
+```
+cd build
+make
+```
+This will result in (at least one of) the examples compiling into a binary. 
