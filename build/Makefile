@@ -27,6 +27,9 @@ ModernOpenGLExample$(EXE): ../examples/ModernOpenGLExample/main.cpp $(LIB_FILE)
 SimpleWindowExample$(EXE): ../examples/SimpleWindowExample/main.cpp $(LIB_FILE)
 	$(CXX) ../examples/SimpleWindowExample/main.cpp $(LIB_FILE) $(OWL_FLAGS) $(CXX_FLAGS) -o SimpleWindowExample$(EXE)
 
+
+justlibrary: $(LIB_FILE)
+
 $(LIB_FILE): OWL.o
 	$(AR) rcs $(LIB_FILE) OWL.o
 OWL.o: ../src/OWL.cpp
