@@ -35,7 +35,7 @@ public:
             (p == (void*)0x3) ||
             (p == (void*)-1)
         ) {
-            p = (void *)::GetProcAddress(g_WinAPI_Data->hOpengl32Module, name);
+            p = (void *)::GetProcAddress(WinAPI_Data::get()->hOpengl32Module, name);
         }
 
         return (FuncPtr)p;
@@ -67,7 +67,7 @@ protected:
 			m_Hrc = wglCreateContext(m_Hdc);
 			wglMakeCurrent(m_Hdc, m_Hrc);
 
-            g_WinAPI_Data->hOpengl32Module = LoadLibraryA("opengl32.dll");
+            WinAPI_Data::get()->hOpengl32Module = LoadLibraryA("opengl32.dll");
 			
 			return true;
 		}

@@ -10,7 +10,7 @@
 #endif
 
 namespace OWL {
-void Sleep(unsigned int _milliseconds) {
+inline void Sleep(unsigned int _milliseconds) {
 	std::this_thread::sleep_for(std::chrono::milliseconds(_milliseconds));
 }
 
