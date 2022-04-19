@@ -41,11 +41,9 @@ public:
 	static WinAPI_Data* get() {
 		if(!m_Instance) {
 			m_Instance = new WinAPI_Data();
-			std::cout << "getInstance(): First instance\n";
 			return m_Instance;
 		}
 		else {
-			std::cout << "getInstance(): previous instance\n";
 			return m_Instance;
 		}
 	}

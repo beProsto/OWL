@@ -333,9 +333,7 @@ public:
 		m_Window.lpfnWndProc = WndProc;
 		m_Window.cbClsExtra = 0;
 		m_Window.cbWndExtra = 0;
-		Debug::Out::Print("Kutas1!", Debug::Out::Type::ERR);
 		m_Window.hInstance = WinAPI_Data::get()->hInstance;
-		Debug::Out::Print("Kutas2!", Debug::Out::Type::ERR);
 		m_Window.hIcon = LoadIcon(NULL, IDI_APPLICATION);
 		m_Window.hCursor = LoadCursor(NULL, IDC_ARROW);
 		m_Window.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
