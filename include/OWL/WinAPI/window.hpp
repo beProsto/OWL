@@ -334,7 +334,7 @@ public:
 		m_Window.cbClsExtra = 0;
 		m_Window.cbWndExtra = 0;
 		m_Window.hInstance = WinAPI_Data::get()->hInstance;
-		m_Window.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+		m_Window.hIcon = LoadIcon(m_Window.hInstance, MAKEINTRESOURCE(460));
 		m_Window.hCursor = LoadCursor(NULL, IDC_ARROW);
 		m_Window.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 		m_Window.lpszMenuName = nullptr;
