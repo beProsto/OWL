@@ -1,6 +1,9 @@
 #include <OWL/OWL.hpp>
 
 #ifdef _WIN32
+
+#include <shellapi.h>
+
 /* WinAPI */
 WinAPI_Data* WinAPI_Data::m_Instance = nullptr;
 
