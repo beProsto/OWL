@@ -442,6 +442,10 @@ public:
 		return m_Running;
 	}
 
+	bool IsFocused() const {
+		return GetFocus() == m_Hwnd;
+	}
+
 	Window& SetFullScreen(bool _fullScreen) {
 		if(m_FullScreen != _fullScreen) {
 			m_FullScreen = _fullScreen;
