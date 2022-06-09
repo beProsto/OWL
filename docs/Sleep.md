@@ -1,5 +1,5 @@
 # Sleep()
-Sleep() function makes the program stop for desired number of milliseconds.
+The `Sleep()` function makes the program stop for desired number of milliseconds.
 
 It takes in one parameter:
 - number of milliseconds it will freeze the program for

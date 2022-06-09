@@ -1,12 +1,12 @@
 # SoftwareContext
 It's a simple class letting you use software (CPU) graphics in your project.
 It has 6 functions:
-- GetType() - It's a function inherited from `Context` class, that returns an `unsigned int`, which represents this context's type (returns `ContextType_Software` enum's value).
-- Resize() - It's a function for resizing the pixel data array.
-- GetSize() - Returns the pixel data array's size.
-- Clear() - Sets every color of pixel data array to selected color (takes in a `Vec4b`) or black.
-- GetPixelData() - returns the pixel data array (in the form of `Vec4b` array)
-- BlitToScreen() - Just blit's the pixel data array as an image to the screen. 
+- `GetType()` - It's a function inherited from `Context` class, that returns an `unsigned int`, which represents this context's type (returns `ContextType_Software` enum's value).
+- `Resize()` - It's a function for resizing the pixel data array.
+- `GetSize()` - Returns the pixel data array's size.
+- `Clear()` - Sets every color of pixel data array to selected color (takes in a `Vec4b`) or black.
+- `GetPixelData()` - returns the pixel data array (in the form of `Vec4b` array)
+- `BlitToScreen()` - Just blit's the pixel data array as an image to the screen. 
 
 __Example of usage:__
 ```cpp

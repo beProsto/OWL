@@ -441,6 +441,13 @@ public:
 		return m_Running;
 	}
 
+	bool IsFocused() const {
+		::Window focused;
+		int revert_to;
+		XGetInputFocus(m_Display, &focused, &revert_to);
+		return focused == m_Section;
+	}
+
 	Window& SetFullScreen(bool _fullScreen) {
 		if(m_FullScreen != _fullScreen) {
 			XEvent event;

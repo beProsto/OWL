@@ -13,7 +13,7 @@
 namespace OWL {
 namespace WinAPI {
 
-LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+inline LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	switch(msg) {
 		case WM_CLOSE:
 			PostQuitMessage(0);
@@ -333,8 +333,8 @@ public:
 		m_Window.lpfnWndProc = WndProc;
 		m_Window.cbClsExtra = 0;
 		m_Window.cbWndExtra = 0;
-		m_Window.hInstance = g_WinAPI_Data->hInstance;
-		m_Window.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+		m_Window.hInstance = WinAPI_Data::get()->hInstance;
+		m_Window.hIcon = LoadIcon(m_Window.hInstance, MAKEINTRESOURCE(460));
 		m_Window.hCursor = LoadCursor(NULL, IDC_ARROW);
 		m_Window.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 		m_Window.lpszMenuName = nullptr;
@@ -346,7 +346,7 @@ public:
 			return;
 		}
 
-		m_Hwnd = CreateWindowEx(WS_EX_CLIENTEDGE, m_ClassName, &m_Title[0], WS_OVERLAPPEDWINDOW, _position.x, _position.y, _size.x, _size.y, NULL, NULL, g_WinAPI_Data->hInstance, NULL);
+		m_Hwnd = CreateWindowEx(WS_EX_CLIENTEDGE, m_ClassName, &m_Title[0], WS_OVERLAPPEDWINDOW, _position.x, _position.y, _size.x, _size.y, NULL, NULL, WinAPI_Data::get()->hInstance, NULL);
 	
 		if(m_Hwnd == NULL) {
 			Debug::Out::Print("Error creating the window!", Debug::Out::Type::ERR);
@@ -359,7 +359,7 @@ public:
 			m_Context->Create(m_Hwnd);
 		}
 	
-		ShowWindow(m_Hwnd, g_WinAPI_Data->nCmdShow);
+		ShowWindow(m_Hwnd, WinAPI_Data::get()->nCmdShow);
 		UpdateWindow(m_Hwnd);
 	}
 	~Window() {
@@ -440,6 +440,10 @@ public:
 	}
 	bool IsRunning() const {
 		return m_Running;
+	}
+
+	bool IsFocused() const {
+		return GetFocus() == m_Hwnd;
 	}
 
 	Window& SetFullScreen(bool _fullScreen) {
