@@ -20,7 +20,7 @@ It has 5 functions:
 		- `DPadLeft`
 		- `DPadRight`
 		- `Logo`
-- `GetButtonsAmmount()` - Returns the ammount of buttons on the gamepad as an `unsigned int`.
+- `GetButtonsCount()` - Returns the ammount of buttons on the gamepad as an `unsigned int`.
 - `GetLeftStick()` - Returns the left stick's state as a `Vec2<float>`.
 - `GetRightStick()` - Returns the right stick's state as a `Vec2<float>`.
 - `GetLeftTrigger()` - Returns the state of the left trigger as a `float`.
@@ -32,5 +32,5 @@ __Example of usage:__
 std::cout << "Left Stick State = {" << window.Gamepad[0].GetLeftStick().x << ", " <<  window.Gamepad[0].GetLeftStick().y << "}\n";
 std::cout << "Left Trigger State = " << window.Gamepad[0].GetLeftTrigger() << "\n";
 std::cout << "Right Shoulder Button's State = " << window.Gamepad[0].IsButtonPressed(OWL::Window::GamepadEvent::ShoulderLeft) << "\n";
-std::cout << "There are " << window.Gamepad[0].GetButtonsAmmount() << " buttons on the gamepad.\n";
+std::cout << "There are " << window.Gamepad[0].GetButtonsCount() << " buttons on the gamepad.\n";
 ```
