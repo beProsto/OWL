@@ -3,13 +3,14 @@
 	border: 0px;
 	padding: 0px;
 }
-html {
+html, body {
+	/* Making the body take whole page */
 	height: 100%;
+	width: 100%;
 }
 body {
-	/* Making the body take whole page */
-	position:absolute; top:0; bottom:0; right:0; left:0;
-	height: 100%;
+	/* We don't want any scrollbars! */
+	overflow: hidden;
 
 	/* The text */
 	color: aliceblue;
@@ -20,7 +21,7 @@ body {
 prosto {
 	color: #5af95a;
 }
-/* all the special cases in which my secondaty font colour is needed */
+/* all the special cases in which my secondary font colour is needed */
 sidekick {
 	color: #00f4ff;
 }
@@ -30,6 +31,7 @@ sidekick {
 	flex-direction: row;
 
 	height: 100%;
+	width: 100%;
 }
 
 #contents {
@@ -40,7 +42,7 @@ sidekick {
 }
 #contents > iframe {
 	width: 100%;
-	height: 98%;
+	height: 100%;
 }
 
 #navbar {

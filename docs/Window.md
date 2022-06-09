@@ -10,21 +10,22 @@ OWL::Window window(&context);
 ```
 
 `Window` class has these public functions:
-- SetEventLoopType() - Sets the `EventLoopType` used for polling events to `EventLoop` or `GameLoop`.
-- GetEventLoopType() - Returns the `EventLoopType` used for polling events.
-- PollEvents() - Polls every needed event, using the event loop type chosen as `EventLoopType`.
-- SetPosition() - Sets windows position on screen.
-- GetPosition() - Returns windows position on screen.
-- SetSize() - Sets the size of window.
-- GetSize() - Returns windows size.
-- SetTitle() - Sets the title of the window.
-- GetTitle() - Returns the title of the window.
-- Close() - Closes the window.
-- IsRunning() - Returns true if the window is running - false otherwise.
-- SetFullScreen() - Sets the fullscreen mode.
-- IsFullScreen() - Returns true, if the window is fullscreen - false otherwise.
-- SetMaxGamepads() - Sets the maximum number of connected gamepads.
-- GetMaxGamepads() - Returns the maximum number of connected gamepads.
+- `SetEventLoopType()` - Sets the `EventLoopType` used for polling events to `EventLoop` or `GameLoop`.
+- `GetEventLoopType()` - Returns the `EventLoopType` used for polling events.
+- `PollEvents()` - Polls every needed event, using the event loop type chosen as `EventLoopType`.
+- `SetPosition()` - Sets windows position on screen.
+- `GetPosition()` - Returns windows position on screen.
+- `SetSize()` - Sets the size of window.
+- `GetSize()` - Returns windows size.
+- `SetTitle()` - Sets the title of the window.
+- `GetTitle()` - Returns the title of the window.
+- `Close()` - Closes the window.
+- `IsRunning()` - Returns true if the window is running - false otherwise.
+- `IsFocused()` - Returns true if the window is currently focused - false otherwise.
+- `SetFullScreen()` - Sets the fullscreen mode.
+- `IsFullScreen()` - Returns true, if the window is fullscreen - false otherwise.
+- `SetMaxGamepads()` - Sets the maximum number of connected gamepads.
+- `GetMaxGamepads()` - Returns the maximum number of connected gamepads.
 
 `Window` class has these public variables:
 - Mouse - instance of MouseEvent, contains polled mouse event data. 

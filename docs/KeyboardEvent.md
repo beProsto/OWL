@@ -3,8 +3,8 @@
 It's used for handling polled keyboard events.
 
 It has 2 functions:
-- IsKeyPressed() - Takes in an enum of the key you want to check, and returns it's state as a `bool`.
-- GetKeyData() - Returns the data about pressed key, as a `KeyData`.
+- `IsKeyPressed()` - Takes in an enum of the key you want to check, and returns it's state as a `bool`.
+- `GetKeyData()` - Returns the data about pressed key, as a `KeyData`.
 	- `KeyData` has 2 members:
 		- `std::string` String - contains text data (the key presented as text, for example: Key A = `"A"`, Key Enter = `"\n"`)
 		- `unsigned int` KeyEnum - contains the enum of the key
