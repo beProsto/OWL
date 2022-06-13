@@ -1,3 +1,4 @@
 .vscode/
 build/*
-!build/Makefile
+!build/.build
+..build
