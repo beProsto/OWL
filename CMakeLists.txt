@@ -2,18 +2,16 @@ cmake_minimum_required(VERSION 3.0.0)
 project(OWL VERSION 0.2022.1)
 
 # NOT YET SURE HOW TO USE THIS
+# NOTE: OWL_Main should actually be a header-only part of the library.
+# The rest shall be compilable. At that point shared libraries are a proper goal.
 
-if(LIBTYPE STREQUAL "STATIC")
-	add_library(OWL STATIC src/OWL.cpp)
-else()
+if(LIBTYPE STREQUAL "SHARED")
 	add_library(OWL SHARED src/OWL.cpp)
-	target_link_options(OWL PRIVATE -Wl,--unresolved-symbols=ignore-all)
+else()
+	add_library(OWL STATIC src/OWL.cpp)
 endif()
 
-
 target_include_directories(OWL PRIVATE include)
-
-target_compile_definitions(OWL PRIVATE BUILD_SHARED_LIBS _OWL_EXPORT)
 
 if(WIN32)
 	target_link_libraries(OWL
