@@ -14,9 +14,19 @@ OWL will of course support Direct3D, OpenGL and Vulkan. :D
 	- Software graphics
 	- OpenGL graphics
 
-If you wish to see the examples working, simply head over to the `build` directory and use `make`.
+To build the library use either `cmake` or `make`:
 ```
-cd build
-make
+cmake -B ./build
+cmake --build ./build
 ```
-This will result in (at least one of) the examples compiling into a binary. 
+or
+```
+make 
+```
+This will result in a `libOWL.a` / `OWL.lib` library file being created in the `./build/` directory.
+Additionally 3 examples (executables) will be compiled along with it.
+
+To turn compiling examples off, set: `BUILD_EXAMPLES` to `NO`. For example like this:
+```
+cmake -B ./build -DBUILD_EXAMPLES=NO
+```
