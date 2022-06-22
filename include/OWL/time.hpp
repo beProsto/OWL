@@ -16,33 +16,13 @@ inline void Sleep(unsigned int _milliseconds) {
 
 class FPSLimiter {
 public:
-	FPSLimiter(unsigned int _desiredFPS = 30) {
-		m_FPS = _desiredFPS;
-	}
-	~FPSLimiter() {
+	FPSLimiter(unsigned int _desiredFPS = 30);
+	~FPSLimiter();
 
-	}
-
-	FPSLimiter& SetDesiredFPS(unsigned int _desiredFPS = 30) {
-		m_FPS = _desiredFPS;
-		return *this;
-	}
-	unsigned int GetDesiredFPS() const {
-		return m_FPS;
-	}
-
-	FPSLimiter& Start() {
-		m_StartTicks = (clock())/(CLOCKS_PER_SEC/1000.0);
-		return *this;
-	}
-	FPSLimiter& End() {
-		unsigned int elapsedTicks = (clock())/(CLOCKS_PER_SEC/1000.0) - m_StartTicks;
-		float delay = (1000.0f/m_FPS)-elapsedTicks;
-		if(delay > 0) {
-			Sleep(delay);
-		}
-		return *this;
-	}
+	FPSLimiter& SetDesiredFPS(unsigned int _desiredFPS = 30);
+	unsigned int GetDesiredFPS() const;
+	FPSLimiter& Start();
+	FPSLimiter& End();
 
 private:
 	unsigned int m_StartTicks;
