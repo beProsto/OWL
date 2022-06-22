@@ -25,15 +25,16 @@ else()
 	)
 endif()
 
-# NOTE: OWL_Main should actually be a header-only part of the library.
-# The rest shall be compilable. At that point shared libraries are a proper goal.
-# Because of that small mishap we'll have to compile to static for a while.
-# Here we define the OWL (library) target:
+# All the OS independent source files should be in the main directories
+file(GLOB os_independent_srcs
+	"include/OWL/*.hpp"
+	"src/*.cpp"
+)
 
-if(LIBTYPE STREQUAL "SHARED")
-	add_library(OWL SHARED src/OWL.cpp)
+if(LIBTYPE STREQUAL "STATIC")
+	add_library(OWL STATIC ${os_independent_srcs})
 else()
-	add_library(OWL STATIC src/OWL.cpp)
+	add_library(OWL SHARED ${os_independent_srcs})
 endif()
 
 # If the user didn't turn building examples off, we create them, linking the new OWL library:
