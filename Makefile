@@ -2,10 +2,11 @@ CC  = gcc
 CXX = g++
 G = Ninja
 J = 16
-LT = STATIC
+LT = SHARED
+BE = YES
 
 compile:
-	cmake -B ./build -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DCMAKE_BUILD_TYPE:STRING=Debug "-DCMAKE_C_COMPILER:FILEPATH=$(CC)" "-DCMAKE_CXX_COMPILER:FILEPATH=$(CXX)" "-DLIBTYPE=$(LT)" -G "$(G)" & cmake --build ./build -j $(J)
+	cmake -B ./build -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DCMAKE_BUILD_TYPE:STRING=Debug "-DCMAKE_C_COMPILER:FILEPATH=$(CC)" "-DCMAKE_CXX_COMPILER:FILEPATH=$(CXX)" "-DLIBTYPE=$(LT)" "-DBUILD_EXAMPLES=$(BE)" -G "$(G)" & cmake --build ./build -j $(J)
 
 clean:
 	cd build & git clean -d -f -x
