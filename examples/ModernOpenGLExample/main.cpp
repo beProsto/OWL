@@ -1,6 +1,7 @@
 #include <cmath>
 // #include <GL/glew.h>
 #include <OWL/OWL.hpp>
+#include <OWL/main.hpp>
 #include <OWL/GLContext.hpp>
 #include <OWL/time.hpp>
 

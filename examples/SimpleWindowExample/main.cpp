@@ -1,4 +1,5 @@
 #include <OWL/OWL.hpp>
+#include <OWL/main.hpp>
 #include <OWL/time.hpp>
 
 int Main(const std::vector<std::string>& args) {

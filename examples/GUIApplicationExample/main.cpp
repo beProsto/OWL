@@ -1,5 +1,6 @@
 #include <iostream>
 #include <OWL/OWL.hpp>
+#include <OWL/main.hpp>
 
 void DrawPixel(OWL::Vec4b* _canvas, const OWL::Vec2ui& _size, const OWL::Vec2i& _position, const OWL::Vec4b& _color) {
 	if(_position.x >= 0 && _position.x < _size.x && _position.y >= 0 && _position.y < _size.y) {
