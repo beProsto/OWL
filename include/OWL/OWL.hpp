@@ -14,8 +14,6 @@
 
 /* This file contains typedefs for all the needed types in OWL */
 
-int Main(const std::vector<std::string>&);
-
 namespace OWL {
 enum {
 	ContextType_Unknown = 0,
@@ -81,5 +79,7 @@ typedef X11::Window Window;
 
 #endif
 
+
+int Main(const std::vector<std::string>&);
 
 #endif/*_OWL_OWL_HPP_HEADER_FILE_GUARD*/

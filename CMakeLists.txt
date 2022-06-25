@@ -27,7 +27,7 @@ endif()
 
 # All the OS independent source files should be in the main directories
 file(GLOB os_independent_srcs
-	"include/OWL/*.hpp"
+	# "include/OWL/*.hpp"
 	"src/*.cpp"
 )
 
@@ -40,10 +40,7 @@ endif()
 # If the user didn't turn building examples off, we create them, linking the new OWL library:
 if(NOT BUILD_EXAMPLES STREQUAL "NO")
 	link_libraries(OWL)
-	add_executable(GUIApplicationExample  examples/GUIApplicationExample/main.cpp)
-	add_executable(ModernOpenGLExample    examples/ModernOpenGLExample/main.cpp)
-	add_executable(SimpleWindowExample    examples/SimpleWindowExample/main.cpp)
+	add_executable(GUIApplicationExample examples/GUIApplicationExample/main.cpp)
+	add_executable(ModernOpenGLExample examples/ModernOpenGLExample/main.cpp)
+	add_executable(SimpleWindowExample examples/SimpleWindowExample/main.cpp)
 endif()
-
-
-

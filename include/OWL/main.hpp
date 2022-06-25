@@ -1,7 +1,7 @@
 #ifndef _OWL_MAIN_HPP_HEADER_FILE_GUARD
 #define _OWL_MAIN_HPP_HEADER_FILE_GUARD
 
-#include <OWL/OWL.hpp>
+#include "OWL.hpp"
 
 #ifdef _WIN32
 
