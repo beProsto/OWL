@@ -35,6 +35,7 @@ if(LIBTYPE STREQUAL "STATIC")
 	add_library(OWL STATIC ${os_independent_srcs})
 else()
 	add_library(OWL SHARED ${os_independent_srcs})
+	target_compile_definitions(OWL PRIVATE OWL_BUILD_DLL)
 endif()
 
 # If the user didn't turn building examples off, we create them, linking the new OWL library:
