@@ -1,5 +1,4 @@
-#ifndef _OWL_MAIN_HPP_HEADER_FILE_GUARD
-#define _OWL_MAIN_HPP_HEADER_FILE_GUARD
+#pragma once
 
 #include "OWL.hpp"
 
@@ -53,5 +52,3 @@ int main(int argc, char** argv) {
 #error OWL: Unsupported platform! (Only linux and windows supported currently!)
 
 #endif
-
-#endif/*_OWL_MAIN_HPP_HEADER_FILE_GUARD*/

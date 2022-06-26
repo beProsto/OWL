@@ -1,5 +1,4 @@
-#ifndef _OWL_WINAPI_WINDOW_HPP_HEADER_FILE_GUARD
-#define _OWL_WINAPI_WINDOW_HPP_HEADER_FILE_GUARD
+#pragma once
 
 #include <string>
 #include <iostream>
@@ -745,5 +744,3 @@ protected:
 
 }
 }
-
-#endif/*_OWL_WINAPI_WINDOW_HPP_HEADER_FILE_GUARD*/

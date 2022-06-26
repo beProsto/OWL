@@ -1,5 +1,4 @@
-#ifndef _OWL_VECTOR2_HPP_HEADER_FILE_GUARD
-#define _OWL_VECTOR2_HPP_HEADER_FILE_GUARD
+#pragma once
 namespace OWL {
 template<typename T> class Vec2 {
 public:
@@ -108,6 +107,3 @@ typedef Vec2<float> Vec2f;
 typedef Vec2<double> Vec2d;
 
 }
-
-#endif /*_OWL_VECTOR2_HPP_HEADER_FILE_GUARD*/
-

@@ -1,5 +1,4 @@
-#ifndef _OWL_OWL_HPP_HEADER_FILE_GUARD
-#define _OWL_OWL_HPP_HEADER_FILE_GUARD
+#pragma once
 
 #include <chrono>
 #include <thread>
@@ -81,5 +80,3 @@ typedef X11::Window Window;
 
 
 int Main(const std::vector<std::string>&);
-
-#endif/*_OWL_OWL_HPP_HEADER_FILE_GUARD*/

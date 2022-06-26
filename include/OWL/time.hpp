@@ -1,5 +1,4 @@
-#ifndef _OWL_TIME_HPP_HEADER_FILE_GUARD
-#define _OWL_TIME_HPP_HEADER_FILE_GUARD
+#pragma once
 
 #include <chrono>
 #include <thread>
@@ -58,5 +57,3 @@ private:
 };
 
 }
-
-#endif/*_OWL_TIME_HPP_HEADER_FILE_GUARD*/
