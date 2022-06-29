@@ -1,10 +1,12 @@
 #pragma once
 
+#include "config.hpp"
+
 #include <chrono>
 #include <thread>
 #include <time.h>
 
-#ifndef _WIN32
+#ifndef OWL_SYSTEM_WINDOWS
 #include <sys/time.h>
 #endif
 
@@ -13,7 +15,7 @@ inline void Sleep(unsigned int _milliseconds) {
 	std::this_thread::sleep_for(std::chrono::milliseconds(_milliseconds));
 }
 
-class FPSLimiter {
+class OWL_LIB_EXPORT FPSLimiter {
 public:
 	FPSLimiter(unsigned int _desiredFPS = 30);
 	~FPSLimiter();
