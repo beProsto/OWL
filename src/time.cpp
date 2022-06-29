@@ -28,4 +28,24 @@ FPSLimiter& FPSLimiter::End() {
 	return *this;
 }
 
+Timer::Timer() {
+
+}
+Timer::~Timer() {
+
+}
+Timer& Timer::Start() {
+	m_S = std::chrono::high_resolution_clock::now();
+	return *this;
+}
+Timer& Timer::End() {
+	m_E = std::chrono::high_resolution_clock::now();
+	auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(m_E - m_S).count();
+	m_DeltaTime = ms / 1000.0f;
+	return *this;
+}
+float Timer::GetDeltaTime() const {
+	return m_DeltaTime;
+}
+
 }
