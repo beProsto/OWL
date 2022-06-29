@@ -345,8 +345,8 @@ public:
 			return;
 		}
 
-		m_Hwnd = CreateWindowEx(WS_EX_CLIENTEDGE, m_ClassName, &m_Title[0], WS_OVERLAPPEDWINDOW, _position.x, _position.y, _size.x, _size.y, NULL, NULL, WinAPI_Data::get()->hInstance, NULL);
-	
+		m_Hwnd = CreateWindowEx(WS_EX_CLIENTEDGE, m_ClassName, m_Title.c_str(), WS_OVERLAPPEDWINDOW, _position.x, _position.y, _size.x, _size.y, NULL, NULL, WinAPI_Data::get()->hInstance, NULL);
+
 		if(m_Hwnd == NULL) {
 			Debug::Out::Print("Error creating the window!", Debug::Out::Type::ERR);
 			return;
@@ -425,7 +425,7 @@ public:
 	Window& SetTitle(const std::string& _title) {
 		if(m_Title != _title) {
 			m_Title = _title;
-			SetWindowText(m_Hwnd, &m_Title[0]);
+			SetWindowTextA(m_Hwnd, &m_Title[0]);
 		}
 		return *this;
 	}
