@@ -12,10 +12,13 @@
 // On windows we need spec declarations for shared libraries:
 #ifdef OWL_SYSTEM_WINDOWS
 	#ifdef OWL_BUILD_DLL
-		#define OWL_LIB_EXPORT __declspec(dllexport)
+		// When building the DLL, we specify we want the classes and functions treated as export
+		#define OWL_API __declspec(dllexport)
 	#else
-		#define OWL_LIB_EXPORT __declspec(dllimport)
+		// When building the executables, we specify we want everything treated as import
+		#define OWL_API __declspec(dllimport)
 	#endif
 #else
-	#define OWL_LIB_EXPORT 
+	// On other systems we can leave it empty
+	#define OWL_API 
 #endif

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "config.hpp"
+#include <OWL/Utility/Config.hpp>
 
 #include <chrono>
 #include <thread>
@@ -15,28 +15,28 @@ inline void Sleep(unsigned int _milliseconds) {
 	std::this_thread::sleep_for(std::chrono::milliseconds(_milliseconds));
 }
 
-class OWL_LIB_EXPORT FPSLimiter {
+class OWL_API FPSLimiter {
 public:
 	FPSLimiter(unsigned int _desiredFPS = 30);
 	~FPSLimiter();
 
-	FPSLimiter& SetDesiredFPS(unsigned int _desiredFPS = 30);
+	void SetDesiredFPS(unsigned int _desiredFPS = 30);
 	unsigned int GetDesiredFPS() const;
-	FPSLimiter& Start();
-	FPSLimiter& End();
+	void Start();
+	void End();
 
 private:
 	unsigned int m_StartTicks;
 	unsigned int m_FPS;
 };
 
-class OWL_LIB_EXPORT Timer {
+class OWL_API Timer {
 public:
 	Timer();
 	~Timer();
 
-	Timer& Start();
-	Timer& End();
+	void Start();
+	void End();
 
 	float GetDeltaTime() const;
 

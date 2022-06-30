@@ -1,4 +1,7 @@
 #pragma once
+
+#include <stddef.h>
+
 namespace OWL {
 template<typename T> class Vec2 {
 public:
