@@ -1,5 +1,7 @@
 #pragma once
 
+#include "config.hpp"
+
 /* This file contains typedefs for GLContext type in OWL */
 namespace OWL {
 enum {
@@ -7,7 +9,7 @@ enum {
 };
 }
 
-#ifdef _WIN32
+#if defined OWL_SYSTEM_WINDOWS
 /* WinAPI */
 #include "WinAPI/GLContext.hpp"
 
@@ -23,12 +25,8 @@ namespace OWL {
 typedef X11::GLContext GLContext;
 }
 
-#elif defined __APPLE__
-/* Mac stuff */
-#include "Unsupported/GLContext.hpp"
+#else
 
-namespace OWL {
-typedef Unsupported::GLContext GLContext;
-}
+#error OWL: Unsupported platform! (Only linux and windows supported currently!)
 
 #endif
