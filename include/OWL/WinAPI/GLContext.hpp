@@ -1,5 +1,4 @@
-#ifndef _OWL_WINAPI_GLCONTEXT_HPP_HEADER_FILE_GUARD
-#define _OWL_WINAPI_GLCONTEXT_HPP_HEADER_FILE_GUARD
+#pragma once
 
 #include "WGL.hpp"
 #include "context.hpp"
@@ -96,6 +95,3 @@ protected:
 	
 }
 }
-
-#endif/*_OWL_WINAPI_GLCONTEXT_HPP_HEADER_FILE_GUARD*/
-

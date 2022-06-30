@@ -1,5 +1,4 @@
-#ifndef _DEBUG_OUT_HPP_HEADER_FILE_GUARD
-#define _DEBUG_OUT_HPP_HEADER_FILE_GUARD
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -29,5 +28,3 @@ public:
 	}
 };
 }
-
-#endif /*_DEBUG_OUT_HPP_HEADER_FILE_GUARD*/

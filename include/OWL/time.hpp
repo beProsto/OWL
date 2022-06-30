@@ -1,11 +1,12 @@
-#ifndef _OWL_TIME_HPP_HEADER_FILE_GUARD
-#define _OWL_TIME_HPP_HEADER_FILE_GUARD
+#pragma once
+
+#include "config.hpp"
 
 #include <chrono>
 #include <thread>
 #include <time.h>
 
-#ifndef _WIN32
+#ifndef OWL_SYSTEM_WINDOWS
 #include <sys/time.h>
 #endif
 
@@ -14,7 +15,7 @@ inline void Sleep(unsigned int _milliseconds) {
 	std::this_thread::sleep_for(std::chrono::milliseconds(_milliseconds));
 }
 
-class FPSLimiter {
+class OWL_LIB_EXPORT FPSLimiter {
 public:
 	FPSLimiter(unsigned int _desiredFPS = 30);
 	~FPSLimiter();
@@ -28,29 +29,16 @@ private:
 	unsigned int m_StartTicks;
 	unsigned int m_FPS;
 };
-class Timer {
+
+class OWL_LIB_EXPORT Timer {
 public:
-	Timer() {
+	Timer();
+	~Timer();
 
-	}
-	~Timer() {
+	Timer& Start();
+	Timer& End();
 
-	}
-
-	Timer& Start() {
-		m_S = std::chrono::high_resolution_clock::now();
-		return *this;
-	}
-	Timer& End() {
-		m_E = std::chrono::high_resolution_clock::now();
-		auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(m_E - m_S).count();
-		m_DeltaTime = ms / 1000.0f;
-		return *this;
-	}
-
-	float GetDeltaTime() const {
-		return m_DeltaTime;
-	}
+	float GetDeltaTime() const;
 
 private:
 	std::chrono::high_resolution_clock::time_point m_S, m_E;
@@ -58,5 +46,3 @@ private:
 };
 
 }
-
-#endif/*_OWL_TIME_HPP_HEADER_FILE_GUARD*/

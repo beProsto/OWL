@@ -1,5 +1,4 @@
-#ifndef _OWL_GLCONTEXT_HPP_HEADER_FILE_GUARD
-#define _OWL_GLCONTEXT_HPP_HEADER_FILE_GUARD
+#pragma once
 
 /* This file contains typedefs for GLContext type in OWL */
 namespace OWL {
@@ -33,5 +32,3 @@ typedef Unsupported::GLContext GLContext;
 }
 
 #endif
-
-#endif/*_OWL_GLCONTEXT_HPP_HEADER_FILE_GUARD*/

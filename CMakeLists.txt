@@ -35,12 +35,20 @@ if(LIBTYPE STREQUAL "STATIC")
 	add_library(OWL STATIC ${os_independent_srcs})
 else()
 	add_library(OWL SHARED ${os_independent_srcs})
+	target_compile_definitions(OWL PRIVATE OWL_BUILD_DLL)
+endif()
+
+
+if(WIN32)
+	set(EXE_TYPE WIN32)
+else()
+	set(EXE_TYPE )
 endif()
 
 # If the user didn't turn building examples off, we create them, linking the new OWL library:
 if(NOT BUILD_EXAMPLES STREQUAL "NO")
 	link_libraries(OWL)
-	add_executable(GUIApplicationExample examples/GUIApplicationExample/main.cpp)
-	add_executable(ModernOpenGLExample examples/ModernOpenGLExample/main.cpp)
-	add_executable(SimpleWindowExample examples/SimpleWindowExample/main.cpp)
+	add_executable(GUIApplicationExample ${EXE_TYPE} examples/GUIApplicationExample/main.cpp)
+	add_executable(ModernOpenGLExample   ${EXE_TYPE} examples/ModernOpenGLExample/main.cpp)
+	add_executable(SimpleWindowExample   ${EXE_TYPE} examples/SimpleWindowExample/main.cpp)
 endif()

@@ -1,9 +1,11 @@
-#ifndef _OWL_MAIN_HPP_HEADER_FILE_GUARD
-#define _OWL_MAIN_HPP_HEADER_FILE_GUARD
+#pragma once
 
+#include "config.hpp"
 #include "OWL.hpp"
 
-#ifdef _WIN32
+int Main(const std::vector<std::string>&);
+
+#if defined OWL_SYSTEM_WINDOWS
 
 #include <shellapi.h>
 
@@ -38,7 +40,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 }
 
 
-#elif defined __linux__
+#elif defined OWL_SYSTEM_LINUX
 /* X11 */
 int main(int argc, char** argv) {
 	std::vector<std::string> passed;
@@ -53,5 +55,3 @@ int main(int argc, char** argv) {
 #error OWL: Unsupported platform! (Only linux and windows supported currently!)
 
 #endif
-
-#endif/*_OWL_MAIN_HPP_HEADER_FILE_GUARD*/

@@ -1,5 +1,4 @@
-#ifndef _OWL_X11_GLCONTEXT_HPP_HEADER_FILE_GUARD
-#define _OWL_X11_GLCONTEXT_HPP_HEADER_FILE_GUARD
+#pragma once
 
 #include "context.hpp"
 #include "GLX.hpp"
@@ -117,6 +116,3 @@ protected:
 	
 }
 }
-
-#endif/*_OWL_X11_GLCONTEXT_HPP_HEADER_FILE_GUARD*/
-

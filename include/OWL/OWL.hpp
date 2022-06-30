@@ -1,5 +1,6 @@
-#ifndef _OWL_OWL_HPP_HEADER_FILE_GUARD
-#define _OWL_OWL_HPP_HEADER_FILE_GUARD
+#pragma once
+
+#include "config.hpp"
 
 #include <chrono>
 #include <thread>
@@ -29,7 +30,7 @@ struct KeyData {
 }; 
 }
 
-#ifdef _WIN32
+#if defined OWL_SYSTEM_WINDOWS
 /* WinAPI */
 #include "WinAPI/WinAPI.hpp"
 
@@ -63,7 +64,7 @@ typedef WinAPI::Window Window;
 
 
 
-#elif defined __linux__
+#elif defined OWL_SYSTEM_LINUX
 /* X11 */
 #include "X11/window.hpp"
 
@@ -78,8 +79,3 @@ typedef X11::Window Window;
 #error OWL: Unsupported platform! (Only linux and windows supported currently!)
 
 #endif
-
-
-int Main(const std::vector<std::string>&);
-
-#endif/*_OWL_OWL_HPP_HEADER_FILE_GUARD*/

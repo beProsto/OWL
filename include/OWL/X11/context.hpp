@@ -1,5 +1,4 @@
-#ifndef _OWL_X11_CONTEXT_HPP_HEADER_FILE_GUARD
-#define _OWL_X11_CONTEXT_HPP_HEADER_FILE_GUARD
+#pragma once
 
 #include "X11.hpp"
 
@@ -136,5 +135,3 @@ protected:
 
 }
 }
-
-#endif/*_OWL_X11_CONTEXT_HPP_HEADER_FILE_GUARD*/
