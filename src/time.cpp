@@ -24,7 +24,7 @@ public:
 	}
 
 public:
-	std::chrono::high_resolution_clock::time_point m_S, m_E;
+	std::chrono::steady_clock::time_point m_S, m_E;
 };
 }
 
@@ -43,10 +43,10 @@ unsigned int FPSLimiter::GetDesiredFPS() const {
 	return m_FPS;
 }
 void FPSLimiter::Start() {
-	m_Impl->m_S = std::chrono::high_resolution_clock::now();
+	m_Impl->m_S = std::chrono::steady_clock::now();
 }
 void FPSLimiter::End() {
-	m_Impl->m_E = std::chrono::high_resolution_clock::now();
+	m_Impl->m_E = std::chrono::steady_clock::now();
 	auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(m_Impl->m_E - m_Impl->m_S).count();
 	float delay = (1000.0f / (float)m_FPS) - ms;
 	if(delay > 0) {
@@ -62,10 +62,10 @@ Timer::~Timer() {
 	delete m_Impl;
 }
 void Timer::Start() {
-	m_Impl->m_S = std::chrono::high_resolution_clock::now();
+	m_Impl->m_S = std::chrono::steady_clock::now();
 }
 void Timer::End() {
-	m_Impl->m_E = std::chrono::high_resolution_clock::now();
+	m_Impl->m_E = std::chrono::steady_clock::now();
 	auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(m_Impl->m_E - m_Impl->m_S).count();
 	m_DeltaTime = ms / 1000.0f;
 }
