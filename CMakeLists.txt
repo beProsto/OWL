@@ -26,8 +26,8 @@ else()
 endif()
 
 # All the OS independent source files should be in the main directories
-file(GLOB os_independent_srcs
-	# "include/OWL/*.hpp"
+file(GLOB_RECURSE os_independent_srcs
+	"include/OWL/*.hpp"
 	"src/*.cpp"
 )
 
@@ -51,5 +51,5 @@ if(NOT BUILD_EXAMPLES STREQUAL "NO")
 	# add_executable(GUIApplication ${EXE_TYPE} examples/GUIApplication/main.cpp)
 	# add_executable(ModernOpenGL   ${EXE_TYPE} examples/ModernOpenGL/main.cpp)
 	# add_executable(SimpleWindow   ${EXE_TYPE} examples/SimpleWindow/main.cpp)
-	add_executable(Temporary  ${EXE_TYPE} examples/Temporary/main.cpp)
+	add_executable(Temporary  ${EXE_TYPE} examples/Temporary/main.cpp examples/Temporary/test.cpp)
 endif()
