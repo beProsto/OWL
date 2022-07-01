@@ -13,17 +13,9 @@
 /// Define the OS Info singleton ///
 namespace OWL {
 
-class OSInfo {
+class OWL_API OSInfo {
 public:
-	static OSInfo* Get() {
-		if(!m_Instance) {
-			m_Instance = new OSInfo();
-			return m_Instance;
-		}
-		else {
-			return m_Instance;
-		}
-	}
+	static OSInfo* Get();
 
 public:
 	#if defined OWL_SYSTEM_WINDOWS
@@ -35,10 +27,8 @@ public:
 	#endif
 
 private:
-	OSInfo() {}
+	OSInfo();
 	static OSInfo* m_Instance;
 };
-
-OSInfo* OSInfo::m_Instance = nullptr;
 
 }
