@@ -15,8 +15,7 @@ int OWLMain(int, char**);
 /// Call the main function ///
 #if defined OWL_SYSTEM_WINDOWS
 /* WinAPI */
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
+#include <OWL/OS/WinAPI.hpp>
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 	OWL::OSInfo::Get()->InstanceHandle = hInstance;
 
@@ -31,6 +30,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 #elif defined OWL_SYSTEM_LINUX
 /* X11 */
+#include <OWL/OS/Linux.hpp>
 int main(int argc, char** argv) {
 	return OWLMain(argc, argv);
 }
