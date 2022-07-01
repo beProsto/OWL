@@ -4,7 +4,6 @@
 #include <OWL/System/Info.hpp>
 #include <OWL/OWL.hpp>
 
-
 /// Define the main function ///
 int OWLMain(int, char**);
 #if defined main
