@@ -45,11 +45,20 @@ else()
 	set(EXE_TYPE )
 endif()
 
+function(add_example name)
+	file(GLOB_RECURSE ${name}_srcs
+		"examples/${name}/*.hpp"
+		"examples/${name}/*.cpp"
+	)
+	add_executable(${name} ${EXE_TYPE} ${${name}_srcs})
+endfunction()
+
 # If the user didn't turn building examples off, we create them, linking the new OWL library:
 if(NOT BUILD_EXAMPLES STREQUAL "NO")
 	link_libraries(OWL)
-	# add_executable(GUIApplication ${EXE_TYPE} examples/GUIApplication/main.cpp)
-	# add_executable(ModernOpenGL   ${EXE_TYPE} examples/ModernOpenGL/main.cpp)
-	# add_executable(SimpleWindow   ${EXE_TYPE} examples/SimpleWindow/main.cpp)
-	add_executable(Temporary  ${EXE_TYPE} examples/Temporary/main.cpp examples/Temporary/test.cpp)
+	
+	# add_example(GUIApplication)
+	# add_example(ModernOpenGL)
+	# add_example(SimpleWindow)
+	add_example(Temporary)
 endif()

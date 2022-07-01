@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-int a();
+float b();
 
 int main(int argc, char** argv) {
 	OWL::Timer time;
@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
 	OWL::Sleep(16);
 	time.End();
 	printf("%f\n", time.GetDeltaTime());
-	printf("%d\n", a());
+	printf("%f\n", b());
 	std::cin.get();
 	return 0;
 }

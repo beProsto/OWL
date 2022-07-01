@@ -1,5 +1,12 @@
 #include <OWL/OWL.hpp>
+#include <OWL/Time.hpp>
 
-int a() {
-	return 5;
+float b() {
+	OWL::Timer timer;
+	OWL::FPSLimiter fps(1);
+	timer.Start();
+	fps.Start();
+	fps.End();
+	timer.End();
+	return timer.GetDeltaTime();
 }
