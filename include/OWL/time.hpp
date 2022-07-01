@@ -2,17 +2,12 @@
 
 #include <OWL/Utility/Config.hpp>
 
-#include <chrono>
-#include <thread>
-#include <time.h>
-
-#ifndef OWL_SYSTEM_WINDOWS
-#include <sys/time.h>
-#endif
-
 namespace OWL {
-inline void Sleep(unsigned int _milliseconds) {
-	std::this_thread::sleep_for(std::chrono::milliseconds(_milliseconds));
+
+void OWL_API Sleep(unsigned int _milliseconds);
+
+namespace Impl {
+class OWL_API Timer;
 }
 
 class OWL_API FPSLimiter {
@@ -26,7 +21,7 @@ public:
 	void End();
 
 private:
-	unsigned int m_StartTicks;
+	Impl::Timer* m_Impl;
 	unsigned int m_FPS;
 };
 
@@ -41,7 +36,7 @@ public:
 	float GetDeltaTime() const;
 
 private:
-	std::chrono::high_resolution_clock::time_point m_S, m_E;
+	Impl::Timer* m_Impl;
 	float m_DeltaTime;
 };
 

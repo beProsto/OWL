@@ -6,11 +6,5 @@
 #include <OWL/Utility/Vec3.hpp>
 #include <OWL/Utility/Vec4.hpp>
 
-// namespace OWL {
-// struct KeyData {
-// 	std::string String; 
-// 	unsigned int KeyEnum;
-// }; 
-// }
-
+#include <OWL/System/Info.hpp>
 #include <OWL/System/Window.hpp>

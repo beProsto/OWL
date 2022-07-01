@@ -4,11 +4,11 @@
 #include <OWL/Utility/Vec2.hpp>
 #include <string>
 
-#include <OWL/System/Input/Mouse.hpp>
-#include <OWL/System/Input/Keyboard.hpp>
-#include <OWL/System/Input/Gamepad.hpp>
+// #include <OWL/System/Input/Mouse.hpp>
+// #include <OWL/System/Input/Keyboard.hpp>
+// #include <OWL/System/Input/Gamepad.hpp>
 
-#include <OWL/System/Graphics/Context.hpp>
+// #include <OWL/System/Graphics/Context.hpp>
 
 namespace OWL {
 
@@ -23,8 +23,8 @@ public:
 
 	void PollEvents();
 
-	void SetContext(Graphics::Context& _context);
-	Graphics::Context& GetContext();
+	// void SetContext(Graphics::Context& _context);
+	// Graphics::Context& GetContext();
 
 	void SetPosition(const Vec2<int>& _position);
 	Vec2<int> GetPosition() const;
@@ -43,11 +43,6 @@ public:
 
 	void SetFullScreen(bool _fullScreen);
 	bool IsFullScreen() const;
-
-public:
-	Input::Mouse Mouse;
-	Input::Keyboard Keyboard;
-	Input::Gamepads Gamepads;
 
 private:
 	Impl::Window* m_Impl;

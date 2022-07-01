@@ -3,8 +3,7 @@
 #include <OWL/Utility/Config.hpp>
 
 #if defined OWL_SYSTEM_WINDOWS
-	#define WIN32_LEAN_AND_MEAN
-	#include <windows.h>
+	#include <OWL/OS/WinAPI.hpp>
 #elif defined OWL_SYSTEM_LINUX
 	
 #else
@@ -39,5 +38,7 @@ private:
 	OSInfo() {}
 	static OSInfo* m_Instance;
 };
+
+OSInfo* OSInfo::m_Instance = nullptr;
 
 }

@@ -5,7 +5,12 @@
 #include <iostream>
 
 int main(int argc, char** argv) {
-	std::cout << "HELLO DEAR FRIENDS" << std::endl;
-
+	OWL::Timer time;
+	time.Start();
+	printf("HEYA DEAR!\n");
+	OWL::Sleep(16);
+	time.End();
+	printf("%f\n", time.GetDeltaTime());
+	std::cin.get();
 	return 0;
 }
