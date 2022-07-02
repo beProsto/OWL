@@ -10,7 +10,7 @@ Window::Window(Vec2ui _size, std::string _title) {
 	#if defined OWL_SYSTEM_WINDOWS
 		m_Impl = new Impl::WinAPIWindow(_size, _title);
 	#elif defined OWL_SYSTEM_LINUX
-
+		
 	#endif
 }
 
