@@ -19,11 +19,11 @@ int OWLMain(int, char**);
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 	OWL::OSInfo::Get()->InstanceHandle = hInstance;
 
-	// AllocConsole();
-	// FILE *fpstdin = stdin, *fpstdout = stdout, *fpstderr = stderr;
-    // freopen_s(&fpstdin,  "CONIN$",  "r", stdin);
-    // freopen_s(&fpstdout, "CONOUT$", "w", stdout);
-    // freopen_s(&fpstderr, "CONOUT$", "w", stderr);
+	AllocConsole();
+	FILE *fpstdin = stdin, *fpstdout = stdout, *fpstderr = stderr;
+    freopen_s(&fpstdin,  "CONIN$",  "r", stdin);
+    freopen_s(&fpstdout, "CONOUT$", "w", stdout);
+    freopen_s(&fpstderr, "CONOUT$", "w", stderr);
 
 	return OWLMain(__argc, __argv);
 }
