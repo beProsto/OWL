@@ -2,8 +2,6 @@
 #include <OWL/OWL.hpp>
 #include <OWL/Time.hpp>
 
-#include <iostream>
-
 int main(int argc, char** argv) {
 	OWL::Window window;
 	OWL::FPSLimiter fps(60);

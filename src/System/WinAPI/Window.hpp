@@ -120,13 +120,13 @@ public:
 		return (float)m_Size.x / (float)m_Size.y;
 	}
 
-	virtual void SetTitle(const std::string& _title) {
+	virtual void SetTitle(std::string _title) {
 		if(m_Title != _title) {
 			m_Title = _title;
 			SetWindowTextA(m_Hwnd, &m_Title[0]);
 		}
 	}
-	virtual const std::string& GetTitle() const {
+	virtual std::string GetTitle() const {
 		return m_Title;
 	}
 

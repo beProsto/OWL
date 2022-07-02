@@ -1,29 +1,11 @@
 cmake_minimum_required(VERSION 3.0.0)
 # NOT A FULL RELEASE YET
 project(OWL VERSION 0.2022.1)
+# I'm sorry but it has to be this way 😔
+set(CMAKE_BUILD_TYPE Release)
 
 # include_directories and link_libraries work on all targets defined BELOW them
-
 include_directories(include)
-
-if(WIN32)
-	link_libraries(
-		opengl32
-		glu32
-		gdi32
-		user32
-		comctl32
-		kernel32
-		shell32
-		xinput
-	)
-else()
-	link_libraries(
-		X11
-		GL
-		GLX
-	)
-endif()
 
 # All the OS independent source files should be in the main directories
 file(GLOB_RECURSE lib_srcs
@@ -37,6 +19,25 @@ if(LIBTYPE STREQUAL "STATIC")
 else()
 	add_library(OWL SHARED ${lib_srcs})
 	target_compile_definitions(OWL PRIVATE OWL_BUILD_DLL)
+endif()
+
+if(WIN32)
+	target_link_libraries(OWL PRIVATE
+		opengl32
+		glu32
+		gdi32
+		user32
+		comctl32
+		kernel32
+		shell32
+		xinput
+	)
+else()
+	target_link_libraries(OWL PRIVATE
+		X11
+		GL
+		GLX
+	)
 endif()
 
 

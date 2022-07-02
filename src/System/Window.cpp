@@ -39,10 +39,10 @@ float Window::GetAspect() const {
 	return m_Impl->GetAspect();
 }
 
-void Window::SetTitle(const std::string& _title) {
+void Window::SetTitle(std::string _title) {
 	m_Impl->SetTitle(_title);
 }
-const std::string& Window::GetTitle() const {
+std::string Window::GetTitle() const {
 	return m_Impl->GetTitle();
 }
 

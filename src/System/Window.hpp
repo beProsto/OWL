@@ -21,8 +21,8 @@ public:
 	virtual Vec2ui GetSize() const {return Vec2ui{};}
 	virtual float GetAspect() const {return float{};}
 
-	virtual void SetTitle(const std::string& _title) {}
-	virtual const std::string& GetTitle() const {return "";}
+	virtual void SetTitle(std::string _title) {}
+	virtual std::string GetTitle() const {return "";}
 
 	virtual void Close() {}
 	virtual bool IsRunning() const {return false;}

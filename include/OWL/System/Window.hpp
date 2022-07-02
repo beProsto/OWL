@@ -33,8 +33,8 @@ public:
 	Vec2ui GetSize() const;
 	float GetAspect() const;
 
-	void SetTitle(const std::string& _title);
-	const std::string& GetTitle() const;
+	void SetTitle(std::string _title);
+	std::string GetTitle() const;
 
 	void Close();
 	bool IsRunning() const;
