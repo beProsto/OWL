@@ -10,6 +10,8 @@ int main(int argc, char** argv) {
 		window.PollEvents();
 		fps.Start();
 
+		printf("Hello, frame!\n");
+
 		fps.End();
 	}
 	return 0;

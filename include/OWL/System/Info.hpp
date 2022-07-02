@@ -3,7 +3,7 @@
 #include <OWL/Utility/Config.hpp>
 
 #if defined OWL_SYSTEM_WINDOWS
-	#include <OWL/OS/WinAPI.hpp>
+	#include <OWL/OS/Windows.hpp>
 #elif defined OWL_SYSTEM_LINUX
 	
 #else

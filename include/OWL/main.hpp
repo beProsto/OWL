@@ -10,7 +10,7 @@ int OWLMain(int, char**);
 /// Call the main function ///
 #if defined OWL_SYSTEM_WINDOWS
 /* WinAPI */
-#include <OWL/OS/WinAPI.hpp>
+#include <OWL/OS/Windows.hpp>
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
 	OWL::OSInfo::Get()->InstanceHandle = hInstance;
 
