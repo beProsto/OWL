@@ -5,6 +5,7 @@
 #include <OWL/System/Info.hpp>
 
 #include "../Window.hpp"
+#include "../../Input/WinAPI/Mouse.hpp"
 
 /* This will include WinAPI */
 #define WIN32_LEAN_AND_MEAN
@@ -35,11 +36,12 @@ inline LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 
 class OWL_API WinAPIWindow: public Window {
 public:
-	WinAPIWindow(Vec2ui _size, std::string _title) {
+	WinAPIWindow(Vec2ui _size, std::string _title, Mouse& _mouseRef) {
 		m_Title = _title;
 		m_IsRunning = true;
 		m_Size = _size;
 		m_IsFullScreen = false;
+		m_Mouse = (WinAPIMouse*)&_mouseRef;
 
 		m_ClassName = "WinAPI_Window_ClassName";
 
@@ -70,6 +72,8 @@ public:
 	
 		ShowWindow(m_Hwnd, SW_SHOWNORMAL);
 		UpdateWindow(m_Hwnd);
+
+		m_Mouse->m_Hwnd = m_Hwnd;
 	}
 	virtual ~WinAPIWindow() {
 		DestroyWindow(m_Hwnd);
@@ -176,6 +180,8 @@ public:
 	}
 
 public:
+	WinAPIMouse* m_Mouse;
+
 	std::string m_Title;
 	Vec2ui m_Size;
 	bool m_IsRunning;

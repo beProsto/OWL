@@ -4,7 +4,7 @@
 #include <OWL/Utility/Vec2.hpp>
 #include <string>
 
-// #include <OWL/System/Input/Mouse.hpp>
+#include <OWL/Input/Mouse.hpp>
 // #include <OWL/System/Input/Keyboard.hpp>
 // #include <OWL/System/Input/Gamepad.hpp>
 
@@ -43,6 +43,9 @@ public:
 
 	void SetFullScreen(bool _fullScreen);
 	bool IsFullScreen() const;
+
+public:
+	Mouse Mouse;
 
 private:
 	Impl::Window* m_Impl;

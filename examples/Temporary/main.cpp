@@ -10,7 +10,25 @@ int main(int argc, char** argv) {
 		window.PollEvents();
 		fps.Start();
 
-		printf("Hello, frame!\n");
+		printf("X%d Y%d!\n", 
+			window.Mouse.GetPosition().x, 
+			window.Mouse.GetPosition().y
+		);
+		printf("L%d M%d R%d B%d F%d\n",
+			window.Mouse.IsButtonPressed(window.Mouse.Left),
+			window.Mouse.IsButtonPressed(window.Mouse.Middle),
+			window.Mouse.IsButtonPressed(window.Mouse.Right),
+			window.Mouse.IsButtonPressed(window.Mouse.Backward),
+			window.Mouse.IsButtonPressed(window.Mouse.Forward)
+		);
+
+		if(window.Mouse.IsButtonPressed(window.Mouse.Left)) {
+			window.Mouse.SetVisibility(false);
+		}
+		else {
+			window.Mouse.SetVisibility(true);
+		}
+		
 
 		fps.End();
 	}
