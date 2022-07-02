@@ -33,15 +33,14 @@ inline LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 	return 0;
 }
 
-
 class OWL_API WinAPIWindow: public Window {
 public:
-	WinAPIWindow(Vec2ui _size, std::string _title, Mouse& _mouseRef) {
+	WinAPIWindow(Vec2ui _size, std::string _title, Mouse* _mouseImpl) {
 		m_Title = _title;
 		m_IsRunning = true;
 		m_Size = _size;
 		m_IsFullScreen = false;
-		m_Mouse = (WinAPIMouse*)&_mouseRef;
+		m_Mouse = dynamic_cast<WinAPIMouse*>(_mouseImpl);
 
 		m_ClassName = "WinAPI_Window_ClassName";
 
@@ -53,7 +52,7 @@ public:
 		m_Window.hInstance = OSInfo::Get()->InstanceHandle;
 		m_Window.hIcon = LoadIcon(m_Window.hInstance, MAKEINTRESOURCE(460));
 		m_Window.hCursor = LoadCursor(NULL, IDC_ARROW);
-		m_Window.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+		m_Window.hbrBackground = reinterpret_cast<HBRUSH>(COLOR_WINDOW + 1);
 		m_Window.lpszMenuName = nullptr;
 		m_Window.lpszClassName = m_ClassName;
 		m_Window.hIconSm = nullptr;

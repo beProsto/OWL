@@ -4,7 +4,7 @@
 
 int main(int argc, char** argv) {
 	OWL::Window window;
-	OWL::FPSLimiter fps(60);
+	OWL::FPSLimiter fps(10);
 
 	while(window.IsRunning()) {
 		window.PollEvents();
@@ -23,10 +23,11 @@ int main(int argc, char** argv) {
 		);
 
 		if(window.Mouse.IsButtonPressed(window.Mouse.Left)) {
-			window.Mouse.SetVisibility(false);
+			window.Mouse.SetVisibility(!window.Mouse.IsVisible());
 		}
-		else {
-			window.Mouse.SetVisibility(true);
+
+		if(window.Mouse.IsButtonPressed(window.Mouse.Right)) {
+			window.Mouse.SetPosition(OWL::Vec2i(0, 0));
 		}
 		
 

@@ -55,8 +55,6 @@ public:
 	int m_Wheel;
 	bool m_Visible;
 	HWND m_Hwnd;
-
-	friend class Window;
 };
 }
 }

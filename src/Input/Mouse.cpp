@@ -2,8 +2,6 @@
 
 #include "Mouse.hpp"
 
-
-
 namespace OWL {
 
 Mouse::Mouse() {
