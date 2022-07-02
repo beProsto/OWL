@@ -16,13 +16,14 @@ file(GLOB_RECURSE lib_srcs
 
 if(LIBTYPE STREQUAL "STATIC")
 	add_library(OWL STATIC ${lib_srcs})
+	target_compile_definitions(OWL PRIVATE OWL_BUILD_STATIC)
 else()
 	add_library(OWL SHARED ${lib_srcs})
-	target_compile_definitions(OWL PRIVATE OWL_BUILD_DLL)
+	target_compile_definitions(OWL PRIVATE OWL_BUILD_SHARED)
 endif()
 
 if(WIN32)
-	target_link_libraries(OWL PRIVATE
+	link_libraries(
 		opengl32
 		glu32
 		gdi32
@@ -33,7 +34,7 @@ if(WIN32)
 		xinput
 	)
 else()
-	target_link_libraries(OWL PRIVATE
+	link_libraries(
 		X11
 		GL
 		GLX
@@ -53,6 +54,9 @@ function(add_example name)
 		"examples/${name}/*.cpp"
 	)
 	add_executable(${name} ${EXE_TYPE} ${${name}_srcs})
+	if(LIBTYPE STREQUAL "STATIC")
+		target_compile_definitions(${name} PRIVATE OWL_BUILD_STATIC)
+	endif()
 endfunction()
 
 # If the user didn't turn building examples off, we create them, linking the new OWL library to them:
