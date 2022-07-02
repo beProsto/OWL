@@ -2,7 +2,7 @@
 #include <OWL/main.hpp>
 #include <OWL/time.hpp>
 
-int Main(const std::vector<std::string>& args) {
+int main(int argc, char** argv) {
 	OWL::SoftwareContext context;
 	OWL::Window window(&context, "Simple Window in OWL Example", OWL::Vec2i(0), OWL::Vec2ui(480, 460));
 	OWL::FPSLimiter fps(60);

@@ -73,27 +73,49 @@ public:
 		UpdateWindow(m_Hwnd);
 	}
 	virtual ~WinAPIWindow() {
+		DestroyWindow(m_Hwnd);
 	}
 
 	virtual void PollEvents() {
+		while(PeekMessage(&m_Event, 0, 0, 0, PM_REMOVE)) {
+			if(m_Event.message == WM_QUIT) {
+				Close();
+			}
+			TranslateMessage(&m_Event);
+			DispatchMessage(&m_Event);
 
+			// PollEventsStandard(_self);
+		}
+
+		// PollEventsGamepad(_self);
 	}
 
 	virtual void SetPosition(const Vec2i& _position) {
-
+		SetWindowPos(m_Hwnd, 0, _position.x, _position.y, 0, 0, SWP_NOSIZE);
 	}
 	virtual Vec2i GetPosition() const {
-		return Vec2i{};
+		RECT rect;
+		GetWindowRect(m_Hwnd, &rect);
+		return Vec2i(rect.left, rect.top);
 	}
 
 	virtual void SetSize(const Vec2ui& _size) {
 		if(m_Size != _size) {
-			//...
+			SetWindowPos(m_Hwnd, 0, 0, 0, _size.x, _size.y, SWP_NOMOVE);
+
+			OWL::Vec2ui finalSize = GetSize();
+			if(finalSize != _size) {
+				finalSize = _size + (_size - finalSize);
+				SetWindowPos(m_Hwnd, 0, 0, 0, finalSize.x, finalSize.y, SWP_NOMOVE);
+			}
+
 			m_Size = _size;
 		}
 	}
 	virtual Vec2ui GetSize() const {
-		return m_Size;
+		RECT rect;
+		GetClientRect(m_Hwnd, &rect);
+		return Vec2ui(rect.right - rect.left, rect.bottom - rect.top);
 	}
 	virtual float GetAspect() const {
 		return (float)m_Size.x / (float)m_Size.y;
@@ -101,8 +123,8 @@ public:
 
 	virtual void SetTitle(const std::string& _title) {
 		if(m_Title != _title) {
-			//...
 			m_Title = _title;
+			SetWindowTextA(m_Hwnd, &m_Title[0]);
 		}
 	}
 	virtual const std::string& GetTitle() const {
@@ -117,11 +139,38 @@ public:
 	}
 
 	virtual bool IsFocused() const {
-		return false;
+		return GetFocus() == m_Hwnd;
 	}
 
 	virtual void SetFullScreen(bool _fullScreen) {
+		if(m_IsFullScreen != _fullScreen) {
+			m_IsFullScreen = _fullScreen;
 
+			if(m_IsFullScreen) {
+				m_WasMaximized = IsZoomed(m_Hwnd);
+
+				LONG style = GetWindowLong(m_Hwnd, GWL_STYLE);
+				LONG exStyle = GetWindowLong(m_Hwnd, GWL_EXSTYLE);
+				
+				SetWindowLong(m_Hwnd, GWL_STYLE, style & ~(WS_CAPTION | WS_THICKFRAME));
+				SetWindowLong(m_Hwnd, GWL_EXSTYLE, exStyle & ~(WS_EX_DLGMODALFRAME | WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE | WS_EX_STATICEDGE));
+
+				SendMessage(m_Hwnd, WM_SYSCOMMAND, SC_RESTORE, 0);
+				SendMessage(m_Hwnd, WM_SYSCOMMAND, SC_MAXIMIZE, 0);
+			}
+			else {
+				LONG style = GetWindowLong(m_Hwnd, GWL_STYLE);
+				LONG exStyle = GetWindowLong(m_Hwnd, GWL_EXSTYLE);
+				
+				SetWindowLong(m_Hwnd, GWL_STYLE, style | (WS_CAPTION | WS_THICKFRAME));
+				SetWindowLong(m_Hwnd, GWL_EXSTYLE, exStyle | (WS_EX_DLGMODALFRAME | WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE | WS_EX_STATICEDGE));
+
+				SendMessage(m_Hwnd, WM_SYSCOMMAND, SC_RESTORE, 0);
+				if(m_WasMaximized) {
+					SendMessage(m_Hwnd, WM_SYSCOMMAND, SC_MAXIMIZE, 0);
+				}
+			}
+		}
 	}
 	virtual bool IsFullScreen() const {
 		return m_IsFullScreen;

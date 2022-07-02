@@ -15,7 +15,7 @@
 #define GL_ARRAY_BUFFER 0x8892
 #define GL_STATIC_DRAW 0x88E4
 
-int Main(const std::vector<std::string>& args) {
+int main(int argc, char** argv) {
 	OWL::GLContext context;
 	OWL::Window window(&context, "Modern OpenGL in OWL Example", OWL::Vec2i(0), OWL::Vec2ui(480, 460));
 	OWL::FPSLimiter fps(60);

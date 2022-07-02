@@ -16,7 +16,7 @@ void DrawRect(OWL::Vec4b* _canvas, const OWL::Vec2ui& _size, const OWL::Vec2i& _
 	}
 }
 
-int Main(const std::vector<std::string>& _args) {
+int main(int argc, char** argv) {
 	/* Initializing a Software rendering context */
 	OWL::SoftwareContext context;
 	/* Initializing a window using an EventLoop Event Loop Type (Remember - they can be dynamically changed) */
