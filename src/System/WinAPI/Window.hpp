@@ -10,7 +10,6 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <winuser.h>
-#include <xinput.h>
 
 /* Debug */
 #include <stdio.h>
