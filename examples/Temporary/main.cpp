@@ -4,19 +4,15 @@
 
 #include <iostream>
 
-float b();
-
 int main(int argc, char** argv) {
-	OWL::Timer time;
-	time.Start();
-	printf("HEYA DEAR!\n");
-	OWL::Sleep(16);
-	{
-		OWL::Window window;
+	OWL::Window window;
+	OWL::FPSLimiter fps(60);
+
+	while(window.IsRunning()) {
+		window.PollEvents();
+		fps.Start();
+
+		fps.End();
 	}
-	time.End();
-	printf("%f\n", time.GetDeltaTime());
-	printf("%f\n", b());
-	std::cin.get();
 	return 0;
 }
