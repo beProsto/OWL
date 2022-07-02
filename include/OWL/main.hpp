@@ -6,11 +6,6 @@
 
 /// Define the main function ///
 int OWLMain(int, char**);
-#if defined main
-	#undef main
-#endif
-#define main OWLMain
-
 
 /// Call the main function ///
 #if defined OWL_SYSTEM_WINDOWS
@@ -40,3 +35,9 @@ int main(int argc, char** argv) {
 #error OWL: Unsupported platform! (Only linux and windows supported currently!)
 
 #endif
+
+/// When using main, user refers to OWLMain /// 
+#if defined main
+	#undef main
+#endif
+#define main OWLMain
