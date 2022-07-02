@@ -18,7 +18,7 @@ class OWL_API Window;
 
 class OWL_API Window {
 public:
-	Window();
+	Window(Vec2ui _size = Vec2ui(640, 360), std::string _title = "beprosto.github.io/OWL");
 	~Window();
 
 	void PollEvents();
@@ -26,11 +26,11 @@ public:
 	// void SetContext(Graphics::Context& _context);
 	// Graphics::Context& GetContext();
 
-	void SetPosition(const Vec2<int>& _position);
-	Vec2<int> GetPosition() const;
+	void SetPosition(const Vec2i& _position);
+	Vec2i GetPosition() const;
 
-	void SetSize(const Vec2<unsigned int>& _size);
-	Vec2<unsigned int> GetSize() const;
+	void SetSize(const Vec2ui& _size);
+	Vec2ui GetSize() const;
 	float GetAspect() const;
 
 	void SetTitle(const std::string& _title);

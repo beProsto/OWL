@@ -11,6 +11,9 @@ int main(int argc, char** argv) {
 	time.Start();
 	printf("HEYA DEAR!\n");
 	OWL::Sleep(16);
+	{
+		OWL::Window window;
+	}
 	time.End();
 	printf("%f\n", time.GetDeltaTime());
 	printf("%f\n", b());

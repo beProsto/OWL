@@ -26,15 +26,16 @@ else()
 endif()
 
 # All the OS independent source files should be in the main directories
-file(GLOB_RECURSE os_independent_srcs
+file(GLOB_RECURSE lib_srcs
 	"include/OWL/*.hpp"
+	"src/*.hpp"
 	"src/*.cpp"
 )
 
 if(LIBTYPE STREQUAL "STATIC")
-	add_library(OWL STATIC ${os_independent_srcs})
+	add_library(OWL STATIC ${lib_srcs})
 else()
-	add_library(OWL SHARED ${os_independent_srcs})
+	add_library(OWL SHARED ${lib_srcs})
 	target_compile_definitions(OWL PRIVATE OWL_BUILD_DLL)
 endif()
 
@@ -53,7 +54,7 @@ function(add_example name)
 	add_executable(${name} ${EXE_TYPE} ${${name}_srcs})
 endfunction()
 
-# If the user didn't turn building examples off, we create them, linking the new OWL library:
+# If the user didn't turn building examples off, we create them, linking the new OWL library to them:
 if(NOT BUILD_EXAMPLES STREQUAL "NO")
 	link_libraries(OWL)
 	
