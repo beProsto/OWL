@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
 			window.Mouse.SetPosition(OWL::Vec2i(0, 0));
 		}
 		
-		if(window.Keyboard.IsKeyPressed(OWL::Keyboard::A)) {
+		if(window.Keyboard.IsKeyPressed(OWL::Keyboard::Escape)) {
 			window.Close();
 		}
 
