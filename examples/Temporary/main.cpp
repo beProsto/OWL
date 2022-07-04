@@ -34,6 +34,9 @@ int main(int argc, char** argv) {
 			window.Mouse.SetPosition(OWL::Vec2i(0, 0));
 		}
 		
+		if(window.Keyboard.IsKeyPressed(OWL::Keyboard::A)) {
+			window.Close();
+		}
 
 		fps.End();
 	}
