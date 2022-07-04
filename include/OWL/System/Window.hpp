@@ -5,10 +5,10 @@
 #include <string>
 
 #include <OWL/Input/Mouse.hpp>
-// #include <OWL/System/Input/Keyboard.hpp>
-// #include <OWL/System/Input/Gamepad.hpp>
+#include <OWL/Input/Keyboard.hpp>
+// #include <OWL/Input/Gamepad.hpp>
 
-// #include <OWL/System/Graphics/Context.hpp>
+// #include <OWL/Graphics/Context.hpp>
 
 namespace OWL {
 
