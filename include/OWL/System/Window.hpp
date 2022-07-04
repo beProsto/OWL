@@ -46,6 +46,7 @@ public:
 
 public:
 	Mouse Mouse;
+	Keyboard Keyboard;
 
 private:
 	Impl::Window* m_Impl;
