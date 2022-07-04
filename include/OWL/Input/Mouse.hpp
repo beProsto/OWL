@@ -27,10 +27,10 @@ public:
 public:
 	enum Button {
 		Left = 0,
-		Middle = 1,
-		Right = 2,
-		Backward = 3,
-		Forward = 4,
+		Middle,
+		Right,
+		Backward,
+		Forward,
 		Count,
 	};
 
