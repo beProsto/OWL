@@ -12,11 +12,11 @@ public:
 		m_Visible = true;
 		m_Wheel = 0;
 		
-		m_ButtonMap[OWL::Mouse::Button::Left]     = VK_LBUTTON;
-		m_ButtonMap[OWL::Mouse::Button::Middle]   = VK_MBUTTON;
-		m_ButtonMap[OWL::Mouse::Button::Right]    = VK_RBUTTON;
+		m_ButtonMap[OWL::Mouse::Button::Left] = VK_LBUTTON;
+		m_ButtonMap[OWL::Mouse::Button::Middle] = VK_MBUTTON;
+		m_ButtonMap[OWL::Mouse::Button::Right] = VK_RBUTTON;
 		m_ButtonMap[OWL::Mouse::Button::Backward] = VK_XBUTTON1;
-		m_ButtonMap[OWL::Mouse::Button::Forward]  = VK_XBUTTON2;
+		m_ButtonMap[OWL::Mouse::Button::Forward] = VK_XBUTTON2;
 	}
 	virtual ~WinAPIMouse() {
 
