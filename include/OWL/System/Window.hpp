@@ -23,8 +23,8 @@ public:
 
 	void PollEvents();
 
-	// void SetContext(Graphics::Context& _context);
-	// Graphics::Context& GetContext();
+	void SetContext(Context& _context);
+	Context& GetContext();
 
 	void SetPosition(const Vec2i& _position);
 	Vec2i GetPosition() const;
