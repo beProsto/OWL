@@ -8,7 +8,7 @@
 #include <OWL/Input/Keyboard.hpp>
 // #include <OWL/Input/Gamepad.hpp>
 
-// #include <OWL/Graphics/Context.hpp>
+#include <OWL/Graphics/Context.hpp>
 
 namespace OWL {
 
