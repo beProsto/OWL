@@ -22,6 +22,14 @@ void Window::PollEvents() {
 	m_Impl->PollEvents();
 }
 
+
+void Window::SetContext(Context& _context) {
+	m_Impl->SetContext(_context);
+}
+Context& Window::GetContext() {
+	return m_Impl->GetContext();
+}
+
 void Window::SetPosition(const Vec2i& _position) {
 	m_Impl->SetPosition(_position);
 }

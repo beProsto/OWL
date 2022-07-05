@@ -23,7 +23,7 @@ Vec2ui SoftwareContext::GetSize() const {
 	return static_cast<Impl::SoftwareContext*>(m_Impl)->GetSize();
 }
 
-void SoftwareContext::Clear(const Vec4ub& _color = Vec4ub(0)) {
+void SoftwareContext::Clear(const Vec4ub& _color) {
 	static_cast<Impl::SoftwareContext*>(m_Impl)->Clear(_color);
 }
 

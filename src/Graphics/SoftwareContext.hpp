@@ -13,15 +13,15 @@ public:
 	virtual bool Validate() {return false;}
 
 	virtual void Resize(Vec2ui _newSize) {}
-	Vec2ui GetSize() const;
+	virtual Vec2ui GetSize() const {return Vec2ui(0);}
 
-	void Clear(const Vec4ub& _color = Vec4ub(0));
+	virtual void Clear(const Vec4ub& _color) {}
 
-	void BlitToScreen();
+	virtual void BlitToScreen() {}
 
-	Vec4ub* GetPixelData();
+	virtual Vec4ub* GetPixelData() {return nullptr;}
 
-	unsigned int GetType() const;
+	virtual unsigned int GetType() const {return 0;}
 };
 }
 }

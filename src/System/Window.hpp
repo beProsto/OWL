@@ -14,6 +14,9 @@ public:
 	
 	virtual void PollEvents() {}
 
+	virtual void SetContext(OWL::Context& _context) {}
+	virtual OWL::Context& GetContext() {return *m_Context;}
+
 	virtual void SetPosition(const Vec2i& _position) {}
 	virtual Vec2i GetPosition() const {return Vec2i{};}
 
@@ -31,6 +34,9 @@ public:
 
 	virtual void SetFullScreen(bool _fullScreen) {}
 	virtual bool IsFullScreen() const {return false;}
+
+public:
+	OWL::Context* m_Context;
 };
 
 }

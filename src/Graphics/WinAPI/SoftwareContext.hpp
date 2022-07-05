@@ -17,10 +17,32 @@ public:
 
 	}
 
-	virtual bool Create() {printf("WINAPI SOFT CONT CREATED"); return true;}
-	virtual bool Validate() {printf("WINAPI SOFT CONT VALIDATED"); return true;}
+	virtual bool Create() {printf("WINAPI SOFT CONT CREATED\n"); return true;}
+	virtual bool Validate() {printf("WINAPI SOFT CONT VALIDATED\n"); return true;}
 
 
+	virtual void Resize(Vec2ui _newSize) {
+
+	}
+	virtual Vec2ui GetSize() const {
+		return Vec2ui(0);
+	}
+
+	virtual void Clear(const Vec4ub& _color) {
+		printf("WINAPI CONTEXT CLEAR\n");
+	}
+
+	virtual void BlitToScreen() {
+
+	}
+
+	virtual Vec4ub* GetPixelData() {
+		return nullptr;
+	}
+
+	virtual unsigned int GetType() const {
+		return 0;
+	}
 };
 }
 }
