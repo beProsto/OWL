@@ -38,7 +38,6 @@ public:
 	WinAPIWindow(Vec2ui _size, std::string _title, Mouse* _mouseImpl) {
 		m_Title = _title;
 		m_IsRunning = true;
-		m_Size = _size;
 		m_IsFullScreen = false;
 		m_Mouse = static_cast<WinAPIMouse*>(_mouseImpl);
 
@@ -71,6 +70,8 @@ public:
 	
 		ShowWindow(m_Hwnd, SW_SHOWNORMAL);
 		UpdateWindow(m_Hwnd);
+
+		SetSize(_size);
 
 		m_Mouse->m_Hwnd = m_Hwnd;
 	}
