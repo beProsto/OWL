@@ -29,7 +29,7 @@ public:
 	void SetPosition(const Vec2i& _position);
 	Vec2i GetPosition() const;
 
-	void SetSize(const Vec2ui& _size);
+	void SetSize(Vec2ui _size);
 	Vec2ui GetSize() const;
 	float GetAspect() const;
 

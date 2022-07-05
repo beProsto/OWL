@@ -102,7 +102,7 @@ public:
 		return Vec2i(rect.left, rect.top);
 	}
 
-	virtual void SetSize(const Vec2ui& _size) {
+	virtual void SetSize(Vec2ui _size) {
 		if(m_Size != _size) {
 			SetWindowPos(m_Hwnd, 0, 0, 0, _size.x, _size.y, SWP_NOMOVE);
 

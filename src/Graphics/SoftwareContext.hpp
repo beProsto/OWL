@@ -12,8 +12,8 @@ public:
 	virtual bool Create() {return false;}
 	virtual bool Validate() {return false;}
 
-	virtual void Resize(const Vec2ui& _newSize) {}
-	const Vec2ui& GetSize() const;
+	virtual void Resize(Vec2ui _newSize) {}
+	Vec2ui GetSize() const;
 
 	void Clear(const Vec4ub& _color = Vec4ub(0));
 

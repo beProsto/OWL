@@ -29,7 +29,7 @@ Vec2i Window::GetPosition() const {
 	return m_Impl->GetPosition();
 }
 
-void Window::SetSize(const Vec2ui& _size) {
+void Window::SetSize(Vec2ui _size) {
 	m_Impl->SetSize(_size);
 }
 Vec2ui Window::GetSize() const {

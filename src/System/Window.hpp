@@ -17,7 +17,7 @@ public:
 	virtual void SetPosition(const Vec2i& _position) {}
 	virtual Vec2i GetPosition() const {return Vec2i{};}
 
-	virtual void SetSize(const Vec2ui& _size) {}
+	virtual void SetSize(Vec2ui _size) {}
 	virtual Vec2ui GetSize() const {return Vec2ui{};}
 	virtual float GetAspect() const {return float{};}
 

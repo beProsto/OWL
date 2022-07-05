@@ -16,15 +16,27 @@ SoftwareContext::~SoftwareContext() {
 }
 
 
-void Resize(const Vec2ui& _newSize);
-const Vec2ui& GetSize() const;
+void SoftwareContext::Resize(Vec2ui _newSize) {
+	static_cast<Impl::SoftwareContext*>(m_Impl)->Resize(_newSize);
+}
+Vec2ui SoftwareContext::GetSize() const {
+	return static_cast<Impl::SoftwareContext*>(m_Impl)->GetSize();
+}
 
-void Clear(const Vec4ub& _color = Vec4ub(0));
+void SoftwareContext::Clear(const Vec4ub& _color = Vec4ub(0)) {
+	static_cast<Impl::SoftwareContext*>(m_Impl)->Clear(_color);
+}
 
-void BlitToScreen();
+void SoftwareContext::BlitToScreen() {
+	static_cast<Impl::SoftwareContext*>(m_Impl)->BlitToScreen();
+}
 
-Vec4ub* GetPixelData();
+Vec4ub* SoftwareContext::GetPixelData() {
+	return static_cast<Impl::SoftwareContext*>(m_Impl)->GetPixelData();
+}
 
-unsigned int GetType() const;
+unsigned int SoftwareContext::GetType() const {
+	return static_cast<Impl::SoftwareContext*>(m_Impl)->GetType();
+}
 
 }
