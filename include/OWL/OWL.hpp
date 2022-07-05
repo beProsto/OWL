@@ -8,3 +8,6 @@
 
 #include <OWL/System/Info.hpp>
 #include <OWL/System/Window.hpp>
+
+#include <OWL/Graphics/SoftwareContext.hpp>
+#include <OWL/Graphics/GLContext.hpp>
