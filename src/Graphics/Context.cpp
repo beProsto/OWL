@@ -12,11 +12,11 @@ Context::~Context() {
 }
 
 bool Context::Create() {
-	m_Impl->Create();
+	return m_Impl->Create();
 }
 
 bool Context::Validate() {
-	m_Impl->Validate();
+	return m_Impl->Validate();
 }
 
 }
