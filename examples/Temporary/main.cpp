@@ -26,7 +26,7 @@ int main(int argc, char** argv) {
 			window.Mouse.SetVisibility(!window.Mouse.IsVisible());
 		}
 
-		if(window.Mouse.IsButtonPressed(OWL::Mouse::Middle)) {
+		if(window.Mouse.IsButtonPressed(OWL::Mouse::Middle) || window.Keyboard.IsKeyPressed(OWL::Keyboard::F11)) {
 			window.SetFullScreen(!window.IsFullScreen());
 		}
 
