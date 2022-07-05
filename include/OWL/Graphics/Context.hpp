@@ -13,7 +13,7 @@ public:
 	Context();
 	~Context();
 
-protected:
+public:
 	// Seems like some operating systems require for there to be two seperate steps during graphics' context creation;
 	// One done before the creation of a window and one after. We'll call them creation and validation.
 	bool Create();
