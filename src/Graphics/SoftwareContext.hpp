@@ -2,6 +2,9 @@
 
 #include "Context.hpp"
 
+#include <OWL/Utility/Vec2.hpp>
+#include <OWL/Utility/Vec4.hpp>
+
 namespace OWL {
 namespace Impl {
 class OWL_API SoftwareContext: public Context {
