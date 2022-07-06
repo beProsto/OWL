@@ -24,7 +24,7 @@ public:
 		if(!m_Created) {
 			m_Created = true;
 
-			m_Hdc = GetDC(m_Hwnd);
+			m_Hdc = GetDC(static_cast<WinAPIWindow*>(m_WindowImpl)->m_Hwnd);
 
 			m_Data = new unsigned char[0];
 			
@@ -90,7 +90,7 @@ public:
 	Vec2<unsigned int> m_Size;
 	unsigned char* m_Data;
 
-	HWND m_Hwnd;
+	// HWND m_Hwnd;
 	HDC m_Hdc;
 
 };

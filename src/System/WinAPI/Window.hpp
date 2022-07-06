@@ -36,10 +36,10 @@ inline LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 class OWL_API WinAPIWindow: public Window {
 public:
 	WinAPIWindow(Vec2ui _size, std::string _title, Mouse* _mouseImpl) {
-		m_Title = _title;
 		m_IsRunning = true;
 		m_IsFullScreen = false;
 		m_Mouse = static_cast<WinAPIMouse*>(_mouseImpl);
+		m_Hwnd = nullptr;
 
 		m_ClassName = "WinAPI_Window_ClassName";
 
@@ -61,22 +61,46 @@ public:
 			return;
 		}
 
-		m_Hwnd = CreateWindowEx(WS_EX_CLIENTEDGE, m_ClassName, m_Title.c_str(), WS_OVERLAPPEDWINDOW, 0, 0, _size.x, _size.y, NULL, NULL, OSInfo::Get()->InstanceHandle, NULL);
-
-		if(m_Hwnd == NULL) {
-			printf("Error creating the window!\n");
-			return;
-		}
-	
-		ShowWindow(m_Hwnd, SW_SHOWNORMAL);
-		UpdateWindow(m_Hwnd);
-
-		SetSize(_size);
+		Create(_size, _title);
 
 		m_Mouse->m_Hwnd = m_Hwnd;
 	}
 	virtual ~WinAPIWindow() {
 		DestroyWindow(m_Hwnd);
+	}
+
+	virtual bool Create(Vec2ui _size, std::string _title) {
+		if(m_Hwnd != nullptr) {
+			DestroyWindow(m_Hwnd);
+		}
+
+		m_Title = _title;
+		m_Size = Vec2ui(0);
+
+		m_Hwnd = CreateWindowEx(WS_EX_CLIENTEDGE, m_ClassName, m_Title.c_str(), WS_OVERLAPPEDWINDOW, 0, 0, _size.x, _size.y, NULL, NULL, OSInfo::Get()->InstanceHandle, NULL);
+
+		if(m_Hwnd == NULL) {
+			printf("Error creating the window!\n");
+			return false;
+		}
+
+		ShowWindow(m_Hwnd, SW_SHOWNORMAL);
+		UpdateWindow(m_Hwnd);
+
+		SetSize(_size);
+		
+		return true;
+	}
+	
+	virtual void SetContext(Context& _context) {
+		m_ContextImpl = &_context;
+		m_ContextImpl->m_WindowImpl = this;
+
+		m_ContextImpl->Create();
+
+		Create(m_Size, m_Title);
+
+		m_ContextImpl->Validate();
 	}
 
 	virtual void PollEvents() {

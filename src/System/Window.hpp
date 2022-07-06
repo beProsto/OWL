@@ -4,6 +4,8 @@
 
 #include <OWL/System/Window.hpp>
 
+#include "../Graphics/Context.hpp"
+
 namespace OWL {
 namespace Impl {
 
@@ -11,11 +13,12 @@ class OWL_API Window {
 public:
 	Window() {}
 	virtual ~Window() {}
-	
-	virtual void PollEvents() {}
 
-	virtual void SetContext(OWL::Context& _context) {}
-	virtual OWL::Context& GetContext() {return *m_Context;}
+	virtual bool Create(Vec2ui _size, std::string _title) {return false;}
+	
+	virtual void SetContext(Context& _context) {}
+
+	virtual void PollEvents() {}
 
 	virtual void SetPosition(const Vec2i& _position) {}
 	virtual Vec2i GetPosition() const {return Vec2i{};}
@@ -36,7 +39,7 @@ public:
 	virtual bool IsFullScreen() const {return false;}
 
 public:
-	OWL::Context* m_Context;
+	Context* m_ContextImpl;
 };
 
 }

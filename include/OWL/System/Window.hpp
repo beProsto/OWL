@@ -24,8 +24,7 @@ public:
 	void PollEvents();
 
 	void SetContext(Context& _context);
-	Context& GetContext();
-
+	
 	void SetPosition(const Vec2i& _position);
 	Vec2i GetPosition() const;
 
