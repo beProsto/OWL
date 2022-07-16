@@ -22,8 +22,6 @@ public:
 	void BlitToScreen();
 	
 	Vec4ub* GetPixelData();
-	
-	unsigned int GetType() const;
 };
 
 }
