@@ -5,6 +5,8 @@
 int main(int argc, char** argv) {
 	OWL::Window window;
 	OWL::FPSLimiter fps(10);
+	OWL::SoftwareContext soft;
+	window.SetContext(soft);
 
 	while(window.IsRunning()) {
 		window.PollEvents();
@@ -30,13 +32,14 @@ int main(int argc, char** argv) {
 			window.SetFullScreen(!window.IsFullScreen());
 		}
 
-		if(window.Mouse.IsButtonPressed(OWL::Mouse::Right)) {
-			window.Mouse.SetPosition(OWL::Vec2i(0, 0));
-		}
-		
 		if(window.Keyboard.IsKeyPressed(OWL::Keyboard::Escape)) {
 			window.Close();
 		}
+
+		soft.Resize(window.GetSize());
+
+		soft.Clear(OWL::Vec4ub(0, 255, 0, 255));
+		soft.BlitToScreen();
 
 		fps.End();
 	}

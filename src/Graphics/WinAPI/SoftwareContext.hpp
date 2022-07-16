@@ -22,18 +22,11 @@ public:
 		return true;
 	}
 	virtual bool Validate() {
-		if(!m_Created) {
-			m_Created = true;
+		m_Hdc = GetDC(static_cast<WinAPIWindow*>(m_WindowImpl)->m_Hwnd);
 
-			m_Hdc = GetDC(static_cast<WinAPIWindow*>(m_WindowImpl)->m_Hwnd);
-
-			m_Data = new unsigned char[0];
-			
-			return true;
-		}
-		else {
-			return false;
-		}
+		m_Data = new unsigned char[0];
+		
+		return true;
 	}
 
 
@@ -57,7 +50,7 @@ public:
 		}
 	}
 
-	virtual void BlitToScreen() {	
+	virtual void BlitToScreen() {
 		/* Our data is in RGBA format, but WinAPI requires BGRA format for some reason */
 		/* We have to swap red and blue */
 		for(size_t i = 0; i < m_Size.x * m_Size.y * 4; i += 4) {
@@ -86,8 +79,6 @@ public:
 	}
 
 public:
-	bool m_Created;
-
 	Vec2<unsigned int> m_Size;
 	unsigned char* m_Data;
 
