@@ -15,6 +15,7 @@ public:
 	virtual ~Window() {}
 
 	virtual bool Create(Vec2ui _size, std::string _title) {return false;}
+	virtual void Destroy() {}
 	
 	virtual void SetContext(Context& _context) {}
 

@@ -70,10 +70,6 @@ public:
 	}
 
 	virtual bool Create(Vec2ui _size, std::string _title) {
-		if(m_Hwnd != nullptr) {
-			DestroyWindow(m_Hwnd);
-		}
-
 		m_Title = _title;
 		m_Size = Vec2ui(0);
 
@@ -91,10 +87,17 @@ public:
 		
 		return true;
 	}
-	
+	virtual void Destroy() {
+		if(m_Hwnd != nullptr) {
+			DestroyWindow(m_Hwnd);
+		}
+	}
+
 	virtual void SetContext(Context& _context) {
 		m_ContextImpl = &_context;
 		m_ContextImpl->m_WindowImpl = this;
+
+		Destroy();
 
 		m_ContextImpl->Create();
 
