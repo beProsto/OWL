@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../SoftwareContext.hpp"
+#include "../../System/Window.hpp"
 
 #include <OWL/OS/Windows.hpp>
 

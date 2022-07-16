@@ -2,10 +2,10 @@
 
 #include <OWL/Graphics/Context.hpp>
 
-#include "../System/Window.hpp"
-
 namespace OWL {
 namespace Impl {
+class OWL_API Window;
+
 class OWL_API Context {
 public:
 	Context() {}
