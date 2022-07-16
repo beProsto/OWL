@@ -4,10 +4,11 @@
 
 int main(int argc, char** argv) {
 	OWL::Window window;
-	OWL::FPSLimiter fps(10);
 	OWL::SoftwareContext soft;
 	window.SetContext(soft);
 
+	OWL::FPSLimiter fps(10);
+	
 	while(window.IsRunning()) {
 		window.PollEvents();
 		fps.Start();
