@@ -51,7 +51,7 @@ public:
 		m_Window.hInstance = OSInfo::Get()->InstanceHandle;
 		m_Window.hIcon = LoadIcon(m_Window.hInstance, MAKEINTRESOURCE(460));
 		m_Window.hCursor = LoadCursor(NULL, IDC_ARROW);
-		m_Window.hbrBackground = reinterpret_cast<HBRUSH>(COLOR_WINDOW + 2);
+		m_Window.hbrBackground = reinterpret_cast<HBRUSH>(COLOR_WINDOW + 1);
 		m_Window.lpszMenuName = nullptr;
 		m_Window.lpszClassName = m_ClassName;
 		m_Window.hIconSm = nullptr;
