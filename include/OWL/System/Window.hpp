@@ -18,7 +18,7 @@ class OWL_API Window;
 
 class OWL_API Window {
 public:
-	Window(Vec2ui _size = Vec2ui(640, 360), std::string _title = "beprosto.github.io/OWL");
+	Window(Vec2ui _size = Vec2ui(640, 360), std::string _title = "beProsto.github.io/OWL");
 	~Window();
 
 	void PollEvents();
