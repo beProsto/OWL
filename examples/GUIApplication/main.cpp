@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
 		window.PollEvents();
 
 		/* Resizing the context's pixel array to the window's size */
-		context.Resize(window.GetSize());
+		context.SetSize(window.GetSize());
 		context.Clear(colorPalette[4]);
 
 		/* Drawing the rectangles */

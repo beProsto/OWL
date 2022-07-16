@@ -19,7 +19,7 @@ if(window.Keyboard.GetKeyData().String != "\b") {
 	text += window.Keyboard.GetKeyData().String;
 }
 else {
-	text.resize(text.size() - 1);
+	text.SetSize(text.size() - 1);
 }
 
 std::cout << "Is F1 key pressed: (" << window.Keyboard.IsKeyPressed(window.Keyboard.F1) << ")\n";

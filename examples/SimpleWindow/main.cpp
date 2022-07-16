@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
 			window.Close();
 		}
 
-		context.Resize(window.GetSize());
+		context.SetSize(window.GetSize());
 		context.Clear(OWL::Vec4ub(255, 100, 45, 255)); /* Clears the screen in orange color */
 
 		context.BlitToScreen();

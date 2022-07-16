@@ -30,7 +30,7 @@ public:
 	}
 
 
-	virtual void Resize(Vec2ui _newSize) {
+	virtual void SetSize(Vec2ui _newSize) {
 		if(m_Size != _newSize) {
 			m_Size = _newSize;
 			delete[] m_Data;

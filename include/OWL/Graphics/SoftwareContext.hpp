@@ -14,7 +14,7 @@ public:
 	SoftwareContext();
 	~SoftwareContext();
 
-	void Resize(Vec2ui _newSize);
+	void SetSize(Vec2ui _newSize);
 	Vec2ui GetSize() const;
 
 	void Clear(const Vec4ub& _color = Vec4ub(0));

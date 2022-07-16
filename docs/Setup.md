@@ -70,7 +70,7 @@ int Main(const std::vector<std::string>& args) {
 		}
 
 		// We want our context to fit exactly to the window.
-		context.Resize(window.GetSize());
+		context.SetSize(window.GetSize());
 		// We clear our context's canvas with a given RGBA colour.
 		context.Clear(OWL::Vec4ub(255, 100, 45, 255)); /* Clears the screen in orange color */
 

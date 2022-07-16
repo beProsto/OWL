@@ -25,3 +25,6 @@
 	// On other systems we can leave it empty
 	#define OWL_API 
 #endif
+
+// If any other libs would like to know if OWL is used:
+#define OWL_

@@ -8,7 +8,7 @@ int main(int argc, char** argv) {
 	window.SetContext(soft);
 
 	OWL::FPSLimiter fps(10);
-	
+
 	while(window.IsRunning()) {
 		window.PollEvents();
 		fps.Start();
@@ -37,7 +37,7 @@ int main(int argc, char** argv) {
 			window.Close();
 		}
 
-		soft.Resize(window.GetSize());
+		soft.SetSize(window.GetSize());
 
 		soft.Clear(OWL::Vec4ub(0, 255, 0, 255));
 		soft.BlitToScreen();

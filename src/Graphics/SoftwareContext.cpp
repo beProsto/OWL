@@ -16,8 +16,8 @@ SoftwareContext::~SoftwareContext() {
 }
 
 
-void SoftwareContext::Resize(Vec2ui _newSize) {
-	static_cast<Impl::SoftwareContext*>(m_Impl)->Resize(_newSize);
+void SoftwareContext::SetSize(Vec2ui _newSize) {
+	static_cast<Impl::SoftwareContext*>(m_Impl)->SetSize(_newSize);
 }
 Vec2ui SoftwareContext::GetSize() const {
 	return static_cast<Impl::SoftwareContext*>(m_Impl)->GetSize();
