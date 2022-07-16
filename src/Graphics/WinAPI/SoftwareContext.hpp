@@ -74,10 +74,6 @@ public:
 		return reinterpret_cast<Vec4ub*>(m_Data);
 	}
 
-	virtual unsigned int GetType() const {
-		return 0;
-	}
-
 public:
 	Vec2<unsigned int> m_Size;
 	unsigned char* m_Data;

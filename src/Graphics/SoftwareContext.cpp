@@ -35,8 +35,4 @@ Vec4ub* SoftwareContext::GetPixelData() {
 	return static_cast<Impl::SoftwareContext*>(m_Impl)->GetPixelData();
 }
 
-unsigned int SoftwareContext::GetType() const {
-	return static_cast<Impl::SoftwareContext*>(m_Impl)->GetType();
-}
-
 }

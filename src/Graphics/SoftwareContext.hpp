@@ -23,8 +23,6 @@ public:
 	virtual void BlitToScreen() {}
 
 	virtual Vec4ub* GetPixelData() {return nullptr;}
-
-	virtual unsigned int GetType() const {return 0;}
 };
 }
 }
