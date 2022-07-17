@@ -11,7 +11,7 @@ public:
 
 	virtual bool IsKeyPressed(unsigned int _key) const {return false;}
 
-public:
+protected:
 	unsigned int m_KeyMap[OWL::Keyboard::Key::Count];
 };
 }

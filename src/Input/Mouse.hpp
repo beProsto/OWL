@@ -18,7 +18,7 @@ public:
 	virtual int GetWheelRotation() const {return 0;}
 	virtual bool IsButtonPressed(unsigned int _button) const {return false;}
 
-public:
+protected:
 	unsigned int m_ButtonMap[OWL::Mouse::Button::Count];
 };
 }
