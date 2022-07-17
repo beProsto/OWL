@@ -14,6 +14,9 @@ public:
 	virtual bool Create() {return false;}
 	virtual bool Validate() {return false;}
 
+	virtual void Destroy() {}
+
+
 public:
 	Window* m_WindowImpl;
 };

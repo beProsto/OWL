@@ -29,6 +29,10 @@ public:
 		return true;
 	}
 
+	virtual void Destroy() {
+		delete[] m_Data;
+		ReleaseDC(static_cast<WinAPIWindow*>(m_WindowImpl)->m_Hwnd, m_Hdc);
+	}
 
 	virtual void SetSize(Vec2ui _newSize) {
 		if(m_Size != _newSize) {
@@ -78,7 +82,6 @@ public:
 	Vec2<unsigned int> m_Size;
 	unsigned char* m_Data;
 
-	// HWND m_Hwnd;
 	HDC m_Hdc;
 
 };

@@ -40,6 +40,7 @@ public:
 		m_IsFullScreen = false;
 		m_Mouse = static_cast<WinAPIMouse*>(_mouseImpl);
 		m_Hwnd = nullptr;
+		m_ContextImpl = nullptr;
 
 		m_ClassName = "WinAPI_Window_ClassName";
 
@@ -66,12 +67,14 @@ public:
 		m_Mouse->m_Hwnd = m_Hwnd;
 	}
 	virtual ~WinAPIWindow() {
-		DestroyWindow(m_Hwnd);
+		Destroy();
 	}
 
 	virtual bool Create(Vec2ui _size, std::string _title) {
 		m_Title = _title;
 		m_Size = Vec2ui(0);
+
+		Destroy();
 
 		m_Hwnd = CreateWindowEx(WS_EX_CLIENTEDGE, m_ClassName, m_Title.c_str(), WS_OVERLAPPEDWINDOW, 0, 0, _size.x, _size.y, NULL, NULL, OSInfo::Get()->InstanceHandle, NULL);
 
@@ -90,14 +93,20 @@ public:
 	virtual void Destroy() {
 		if(m_Hwnd != nullptr) {
 			DestroyWindow(m_Hwnd);
+			m_Hwnd = nullptr;
+			
+			if(m_ContextImpl != nullptr) {
+				m_ContextImpl->Destroy();
+				m_ContextImpl = nullptr;
+			}
 		}
 	}
 
 	virtual void SetContext(Context& _context) {
+		Destroy();
+
 		m_ContextImpl = &_context;
 		m_ContextImpl->m_WindowImpl = this;
-
-		Destroy();
 
 		m_ContextImpl->Create();
 

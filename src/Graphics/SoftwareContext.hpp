@@ -14,6 +14,8 @@ public:
 
 	virtual bool Create() {return false;}
 	virtual bool Validate() {return false;}
+	
+	virtual void Destroy() {}
 
 	virtual void SetSize(Vec2ui _newSize) {}
 	virtual Vec2ui GetSize() const {return Vec2ui(0);}
