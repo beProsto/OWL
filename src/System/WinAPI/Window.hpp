@@ -5,7 +5,6 @@
 #include <OWL/System/Info.hpp>
 
 #include "../Window.hpp"
-#include "../../Input/WinAPI/Mouse.hpp"
 
 /* This will include WinAPI */
 #define WIN32_LEAN_AND_MEAN
@@ -35,15 +34,19 @@ inline LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 
 class OWL_API WinAPIWindow: public Window {
 public:
-	WinAPIWindow(Vec2ui _size, std::string _title, Mouse* _mouseImpl) {
+	WinAPIWindow(Vec2ui _size, std::string _title, Keyboard* _keyboardImpl, Mouse* _mouseImpl) {
 		m_IsRunning = true;
 		m_IsFullScreen = false;
-		m_Mouse = static_cast<WinAPIMouse*>(_mouseImpl);
 		m_Hwnd = nullptr;
 		m_ContextImpl = nullptr;
 
-		m_ClassName = "WinAPI_Window_ClassName";
+		m_KeyboardImpl = _keyboardImpl;
+		m_KeyboardImpl->m_WindowImpl = this;
 
+		m_MouseImpl = _mouseImpl;
+		m_MouseImpl->m_WindowImpl = this;
+
+		m_ClassName = "WinAPI_Window_ClassName";
 		m_Window.cbSize = sizeof(WNDCLASSEX);
 		m_Window.style = 0;
 		m_Window.lpfnWndProc = WndProc;
@@ -63,8 +66,6 @@ public:
 		}
 
 		Create(_size, _title);
-
-		m_Mouse->m_Hwnd = m_Hwnd;
 	}
 	virtual ~WinAPIWindow() {
 		Destroy();
@@ -94,7 +95,7 @@ public:
 		if(m_Hwnd != nullptr) {
 			DestroyWindow(m_Hwnd);
 			m_Hwnd = nullptr;
-			
+
 			if(m_ContextImpl != nullptr) {
 				m_ContextImpl->Destroy();
 				m_ContextImpl = nullptr;
@@ -216,15 +217,11 @@ public:
 	}
 
 public:
-	WinAPIMouse* m_Mouse;
-
 	std::string m_Title;
 	Vec2ui m_Size;
 	bool m_IsRunning;
 	bool m_IsFullScreen;
 	bool m_WasMaximized;
-
-	// Context* m_Context;
 
 	const char* m_ClassName;
 	WNDCLASSEX m_Window;

@@ -4,6 +4,8 @@
 
 namespace OWL {
 namespace Impl {
+class OWL_API Window;
+
 class OWL_API Mouse {
 public:
 	Mouse() {}
@@ -18,13 +20,14 @@ public:
 	virtual int GetWheelRotation() const {return 0;}
 	virtual bool IsButtonPressed(unsigned int _button) const {return false;}
 
-protected:
+public:
 	unsigned int m_ButtonMap[OWL::Mouse::Button::Count];
+	Window* m_WindowImpl;
 };
 }
 }
 
-
+#if !defined _OWL_INCLUDE_WITHOUT_IMPLEMENTATION
 #if defined OWL_SYSTEM_WINDOWS
 	#include "WinAPI/Mouse.hpp"
 #elif defined OWL_SYSTEM_LINUX
@@ -35,4 +38,5 @@ protected:
 		// 	m_ButtonMap[3] = 1<<15;
 		// 	m_ButtonMap[4] = 1<<16;
 
+#endif
 #endif

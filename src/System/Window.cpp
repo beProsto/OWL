@@ -8,7 +8,7 @@ namespace OWL {
 
 Window::Window(Vec2ui _size, std::string _title) {
 	#if defined OWL_SYSTEM_WINDOWS
-		m_Impl = new Impl::WinAPIWindow(_size, _title, Mouse.m_Impl);
+		m_Impl = new Impl::WinAPIWindow(_size, _title, Keyboard.m_Impl, Mouse.m_Impl);
 	#elif defined OWL_SYSTEM_LINUX
 		
 	#endif

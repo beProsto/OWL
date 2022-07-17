@@ -4,7 +4,11 @@
 
 #include <OWL/System/Window.hpp>
 
+#define _OWL_INCLUDE_WITHOUT_IMPLEMENTATION
 #include "../Graphics/Context.hpp"
+#include "../Input/Keyboard.hpp"
+#include "../Input/Mouse.hpp"
+#undef _OWL_INCLUDE_WITHOUT_IMPLEMENTATION
 
 namespace OWL {
 namespace Impl {
@@ -41,6 +45,8 @@ public:
 
 public:
 	Context* m_ContextImpl;
+	Keyboard* m_KeyboardImpl;
+	Mouse* m_MouseImpl;
 };
 
 }

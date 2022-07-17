@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Keyboard.hpp"
+#include "../../System/Window.hpp"
 
 #include <OWL/OS/Windows.hpp>
 

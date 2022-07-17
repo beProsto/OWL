@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Mouse.hpp"
+#include "../../System/Window.hpp"
 
 #include <OWL/OS/Windows.hpp>
 
@@ -34,13 +35,13 @@ public:
 		POINT p;
 		p.x = _position.x;
 		p.y = _position.y;
-		ClientToScreen(m_Hwnd, &p);
+		ClientToScreen(static_cast<WinAPIWindow*>(m_WindowImpl)->m_Hwnd, &p);
 		SetCursorPos(p.x, p.y);
 	}
 	virtual Vec2i GetPosition() const {
 		POINT p;
 		GetCursorPos(&p);
-		ScreenToClient(m_Hwnd, &p);
+		ScreenToClient(static_cast<WinAPIWindow*>(m_WindowImpl)->m_Hwnd, &p);
 		return Vec2<int>(p.x, p.y);
 	}
 
@@ -54,7 +55,6 @@ public:
 public:
 	int m_Wheel;
 	bool m_Visible;
-	HWND m_Hwnd;
 };
 }
 }
