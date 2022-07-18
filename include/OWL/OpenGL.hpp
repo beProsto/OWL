@@ -2,4 +2,4 @@
 
 #include <OWL/OWL.hpp>
 
-#include <OWL/Graphics/GLContext.hpp>
+#include <OWL/Graphics/OpenGLContext.hpp>
