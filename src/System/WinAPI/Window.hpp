@@ -93,13 +93,13 @@ public:
 	}
 	virtual void Destroy() {
 		if(m_Hwnd != nullptr) {
-			DestroyWindow(m_Hwnd);
-			m_Hwnd = nullptr;
-
 			if(m_ContextImpl != nullptr) {
 				m_ContextImpl->Destroy();
 				m_ContextImpl = nullptr;
 			}
+
+			DestroyWindow(m_Hwnd);
+			m_Hwnd = nullptr;
 		}
 	}
 
