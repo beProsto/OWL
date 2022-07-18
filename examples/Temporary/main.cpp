@@ -7,12 +7,12 @@ int main(int argc, char** argv) {
 	OWL::Window window;
 	OWL::SoftwareContext soft;
 	OWL::SoftwareContext soft2;
-	OWL::OpenGLContext gl;
+	// OWL::OpenGLContext gl;
 
 	bool contextSoftware = true;
 	window.SetContext(soft);
 
-	OWL::FPSLimiter fps(10);
+	OWL::FPSLimiter fps(1);
 
 	while(window.IsRunning()) {
 		window.PollEvents();
@@ -42,16 +42,6 @@ int main(int argc, char** argv) {
 			window.Close();
 		}
 
-		if(window.Mouse.IsButtonPressed(OWL::Mouse::Right)) {
-			contextSoftware = !contextSoftware;
-			if(contextSoftware) {
-				window.SetContext(soft);
-			}
-			else {
-				window.SetContext(soft2);
-			}
-		}
-
 		if(contextSoftware) {
 			soft.SetSize(window.GetSize());
 
@@ -68,6 +58,16 @@ int main(int argc, char** argv) {
 			// glClear(GL_COLOR_BUFFER_BIT);
 
 			// gl.SwapBuffers();
+		}
+
+		if(window.Mouse.IsButtonPressed(OWL::Mouse::Right)) {
+			contextSoftware = !contextSoftware;
+			if(contextSoftware) {
+				window.SetContext(soft);
+			}
+			else {
+				window.SetContext(soft2);
+			}
 		}
 
 		fps.End();
