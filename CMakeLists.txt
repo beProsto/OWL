@@ -14,14 +14,6 @@ file(GLOB_RECURSE lib_srcs
 	"src/*.cpp"
 )
 
-if(LIBTYPE STREQUAL "STATIC")
-	add_library(OWL STATIC ${lib_srcs})
-	target_compile_definitions(OWL PRIVATE OWL_BUILD_STATIC)
-else()
-	add_library(OWL SHARED ${lib_srcs})
-	target_compile_definitions(OWL PRIVATE OWL_BUILD_SHARED)
-endif()
-
 if(WIN32)
 	link_libraries(
 		opengl32
@@ -41,6 +33,13 @@ else()
 	)
 endif()
 
+if(LIBTYPE STREQUAL "STATIC")
+	add_library(OWL STATIC ${lib_srcs})
+	target_compile_definitions(OWL PRIVATE OWL_BUILD_STATIC)
+else()
+	add_library(OWL SHARED ${lib_srcs})
+	target_compile_definitions(OWL PRIVATE OWL_BUILD_SHARED)
+endif()
 
 if(WIN32)
 	set(EXE_TYPE WIN32)
