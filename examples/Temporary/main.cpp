@@ -1,10 +1,14 @@
 #include <OWL/Main.hpp>
 #include <OWL/OWL.hpp>
 #include <OWL/Time.hpp>
+#include <OWL/OpenGL.hpp>
 
 int main(int argc, char** argv) {
 	OWL::Window window;
 	OWL::SoftwareContext soft;
+	OWL::OpenGLContext gl;
+
+	bool contextSoftware = true;
 	window.SetContext(soft);
 
 	OWL::FPSLimiter fps(10);
@@ -37,10 +41,28 @@ int main(int argc, char** argv) {
 			window.Close();
 		}
 
-		soft.SetSize(window.GetSize());
+		if(window.Mouse.IsButtonPressed(OWL::Mouse::Right)) {
+			contextSoftware = !contextSoftware;
+			if(contextSoftware) {
+				window.SetContext(soft);
+			}
+			else {
+				window.SetContext(gl);
+			}
+		}
 
-		soft.Clear(OWL::Vec4ub(0, 255, 0, 255));
-		soft.BlitToScreen();
+		if(contextSoftware) {
+			soft.SetSize(window.GetSize());
+
+			soft.Clear(OWL::Vec4ub(0, 255, 0, 255));
+			soft.BlitToScreen();
+		}
+		else {
+			glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+			glClear(GL_COLOR_BUFFER_BIT);
+
+			gl.SwapBuffers();
+		}
 
 		fps.End();
 	}

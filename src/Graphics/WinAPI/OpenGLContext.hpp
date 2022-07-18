@@ -5,7 +5,7 @@
 
 #include <OWL/OS/Windows.hpp>
 
-#include <gl/gl.h>
+#include <OWL/OS/OpenGL.hpp>
 
 namespace OWL {
 namespace Impl {
