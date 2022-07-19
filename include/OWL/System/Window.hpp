@@ -6,7 +6,7 @@
 
 #include <OWL/Input/Mouse.hpp>
 #include <OWL/Input/Keyboard.hpp>
-// #include <OWL/Input/Gamepad.hpp>
+#include <OWL/Input/Gamepad.hpp>
 
 #include <OWL/Graphics/Context.hpp>
 
