@@ -106,19 +106,31 @@ public:
 	}
 
 	virtual void SetContext(Context& _context) {
-		Vec2ui winSize = GetSize();
-		Vec2i winPosition = GetPosition();
-		bool winFullScreen = IsFullScreen();
+		// // THIS IS THE PROPER WAY TO GO ABOUT THIS
+		// // BUT IT LOOKS BAD
+		// // SO ONLY USE THIS IMPLEMENTATION
+		// // IF REQUIRED BY DIRECT3D
+		// // (VULKAN DOESN'T AS FAR AS I'M AWARE)
+		// Vec2ui winSize = GetSize();
+		// Vec2i winPosition = GetPosition();
+		// bool winFullScreen = IsFullScreen();
+		// Destroy();
+		// m_ContextImpl = &_context;
+		// m_ContextImpl->m_WindowImpl = this;
+		// m_ContextImpl->Create();
+		// Create(winPosition, winSize, m_Title, winFullScreen);
+		// m_ContextImpl->Validate();
 
-		Destroy();
-
+		// This is an improper, but good looking
+		// implementation of context switching.
+		if(m_ContextImpl != nullptr) {
+			m_ContextImpl->Destroy();
+			m_ContextImpl = nullptr;
+		}
 		m_ContextImpl = &_context;
 		m_ContextImpl->m_WindowImpl = this;
 
 		m_ContextImpl->Create();
-
-		Create(winPosition, winSize, m_Title, winFullScreen);
-
 		m_ContextImpl->Validate();
 	}
 
