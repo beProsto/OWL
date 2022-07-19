@@ -42,6 +42,16 @@ int main(int argc, char** argv) {
 			window.Close();
 		}
 
+		if(window.Mouse.IsButtonPressed(OWL::Mouse::Right)) {
+			contextSoftware = !contextSoftware;
+			if(contextSoftware) {
+				window.SetContext(soft);
+			}
+			else {
+				window.SetContext(gl);
+			}
+		}
+
 		if(contextSoftware) {
 			soft.SetSize(window.GetSize());
 
@@ -53,16 +63,6 @@ int main(int argc, char** argv) {
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			gl.SwapBuffers();
-		}
-
-		if(window.Mouse.IsButtonPressed(OWL::Mouse::Right)) {
-			contextSoftware = !contextSoftware;
-			if(contextSoftware) {
-				window.SetContext(soft);
-			}
-			else {
-				window.SetContext(gl);
-			}
 		}
 
 		fps.End();
