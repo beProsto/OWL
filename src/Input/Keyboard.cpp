@@ -16,7 +16,7 @@ Keyboard::~Keyboard() {
 }
 
 bool Keyboard::IsKeyPressed(unsigned int _key) const {
-	return m_Impl ->IsKeyPressed(_key);
+	return m_Impl->IsKeyPressed(_key);
 }
 
 }
