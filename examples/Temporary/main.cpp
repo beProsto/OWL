@@ -6,13 +6,13 @@
 int main(int argc, char** argv) {
 	OWL::Window window;
 	OWL::SoftwareContext soft;
-	OWL::SoftwareContext soft2;
-	// OWL::OpenGLContext gl;
+	// OWL::SoftwareContext soft2;
+	OWL::OpenGLContext gl;
 
 	bool contextSoftware = true;
 	window.SetContext(soft);
 
-	OWL::FPSLimiter fps(1);
+	OWL::FPSLimiter fps(10);
 
 	while(window.IsRunning()) {
 		window.PollEvents();
@@ -49,15 +49,10 @@ int main(int argc, char** argv) {
 			soft.BlitToScreen();
 		}
 		else {
-			soft2.SetSize(window.GetSize());
+			glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+			glClear(GL_COLOR_BUFFER_BIT);
 
-			soft2.Clear(OWL::Vec4ub(0, 0, 255, 255));
-			soft2.BlitToScreen();
-			
-			// glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-			// glClear(GL_COLOR_BUFFER_BIT);
-
-			// gl.SwapBuffers();
+			gl.SwapBuffers();
 		}
 
 		if(window.Mouse.IsButtonPressed(OWL::Mouse::Right)) {
@@ -66,7 +61,7 @@ int main(int argc, char** argv) {
 				window.SetContext(soft);
 			}
 			else {
-				window.SetContext(soft2);
+				window.SetContext(gl);
 			}
 		}
 

@@ -65,15 +65,15 @@ public:
 			return;
 		}
 
-		Create(_size, _title);
+		Create(Vec2i(0), _size, _title, false);
 	}
 	virtual ~WinAPIWindow() {
 		Destroy();
 	}
 
-	virtual bool Create(Vec2ui _size, std::string _title) {
+	virtual bool Create(Vec2i _pos, Vec2ui _size, std::string _title, bool _fullScreen) {
 		m_Title = _title;
-		m_Size = Vec2ui(0);
+		m_IsFullScreen = false;
 
 		Destroy();
 
@@ -88,7 +88,9 @@ public:
 		UpdateWindow(m_Hwnd);
 
 		SetSize(_size);
-		
+		SetPosition(_pos);
+		SetFullScreen(_fullScreen);
+
 		return true;
 	}
 	virtual void Destroy() {
@@ -104,6 +106,10 @@ public:
 	}
 
 	virtual void SetContext(Context& _context) {
+		Vec2ui winSize = GetSize();
+		Vec2i winPosition = GetPosition();
+		bool winFullScreen = IsFullScreen();
+
 		Destroy();
 
 		m_ContextImpl = &_context;
@@ -111,7 +117,7 @@ public:
 
 		m_ContextImpl->Create();
 
-		Create(m_Size, m_Title);
+		Create(winPosition, winSize, m_Title, winFullScreen);
 
 		m_ContextImpl->Validate();
 	}
@@ -140,16 +146,12 @@ public:
 	}
 
 	virtual void SetSize(Vec2ui _size) {
-		if(m_Size != _size) {
-			SetWindowPos(m_Hwnd, 0, 0, 0, _size.x, _size.y, SWP_NOMOVE);
+		SetWindowPos(m_Hwnd, 0, 0, 0, _size.x, _size.y, SWP_NOMOVE);
 
-			OWL::Vec2ui finalSize = GetSize();
-			if(finalSize != _size) {
-				finalSize = _size + (_size - finalSize);
-				SetWindowPos(m_Hwnd, 0, 0, 0, finalSize.x, finalSize.y, SWP_NOMOVE);
-			}
-
-			m_Size = _size;
+		OWL::Vec2ui finalSize = GetSize();
+		if(finalSize != _size) {
+			finalSize = _size + (_size - finalSize);
+			SetWindowPos(m_Hwnd, 0, 0, 0, finalSize.x, finalSize.y, SWP_NOMOVE);
 		}
 	}
 	virtual Vec2ui GetSize() const {
@@ -158,7 +160,8 @@ public:
 		return Vec2ui(rect.right - rect.left, rect.bottom - rect.top);
 	}
 	virtual float GetAspect() const {
-		return (float)m_Size.x / (float)m_Size.y;
+		Vec2f size = GetSize(); 
+		return size.x / size.y;
 	}
 
 	virtual void SetTitle(std::string _title) {
@@ -218,7 +221,6 @@ public:
 
 public:
 	std::string m_Title;
-	Vec2ui m_Size;
 	bool m_IsRunning;
 	bool m_IsFullScreen;
 	bool m_WasMaximized;

@@ -25,13 +25,15 @@ public:
 		m_Hdc = GetDC(static_cast<WinAPIWindow*>(m_WindowImpl)->m_Hwnd);
 
 		m_Data = new unsigned char[0];
+		m_Size = OWL::Vec2ui(0);
 		
 		return true;
 	}
 
 	virtual void Destroy() {
-		delete[] m_Data;
 		ReleaseDC(static_cast<WinAPIWindow*>(m_WindowImpl)->m_Hwnd, m_Hdc);
+		delete[] m_Data;
+		m_Size = OWL::Vec2ui(0);
 	}
 
 	virtual void SetSize(Vec2ui _newSize) {
@@ -58,7 +60,7 @@ public:
 		/* Our data is in RGBA format, but WinAPI requires BGRA format for some reason */
 		/* We have to swap red and blue */
 		for(size_t i = 0; i < m_Size.x * m_Size.y * 4; i += 4) {
-			char red = m_Data[i];
+			unsigned char red = m_Data[i];
 			m_Data[i] = m_Data[i+2]; /* blue */
 			m_Data[i+2] = red; /* red */
 		}
