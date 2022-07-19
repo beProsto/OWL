@@ -14,6 +14,8 @@ int main(int argc, char** argv) {
 
 	OWL::FPSLimiter fps(10);
 
+	OWL::Vec2f offset;
+
 	while(window.IsRunning()) {
 		window.PollEvents();
 		fps.Start();
@@ -52,6 +54,8 @@ int main(int argc, char** argv) {
 			}
 		}
 
+		offset = window.Gamepads[0].GetLeftStick();
+
 		if(contextSoftware) {
 			soft.SetSize(window.GetSize());
 
@@ -59,8 +63,19 @@ int main(int argc, char** argv) {
 			soft.BlitToScreen();
 		}
 		else {
+			glViewport(0,0,window.GetSize().x,window.GetSize().y);
+
 			glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
+
+			glBegin(GL_TRIANGLES);
+				glColor3f(0.9f, 0.3f, 0.4f);
+				glVertex2f(offset.x + -0.5f, offset.y +  -0.5f);
+				glColor3f(0.3f, 0.9f, 0.4f);
+				glVertex2f(offset.x +  0.0f, offset.y +   0.5f);
+				glColor3f(0.3f, 0.4f, 0.9f);
+				glVertex2f(offset.x +  0.5f, offset.y +  -0.5f);
+			glEnd();
 
 			gl.SwapBuffers();
 		}
