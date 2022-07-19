@@ -1,22 +1,21 @@
 #include <OWL/OWL.hpp>
-#include <OWL/main.hpp>
-#include <OWL/time.hpp>
+#include <OWL/Main.hpp>
+#include <OWL/Time.hpp>
 
 int main(int argc, char** argv) {
 	OWL::SoftwareContext context;
-	OWL::Window window(&context, "Simple Window in OWL Example", OWL::Vec2i(0), OWL::Vec2ui(480, 460));
+	OWL::Window window;
+	window.SetContext(context);
 	OWL::FPSLimiter fps(60);
-
-	window.SetEventLoopType(OWL::EventLoopType::GameLoop);
 
 	while(window.IsRunning()) {
 		window.PollEvents();
 		fps.Start();
 
-		if(window.Keyboard.GetKeyData().KeyEnum == window.Keyboard.F11) {
-			window.SetFullScreen(!window.IsFullScreen());
-		}
-		if(window.Keyboard.GetKeyData().KeyEnum == window.Keyboard.Escape) {
+		// if(window.Keyboard.GetKeyData().KeyEnum == window.Keyboard.F11) {
+		// 	window.SetFullScreen(!window.IsFullScreen());
+		// }
+		if(window.Keyboard.IsKeyPressed(window.Keyboard.Escape)) {
 			window.Close();
 		}
 

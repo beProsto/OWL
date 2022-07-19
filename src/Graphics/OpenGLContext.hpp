@@ -1,5 +1,7 @@
 #pragma once
 
+#include <OWL/OS/OpenGL.hpp>
+
 #include "Context.hpp"
 
 namespace OWL {
@@ -14,6 +16,7 @@ public:
 	
 	virtual void Destroy() {}
 
+	virtual OpenGLLoaderFunction GetLoaderFunction() { return [](const char* name){return static_cast<void*>(nullptr);}; }
 	virtual void SwapBuffers() {}
 };
 }

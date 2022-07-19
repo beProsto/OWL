@@ -42,17 +42,33 @@ public:
 		m_Hrc = wglCreateContext(m_Hdc);
 		wglMakeCurrent(m_Hdc, m_Hrc);
 
-		// WinAPI_Data::get()->hOpengl32Module = LoadLibraryA("opengl32.dll");
-		
+		OSInfo::Get()->Opengl32ModuleHandle = LoadLibraryA("opengl32.dll");
+
 		return true;
 	}
 
 	virtual void Destroy() {
+		FreeLibrary(OSInfo::Get()->Opengl32ModuleHandle);
 		wglMakeCurrent(NULL, NULL);
 		wglDeleteContext(m_Hrc);
 		ReleaseDC(static_cast<WinAPIWindow*>(m_WindowImpl)->m_Hwnd, m_Hdc);
 	}
 
+	virtual OpenGLLoaderFunction GetLoaderFunction() {
+		return [](const char* name) {
+			void *p = (void *)wglGetProcAddress(name);
+			if(
+				p == 0 ||
+				(p == (void*)0x1) || 
+				(p == (void*)0x2) || 
+				(p == (void*)0x3) ||
+				(p == (void*)-1)
+			) {
+				p = (void *)::GetProcAddress(OSInfo::Get()->Opengl32ModuleHandle, name);
+			}
+			return p;
+		};
+	}
 	virtual void SwapBuffers() {
 		::SwapBuffers(m_Hdc);
 	}

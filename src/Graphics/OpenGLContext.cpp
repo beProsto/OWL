@@ -15,6 +15,9 @@ OpenGLContext::~OpenGLContext() {
 	delete m_Impl;
 }
 
+OpenGLLoaderFunction OpenGLContext::GetLoaderFunction() {
+	return static_cast<Impl::OpenGLContext*>(m_Impl)->GetLoaderFunction();
+}
 void OpenGLContext::SwapBuffers() {
 	static_cast<Impl::OpenGLContext*>(m_Impl)->SwapBuffers();
 }

@@ -20,6 +20,7 @@ public:
 public:
 	#if defined OWL_SYSTEM_WINDOWS
 		HINSTANCE InstanceHandle;
+		HMODULE Opengl32ModuleHandle;
 	#elif defined OWL_SYSTEM_LINUX
 		
 	#else

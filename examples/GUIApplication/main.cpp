@@ -1,14 +1,14 @@
 #include <iostream>
 #include <OWL/OWL.hpp>
-#include <OWL/main.hpp>
+#include <OWL/Main.hpp>
 
-void DrawPixel(OWL::Vec4b* _canvas, const OWL::Vec2ui& _size, const OWL::Vec2i& _position, const OWL::Vec4b& _color) {
+void DrawPixel(OWL::Vec4ub* _canvas, const OWL::Vec2ui& _size, const OWL::Vec2i& _position, const OWL::Vec4ub& _color) {
 	if(_position.x >= 0 && _position.x < _size.x && _position.y >= 0 && _position.y < _size.y) {
 		_canvas[_position.y * _size.x + _position.x] = _color;
 	}
 }
 
-void DrawRect(OWL::Vec4b* _canvas, const OWL::Vec2ui& _size, const OWL::Vec2i& _rectPosition, const OWL::Vec2ui& _rectSize, const OWL::Vec4b& _color) {
+void DrawRect(OWL::Vec4ub* _canvas, const OWL::Vec2ui& _size, const OWL::Vec2i& _rectPosition, const OWL::Vec2ui& _rectSize, const OWL::Vec4ub& _color) {
 	for(int i = _rectPosition.x; i < _rectPosition.x + _rectSize.x; i++) {
 		for(int j =_rectPosition.y; j < _rectPosition.y + _rectSize.y; j++) {
 			DrawPixel(_canvas, _size, OWL::Vec2i(i, j), _color);
@@ -19,16 +19,17 @@ void DrawRect(OWL::Vec4b* _canvas, const OWL::Vec2ui& _size, const OWL::Vec2i& _
 int main(int argc, char** argv) {
 	/* Initializing a Software rendering context */
 	OWL::SoftwareContext context;
-	/* Initializing a window using an EventLoop Event Loop Type (Remember - they can be dynamically changed) */
-	OWL::Window window(&context, "OWL GUI Application Example", OWL::Vec2i(0), OWL::Vec2ui(1280, 720), OWL::EventLoopType::EventLoop);
+	/* Initializing a window */
+	OWL::Window window;
+	window.SetContext(context);
 	
 	/* Creating a color palette */
-	OWL::Vec4b colorPalette[5] = {
-		OWL::Vec4b(4, 15, 15, 255),
-		OWL::Vec4b(36, 130, 50, 255),
-		OWL::Vec4b(43, 168, 74, 255),
-		OWL::Vec4b(170, 166, 168, 255),
-		OWL::Vec4b(252, 255, 252, 255)
+	OWL::Vec4ub colorPalette[5] = {
+		OWL::Vec4ub(4, 15, 15, 255),
+		OWL::Vec4ub(36, 130, 50, 255),
+		OWL::Vec4ub(43, 168, 74, 255),
+		OWL::Vec4ub(170, 166, 168, 255),
+		OWL::Vec4ub(252, 255, 252, 255)
 	};
 
 	/* Some fancy variables */
