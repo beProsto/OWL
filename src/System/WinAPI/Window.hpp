@@ -34,7 +34,7 @@ inline LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 
 class OWL_API WinAPIWindow: public Window {
 public:
-	WinAPIWindow(Vec2ui _size, std::string _title, Keyboard* _keyboardImpl, Mouse* _mouseImpl) {
+	WinAPIWindow(Vec2ui _size, std::string _title, Keyboard* _keyboardImpl, Mouse* _mouseImpl, Gamepads* _gamepadsImpl) {
 		m_IsRunning = true;
 		m_IsFullScreen = false;
 		m_Hwnd = nullptr;
@@ -45,6 +45,9 @@ public:
 
 		m_MouseImpl = _mouseImpl;
 		m_MouseImpl->m_WindowImpl = this;
+
+		m_GamepadsImpl = _gamepadsImpl;
+		m_GamepadsImpl->m_WindowImpl = this;
 
 		m_ClassName = "WinAPI_Window_ClassName";
 		m_Window.cbSize = sizeof(WNDCLASSEX);
@@ -145,7 +148,7 @@ public:
 			// PollEventsStandard(_self);
 		}
 
-		// PollEventsGamepad(_self);
+		m_GamepadsImpl->PollGamepadEvents();
 	}
 
 	virtual void SetPosition(const Vec2i& _position) {

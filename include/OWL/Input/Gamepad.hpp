@@ -18,37 +18,41 @@ public:
 	~Gamepad();
 
 	bool IsConnected() const;
-	bool IsButtonPressed(unsigned int _button) const;
+
+	bool IsButtonPressed(uint16_t _button) const;
 
 	const Vec2f& GetLeftStick() const;
 	const Vec2f& GetRightStick() const;
+
 	float GetLeftTrigger() const;
 	float GetRightTrigger() const;
 
 public:
 	enum Button {
-		A = 1,
-		B = 2,
-		X = 4,
-		Y = 8,
-		ShoulderLeft = 16,
-		ShoulderRight = 32,
-		Back = 64,
-		Start = 128,
-		Logo = 256,
-		ThumbLeft = 512,
-		ThumbRight = 1024,
-		DPadLeft = 2048,
-		DPadRight = 4096,
-		DPadUp = 8192,
-		DPadDown = 16384
+		A = 0,
+		B = 1,
+		X = 2,
+		Y = 3,
+		ShoulderLeft = 4,
+		ShoulderRight = 5,
+		Back = 6,
+		Start = 7,
+		Logo = 8,
+		ThumbLeft = 9,
+		ThumbRight = 10,
+		DPadLeft = 11,
+		DPadRight = 12,
+		DPadUp = 13,
+		DPadDown = 14
 	};
 
-protected:
-	uint16_t m_Buttons;
-
-	friend class Gamepads;
-	friend class Window;
+public:
+	bool m_IsConnected;
+	bool m_Buttons[15];
+	float m_LeftTrigger;
+	float m_RightTrigger;
+	Vec2f m_LeftStick;
+	Vec2f m_RightStick;
 };
 
 class OWL_API Gamepads {
@@ -56,10 +60,12 @@ public:
 	Gamepads();
 	~Gamepads();
 
+	size_t GetCount() const;
+
 	const Gamepad& operator[](size_t _id) const;
 
 protected:
-	Impl::Gamepads* m_Gamepads;
+	Impl::Gamepads* m_Impl;
 
 	friend class Window;
 };

@@ -8,6 +8,7 @@
 #include "../Graphics/Context.hpp"
 #include "../Input/Keyboard.hpp"
 #include "../Input/Mouse.hpp"
+#include "../Input/Gamepad.hpp"
 #undef _OWL_INCLUDE_WITHOUT_IMPLEMENTATION
 
 namespace OWL {
@@ -47,6 +48,7 @@ public:
 	Context* m_ContextImpl;
 	Keyboard* m_KeyboardImpl;
 	Mouse* m_MouseImpl;
+	Gamepads* m_GamepadsImpl;
 };
 
 }
