@@ -18,8 +18,11 @@ public:
 	virtual Vec2i GetPosition() const {return Vec2i{};}
 
 	virtual int GetWheelRotation() const {return 0;}
-	
+
 	virtual bool IsButtonPressed(unsigned int _button) const {return false;}
+
+public:
+	virtual void PollSpecificEvents() {}
 
 public:
 	unsigned int m_ButtonMap[OWL::Mouse::Button::Count];

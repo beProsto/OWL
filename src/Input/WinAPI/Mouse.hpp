@@ -48,9 +48,14 @@ public:
 	virtual int GetWheelRotation() const {
 		return m_Wheel;
 	}
-	
+
 	virtual bool IsButtonPressed(unsigned int _button) const {
 		return GetKeyState(m_ButtonMap[_button]) & 0x100;;
+	}
+
+public:
+	virtual void PollSpecificEvents() {
+	
 	}
 
 public:
