@@ -36,6 +36,7 @@ public:
 	}
 
 public:
+	virtual void PollPreparation() {}
 	virtual void PollSpecificEvents() {}
 
 public:

@@ -2,6 +2,9 @@
 
 #include <OWL/Utility/Config.hpp>
 
+#include <stdint.h>
+#include <stddef.h>
+
 namespace OWL {
 
 namespace Impl {
@@ -9,7 +12,7 @@ class OWL_API Keyboard;
 }
 
 struct KeyData {
-	char Char;
+	wchar_t Char;
 	unsigned int Enum;
 };
 

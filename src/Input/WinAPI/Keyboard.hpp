@@ -117,20 +117,132 @@ public:
 
 	}
 
+	unsigned int TranslateFromVirtualKey(unsigned int _key) {
+		switch(_key) {
+			case VK_LSHIFT: return OWL::Keyboard::Key::ShiftLeft;
+			case VK_RSHIFT: return OWL::Keyboard::Key::ShiftRight;
+			case VK_LCONTROL: return OWL::Keyboard::Key::CtrlLeft;
+			case VK_RCONTROL: return OWL::Keyboard::Key::CtrlRight;
+			case VK_RETURN: return OWL::Keyboard::Key::Enter;
+			case VK_CAPITAL: return OWL::Keyboard::Key::CapsLock;
+			case VK_TAB: return OWL::Keyboard::Key::Tab;
+			case VK_OEM_7: return OWL::Keyboard::Key::Apostrophe;
+			case VK_ESCAPE: return OWL::Keyboard::Key::Escape;
+			case VK_LMENU: return OWL::Keyboard::Key::AltLeft;
+			case VK_RMENU: return OWL::Keyboard::Key::AltRight;
+			case VK_BACK: return OWL::Keyboard::Key::Backspace;
+			case VK_SPACE: return OWL::Keyboard::Key::Space;
+			case 0x31: return OWL::Keyboard::Key::Num1;
+			case 0x32: return OWL::Keyboard::Key::Num2;
+			case 0x33: return OWL::Keyboard::Key::Num3;
+			case 0x34: return OWL::Keyboard::Key::Num4;
+			case 0x35: return OWL::Keyboard::Key::Num5;
+			case 0x36: return OWL::Keyboard::Key::Num6;
+			case 0x37: return OWL::Keyboard::Key::Num7;
+			case 0x38: return OWL::Keyboard::Key::Num8;
+			case 0x39: return OWL::Keyboard::Key::Num9;
+			case 0x30: return OWL::Keyboard::Key::Num0;
+			case VK_NUMPAD1: return OWL::Keyboard::Key::NumPad1;
+			case VK_NUMPAD2: return OWL::Keyboard::Key::NumPad2;
+			case VK_NUMPAD3: return OWL::Keyboard::Key::NumPad3;
+			case VK_NUMPAD4: return OWL::Keyboard::Key::NumPad4;
+			case VK_NUMPAD5: return OWL::Keyboard::Key::NumPad5;
+			case VK_NUMPAD6: return OWL::Keyboard::Key::NumPad6;
+			case VK_NUMPAD7: return OWL::Keyboard::Key::NumPad7;
+			case VK_NUMPAD8: return OWL::Keyboard::Key::NumPad8;
+			case VK_NUMPAD9: return OWL::Keyboard::Key::NumPad9;
+			case VK_NUMPAD0: return OWL::Keyboard::Key::NumPad0;
+			case 0x51: return OWL::Keyboard::Key::Q;
+			case 0x57: return OWL::Keyboard::Key::W;
+			case 0x45: return OWL::Keyboard::Key::E;
+			case 0x52: return OWL::Keyboard::Key::R;
+			case 0x54: return OWL::Keyboard::Key::T;
+			case 0x59: return OWL::Keyboard::Key::Y;
+			case 0x55: return OWL::Keyboard::Key::U;
+			case 0x49: return OWL::Keyboard::Key::I;
+			case 0x4F: return OWL::Keyboard::Key::O;
+			case 0x50: return OWL::Keyboard::Key::P;
+			case 0x41: return OWL::Keyboard::Key::A;
+			case 0x53: return OWL::Keyboard::Key::S;
+			case 0x44: return OWL::Keyboard::Key::D;
+			case 0x46: return OWL::Keyboard::Key::F;
+			case 0x47: return OWL::Keyboard::Key::G;
+			case 0x48: return OWL::Keyboard::Key::H;
+			case 0x4A: return OWL::Keyboard::Key::J;
+			case 0x4B: return OWL::Keyboard::Key::K;
+			case 0x4C: return OWL::Keyboard::Key::L;
+			case 0x5A: return OWL::Keyboard::Key::Z;
+			case 0x58: return OWL::Keyboard::Key::X;
+			case 0x43: return OWL::Keyboard::Key::C;
+			case 0x56: return OWL::Keyboard::Key::V;
+			case 0x42: return OWL::Keyboard::Key::B;
+			case 0x4E: return OWL::Keyboard::Key::N;
+			case 0x4D: return OWL::Keyboard::Key::M;
+			case VK_OEM_COMMA: return OWL::Keyboard::Key::Comma;
+			case VK_OEM_PERIOD: return OWL::Keyboard::Key::Period;
+			case VK_OEM_2: return OWL::Keyboard::Key::Slash;
+			case VK_OEM_5: return OWL::Keyboard::Key::SlashBack;
+			case VK_OEM_1: return OWL::Keyboard::Key::Semicolon;
+			case VK_OEM_4: return OWL::Keyboard::Key::BracketOpen;
+			case VK_OEM_6: return OWL::Keyboard::Key::BracketClose;
+			case VK_OEM_MINUS: return OWL::Keyboard::Key::Minus;
+			case VK_OEM_PLUS: return OWL::Keyboard::Key::Equals;
+			case VK_LWIN: return OWL::Keyboard::Key::Super;
+			case VK_MENU: return OWL::Keyboard::Key::Menu;
+			case VK_F1: return OWL::Keyboard::Key::F1;
+			case VK_F2: return OWL::Keyboard::Key::F2;
+			case VK_F3: return OWL::Keyboard::Key::F3;
+			case VK_F4: return OWL::Keyboard::Key::F4;
+			case VK_F5: return OWL::Keyboard::Key::F5;
+			case VK_F6: return OWL::Keyboard::Key::F6;
+			case VK_F7: return OWL::Keyboard::Key::F7;
+			case VK_F8: return OWL::Keyboard::Key::F8;
+			case VK_F9: return OWL::Keyboard::Key::F9;
+			case VK_F10: return OWL::Keyboard::Key::F10;
+			case VK_F11: return OWL::Keyboard::Key::F11;
+			case VK_F12: return OWL::Keyboard::Key::F12;
+			case VK_NUMLOCK: return OWL::Keyboard::Key::NumLock;
+			case VK_MULTIPLY: return OWL::Keyboard::Key::NumPadMultiply;
+			case VK_DIVIDE: return OWL::Keyboard::Key::NumPadDivide;
+			case VK_SUBTRACT: return OWL::Keyboard::Key::NumPadMinus;
+			case VK_ADD: return OWL::Keyboard::Key::NumPadPlus;
+			case VK_SEPARATOR: return OWL::Keyboard::Key::NumPadDelete;
+			case VK_UP: return OWL::Keyboard::Key::ArrowUp;
+			case VK_DOWN: return OWL::Keyboard::Key::ArrowDown;
+			case VK_LEFT: return OWL::Keyboard::Key::ArrowLeft;
+			case VK_RIGHT: return OWL::Keyboard::Key::ArrowRight;
+			case VK_SNAPSHOT: return OWL::Keyboard::Key::PrintScreen;
+			case VK_SCROLL: return OWL::Keyboard::Key::ScrollLock;
+			case VK_PAUSE: return OWL::Keyboard::Key::Pause;
+			case VK_INSERT: return OWL::Keyboard::Key::Insert;
+			case VK_HOME: return OWL::Keyboard::Key::Home;
+			case VK_PRIOR: return OWL::Keyboard::Key::PageUp;
+			case VK_DELETE: return OWL::Keyboard::Key::Delete;
+			case VK_END: return OWL::Keyboard::Key::End;
+			case VK_NEXT: return OWL::Keyboard::Key::PageDown;
+			case VK_OEM_3: return OWL::Keyboard::Key::BackQuote;
+			default: return OWL::Keyboard::None;
+		}
+	}
+
 	virtual bool IsKeyPressed(unsigned int _key) const {
 		return GetKeyState(m_KeyMap[_key]) & 0xFFFF0000;
 	}
 
-	virtual KeyData GetKeyData() const {
-		return m_KeyData;
+public:
+	virtual void PollPreparation() {
+		m_KeyData.Char = '\0';
+		m_KeyData.Enum = OWL::Keyboard::None;
+	}
+	virtual void PollSpecificEvents() {
+		if(static_cast<WinAPIWindow*>(m_WindowImpl)->m_Event.message == WM_KEYDOWN) {
+			m_KeyData.Enum = TranslateFromVirtualKey(static_cast<WinAPIWindow*>(m_WindowImpl)->m_Event.wParam);
+		}
+		else if(static_cast<WinAPIWindow*>(m_WindowImpl)->m_Event.message == WM_CHAR) {
+			m_KeyData.Char = static_cast<WinAPIWindow*>(m_WindowImpl)->m_Event.wParam;
+		}
 	}
 
-public:
-	virtual void PollSpecificEvents() {
-	
-	}
-public:
-	KeyData m_KeyData;
 };
 }
 }

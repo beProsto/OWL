@@ -22,6 +22,7 @@ public:
 	virtual bool IsButtonPressed(unsigned int _button) const {return false;}
 
 public:
+	virtual void PollPreparation() {}
 	virtual void PollSpecificEvents() {}
 
 public:

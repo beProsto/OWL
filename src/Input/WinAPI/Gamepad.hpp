@@ -29,7 +29,7 @@ public:
 	}
 
 public:
-	virtual void PollSpecificEvents() {
+	virtual void PollPreparation() {
 		for(unsigned int i = 0; i < m_GamepadsCount; i++) {
 			// Setting up the controller's state
 			XINPUT_STATE state;
@@ -63,6 +63,9 @@ public:
 				m_Gamepads[i].m_Buttons[OWL::Gamepad::DPadRight] = (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT) != 0;
 			}
 		}
+	}
+	virtual void PollSpecificEvents() {
+
 	}
 };
 }

@@ -54,6 +54,9 @@ public:
 	}
 
 public:
+	virtual void PollPreparation() {
+		m_Wheel = 0;
+	}
 	virtual void PollSpecificEvents() {
 		if(static_cast<WinAPIWindow*>(m_WindowImpl)->m_Event.message == WM_MOUSEWHEEL) {
 			m_Wheel = GET_WHEEL_DELTA_WPARAM(static_cast<WinAPIWindow*>(m_WindowImpl)->m_Event.wParam);

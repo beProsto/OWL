@@ -148,12 +148,12 @@ int main(int argc, char** argv) {
 		
 		if(time.GetDeltaTime() > 0.0f) t += time.GetDeltaTime();
 
-		// if(window.Keyboard.GetKeyData().KeyEnum == window.Keyboard.M) {
-		// 	window.Mouse.SetVisibility(!window.Mouse.IsVisible());
-		// }
-		// if(window.Keyboard.GetKeyData().KeyEnum == window.Keyboard.F11) {
-		// 	window.SetFullScreen(!window.IsFullScreen());
-		// }
+		if(window.Keyboard.GetKeyData().Char == 'm') {
+			window.Mouse.SetVisibility(!window.Mouse.IsVisible());
+		}
+		if(window.Keyboard.GetKeyData().Enum == window.Keyboard.F11) {
+			window.SetFullScreen(!window.IsFullScreen());
+		}
 		if(window.Keyboard.IsKeyPressed(window.Keyboard.Escape)) {
 			window.Close();
 		}

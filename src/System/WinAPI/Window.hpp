@@ -25,7 +25,12 @@ inline LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 			
 		case WM_DESTROY:
 			break;
-			
+		
+		case WM_SYSKEYDOWN:
+		case WM_SYSKEYUP:
+		case WM_SYSCHAR:
+			return (LRESULT)1;
+		
 		default:
 			return DefWindowProc(hwnd, msg, wParam, lParam);
 	}
@@ -138,6 +143,10 @@ public:
 	}
 
 	virtual void PollEvents() {
+		m_MouseImpl->PollPreparation();
+		m_KeyboardImpl->PollPreparation();
+		m_GamepadsImpl->PollPreparation();
+
 		while(PeekMessage(&m_Event, 0, 0, 0, PM_REMOVE)) {
 			if(m_Event.message == WM_QUIT) {
 				Close();
@@ -147,9 +156,8 @@ public:
 
 			m_MouseImpl->PollSpecificEvents();
 			m_KeyboardImpl->PollSpecificEvents();
+			// m_GamepadsImpl->PollSpecificEvents(); // No need
 		}
-
-		m_GamepadsImpl->PollSpecificEvents();
 	}
 
 	virtual void SetPosition(const Vec2i& _position) {
