@@ -54,6 +54,13 @@ int main(int argc, char** argv) {
 			}
 		}
 
+		if(window.Keyboard.IsKeyPressed(OWL::Keyboard::Space)) {
+			window.Gamepads.SetCount(0);
+		}
+		else {
+			window.Gamepads.SetCount(1);
+		}
+
 		offset = window.Gamepads[0].GetLeftStick();
 
 		if(contextSoftware) {

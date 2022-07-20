@@ -28,7 +28,7 @@ public:
 		}
 	}
 
-	virtual void PollGamepadEvents() {
+	virtual void PollSpecificEvents() {
 		for(unsigned int i = 0; i < m_GamepadsCount; i++) {
 			// Setting up the controller's state
 			XINPUT_STATE state;

@@ -18,7 +18,7 @@ public:
 	
 	virtual const Gamepad& operator[](size_t _id) const { return m_Gamepads[_id]; }
 
-	virtual void PollGamepadEvents() {}
+	virtual void PollSpecificEvents() {}
 
 	static inline OWL::Vec2f StickNorm(float _x, float _y) {
 		float magnitude = std::sqrt(_x*_x + _y*_y);

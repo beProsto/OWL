@@ -148,7 +148,7 @@ public:
 			// PollEventsStandard(_self);
 		}
 
-		m_GamepadsImpl->PollGamepadEvents();
+		m_GamepadsImpl->PollSpecificEvents();
 	}
 
 	virtual void SetPosition(const Vec2i& _position) {
