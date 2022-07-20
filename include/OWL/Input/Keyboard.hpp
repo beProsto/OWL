@@ -8,12 +8,19 @@ namespace Impl {
 class OWL_API Keyboard;
 }
 
+struct KeyData {
+	char Char;
+	unsigned int Enum;
+};
+
 class OWL_API Keyboard {
 public:
 	Keyboard();
 	~Keyboard();
 
 	bool IsKeyPressed(unsigned int _key) const;
+
+	KeyData GetKeyData() const;
 
 public:
 	enum Key {

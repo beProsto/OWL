@@ -19,4 +19,8 @@ bool Keyboard::IsKeyPressed(unsigned int _key) const {
 	return m_Impl->IsKeyPressed(_key);
 }
 
+KeyData Keyboard::GetKeyData() const {
+	return m_Impl->GetKeyData();
+}
+
 }

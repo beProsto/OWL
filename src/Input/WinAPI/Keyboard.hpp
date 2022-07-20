@@ -121,6 +121,9 @@ public:
 		return GetKeyState(m_KeyMap[_key]) & 0xFFFF0000;
 	}
 
+	virtual KeyData GetKeyData() const {
+		return 
+	}
 };
 }
 }
