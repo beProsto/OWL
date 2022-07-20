@@ -50,7 +50,10 @@ Gamepads::~Gamepads() {
 	delete m_Impl;
 }
 
-size_t Gamepads::GetCount() const {
+void Gamepads::SetCount(unsigned int _gamepadsCount) {
+	m_Impl->SetCount(_gamepadsCount);
+}
+unsigned int Gamepads::GetCount() const {
 	return m_Impl->GetCount();
 }
 

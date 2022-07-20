@@ -60,7 +60,8 @@ public:
 	Gamepads();
 	~Gamepads();
 
-	size_t GetCount() const;
+	void SetCount(unsigned int _gamepadsCount);
+	unsigned int GetCount() const;
 
 	const Gamepad& operator[](size_t _id) const;
 

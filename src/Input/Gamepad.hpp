@@ -12,8 +12,10 @@ class OWL_API Gamepads {
 public:
 	Gamepads() {}
 	virtual ~Gamepads() {}
-
+	
+	virtual void SetCount(unsigned int _gamepadsCount) {}
 	virtual size_t GetCount() const { return m_GamepadsCount; }
+	
 	virtual const Gamepad& operator[](size_t _id) const { return m_Gamepads[_id]; }
 
 	virtual void PollGamepadEvents() {}

@@ -19,6 +19,15 @@ public:
 		delete[] m_Gamepads;
 	}
 
+	virtual void SetCount(unsigned int _gamepadsCount) {
+		if(_gamepadsCount != m_GamepadsCount) {
+			delete[] m_Gamepads;
+
+			m_GamepadsCount = _gamepadsCount;
+			m_Gamepads = new Gamepad[m_GamepadsCount]();
+		}
+	}
+
 	virtual void PollGamepadEvents() {
 		for(unsigned int i = 0; i < m_GamepadsCount; i++) {
 			// Setting up the controller's state
