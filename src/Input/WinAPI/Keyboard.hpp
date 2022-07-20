@@ -122,8 +122,15 @@ public:
 	}
 
 	virtual KeyData GetKeyData() const {
-		return 
+		return m_KeyData;
 	}
+
+public:
+	virtual void PollSpecificEvents() {
+	
+	}
+public:
+	KeyData m_KeyData;
 };
 }
 }
