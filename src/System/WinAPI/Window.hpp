@@ -148,6 +148,7 @@ public:
 			// PollEventsStandard(_self);
 		}
 
+		m_KeyboardImpl->PollSpecificEvents();
 		m_GamepadsImpl->PollSpecificEvents();
 	}
 
