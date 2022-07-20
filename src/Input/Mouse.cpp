@@ -32,6 +32,7 @@ Vec2i Mouse::GetPosition() const {
 int Mouse::GetWheelRotation() const {
 	return m_Impl->GetWheelRotation();
 }
+
 bool Mouse::IsButtonPressed(unsigned int _button) const {
 	return m_Impl->IsButtonPressed(_button);
 }
