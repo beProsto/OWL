@@ -24,12 +24,13 @@ int main(int argc, char** argv) {
 			window.Mouse.GetPosition().x, 
 			window.Mouse.GetPosition().y
 		);
-		printf("L%d M%d R%d B%d F%d\n",
+		printf("L%d M%d R%d B%d F%d Wh%d\n",
 			window.Mouse.IsButtonPressed(OWL::Mouse::Left),
 			window.Mouse.IsButtonPressed(OWL::Mouse::Middle),
 			window.Mouse.IsButtonPressed(OWL::Mouse::Right),
 			window.Mouse.IsButtonPressed(OWL::Mouse::Backward),
-			window.Mouse.IsButtonPressed(OWL::Mouse::Forward)
+			window.Mouse.IsButtonPressed(OWL::Mouse::Forward),
+			window.Mouse.GetWheelRotation()
 		);
 
 		if(window.Mouse.IsButtonPressed(OWL::Mouse::Left)) {
