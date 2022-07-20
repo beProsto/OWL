@@ -148,7 +148,7 @@ int main(int argc, char** argv) {
 		
 		if(time.GetDeltaTime() > 0.0f) t += time.GetDeltaTime();
 
-		if(window.Keyboard.GetKeyData().Char == 'm') {
+		if(window.Keyboard.GetKeyData().Enum == window.Keyboard.M) {
 			window.Mouse.SetVisibility(!window.Mouse.IsVisible());
 		}
 		if(window.Keyboard.GetKeyData().Enum == window.Keyboard.F11) {

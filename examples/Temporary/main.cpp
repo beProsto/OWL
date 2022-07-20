@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
 	bool contextSoftware = true;
 	window.SetContext(soft);
 
-	OWL::FPSLimiter fps(10);
+	OWL::FPSLimiter fps(60);
 
 	OWL::Vec2f offset;
 
@@ -36,7 +36,7 @@ int main(int argc, char** argv) {
 			window.Mouse.SetVisibility(!window.Mouse.IsVisible());
 		}
 
-		if(window.Mouse.IsButtonPressed(OWL::Mouse::Middle) || window.Keyboard.IsKeyPressed(OWL::Keyboard::F11)) {
+		if(window.Mouse.IsButtonPressed(OWL::Mouse::Middle) || window.Keyboard.GetKeyData().Enum == OWL::Keyboard::F11) {
 			window.SetFullScreen(!window.IsFullScreen());
 		}
 
