@@ -2,17 +2,9 @@
 
 ## OWL (Open Windowing Library)
 
-OWL is intended to be a simple, multiplatform windowing library, based on Xlib, WinAPI and (maybe) Cocoa.
+OWL is intended to be a simple multiplatform windowing library based on Wayland, Xlib and WinAPI (eventually with Cocoa support in the future).
 
-OWL will of course support Direct3D, OpenGL and Vulkan. :D
-
-*Supports:*
-- Xlib
-	- Software graphics
-	- OpenGL graphics
-- WinAPI
-	- Software graphics
-	- OpenGL graphics
+The plan is for OWL to support Software, OpenGL and Vulkan graphics.
 
 To build the library use either `cmake` or `make`:
 ```
