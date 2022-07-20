@@ -145,11 +145,10 @@ public:
 			TranslateMessage(&m_Event);
 			DispatchMessage(&m_Event);
 
-			// PollEventsStandard(_self);
+			m_MouseImpl->PollSpecificEvents();
+			m_KeyboardImpl->PollSpecificEvents();
 		}
 
-		m_MouseImpl->PollSpecificEvents();
-		m_KeyboardImpl->PollSpecificEvents();
 		m_GamepadsImpl->PollSpecificEvents();
 	}
 
