@@ -22,6 +22,7 @@ public:
 	Vec2i GetPosition() const;
 
 	int GetWheelRotation() const;
+	
 	bool IsButtonPressed(unsigned int _button) const;
 
 public:
