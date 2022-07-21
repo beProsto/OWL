@@ -55,14 +55,16 @@ int main(int argc, char** argv) {
 			}
 		}
 
+
 		if(window.Keyboard.IsKeyPressed(OWL::Keyboard::Space)) {
 			window.Gamepads.SetCount(0);
+			offset = (((OWL::Vec2f)window.Mouse.GetPosition()) / ((OWL::Vec2f)window.GetSize()) - OWL::Vec2f(0.5f)) * OWL::Vec2f(2.0f, -2.0f);
 		}
 		else {
 			window.Gamepads.SetCount(1);
+			offset = window.Gamepads[0].GetLeftStick();
 		}
 
-		offset = window.Gamepads[0].GetLeftStick();
 
 		if(contextSoftware) {
 			soft.SetSize(window.GetSize());
