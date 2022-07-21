@@ -1,0 +1,38 @@
+#include <OWL/Graphics/SoftwareContext.hpp>
+
+#include "SoftwareContext.hpp"
+
+namespace OWL {
+
+SoftwareContext::SoftwareContext() {
+	#if defined OWL_SYSTEM_WINDOWS
+		m_Impl = new Impl::WinAPISoftwareContext;
+	#elif defined OWL_SYSTEM_LINUX
+
+	#endif
+}
+SoftwareContext::~SoftwareContext() {
+	delete m_Impl;
+}
+
+
+void SoftwareContext::SetSize(Vec2ui _newSize) {
+	static_cast<Impl::SoftwareContext*>(m_Impl)->SetSize(_newSize);
+}
+Vec2ui SoftwareContext::GetSize() const {
+	return static_cast<Impl::SoftwareContext*>(m_Impl)->GetSize();
+}
+
+void SoftwareContext::Clear(const Vec4ub& _color) {
+	static_cast<Impl::SoftwareContext*>(m_Impl)->Clear(_color);
+}
+
+void SoftwareContext::BlitToScreen() {
+	static_cast<Impl::SoftwareContext*>(m_Impl)->BlitToScreen();
+}
+
+Vec4ub* SoftwareContext::GetPixelData() {
+	return static_cast<Impl::SoftwareContext*>(m_Impl)->GetPixelData();
+}
+
+}

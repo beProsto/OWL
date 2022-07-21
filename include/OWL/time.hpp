@@ -1,47 +1,42 @@
 #pragma once
 
-#include "config.hpp"
-
-#include <chrono>
-#include <thread>
-#include <time.h>
-
-#ifndef OWL_SYSTEM_WINDOWS
-#include <sys/time.h>
-#endif
+#include <OWL/Utility/Config.hpp>
 
 namespace OWL {
-inline void Sleep(unsigned int _milliseconds) {
-	std::this_thread::sleep_for(std::chrono::milliseconds(_milliseconds));
+
+void OWL_API Sleep(unsigned int _milliseconds);
+
+namespace Impl {
+class OWL_API Timer;
 }
 
-class OWL_LIB_EXPORT FPSLimiter {
+class OWL_API FPSLimiter {
 public:
 	FPSLimiter(unsigned int _desiredFPS = 30);
 	~FPSLimiter();
 
-	FPSLimiter& SetDesiredFPS(unsigned int _desiredFPS = 30);
+	void SetDesiredFPS(unsigned int _desiredFPS = 30);
 	unsigned int GetDesiredFPS() const;
-	FPSLimiter& Start();
-	FPSLimiter& End();
+	void Start();
+	void End();
 
 private:
-	unsigned int m_StartTicks;
+	Impl::Timer* m_Impl;
 	unsigned int m_FPS;
 };
 
-class OWL_LIB_EXPORT Timer {
+class OWL_API Timer {
 public:
 	Timer();
 	~Timer();
 
-	Timer& Start();
-	Timer& End();
+	void Start();
+	void End();
 
 	float GetDeltaTime() const;
 
 private:
-	std::chrono::high_resolution_clock::time_point m_S, m_E;
+	Impl::Timer* m_Impl;
 	float m_DeltaTime;
 };
 

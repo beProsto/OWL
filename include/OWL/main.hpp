@@ -1,57 +1,43 @@
 #pragma once
 
-#include "config.hpp"
-#include "OWL.hpp"
+#include <OWL/Utility/Config.hpp>
+#include <OWL/System/Info.hpp>
+#include <OWL/OWL.hpp>
 
-int Main(const std::vector<std::string>&);
+/// Define the main function ///
+int OWLMain(int, char**);
 
+/// Call the main function ///
 #if defined OWL_SYSTEM_WINDOWS
-
-#include <shellapi.h>
-
 /* WinAPI */
-WinAPI_Data* WinAPI_Data::m_Instance = nullptr;
-
+#include <OWL/OS/Windows.hpp>
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
-	WinAPI_Data* wdata = WinAPI_Data::get();
-	wdata->hInstance = hInstance;
-	wdata->nCmdShow = nCmdShow;
+	OWL::OSInfo::Get()->InstanceHandle = hInstance;
 
-	std::vector<std::string> passed;
-	
-	{ /* Scope, so that variables created here will be freed when they are not needed */
-		int cnt = 0;
-		wchar_t** cmdl = CommandLineToArgvW(GetCommandLineW(), &cnt);
-		if(cnt > 0) {
-			unsigned int count = cnt;
-			for(unsigned int i = 0; i < count; i++) {
-				int strsize = WideCharToMultiByte(CP_UTF8, 0, cmdl[i], -1, 0, 0, NULL, NULL); //CP_ACP
-				char* strstr = new char[strsize];
-				WideCharToMultiByte(CP_UTF8, 0, cmdl[i], -1, strstr , strsize, NULL, NULL);
-				passed.push_back(strstr);
-				delete[] strstr;
-			}
-		}
-		LocalFree(cmdl);
-	}
+	AllocConsole();
+	FILE *fpstdin = stdin, *fpstdout = stdout, *fpstderr = stderr;
+    freopen_s(&fpstdin,  "CONIN$",  "r", stdin);
+    freopen_s(&fpstdout, "CONOUT$", "w", stdout);
+    freopen_s(&fpstderr, "CONOUT$", "w", stderr);
 
-	return Main(passed);
-	/* No need for cleaning after allocating the WinAPI_Data::get(), as the kernel will do it itself. */
+	return OWLMain(__argc, __argv);
 }
-
 
 #elif defined OWL_SYSTEM_LINUX
 /* X11 */
+#include <OWL/OS/Linux.hpp>
 int main(int argc, char** argv) {
-	std::vector<std::string> passed;
-	for(unsigned int i = 0; i < argc; i++) {
-		passed.push_back(argv[i]);
-	}
-	return Main(passed);
+	return OWLMain(argc, argv);
 }
 
 #else
-
+/* Other */
 #error OWL: Unsupported platform! (Only linux and windows supported currently!)
 
 #endif
+
+/// When using main, user refers to OWLMain /// 
+#if defined main
+	#undef main
+#endif
+#define main OWLMain
