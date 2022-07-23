@@ -43,7 +43,7 @@ public:
 				m_Gamepads[i].m_LeftTrigger = (float)state.Gamepad.bLeftTrigger / 255;
 				m_Gamepads[i].m_RightTrigger = (float)state.Gamepad.bRightTrigger / 255;
 
-				m_Gamepads[i].m_Buttons[OWL::Gamepad::A] |= (state.Gamepad.wButtons & XINPUT_GAMEPAD_A) != 0;
+				m_Gamepads[i].m_Buttons[OWL::Gamepad::A] = (state.Gamepad.wButtons & XINPUT_GAMEPAD_A) != 0;
 				m_Gamepads[i].m_Buttons[OWL::Gamepad::B] = (state.Gamepad.wButtons & XINPUT_GAMEPAD_B) != 0;
 				m_Gamepads[i].m_Buttons[OWL::Gamepad::X] = (state.Gamepad.wButtons & XINPUT_GAMEPAD_X) != 0;
 				m_Gamepads[i].m_Buttons[OWL::Gamepad::Y] = (state.Gamepad.wButtons & XINPUT_GAMEPAD_Y) != 0;
