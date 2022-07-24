@@ -1,8 +1,8 @@
-# Main()
-A function that replaces the standard `int main(int, char**)`.
-To make it on your own, you just have to do:
+# main()
+It's the starting point of the application.
+To use it, you just have to do:
 ```cpp
-int Main(const std::vector<std::string>& _args) { /* _args can be changed to any other name :D */
+int main(int argc, char** argv) { /* _args can be changed to any other name :D */
     return 0;
 }
 ```
