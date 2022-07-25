@@ -102,11 +102,11 @@ public:
 	};
 };
 
-typedef Vec2<int> Vec2i;
-typedef Vec2<unsigned int> Vec2ui;
-typedef Vec2<char> Vec2b;
-typedef Vec2<unsigned char> Vec2ub;
-typedef Vec2<float> Vec2f;
-typedef Vec2<double> Vec2d;
+using Vec2i  = Vec2<int>;
+using Vec2ui = Vec2<unsigned int>;
+using Vec2b  = Vec2<char>;
+using Vec2ub = Vec2<unsigned char>;
+using Vec2f  = Vec2<float>;
+using Vec2d  = Vec2<double>;
 
 }

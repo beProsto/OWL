@@ -138,11 +138,11 @@ public:
 	};
 };
 
-typedef Vec4<int> Vec4i;
-typedef Vec4<unsigned int> Vec4ui;
-typedef Vec4<char> Vec4b;
-typedef Vec4<unsigned char> Vec4ub;
-typedef Vec4<float> Vec4f;
-typedef Vec4<double> Vec4d;
+using Vec4i  = Vec4<int>;
+using Vec4ui = Vec4<unsigned int>;
+using Vec4b  = Vec4<char>;
+using Vec4ub = Vec4<unsigned char>;
+using Vec4f  = Vec4<float>;
+using Vec4d  = Vec4<double>;
 
 }

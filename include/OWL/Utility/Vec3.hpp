@@ -120,11 +120,11 @@ public:
 	};
 };
 
-typedef Vec3<int> Vec3i;
-typedef Vec3<unsigned int> Vec3ui;
-typedef Vec3<char> Vec3b;
-typedef Vec3<unsigned char> Vec3ub;
-typedef Vec3<float> Vec3f;
-typedef Vec3<double> Vec3d;
+using Vec3i  = Vec3<int>;
+using Vec3ui = Vec3<unsigned int>;
+using Vec3b  = Vec3<char>;
+using Vec3ub = Vec3<unsigned char>;
+using Vec3f  = Vec3<float>;
+using Vec3d  = Vec3<double>;
 
 }
