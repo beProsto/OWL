@@ -59,7 +59,7 @@ int main(int argc, char** argv) {
 		if(window.Keyboard.GetKeyData().Enum == OWL::Keyboard::F11) {
 			window.SetFullScreen(!window.IsFullScreen());
 		}
-		// If the user presses Escape, we cloase the app.
+		// If the user presses Escape, we close the app.
 		if(window.Keyboard.IsKeyPressed(OWL::Keyboard::Escape)) {
 			window.Close();
 		}
