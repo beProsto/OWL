@@ -1,7 +1,7 @@
 # KeyEnums
-The `Key` enums are a part of the `KeyboardEvent` class - they are used by the `IsKeyPressed()` function to check whether or not is the key behind a certain enum pressed, and is used in the `KeyData` structure, as `KeyEnum` value. The structure is returned by the `GetKeyData()` function.
+The `Key` enums are a part of the `Keyboard` class - they are used by the `IsKeyPressed()` function to check whether or not is the key behind a certain enum pressed, and are used in the `KeyData` structure, as the `Enum` value. The structure is returned by the `GetKeyData()` function.
 
-These are all the keys in it (unless i'm lazy and didn't update the list):
+These are all the keys in it:
 - `ShiftLeft`
 - `ShiftRight`
 - `CtrlLeft`
@@ -107,6 +107,6 @@ These are all the keys in it (unless i'm lazy and didn't update the list):
 
 __Example of usage:__
 ```cpp
-std::cout << "Apostrophe key's state: " << window.Keyboard.IsKeyPressed(window.Keyboard.Apostrophe) << "\n";
-std::cout << "Is B being typeed in: " << ((window.Keyboard.GetKeyData().KeyEnum == window.Keyboard.B) ? "yes" : "no") << "\n"; // We should see an pattern of interpolating "yes"'s and "no"'s if the button is pressed.
+std::cout << "Apostrophe key's state: " << window.Keyboard.IsKeyPressed(OWL::Keyboard::Apostrophe) << "\n";
+std::cout << "Is B being typeed in: " << ((window.Keyboard.GetKeyData().Enum == OWL::Keyboard::B) ? "yes" : "no") << "\n"; // We should see an pattern of interpolating "yes"'s and "no"'s if the button is pressed.
 ```
