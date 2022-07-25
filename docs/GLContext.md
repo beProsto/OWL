@@ -1,7 +1,6 @@
 # GLContext
 It's a simple class letting you use OpenGL (GPU) graphics in your project.
-It has 2 functions:
-- `GetType()` - It's a function inherited from `Context` class, that returns an `unsigned int`, which represents this context's type (returns `ContextType_OpenGL` enum's value).
+It has 1 function:
 - `SwapBuffers()` - It's a function that swaps main OpenGL frame buffer with the one used by our window.
 
 __Example of usage:__
