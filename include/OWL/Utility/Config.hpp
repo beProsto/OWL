@@ -1,7 +1,11 @@
 #pragma once
 
 // Decide which operating system this is:
-#if defined _WIN32
+#if defined __EMSCRIPTEN__
+#define OWL_SYSTEM_EMSCRIPTEN
+#elif defined __wasm__ || defined __wasm32__ || defined __wasm64__
+#define OWL_SYSTEM_WASM
+#elif defined _WIN32
 #define OWL_SYSTEM_WINDOWS
 #elif defined __linux__
 #define OWL_SYSTEM_LINUX
@@ -27,4 +31,4 @@
 #endif
 
 // If any other libs would like to know if OWL is used:
-#define OWL_
+#define OWL OWL
