@@ -14,7 +14,9 @@ file(GLOB_RECURSE lib_srcs
 	"src/*.cpp"
 )
 
-if(WIN32)
+if(EMSCRIPTEN)
+
+elseif(WIN32)
 	link_libraries(
 		opengl32
 		glu32
@@ -25,7 +27,7 @@ if(WIN32)
 		shell32
 		xinput
 	)
-else()
+elseif(UNIX)
 	link_libraries(
 		X11
 		GL

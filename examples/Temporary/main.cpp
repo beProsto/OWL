@@ -3,6 +3,11 @@
 #include <OWL/Time.hpp>
 #include <OWL/OpenGL.hpp>
 
+#if defined OWL_SYSTEM_EMSCRIPTEN
+	#include <GLES2/gl2.h>
+	#include <emscripten.h>
+#endif
+
 int main(int argc, char** argv) {
 	OWL::Window window;
 	OWL::SoftwareContext soft;
@@ -78,15 +83,16 @@ int main(int argc, char** argv) {
 			glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 
-			glBegin(GL_TRIANGLES);
-				glColor3f(0.9f, 0.3f, 0.4f);
-				glVertex2f(offset.x + -0.5f, offset.y +  -0.5f);
-				glColor3f(0.3f, 0.9f, 0.4f);
-				glVertex2f(offset.x +  0.0f, offset.y +   0.5f);
-				glColor3f(0.3f, 0.4f, 0.9f);
-				glVertex2f(offset.x +  0.5f, offset.y +  -0.5f);
-			glEnd();
-
+			#if !defined OWL_SYSTEM_EMSCRIPTEN
+				glBegin(GL_TRIANGLES);
+					glColor3f(0.9f, 0.3f, 0.4f);
+					glVertex2f(offset.x + -0.5f, offset.y +  -0.5f);
+					glColor3f(0.3f, 0.9f, 0.4f);
+					glVertex2f(offset.x +  0.0f, offset.y +   0.5f);
+					glColor3f(0.3f, 0.4f, 0.9f);
+					glVertex2f(offset.x +  0.5f, offset.y +  -0.5f);
+				glEnd();
+			#endif
 			gl.SwapBuffers();
 		}
 

@@ -2,6 +2,8 @@
 
 #include "Gamepad.hpp"
 
+#include <string.h>
+
 namespace OWL {
 
 Gamepad::Gamepad() {
