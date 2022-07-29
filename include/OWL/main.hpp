@@ -8,7 +8,15 @@
 int OWLMain(int, char**);
 
 /// Call the main function ///
-#if defined OWL_SYSTEM_WINDOWS
+#if defined OWL_SYSTEM_EMSCRIPTEN
+/* Emscripten */
+#include <OWL/OS/Emscripten.hpp>
+int main() {
+	char** args = new char*[0];
+	return OWLMain(0, args);
+}
+
+#elif defined OWL_SYSTEM_WINDOWS
 /* WinAPI */
 #include <OWL/OS/Windows.hpp>
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
@@ -32,7 +40,7 @@ int main(int argc, char** argv) {
 
 #else
 /* Other */
-// #error OWL: Unsupported platform! (Only linux and windows supported currently!)
+#error OWL: Unsupported platform! (Only linux and windows supported currently!)
 
 #endif
 

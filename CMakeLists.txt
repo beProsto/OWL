@@ -4,6 +4,9 @@ project(OWL VERSION 0.2022.1)
 # I'm sorry but it has to be this way 😔
 set(CMAKE_BUILD_TYPE Release)
 
+# include basic cmake project config
+include(CMakeUtility.txt)
+
 # include_directories and link_libraries work on all targets defined BELOW them
 include_directories(include)
 
@@ -14,9 +17,11 @@ file(GLOB_RECURSE lib_srcs
 	"src/*.cpp"
 )
 
-if(EMSCRIPTEN)
+if(OWL_SYSTEM_EMSCRIPTEN)
+	# WASM doesn't have a concept of a dynamic library
+	set(LIBTYPE STATIC)
 
-elseif(WIN32)
+elseif(OWL_SYSTEM_WINDOWS)
 	link_libraries(
 		opengl32
 		glu32
@@ -27,46 +32,34 @@ elseif(WIN32)
 		shell32
 		xinput
 	)
-elseif(UNIX)
+
+elseif(OWL_SYSTEM_LINUX)
 	link_libraries(
 		X11
 		GL
 		GLX
 	)
+
 endif()
 
+# Depending on the library type, we need to use a correct definition
 if(LIBTYPE STREQUAL "STATIC")
 	add_library(OWL STATIC ${lib_srcs})
 	target_compile_definitions(OWL PRIVATE OWL_BUILD_STATIC)
+
 else()
 	add_library(OWL SHARED ${lib_srcs})
 	target_compile_definitions(OWL PRIVATE OWL_BUILD_SHARED)
-endif()
 
-if(WIN32)
-	set(EXE_TYPE WIN32)
-else()
-	set(EXE_TYPE )
 endif()
-
-function(add_example name)
-	file(GLOB_RECURSE ${name}_srcs
-		"examples/${name}/*.hpp"
-		"examples/${name}/*.cpp"
-	)
-	add_executable(${name} ${EXE_TYPE} ${${name}_srcs})
-	if(LIBTYPE STREQUAL "STATIC")
-		target_compile_definitions(${name} PRIVATE OWL_BUILD_STATIC)
-	endif()
-endfunction()
 
 # If the user didn't turn building examples off, we create them, linking the new OWL library to them:
 if(NOT BUILD_EXAMPLES STREQUAL "NO")
 	link_libraries(OWL)
 	
-	add_example(GUIApplication)
-	add_example(ModernOpenGL)
-	add_example(SimpleWindow)
-	add_example(GamepadTest)
-	add_example(Temporary)
+	OWL_AddExample(GUIApplication)
+	OWL_AddExample(ModernOpenGL)
+	OWL_AddExample(SimpleWindow)
+	OWL_AddExample(GamepadTest)
+	OWL_AddExample(Temporary)
 endif()
