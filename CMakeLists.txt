@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0.0)
 # NOT A FULL RELEASE YET
-project(OWL VERSION 0.2022.1)
+project(OWL VERSION 0.2022.2)
 # I'm sorry but it has to be this way 😔
 set(CMAKE_BUILD_TYPE Release)
 
