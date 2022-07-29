@@ -3,11 +3,6 @@
 #include <OWL/Time.hpp>
 #include <OWL/OpenGL.hpp>
 
-#if defined OWL_SYSTEM_EMSCRIPTEN
-	#include <GLES2/gl2.h>
-	#include <emscripten.h>
-#endif
-
 int main(int argc, char** argv) {
 	OWL::Window window;
 	OWL::SoftwareContext soft;

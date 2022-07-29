@@ -6,12 +6,6 @@
 #include <cmath>
 #include <iostream>
 
-#if defined OWL_SYSTEM_EMSCRIPTEN
-	#include <GLES2/gl2.h>
-	#include <emscripten.h>
-#endif
-
-
 #define GL_FUNC_LOAD(rettype, name, ...) \
 	typedef rettype(*name##F)(__VA_ARGS__); \
 	name##F name = (name##F)openGLLoadFunc(#name);
