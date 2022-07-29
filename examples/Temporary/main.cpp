@@ -4,6 +4,8 @@
 #include <OWL/OpenGL.hpp>
 
 int main(int argc, char** argv) {
+	printf("Hello, Temporary!\n");
+
 	OWL::Window window;
 	OWL::SoftwareContext soft;
 	// OWL::SoftwareContext soft2;
