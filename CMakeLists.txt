@@ -20,6 +20,9 @@ file(GLOB_RECURSE lib_srcs
 if(OWL_SYSTEM_EMSCRIPTEN)
 	# WASM doesn't have a concept of a dynamic library
 	set(LIBTYPE STATIC)
+	link_libraries(
+		SDL2
+	)
 
 elseif(OWL_SYSTEM_WINDOWS)
 	link_libraries(

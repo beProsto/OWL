@@ -3,97 +3,89 @@
 #include <OWL/Time.hpp>
 #include <OWL/OpenGL.hpp>
 
+#include <SDL2/SDL.h>
+#include <emscripten/html5.h>
+
+class AppBoiler {
+public:
+	AppBoiler() {
+
+	}
+	virtual ~AppBoiler() {
+
+	}
+
+	virtual void Start() {
+
+	}
+	virtual bool Update(double time) {
+		return true;
+	}
+
+protected:
+	virtual void Init() {
+		SDL_Init(SDL_INIT_VIDEO);
+
+		Start();
+
+		#ifdef OWL_SYSTEM_EMSCRIPTEN
+			emscripten_set_main_loop([]() { AppBoiler::m_App->Update(0.0); }, 60, 1);
+		#else
+			while(Update());
+		#endif
+	}
+
+	static AppBoiler* m_App;
+};
+AppBoiler* AppBoiler::m_App = nullptr;
+
+class App: public AppBoiler {
+public:
+	App() {
+		AppBoiler::m_App = this;
+		Init();
+	}
+	virtual ~App() {
+
+	}
+
+	virtual void Start() {
+		SDL_CreateWindowAndRenderer(width, height, 0, &window, &renderer);
+
+		SDL_SetRenderDrawColor(renderer, /* RGBA: green */ 0x00, 0x80, 0x00, 0xFF);
+		SDL_Rect rect = {.x = 10, .y = 10, .w = 50, .h = 50};
+		SDL_RenderFillRect(renderer, &rect);
+		SDL_RenderPresent(renderer);
+	}
+	virtual bool Update(double time) {
+		SDL_Event event;
+		SDL_PollEvent(&event);
+		if (event.type == SDL_QUIT) {
+			return false;
+		}
+		if (movex < width) 
+			movex += 1;
+		else movex = 0;
+
+		SDL_Rect rect = {.x = movex, .y = 0, .w = 50, .h = 50};
+		SDL_RenderFillRect(renderer, &rect);
+		SDL_RenderPresent(renderer);
+
+		return true;
+	}
+
+protected:
+	int width = 100;
+	int height = 100;
+	int movex;
+	SDL_Window *window;
+	SDL_Renderer *renderer;
+};
+
 int main(int argc, char** argv) {
 	printf("Hello, Temporary!\n");
 
-	OWL::Window window;
-	OWL::SoftwareContext soft;
-	// OWL::SoftwareContext soft2;
-	OWL::OpenGLContext gl;
+	App app;
 
-	bool contextSoftware = true;
-	window.SetContext(soft);
-
-	OWL::FPSLimiter fps(60);
-
-	OWL::Vec2f offset;
-
-	while(window.IsRunning()) {
-		window.PollEvents();
-		fps.Start();
-
-		printf("X%d Y%d!\n", 
-			window.Mouse.GetPosition().x, 
-			window.Mouse.GetPosition().y
-		);
-		printf("L%d M%d R%d B%d F%d Wh%d\n",
-			window.Mouse.IsButtonPressed(OWL::Mouse::Left),
-			window.Mouse.IsButtonPressed(OWL::Mouse::Middle),
-			window.Mouse.IsButtonPressed(OWL::Mouse::Right),
-			window.Mouse.IsButtonPressed(OWL::Mouse::Backward),
-			window.Mouse.IsButtonPressed(OWL::Mouse::Forward),
-			window.Mouse.GetWheelRotation()
-		);
-
-		if(window.Mouse.IsButtonPressed(OWL::Mouse::Left)) {
-			window.Mouse.SetVisibility(!window.Mouse.IsVisible());
-		}
-
-		if(window.Mouse.IsButtonPressed(OWL::Mouse::Middle) || window.Keyboard.GetKeyData().Enum == OWL::Keyboard::F11) {
-			window.SetFullScreen(!window.IsFullScreen());
-		}
-
-		if(window.Keyboard.IsKeyPressed(OWL::Keyboard::Escape)) {
-			window.Close();
-		}
-
-		if(window.Mouse.IsButtonPressed(OWL::Mouse::Right)) {
-			contextSoftware = !contextSoftware;
-			if(contextSoftware) {
-				window.SetContext(soft);
-			}
-			else {
-				window.SetContext(gl);
-			}
-		}
-
-
-		if(window.Keyboard.IsKeyPressed(OWL::Keyboard::Space)) {
-			window.Gamepads.SetCount(0);
-			offset = (((OWL::Vec2f)window.Mouse.GetPosition()) / ((OWL::Vec2f)window.GetSize()) - OWL::Vec2f(0.5f)) * OWL::Vec2f(2.0f, -2.0f);
-		}
-		else {
-			window.Gamepads.SetCount(1);
-			offset = window.Gamepads[0].GetLeftStick();
-		}
-
-
-		if(contextSoftware) {
-			soft.SetSize(window.GetSize());
-
-			soft.Clear(OWL::Vec4ub(0, 255, 0, 255));
-			soft.BlitToScreen();
-		}
-		else {
-			glViewport(0,0,window.GetSize().x,window.GetSize().y);
-
-			glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
-
-			#if !defined OWL_SYSTEM_EMSCRIPTEN
-				glBegin(GL_TRIANGLES);
-					glColor3f(0.9f, 0.3f, 0.4f);
-					glVertex2f(offset.x + -0.5f, offset.y +  -0.5f);
-					glColor3f(0.3f, 0.9f, 0.4f);
-					glVertex2f(offset.x +  0.0f, offset.y +   0.5f);
-					glColor3f(0.3f, 0.4f, 0.9f);
-					glVertex2f(offset.x +  0.5f, offset.y +  -0.5f);
-				glEnd();
-			#endif
-			gl.SwapBuffers();
-		}
-
-		fps.End();
-	}
 	return 0;
 }
