@@ -45,7 +45,7 @@ public:
 		return Vec2<int>(p.x, p.y);
 	}
 
-	virtual int GetWheelRotation() const {
+	virtual int getWheelRotation() const {
 		return m_wheel;
 	}
 

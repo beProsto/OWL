@@ -21,7 +21,7 @@ public:
 	void setPosition(const Vec2i& _position);
 	Vec2i getPosition() const;
 
-	int GetWheelRotation() const;
+	int getWheelRotation() const;
 	
 	bool isButtonPressed(unsigned int _button) const;
 

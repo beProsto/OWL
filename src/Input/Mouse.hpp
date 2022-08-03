@@ -17,7 +17,7 @@ public:
 	virtual void setPosition(const Vec2i& _position) {}
 	virtual Vec2i getPosition() const {return Vec2i{};}
 
-	virtual int GetWheelRotation() const {return 0;}
+	virtual int getWheelRotation() const {return 0;}
 
 	virtual bool isButtonPressed(unsigned int _button) const {return false;}
 
