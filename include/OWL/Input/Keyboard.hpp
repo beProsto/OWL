@@ -12,8 +12,8 @@ class OWL_API Keyboard;
 }
 
 struct KeyData {
-	wchar_t Char;
-	unsigned int Enum;
+	wchar_t keyChar;
+	unsigned int keyEnum;
 };
 
 class OWL_API Keyboard {
@@ -21,9 +21,9 @@ public:
 	Keyboard();
 	~Keyboard();
 
-	bool IsKeyPressed(unsigned int _key) const;
+	bool isKeyPressed(unsigned int _key) const;
 
-	KeyData GetKeyData() const;
+	KeyData getKeyData() const;
 
 public:
 	enum Key {

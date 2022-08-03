@@ -116,10 +116,10 @@ int main(int argc, char** args) {
 		eventDelay.start();
 		window.pollEvents();
 
-		if(window.keyboard.IsKeyPressed(window.keyboard.Escape)) {
+		if(window.keyboard.isKeyPressed(window.keyboard.Escape)) {
 			window.close();
 		}
-		if(window.keyboard.GetKeyData().Enum == window.keyboard.F11) {
+		if(window.keyboard.getKeyData().keyEnum == window.keyboard.F11) {
 			window.setFullScreen(!window.isFullScreen());
 		}
 

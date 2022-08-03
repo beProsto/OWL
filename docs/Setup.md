@@ -56,11 +56,11 @@ int main(int argc, char** argv) {
 		fps.start();
 
 		// If the user presses F11, we toggle fullscreen.
-		if(window.keyboard.GetKeyData().Enum == OWL::keyboard::F11) {
+		if(window.keyboard.getKeyData().enum == OWL::keyboard::F11) {
 			window.setFullScreen(!window.isFullScreen());
 		}
 		// If the user presses Escape, we close the app.
-		if(window.keyboard.IsKeyPressed(OWL::keyboard::Escape)) {
+		if(window.keyboard.isKeyPressed(OWL::keyboard::Escape)) {
 			window.close();
 		}
 

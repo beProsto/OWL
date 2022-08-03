@@ -1,4 +1,4 @@
-# mouse
+# Mouse
 `mouse` is an element of `Window`.
 It's used for handling mouse events.
 

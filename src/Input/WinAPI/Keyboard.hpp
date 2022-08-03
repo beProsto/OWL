@@ -225,21 +225,21 @@ public:
 		}
 	}
 
-	virtual bool IsKeyPressed(unsigned int _key) const {
+	virtual bool isKeyPressed(unsigned int _key) const {
 		return GetKeyState(m_keyMap[_key]) & 0xFFFF0000;
 	}
 
 public:
 	virtual void pollPreparation() {
-		m_keyData.Char = '\0';
-		m_keyData.Enum = OWL::keyboard::None;
+		m_keyData.char = '\0';
+		m_keyData.enum = OWL::keyboard::None;
 	}
 	virtual void pollSpecificEvents() {
 		if(static_cast<WinAPIWindow*>(m_windowImpl)->m_Event.message == WM_KEYDOWN) {
-			m_keyData.Enum = TranslateFromVirtualKey(static_cast<WinAPIWindow*>(m_windowImpl)->m_Event.wParam);
+			m_keyData.enum = TranslateFromVirtualKey(static_cast<WinAPIWindow*>(m_windowImpl)->m_Event.wParam);
 		}
 		else if(static_cast<WinAPIWindow*>(m_windowImpl)->m_Event.message == WM_CHAR) {
-			m_keyData.Char = static_cast<WinAPIWindow*>(m_windowImpl)->m_Event.wParam;
+			m_keyData.char = static_cast<WinAPIWindow*>(m_windowImpl)->m_Event.wParam;
 		}
 	}
 

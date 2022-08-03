@@ -15,12 +15,12 @@ Keyboard::~Keyboard() {
 	delete m_impl;
 }
 
-bool Keyboard::IsKeyPressed(unsigned int _key) const {
-	return m_impl->IsKeyPressed(_key);
+bool Keyboard::isKeyPressed(unsigned int _key) const {
+	return m_impl->isKeyPressed(_key);
 }
 
-KeyData Keyboard::GetKeyData() const {
-	return m_impl->GetKeyData();
+KeyData Keyboard::getKeyData() const {
+	return m_impl->getKeyData();
 }
 
 }

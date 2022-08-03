@@ -148,13 +148,13 @@ int main(int argc, char** argv) {
 		
 		if(time.getDeltaTime() > 0.0f) t += time.getDeltaTime();
 
-		if(window.keyboard.GetKeyData().Enum == window.keyboard.M) {
+		if(window.keyboard.getKeyData().keyEnum == window.keyboard.M) {
 			window.mouse.SetVisibility(!window.mouse.IsVisible());
 		}
-		if(window.keyboard.GetKeyData().Enum == window.keyboard.F11) {
+		if(window.keyboard.getKeyData().keyEnum == window.keyboard.F11) {
 			window.setFullScreen(!window.isFullScreen());
 		}
-		if(window.keyboard.IsKeyPressed(window.keyboard.Escape)) {
+		if(window.keyboard.isKeyPressed(window.keyboard.Escape)) {
 			window.close();
 		}
 

@@ -1,4 +1,4 @@
-# gamepads
+# Gamepads
 `gamepads` is an element of `Window`.
 It's used for handling polled gamepads' events.
 

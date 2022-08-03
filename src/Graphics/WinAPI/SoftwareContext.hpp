@@ -22,54 +22,54 @@ public:
 		return true;
 	}
 	virtual bool validate() {
-		m_Hdc = GetDC(static_cast<WinAPIWindow*>(m_windowImpl)->m_Hwnd);
+		m_hdc = GetDC(static_cast<WinAPIWindow*>(m_windowImpl)->m_Hwnd);
 
-		m_Data = new unsigned char[0];
-		m_Size = OWL::Vec2ui(0);
+		m_data = new unsigned char[0];
+		m_size = OWL::Vec2ui(0);
 		
 		return true;
 	}
 
 	virtual void destroy() {
-		ReleaseDC(static_cast<WinAPIWindow*>(m_windowImpl)->m_Hwnd, m_Hdc);
-		delete[] m_Data;
-		m_Size = OWL::Vec2ui(0);
+		ReleaseDC(static_cast<WinAPIWindow*>(m_windowImpl)->m_Hwnd, m_hdc);
+		delete[] m_data;
+		m_size = OWL::Vec2ui(0);
 	}
 
 	virtual void setSize(Vec2ui _newSize) {
-		if(m_Size != _newSize) {
-			m_Size = _newSize;
-			delete[] m_Data;
-			m_Data = new unsigned char[m_Size.x * m_Size.y * 4];
+		if(m_size != _newSize) {
+			m_size = _newSize;
+			delete[] m_data;
+			m_data = new unsigned char[m_size.x * m_size.y * 4];
 		}
 	}
 	virtual Vec2ui getSize() const {
-		return m_Size;
+		return m_size;
 	}
 
 	virtual void clear(const Vec4ub& _color) {
-		for(size_t i = 0; i < m_Size.x * m_Size.y * 4; i+=4) {
-			m_Data[i] = _color.r; /* red */
-			m_Data[i+1] = _color.g; /* green */
-			m_Data[i+2] = _color.b; /* blue */
-			m_Data[i+3] = _color.a; /* alpha */
+		for(size_t i = 0; i < m_size.x * m_size.y * 4; i+=4) {
+			m_data[i] = _color.r; /* red */
+			m_data[i+1] = _color.g; /* green */
+			m_data[i+2] = _color.b; /* blue */
+			m_data[i+3] = _color.a; /* alpha */
 		}
 	}
 
 	virtual void blitToScreen() {
 		/* Our data is in RGBA format, but WinAPI requires BGRA format for some reason */
 		/* We have to swap red and blue */
-		for(size_t i = 0; i < m_Size.x * m_Size.y * 4; i += 4) {
-			unsigned char red = m_Data[i];
-			m_Data[i] = m_Data[i+2]; /* blue */
-			m_Data[i+2] = red; /* red */
+		for(size_t i = 0; i < m_size.x * m_size.y * 4; i += 4) {
+			unsigned char red = m_data[i];
+			m_data[i] = m_data[i+2]; /* blue */
+			m_data[i+2] = red; /* red */
 		}
 		
-		HDC hdcMem = CreateCompatibleDC(m_Hdc);
-		HBITMAP hBitmap = CreateBitmap(m_Size.x, m_Size.y, 1, 32, m_Data);
+		HDC hdcMem = CreateCompatibleDC(m_hdc);
+		HBITMAP hBitmap = CreateBitmap(m_size.x, m_size.y, 1, 32, m_data);
 		HBITMAP oldBitmap = (HBITMAP)SelectObject(hdcMem, hBitmap);
 		
-		BitBlt(m_Hdc, 0, 0, m_Size.x, m_Size.y, hdcMem, 0, 0, SRCCOPY);
+		BitBlt(m_hdc, 0, 0, m_size.x, m_size.y, hdcMem, 0, 0, SRCCOPY);
 
 		SelectObject(hdcMem, oldBitmap);
 		DeleteObject(hBitmap);
@@ -77,14 +77,14 @@ public:
 	}
 
 	virtual Vec4ub* getPixelData() {
-		return reinterpret_cast<Vec4ub*>(m_Data);
+		return reinterpret_cast<Vec4ub*>(m_data);
 	}
 
 public:
-	Vec2<unsigned int> m_Size;
-	unsigned char* m_Data;
+	Vec2<unsigned int> m_size;
+	unsigned char* m_data;
 
-	HDC m_Hdc;
+	HDC m_hdc;
 
 };
 }

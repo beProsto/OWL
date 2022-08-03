@@ -11,9 +11,9 @@ public:
 	Keyboard() {}
 	virtual ~Keyboard() {}
 
-	virtual bool IsKeyPressed(unsigned int _key) const {return false;}
+	virtual bool isKeyPressed(unsigned int _key) const {return false;}
 
-	virtual KeyData GetKeyData() const { return m_keyData; }
+	virtual KeyData getKeyData() const { return m_keyData; }
 
 public:
 	virtual void pollPreparation() {}
