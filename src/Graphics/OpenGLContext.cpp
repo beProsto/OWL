@@ -6,20 +6,20 @@ namespace OWL {
 
 OpenGLContext::OpenGLContext() {
 	#if defined OWL_SYSTEM_WINDOWS
-		m_Impl = new Impl::WinAPIOpenGLContext;
+		m_impl = new Impl::WinAPIOpenGLContext;
 	#elif defined OWL_SYSTEM_LINUX
 
 	#endif
 }
 OpenGLContext::~OpenGLContext() {
-	delete m_Impl;
+	delete m_impl;
 }
 
-OpenGLLoaderFunction OpenGLContext::GetLoaderFunction() {
-	return static_cast<Impl::OpenGLContext*>(m_Impl)->GetLoaderFunction();
+OpenGLLoaderFunction OpenGLContext::getLoaderFunction() {
+	return static_cast<Impl::OpenGLContext*>(m_impl)->getLoaderFunction();
 }
-void OpenGLContext::SwapBuffers() {
-	static_cast<Impl::OpenGLContext*>(m_Impl)->SwapBuffers();
+void OpenGLContext::swapBuffers() {
+	static_cast<Impl::OpenGLContext*>(m_impl)->swapBuffers();
 }
 
 }

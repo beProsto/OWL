@@ -18,12 +18,12 @@ public:
 	void SetVisibility(bool _visible);
 	bool IsVisible() const;
 
-	void SetPosition(const Vec2i& _position);
-	Vec2i GetPosition() const;
+	void setPosition(const Vec2i& _position);
+	Vec2i getPosition() const;
 
 	int GetWheelRotation() const;
 	
-	bool IsButtonPressed(unsigned int _button) const;
+	bool isButtonPressed(unsigned int _button) const;
 
 public:
 	enum Button {
@@ -39,7 +39,7 @@ public:
 	// https://codereview.stackexchange.com/questions/24154/mapping-enum-to-enum
 
 protected:
-	Impl::Mouse* m_Impl;
+	Impl::Mouse* m_impl;
 
 	friend class Window;
 };

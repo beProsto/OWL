@@ -11,13 +11,13 @@ public:
 	OpenGLContext() {}
 	virtual ~OpenGLContext() {}
 
-	virtual bool Create() {return false;}
-	virtual bool Validate() {return false;}
+	virtual bool create() {return false;}
+	virtual bool validate() {return false;}
 	
-	virtual void Destroy() {}
+	virtual void destroy() {}
 
-	virtual OpenGLLoaderFunction GetLoaderFunction() { return [](const char* name){return static_cast<void*>(nullptr);}; }
-	virtual void SwapBuffers() {}
+	virtual OpenGLLoaderFunction getLoaderFunction() { return [](const char* name){return static_cast<void*>(nullptr);}; }
+	virtual void swapBuffers() {}
 };
 }
 }

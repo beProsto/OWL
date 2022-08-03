@@ -4,7 +4,7 @@
 
 namespace OWL {
 
-void OWL_API Sleep(unsigned int _milliseconds);
+void OWL_API sleep(unsigned int _milliseconds);
 
 namespace Impl {
 class OWL_API Timer;
@@ -15,14 +15,14 @@ public:
 	FPSLimiter(unsigned int _desiredFPS = 30);
 	~FPSLimiter();
 
-	void SetDesiredFPS(unsigned int _desiredFPS = 30);
-	unsigned int GetDesiredFPS() const;
-	void Start();
-	void End();
+	void setDesiredFPS(unsigned int _desiredFPS = 30);
+	unsigned int getDesiredFPS() const;
+	void start();
+	void end();
 
 private:
-	Impl::Timer* m_Impl;
-	unsigned int m_FPS;
+	Impl::Timer* m_impl;
+	unsigned int m_fps;
 };
 
 class OWL_API Timer {
@@ -30,14 +30,14 @@ public:
 	Timer();
 	~Timer();
 
-	void Start();
-	void End();
+	void start();
+	void end();
 
-	float GetDeltaTime() const;
+	float getDeltaTime() const;
 
 private:
-	Impl::Timer* m_Impl;
-	float m_DeltaTime;
+	Impl::Timer* m_impl;
+	float m_deltaTime;
 };
 
 }

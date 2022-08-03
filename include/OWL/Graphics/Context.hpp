@@ -16,7 +16,7 @@ public:
 	~Context();
 
 protected:
-	Impl::Context* m_Impl;
+	Impl::Context* m_impl;
 	friend Window;
 };
 

@@ -6,21 +6,21 @@ namespace OWL {
 
 Keyboard::Keyboard() {
 	#if defined OWL_SYSTEM_WINDOWS
-		m_Impl = new Impl::WinAPIKeyboard;
+		m_impl = new Impl::WinAPIKeyboard;
 	#elif defined OWL_SYSTEM_LINUX
 
 	#endif
 }
 Keyboard::~Keyboard() {
-	delete m_Impl;
+	delete m_impl;
 }
 
 bool Keyboard::IsKeyPressed(unsigned int _key) const {
-	return m_Impl->IsKeyPressed(_key);
+	return m_impl->IsKeyPressed(_key);
 }
 
 KeyData Keyboard::GetKeyData() const {
-	return m_Impl->GetKeyData();
+	return m_impl->GetKeyData();
 }
 
 }

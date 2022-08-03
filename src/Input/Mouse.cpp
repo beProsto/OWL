@@ -6,35 +6,35 @@ namespace OWL {
 
 Mouse::Mouse() {
 	#if defined OWL_SYSTEM_WINDOWS
-		m_Impl = new Impl::WinAPIMouse;
+		m_impl = new Impl::WinAPIMouse;
 	#elif defined OWL_SYSTEM_LINUX
 
 	#endif
 }
 Mouse::~Mouse() {
-	delete m_Impl;
+	delete m_impl;
 }
 
 void Mouse::SetVisibility(bool _visible) {
-	m_Impl->SetVisibility(_visible);
+	m_impl->SetVisibility(_visible);
 }
 bool Mouse::IsVisible() const {
-	return m_Impl->IsVisible();
+	return m_impl->IsVisible();
 }
 
-void Mouse::SetPosition(const Vec2i& _position) {
-	m_Impl->SetPosition(_position);
+void Mouse::setPosition(const Vec2i& _position) {
+	m_impl->setPosition(_position);
 }
-Vec2i Mouse::GetPosition() const {
-	return m_Impl->GetPosition();
+Vec2i Mouse::getPosition() const {
+	return m_impl->getPosition();
 }
 
 int Mouse::GetWheelRotation() const {
-	return m_Impl->GetWheelRotation();
+	return m_impl->GetWheelRotation();
 }
 
-bool Mouse::IsButtonPressed(unsigned int _button) const {
-	return m_Impl->IsButtonPressed(_button);
+bool Mouse::isButtonPressed(unsigned int _button) const {
+	return m_impl->isButtonPressed(_button);
 }
 
 

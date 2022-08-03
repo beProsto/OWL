@@ -1,5 +1,5 @@
 # KeyboardEvent
-`Keyboard` is an element of `Window`.
+`keyboard` is an element of `Window`.
 It's used for handling keyboard events.
 
 It has 2 functions:
@@ -15,14 +15,14 @@ __Example of usage:__
 std::wstring text = "";
 
 /* In the main loop */
-if(window.Keyboard.GetKeyData().Char != '\b') {
-	text += window.Keyboard.GetKeyData().Char;
+if(window.keyboard.GetKeyData().Char != '\b') {
+	text += window.keyboard.GetKeyData().Char;
 }
 else {
 	text.resize(text.size() - 1);
 }
 
-std::cout << "Is F1 key pressed: (" << window.Keyboard.IsKeyPressed(OWL::Keyboard::F1) << ")\n";
-std::cout << "Key pressed: {" << window.Keyboard.GetKeyData().Char << "}\n";
+std::cout << "Is F1 key pressed: (" << window.keyboard.IsKeyPressed(OWL::keyboard::F1) << ")\n";
+std::cout << "Key pressed: {" << window.keyboard.GetKeyData().Char << "}\n";
 std::cout << "Text written: {" << text << "}\n"; 
 ```

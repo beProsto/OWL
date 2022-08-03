@@ -18,11 +18,11 @@ public:
 
 	}
 
-	virtual bool Create()  {
+	virtual bool create()  {
 		return true;
 	}
-	virtual bool Validate() {
-		m_Hdc = GetDC(static_cast<WinAPIWindow*>(m_WindowImpl)->m_Hwnd);
+	virtual bool validate() {
+		m_Hdc = GetDC(static_cast<WinAPIWindow*>(m_windowImpl)->m_Hwnd);
 
 		m_Data = new unsigned char[0];
 		m_Size = OWL::Vec2ui(0);
@@ -30,24 +30,24 @@ public:
 		return true;
 	}
 
-	virtual void Destroy() {
-		ReleaseDC(static_cast<WinAPIWindow*>(m_WindowImpl)->m_Hwnd, m_Hdc);
+	virtual void destroy() {
+		ReleaseDC(static_cast<WinAPIWindow*>(m_windowImpl)->m_Hwnd, m_Hdc);
 		delete[] m_Data;
 		m_Size = OWL::Vec2ui(0);
 	}
 
-	virtual void SetSize(Vec2ui _newSize) {
+	virtual void setSize(Vec2ui _newSize) {
 		if(m_Size != _newSize) {
 			m_Size = _newSize;
 			delete[] m_Data;
 			m_Data = new unsigned char[m_Size.x * m_Size.y * 4];
 		}
 	}
-	virtual Vec2ui GetSize() const {
+	virtual Vec2ui getSize() const {
 		return m_Size;
 	}
 
-	virtual void Clear(const Vec4ub& _color) {
+	virtual void clear(const Vec4ub& _color) {
 		for(size_t i = 0; i < m_Size.x * m_Size.y * 4; i+=4) {
 			m_Data[i] = _color.r; /* red */
 			m_Data[i+1] = _color.g; /* green */
@@ -56,7 +56,7 @@ public:
 		}
 	}
 
-	virtual void BlitToScreen() {
+	virtual void blitToScreen() {
 		/* Our data is in RGBA format, but WinAPI requires BGRA format for some reason */
 		/* We have to swap red and blue */
 		for(size_t i = 0; i < m_Size.x * m_Size.y * 4; i += 4) {
@@ -76,7 +76,7 @@ public:
 		DeleteDC(hdcMem);
 	}
 
-	virtual Vec4ub* GetPixelData() {
+	virtual Vec4ub* getPixelData() {
 		return reinterpret_cast<Vec4ub*>(m_Data);
 	}
 

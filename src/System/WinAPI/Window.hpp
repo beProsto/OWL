@@ -39,220 +39,220 @@ inline LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 
 class OWL_API WinAPIWindow: public Window {
 public:
-	WinAPIWindow(Vec2ui _size, std::string _title, Keyboard* _keyboardImpl, Mouse* _mouseImpl, Gamepads* _gamepadsImpl) {
-		m_IsRunning = true;
-		m_IsFullScreen = false;
-		m_Hwnd = nullptr;
+	WinAPIWindow(Vec2ui _size, std::string _title, keyboard* _keyboardImpl, mouse* _mouseImpl, gamepads* _gamepadsImpl) {
+		m_isRunning = true;
+		m_isFullScreen = false;
+		m_hwnd = nullptr;
 		m_ContextImpl = nullptr;
 
-		m_KeyboardImpl = _keyboardImpl;
-		m_KeyboardImpl->m_WindowImpl = this;
+		m_keyboardImpl = _keyboardImpl;
+		m_keyboardImpl->m_windowImpl = this;
 
-		m_MouseImpl = _mouseImpl;
-		m_MouseImpl->m_WindowImpl = this;
+		m_mouseImpl = _mouseImpl;
+		m_mouseImpl->m_windowImpl = this;
 
-		m_GamepadsImpl = _gamepadsImpl;
-		m_GamepadsImpl->m_WindowImpl = this;
+		m_gamepadsImpl = _gamepadsImpl;
+		m_gamepadsImpl->m_windowImpl = this;
 
-		m_ClassName = "WinAPI_Window_ClassName";
-		m_Window.cbSize = sizeof(WNDCLASSEX);
-		m_Window.style = 0;
-		m_Window.lpfnWndProc = WndProc;
-		m_Window.cbClsExtra = 0;
-		m_Window.cbWndExtra = 0;
-		m_Window.hInstance = OSInfo::Get()->InstanceHandle;
-		m_Window.hIcon = LoadIcon(m_Window.hInstance, MAKEINTRESOURCE(460));
-		m_Window.hCursor = LoadCursor(NULL, IDC_ARROW);
-		m_Window.hbrBackground = reinterpret_cast<HBRUSH>(COLOR_WINDOW + 1);
-		m_Window.lpszMenuName = nullptr;
-		m_Window.lpszClassName = m_ClassName;
-		m_Window.hIconSm = nullptr;
+		m_className = "WinAPI_Window_ClassName";
+		m_window.cbSize = sizeof(WNDCLASSEX);
+		m_window.style = 0;
+		m_window.lpfnWndProc = WndProc;
+		m_window.cbClsExtra = 0;
+		m_window.cbWndExtra = 0;
+		m_window.hInstance = OSInfo::Get()->InstanceHandle;
+		m_window.hIcon = LoadIcon(m_window.hInstance, MAKEINTRESOURCE(460));
+		m_window.hCursor = LoadCursor(NULL, IDC_ARROW);
+		m_window.hbrBackground = reinterpret_cast<HBRUSH>(COLOR_WINDOW + 1);
+		m_window.lpszMenuName = nullptr;
+		m_window.lpszClassName = m_className;
+		m_window.hIconSm = nullptr;
 	
-		if(!RegisterClassEx(&m_Window)) {
+		if(!RegisterClassEx(&m_window)) {
 			printf("Error registering the window!\n");
 			return;
 		}
 
-		Create(Vec2i(0), _size, _title, false);
+		create(Vec2i(0), _size, _title, false);
 	}
 	virtual ~WinAPIWindow() {
-		Destroy();
+		destroy();
 	}
 
-	virtual bool Create(Vec2i _pos, Vec2ui _size, std::string _title, bool _fullScreen) {
-		m_Title = _title;
-		m_IsFullScreen = false;
+	virtual bool create(Vec2i _pos, Vec2ui _size, std::string _title, bool _fullScreen) {
+		m_title = _title;
+		m_isFullScreen = false;
 
-		Destroy();
+		destroy();
 
-		m_Hwnd = CreateWindowEx(WS_EX_CLIENTEDGE, m_ClassName, m_Title.c_str(), WS_OVERLAPPEDWINDOW, 0, 0, _size.x, _size.y, NULL, NULL, OSInfo::Get()->InstanceHandle, NULL);
+		m_hwnd = CreateWindowEx(WS_EX_CLIENTEDGE, m_className, m_title.c_str(), WS_OVERLAPPEDWINDOW, 0, 0, _size.x, _size.y, NULL, NULL, OSInfo::Get()->InstanceHandle, NULL);
 
-		if(m_Hwnd == NULL) {
+		if(m_hwnd == NULL) {
 			printf("Error creating the window!\n");
 			return false;
 		}
 
-		ShowWindow(m_Hwnd, SW_SHOWNORMAL);
-		UpdateWindow(m_Hwnd);
+		ShowWindow(m_hwnd, SW_SHOWNORMAL);
+		UpdateWindow(m_hwnd);
 
-		SetSize(_size);
-		SetPosition(_pos);
-		SetFullScreen(_fullScreen);
+		setSize(_size);
+		setPosition(_pos);
+		setFullScreen(_fullScreen);
 
 		return true;
 	}
-	virtual void Destroy() {
-		if(m_Hwnd != nullptr) {
+	virtual void destroy() {
+		if(m_hwnd != nullptr) {
 			if(m_ContextImpl != nullptr) {
-				m_ContextImpl->Destroy();
+				m_ContextImpl->destroy();
 				m_ContextImpl = nullptr;
 			}
 
-			DestroyWindow(m_Hwnd);
-			m_Hwnd = nullptr;
+			DestroyWindow(m_hwnd);
+			m_hwnd = nullptr;
 		}
 	}
 
-	virtual void SetContext(Context& _context) {
+	virtual void setContext(Context& _context) {
 		// // THIS IS THE PROPER WAY TO GO ABOUT THIS
 		// // BUT IT LOOKS BAD
 		// // SO ONLY USE THIS IMPLEMENTATION
 		// // IF REQUIRED BY DIRECT3D
 		// // (VULKAN DOESN'T AS FAR AS I'M AWARE)
-		// Vec2ui winSize = GetSize();
-		// Vec2i winPosition = GetPosition();
-		// bool winFullScreen = IsFullScreen();
-		// Destroy();
+		// Vec2ui winSize = getSize();
+		// Vec2i winPosition = getPosition();
+		// bool winFullScreen = isFullScreen();
+		// destroy();
 		// m_ContextImpl = &_context;
-		// m_ContextImpl->m_WindowImpl = this;
-		// m_ContextImpl->Create();
-		// Create(winPosition, winSize, m_Title, winFullScreen);
-		// m_ContextImpl->Validate();
+		// m_ContextImpl->m_windowImpl = this;
+		// m_ContextImpl->create();
+		// create(winPosition, winSize, m_title, winFullScreen);
+		// m_ContextImpl->validate();
 
 		// This is an improper, but good looking
 		// implementation of context switching.
 		if(m_ContextImpl != nullptr) {
-			m_ContextImpl->Destroy();
+			m_ContextImpl->destroy();
 			m_ContextImpl = nullptr;
 		}
 		m_ContextImpl = &_context;
-		m_ContextImpl->m_WindowImpl = this;
+		m_ContextImpl->m_windowImpl = this;
 
-		m_ContextImpl->Create();
-		m_ContextImpl->Validate();
+		m_ContextImpl->create();
+		m_ContextImpl->validate();
 	}
 
-	virtual void PollEvents() {
-		m_MouseImpl->PollPreparation();
-		m_KeyboardImpl->PollPreparation();
-		m_GamepadsImpl->PollPreparation();
+	virtual void pollEvents() {
+		m_mouseImpl->pollPreparation();
+		m_keyboardImpl->pollPreparation();
+		m_gamepadsImpl->pollPreparation();
 
-		while(PeekMessage(&m_Event, 0, 0, 0, PM_REMOVE)) {
-			if(m_Event.message == WM_QUIT) {
-				Close();
+		while(PeekMessage(&m_event, 0, 0, 0, PM_REMOVE)) {
+			if(m_event.message == WM_QUIT) {
+				close();
 			}
-			TranslateMessage(&m_Event);
-			DispatchMessage(&m_Event);
+			TranslateMessage(&m_event);
+			DispatchMessage(&m_event);
 
-			m_MouseImpl->PollSpecificEvents();
-			m_KeyboardImpl->PollSpecificEvents();
-			// m_GamepadsImpl->PollSpecificEvents(); // No need
+			m_mouseImpl->pollSpecificEvents();
+			m_keyboardImpl->pollSpecificEvents();
+			// m_gamepadsImpl->pollSpecificEvents(); // No need
 		}
 	}
 
-	virtual void SetPosition(const Vec2i& _position) {
-		SetWindowPos(m_Hwnd, 0, _position.x, _position.y, 0, 0, SWP_NOSIZE);
+	virtual void setPosition(const Vec2i& _position) {
+		SetWindowPos(m_hwnd, 0, _position.x, _position.y, 0, 0, SWP_NOSIZE);
 	}
-	virtual Vec2i GetPosition() const {
+	virtual Vec2i getPosition() const {
 		RECT rect;
-		GetWindowRect(m_Hwnd, &rect);
+		GetWindowRect(m_hwnd, &rect);
 		return Vec2i(rect.left, rect.top);
 	}
 
-	virtual void SetSize(Vec2ui _size) {
-		SetWindowPos(m_Hwnd, 0, 0, 0, _size.x, _size.y, SWP_NOMOVE);
+	virtual void setSize(Vec2ui _size) {
+		SetWindowPos(m_hwnd, 0, 0, 0, _size.x, _size.y, SWP_NOMOVE);
 
-		OWL::Vec2ui finalSize = GetSize();
+		OWL::Vec2ui finalSize = getSize();
 		if(finalSize != _size) {
 			finalSize = _size + (_size - finalSize);
-			SetWindowPos(m_Hwnd, 0, 0, 0, finalSize.x, finalSize.y, SWP_NOMOVE);
+			SetWindowPos(m_hwnd, 0, 0, 0, finalSize.x, finalSize.y, SWP_NOMOVE);
 		}
 	}
-	virtual Vec2ui GetSize() const {
+	virtual Vec2ui getSize() const {
 		RECT rect;
-		GetClientRect(m_Hwnd, &rect);
+		GetClientRect(m_hwnd, &rect);
 		return Vec2ui(rect.right - rect.left, rect.bottom - rect.top);
 	}
-	virtual float GetAspect() const {
-		Vec2f size = GetSize(); 
+	virtual float getAspect() const {
+		Vec2f size = getSize(); 
 		return size.x / size.y;
 	}
 
-	virtual void SetTitle(std::string _title) {
-		if(m_Title != _title) {
-			m_Title = _title;
-			SetWindowTextA(m_Hwnd, &m_Title[0]);
+	virtual void setTitle(std::string _title) {
+		if(m_title != _title) {
+			m_title = _title;
+			SetWindowTextA(m_hwnd, &m_title[0]);
 		}
 	}
-	virtual std::string GetTitle() const {
-		return m_Title;
+	virtual std::string getTitle() const {
+		return m_title;
 	}
 
-	virtual void Close() {
-		m_IsRunning = false;
+	virtual void close() {
+		m_isRunning = false;
 	}
-	virtual bool IsRunning() const {
-		return m_IsRunning;
-	}
-
-	virtual bool IsFocused() const {
-		return GetFocus() == m_Hwnd;
+	virtual bool isRunning() const {
+		return m_isRunning;
 	}
 
-	virtual void SetFullScreen(bool _fullScreen) {
-		if(m_IsFullScreen != _fullScreen) {
-			m_IsFullScreen = _fullScreen;
+	virtual bool isFocused() const {
+		return GetFocus() == m_hwnd;
+	}
 
-			if(m_IsFullScreen) {
-				m_WasMaximized = IsZoomed(m_Hwnd);
+	virtual void setFullScreen(bool _fullScreen) {
+		if(m_isFullScreen != _fullScreen) {
+			m_isFullScreen = _fullScreen;
 
-				LONG style = GetWindowLong(m_Hwnd, GWL_STYLE);
-				LONG exStyle = GetWindowLong(m_Hwnd, GWL_EXSTYLE);
+			if(m_isFullScreen) {
+				m_wasMaximized = IsZoomed(m_hwnd);
+
+				LONG style = GetWindowLong(m_hwnd, GWL_STYLE);
+				LONG exStyle = GetWindowLong(m_hwnd, GWL_EXSTYLE);
 				
-				SetWindowLong(m_Hwnd, GWL_STYLE, style & ~(WS_CAPTION | WS_THICKFRAME));
-				SetWindowLong(m_Hwnd, GWL_EXSTYLE, exStyle & ~(WS_EX_DLGMODALFRAME | WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE | WS_EX_STATICEDGE));
+				SetWindowLong(m_hwnd, GWL_STYLE, style & ~(WS_CAPTION | WS_THICKFRAME));
+				SetWindowLong(m_hwnd, GWL_EXSTYLE, exStyle & ~(WS_EX_DLGMODALFRAME | WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE | WS_EX_STATICEDGE));
 
-				SendMessage(m_Hwnd, WM_SYSCOMMAND, SC_RESTORE, 0);
-				SendMessage(m_Hwnd, WM_SYSCOMMAND, SC_MAXIMIZE, 0);
+				SendMessage(m_hwnd, WM_SYSCOMMAND, SC_RESTORE, 0);
+				SendMessage(m_hwnd, WM_SYSCOMMAND, SC_MAXIMIZE, 0);
 			}
 			else {
-				LONG style = GetWindowLong(m_Hwnd, GWL_STYLE);
-				LONG exStyle = GetWindowLong(m_Hwnd, GWL_EXSTYLE);
+				LONG style = GetWindowLong(m_hwnd, GWL_STYLE);
+				LONG exStyle = GetWindowLong(m_hwnd, GWL_EXSTYLE);
 				
-				SetWindowLong(m_Hwnd, GWL_STYLE, style | (WS_CAPTION | WS_THICKFRAME));
-				SetWindowLong(m_Hwnd, GWL_EXSTYLE, exStyle | (WS_EX_DLGMODALFRAME | WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE | WS_EX_STATICEDGE));
+				SetWindowLong(m_hwnd, GWL_STYLE, style | (WS_CAPTION | WS_THICKFRAME));
+				SetWindowLong(m_hwnd, GWL_EXSTYLE, exStyle | (WS_EX_DLGMODALFRAME | WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE | WS_EX_STATICEDGE));
 
-				SendMessage(m_Hwnd, WM_SYSCOMMAND, SC_RESTORE, 0);
-				if(m_WasMaximized) {
-					SendMessage(m_Hwnd, WM_SYSCOMMAND, SC_MAXIMIZE, 0);
+				SendMessage(m_hwnd, WM_SYSCOMMAND, SC_RESTORE, 0);
+				if(m_wasMaximized) {
+					SendMessage(m_hwnd, WM_SYSCOMMAND, SC_MAXIMIZE, 0);
 				}
 			}
 		}
 	}
-	virtual bool IsFullScreen() const {
-		return m_IsFullScreen;
+	virtual bool isFullScreen() const {
+		return m_isFullScreen;
 	}
 
 public:
-	std::string m_Title;
-	bool m_IsRunning;
-	bool m_IsFullScreen;
-	bool m_WasMaximized;
+	std::string m_title;
+	bool m_isRunning;
+	bool m_isFullScreen;
+	bool m_wasMaximized;
 
-	const char* m_ClassName;
-	WNDCLASSEX m_Window;
-	HWND m_Hwnd;
-	MSG m_Event;
+	const char* m_className;
+	WNDCLASSEX m_window;
+	HWND m_hwnd;
+	MSG m_event;
 };
 
 }

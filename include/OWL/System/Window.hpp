@@ -21,35 +21,35 @@ public:
 	Window(Vec2ui _size = Vec2ui(640, 360), std::string _title = "beProsto.github.io/OWL");
 	~Window();
 
-	void PollEvents();
+	void pollEvents();
 
-	void SetContext(Context& _context);
+	void setContext(Context& _context);
 	
-	void SetPosition(const Vec2i& _position);
-	Vec2i GetPosition() const;
+	void setPosition(const Vec2i& _position);
+	Vec2i getPosition() const;
 
-	void SetSize(Vec2ui _size);
-	Vec2ui GetSize() const;
-	float GetAspect() const;
+	void setSize(Vec2ui _size);
+	Vec2ui getSize() const;
+	float getAspect() const;
 
-	void SetTitle(std::string _title);
-	std::string GetTitle() const;
+	void setTitle(std::string _title);
+	std::string getTitle() const;
 
-	void Close();
-	bool IsRunning() const;
+	void close();
+	bool isRunning() const;
 
-	bool IsFocused() const;
+	bool isFocused() const;
 
-	void SetFullScreen(bool _fullScreen);
-	bool IsFullScreen() const;
+	void setFullScreen(bool _fullScreen);
+	bool isFullScreen() const;
 
 public:
-	Mouse Mouse;
-	Keyboard Keyboard;
-	Gamepads Gamepads;
+	Mouse mouse;
+	Keyboard keyboard;
+	Gamepads gamepads;
 
 private:
-	Impl::Window* m_Impl;
+	Impl::Window* m_impl;
 };
 
 }

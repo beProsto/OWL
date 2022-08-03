@@ -13,12 +13,12 @@ public:
 	Gamepads() {}
 	virtual ~Gamepads() {}
 	
-	virtual void SetCount(unsigned int _gamepadsCount) {}
-	virtual size_t GetCount() const { return m_GamepadsCount; }
+	virtual void setCount(unsigned int _gamepadsCount) {}
+	virtual size_t getCount() const { return m_gamepadsCount; }
 	
-	virtual const Gamepad& operator[](size_t _id) const { return m_Gamepads[_id]; }
+	virtual const Gamepad& operator[](size_t _id) const { return m_gamepads[_id]; }
 
-	static inline OWL::Vec2f StickNorm(float _x, float _y) {
+	static inline OWL::Vec2f stickNorm(float _x, float _y) {
 		float magnitude = std::sqrt(_x*_x + _y*_y);
 		float normalizedLX = _x / magnitude;
 		float normalizedLY = _y / magnitude;
@@ -36,13 +36,13 @@ public:
 	}
 
 public:
-	virtual void PollPreparation() {}
-	virtual void PollSpecificEvents() {}
+	virtual void pollPreparation() {}
+	virtual void pollSpecificEvents() {}
 
 public:
-	size_t m_GamepadsCount;
-	Gamepad* m_Gamepads;
-	Window* m_WindowImpl;
+	size_t m_gamepadsCount;
+	Gamepad* m_gamepads;
+	Window* m_windowImpl;
 };
 }
 }

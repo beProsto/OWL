@@ -15,7 +15,7 @@ public:
 
 	}
 
-	virtual void Start() {
+	virtual void start() {
 
 	}
 	virtual bool Update(double time) {
@@ -26,7 +26,7 @@ protected:
 	virtual void Init() {
 		SDL_Init(SDL_INIT_VIDEO);
 
-		Start();
+		start();
 
 		#ifdef OWL_SYSTEM_EMSCRIPTEN
 			emscripten_set_main_loop([]() { AppBoiler::m_App->Update(0.0); }, 60, 1);
@@ -49,7 +49,7 @@ public:
 
 	}
 
-	virtual void Start() {
+	virtual void start() {
 		SDL_CreateWindowAndRenderer(width, height, 0, &window, &renderer);
 
 		SDL_SetRenderDrawColor(renderer, /* RGBA: green */ 0x00, 0x80, 0x00, 0xFF);

@@ -13,16 +13,16 @@ public:
 
 	virtual bool IsKeyPressed(unsigned int _key) const {return false;}
 
-	virtual KeyData GetKeyData() const { return m_KeyData; }
+	virtual KeyData GetKeyData() const { return m_keyData; }
 
 public:
-	virtual void PollPreparation() {}
-	virtual void PollSpecificEvents() {}
+	virtual void pollPreparation() {}
+	virtual void pollSpecificEvents() {}
 
 public:
-	unsigned int m_KeyMap[OWL::Keyboard::Key::Count];
-	Window* m_WindowImpl;
-	KeyData m_KeyData;
+	unsigned int m_keyMap[OWL::Keyboard::Key::Count];
+	Window* m_windowImpl;
+	KeyData m_keyData;
 };
 }
 }

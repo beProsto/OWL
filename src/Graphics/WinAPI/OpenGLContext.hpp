@@ -18,11 +18,11 @@ public:
 
 	}
 
-	virtual bool Create()  {
+	virtual bool create()  {
 		return true;
 	}
-	virtual bool Validate() {
-		m_Hdc = GetDC(static_cast<WinAPIWindow*>(m_WindowImpl)->m_Hwnd);
+	virtual bool validate() {
+		m_hdc = GetDC(static_cast<WinAPIWindow*>(m_windowImpl)->m_Hwnd);
 		
 		PIXELFORMATDESCRIPTOR pfd;
 		int iFormat;
@@ -36,25 +36,25 @@ public:
 		pfd.cDepthBits = 24;
 		pfd.cStencilBits = 8;
 		pfd.iLayerType = PFD_MAIN_PLANE;
-		iFormat = ChoosePixelFormat(m_Hdc, &pfd);
-		SetPixelFormat(m_Hdc, iFormat, &pfd);
+		iFormat = ChoosePixelFormat(m_hdc, &pfd);
+		SetPixelFormat(m_hdc, iFormat, &pfd);
 
-		m_Hrc = wglCreateContext(m_Hdc);
-		wglMakeCurrent(m_Hdc, m_Hrc);
+		m_hrc = wglCreateContext(m_hdc);
+		wglMakeCurrent(m_hdc, m_hrc);
 
 		OSInfo::Get()->Opengl32ModuleHandle = LoadLibraryA("opengl32.dll");
 
 		return true;
 	}
 
-	virtual void Destroy() {
+	virtual void destroy() {
 		FreeLibrary(OSInfo::Get()->Opengl32ModuleHandle);
 		wglMakeCurrent(NULL, NULL);
-		wglDeleteContext(m_Hrc);
-		ReleaseDC(static_cast<WinAPIWindow*>(m_WindowImpl)->m_Hwnd, m_Hdc);
+		wglDeleteContext(m_hrc);
+		ReleaseDC(static_cast<WinAPIWindow*>(m_windowImpl)->m_Hwnd, m_hdc);
 	}
 
-	virtual OpenGLLoaderFunction GetLoaderFunction() {
+	virtual OpenGLLoaderFunction getLoaderFunction() {
 		return [](const char* name) {
 			void *p = (void *)wglGetProcAddress(name);
 			if(
@@ -69,13 +69,13 @@ public:
 			return p;
 		};
 	}
-	virtual void SwapBuffers() {
-		::SwapBuffers(m_Hdc);
+	virtual void swapBuffers() {
+		::swapBuffers(m_hdc);
 	}
 
 public:
-	HDC m_Hdc;
-	HGLRC m_Hrc;
+	HDC m_hdc;
+	HGLRC m_hrc;
 
 };
 }

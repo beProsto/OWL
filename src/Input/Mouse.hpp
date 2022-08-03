@@ -14,20 +14,20 @@ public:
 	virtual void SetVisibility(bool _visible) {}
 	virtual bool IsVisible() const {return false;}
 
-	virtual void SetPosition(const Vec2i& _position) {}
-	virtual Vec2i GetPosition() const {return Vec2i{};}
+	virtual void setPosition(const Vec2i& _position) {}
+	virtual Vec2i getPosition() const {return Vec2i{};}
 
 	virtual int GetWheelRotation() const {return 0;}
 
-	virtual bool IsButtonPressed(unsigned int _button) const {return false;}
+	virtual bool isButtonPressed(unsigned int _button) const {return false;}
 
 public:
-	virtual void PollPreparation() {}
-	virtual void PollSpecificEvents() {}
+	virtual void pollPreparation() {}
+	virtual void pollSpecificEvents() {}
 
 public:
-	unsigned int m_ButtonMap[OWL::Mouse::Button::Count];
-	Window* m_WindowImpl;
+	unsigned int m_buttonMap[OWL::Mouse::Button::Count];
+	Window* m_windowImpl;
 };
 }
 }
@@ -37,11 +37,11 @@ public:
 	#include "WinAPI/Mouse.hpp"
 #elif defined OWL_SYSTEM_LINUX
 
-		// 	m_ButtonMap[0] = 1<<8;
-		// 	m_ButtonMap[1] = 1<<9;
-		// 	m_ButtonMap[2] = 1<<10;
-		// 	m_ButtonMap[3] = 1<<15;
-		// 	m_ButtonMap[4] = 1<<16;
+		// 	m_buttonMap[0] = 1<<8;
+		// 	m_buttonMap[1] = 1<<9;
+		// 	m_buttonMap[2] = 1<<10;
+		// 	m_buttonMap[3] = 1<<15;
+		// 	m_buttonMap[4] = 1<<16;
 
 #endif
 #endif

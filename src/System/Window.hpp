@@ -19,36 +19,36 @@ public:
 	Window() {}
 	virtual ~Window() {}
 
-	virtual bool Create(Vec2ui _size, std::string _title) {return false;}
-	virtual void Destroy() {}
+	virtual bool create(Vec2ui _size, std::string _title) {return false;}
+	virtual void destroy() {}
 	
-	virtual void SetContext(Context& _context) {}
+	virtual void setContext(Context& _context) {}
 
-	virtual void PollEvents() {}
+	virtual void pollEvents() {}
 
-	virtual void SetPosition(const Vec2i& _position) {}
-	virtual Vec2i GetPosition() const {return Vec2i{};}
+	virtual void setPosition(const Vec2i& _position) {}
+	virtual Vec2i getPosition() const {return Vec2i{};}
 
-	virtual void SetSize(Vec2ui _size) {}
-	virtual Vec2ui GetSize() const {return Vec2ui{};}
-	virtual float GetAspect() const {return float{};}
+	virtual void setSize(Vec2ui _size) {}
+	virtual Vec2ui getSize() const {return Vec2ui{};}
+	virtual float getAspect() const {return float{};}
 
-	virtual void SetTitle(std::string _title) {}
-	virtual std::string GetTitle() const {return "";}
+	virtual void setTitle(std::string _title) {}
+	virtual std::string getTitle() const {return "";}
 
-	virtual void Close() {}
-	virtual bool IsRunning() const {return false;}
+	virtual void close() {}
+	virtual bool isRunning() const {return false;}
 
-	virtual bool IsFocused() const {return false;}
+	virtual bool isFocused() const {return false;}
 
-	virtual void SetFullScreen(bool _fullScreen) {}
-	virtual bool IsFullScreen() const {return false;}
+	virtual void setFullScreen(bool _fullScreen) {}
+	virtual bool isFullScreen() const {return false;}
 
 public:
-	Context* m_ContextImpl;
-	Keyboard* m_KeyboardImpl;
-	Mouse* m_MouseImpl;
-	Gamepads* m_GamepadsImpl;
+	Context* m_contextImpl;
+	Keyboard* m_keyboardImpl;
+	Mouse* m_mouseImpl;
+	Gamepads* m_gamepadsImpl;
 };
 
 }

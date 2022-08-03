@@ -13,8 +13,8 @@ public:
 	OpenGLContext();
 	~OpenGLContext();
 
-	OpenGLLoaderFunction GetLoaderFunction();
-	void SwapBuffers();
+	OpenGLLoaderFunction getLoaderFunction();
+	void swapBuffers();
 };
 
 }

@@ -127,7 +127,7 @@ public:
 		Home,
 		PageUp,
 		Delete,
-		End,
+		end,
 		PageDown,
 		BackQuote,
 		Count
@@ -137,7 +137,7 @@ public:
 	// https://codereview.stackexchange.com/questions/24154/mapping-enum-to-enum
 
 protected:
-	Impl::Keyboard* m_Impl;
+	Impl::Keyboard* m_impl;
 
 	friend class Window;
 };

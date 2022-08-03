@@ -2,17 +2,17 @@
 Timer class is used to measure how much time passed between two points in our program.
 
 It has 3 functions:
-- `Start()` - Starts measuring the time.
-- `End()` - Ends measuring the time.
-- `GetDeltaTime()` - Returns the time in seconds.
+- `start()` - Starts measuring the time.
+- `end()` - Ends measuring the time.
+- `getDeltaTime()` - Returns the time in seconds.
 
 __Example of usage:__
 ```cpp
 OWL::Timer helloTimer;
 
-helloTimer.Start();
+helloTimer.start();
 // do things
-helloTimer.End();
+helloTimer.end();
 
-std::cout << "It took " << helloTimer.GetDeltaTime() << " seconds to do things.\n";
+std::cout << "It took " << helloTimer.getDeltaTime() << " seconds to do things.\n";
 ```

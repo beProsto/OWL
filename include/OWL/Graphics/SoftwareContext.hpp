@@ -14,14 +14,14 @@ public:
 	SoftwareContext();
 	~SoftwareContext();
 
-	void SetSize(Vec2ui _newSize);
-	Vec2ui GetSize() const;
+	void setSize(Vec2ui _newSize);
+	Vec2ui getSize() const;
 
-	void Clear(const Vec4ub& _color = Vec4ub(0));
+	void clear(const Vec4ub& _color = Vec4ub(0));
 	
-	void BlitToScreen();
+	void blitToScreen();
 	
-	Vec4ub* GetPixelData();
+	Vec4ub* getPixelData();
 };
 
 }

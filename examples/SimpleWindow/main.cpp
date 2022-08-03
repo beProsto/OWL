@@ -5,26 +5,26 @@
 int main(int argc, char** argv) {
 	OWL::SoftwareContext context;
 	OWL::Window window;
-	window.SetContext(context);
+	window.setContext(context);
 	OWL::FPSLimiter fps(60);
 
-	while(window.IsRunning()) {
-		window.PollEvents();
-		fps.Start();
+	while(window.isRunning()) {
+		window.pollEvents();
+		fps.start();
 
-		// if(window.Keyboard.GetKeyData().KeyEnum == window.Keyboard.F11) {
-		// 	window.SetFullScreen(!window.IsFullScreen());
+		// if(window.keyboard.GetKeyData().KeyEnum == window.keyboard.F11) {
+		// 	window.setFullScreen(!window.isFullScreen());
 		// }
-		if(window.Keyboard.IsKeyPressed(window.Keyboard.Escape)) {
-			window.Close();
+		if(window.keyboard.IsKeyPressed(window.keyboard.Escape)) {
+			window.close();
 		}
 
-		context.SetSize(window.GetSize());
-		context.Clear(OWL::Vec4ub(255, 100, 45, 255)); /* Clears the screen in orange color */
+		context.setSize(window.getSize());
+		context.clear(OWL::Vec4ub(255, 100, 45, 255)); /* clears the screen in orange color */
 
-		context.BlitToScreen();
+		context.blitToScreen();
 
-		fps.End();
+		fps.end();
 	}
 
 	return 0;

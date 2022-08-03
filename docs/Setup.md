@@ -42,37 +42,37 @@ int main(int argc, char** argv) {
 	// using the CPU rather than the GPU.
 	OWL::SoftwareContext context;
 	// We set the window to use this context.
-	window.SetContext(context);
+	window.setContext(context);
 
 	// We create an FPS limiter, it will limit the app's performance 
 	// to the given ammount of frames per second.
 	OWL::FPSLimiter fps(60);
 
 	// This is the main loop, our programme's every step is defined here.
-	while(window.IsRunning()) {
+	while(window.isRunning()) {
 		// At the start of every frame we check for any new events.
-		window.PollEvents();
+		window.pollEvents();
 		// Update the fps limiter.
-		fps.Start();
+		fps.start();
 
 		// If the user presses F11, we toggle fullscreen.
-		if(window.Keyboard.GetKeyData().Enum == OWL::Keyboard::F11) {
-			window.SetFullScreen(!window.IsFullScreen());
+		if(window.keyboard.GetKeyData().Enum == OWL::keyboard::F11) {
+			window.setFullScreen(!window.isFullScreen());
 		}
 		// If the user presses Escape, we close the app.
-		if(window.Keyboard.IsKeyPressed(OWL::Keyboard::Escape)) {
-			window.Close();
+		if(window.keyboard.IsKeyPressed(OWL::keyboard::Escape)) {
+			window.close();
 		}
 
 		// We want our context to fit exactly to the window.
-		context.SetSize(window.GetSize());
+		context.setSize(window.getSize());
 		// We clear our context's canvas with a given RGBA colour.
-		context.Clear(OWL::Vec4ub(255, 100, 45, 255)); /* Clears the screen in orange color */
+		context.clear(OWL::Vec4ub(255, 100, 45, 255)); /* clears the screen in orange color */
 
 		// We blit the context (put the context's image) to the screen.
-		context.BlitToScreen();
+		context.blitToScreen();
 		// Update the fps limiter.
-		fps.End();
+		fps.end();
 	}
 
 	return 0;
@@ -82,10 +82,10 @@ int main(int argc, char** argv) {
 Who's to say that we can't have some fun with it, like for instance, put a square on the screen;
 ```cpp
 // Draws a blue rectangle 
-for(unsigned int i = 25; i < min(50, context.GetSize().x); i++) {
-	for(unsigned int j = 60; j < min(170, context.GetSize().y); j++) {
+for(unsigned int i = 25; i < min(50, context.getSize().x); i++) {
+	for(unsigned int j = 60; j < min(170, context.getSize().y); j++) {
 		// Draws a blue pixel
-		context.GetPixelData()[j*context.GetSize().x+i] = OWL::Vec4b(60, 90, 200, 255); 
+		context.getPixelData()[j*context.getSize().x+i] = OWL::Vec4b(60, 90, 200, 255); 
 	}
 }
 ```

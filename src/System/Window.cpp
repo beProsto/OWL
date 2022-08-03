@@ -8,64 +8,64 @@ namespace OWL {
 
 Window::Window(Vec2ui _size, std::string _title) {
 	#if defined OWL_SYSTEM_WINDOWS
-		m_Impl = new Impl::WinAPIWindow(_size, _title, Keyboard.m_Impl, Mouse.m_Impl, Gamepads.m_Impl);
+		m_impl = new Impl::WinAPIWindow(_size, _title, keyboard.m_impl, mouse.m_impl, gamepads.m_impl);
 	#elif defined OWL_SYSTEM_LINUX
 		
 	#endif
 }
 
 Window::~Window() {
-	delete m_Impl;
+	delete m_impl;
 }
 
-void Window::PollEvents() {
-	m_Impl->PollEvents();
+void Window::pollEvents() {
+	m_impl->pollEvents();
 }
 
-void Window::SetContext(Context& _context) {
-	m_Impl->SetContext(*_context.m_Impl);
+void Window::setContext(Context& _context) {
+	m_impl->setContext(*_context.m_impl);
 }
 
-void Window::SetPosition(const Vec2i& _position) {
-	m_Impl->SetPosition(_position);
+void Window::setPosition(const Vec2i& _position) {
+	m_impl->setPosition(_position);
 }
-Vec2i Window::GetPosition() const {
-	return m_Impl->GetPosition();
-}
-
-void Window::SetSize(Vec2ui _size) {
-	m_Impl->SetSize(_size);
-}
-Vec2ui Window::GetSize() const {
-	return m_Impl->GetSize();
-}
-float Window::GetAspect() const {
-	return m_Impl->GetAspect();
+Vec2i Window::getPosition() const {
+	return m_impl->getPosition();
 }
 
-void Window::SetTitle(std::string _title) {
-	m_Impl->SetTitle(_title);
+void Window::setSize(Vec2ui _size) {
+	m_impl->setSize(_size);
 }
-std::string Window::GetTitle() const {
-	return m_Impl->GetTitle();
+Vec2ui Window::getSize() const {
+	return m_impl->getSize();
 }
-
-void Window::Close() {
-	m_Impl->Close();
-}
-bool Window::IsRunning() const {
-	return m_Impl->IsRunning();
+float Window::getAspect() const {
+	return m_impl->getAspect();
 }
 
-bool Window::IsFocused() const {
-	return m_Impl->IsFocused();
+void Window::setTitle(std::string _title) {
+	m_impl->setTitle(_title);
+}
+std::string Window::getTitle() const {
+	return m_impl->getTitle();
 }
 
-void Window::SetFullScreen(bool _fullScreen) {
-	m_Impl->SetFullScreen(_fullScreen);
+void Window::close() {
+	m_impl->close();
 }
-bool Window::IsFullScreen() const {
-	return m_Impl->IsFullScreen();
+bool Window::isRunning() const {
+	return m_impl->isRunning();
+}
+
+bool Window::isFocused() const {
+	return m_impl->isFocused();
+}
+
+void Window::setFullScreen(bool _fullScreen) {
+	m_impl->setFullScreen(_fullScreen);
+}
+bool Window::isFullScreen() const {
+	return m_impl->isFullScreen();
 }
 
 }

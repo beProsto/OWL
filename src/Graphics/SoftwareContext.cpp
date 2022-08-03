@@ -6,33 +6,33 @@ namespace OWL {
 
 SoftwareContext::SoftwareContext() {
 	#if defined OWL_SYSTEM_WINDOWS
-		m_Impl = new Impl::WinAPISoftwareContext;
+		m_impl = new Impl::WinAPISoftwareContext;
 	#elif defined OWL_SYSTEM_LINUX
 
 	#endif
 }
 SoftwareContext::~SoftwareContext() {
-	delete m_Impl;
+	delete m_impl;
 }
 
 
-void SoftwareContext::SetSize(Vec2ui _newSize) {
-	static_cast<Impl::SoftwareContext*>(m_Impl)->SetSize(_newSize);
+void SoftwareContext::setSize(Vec2ui _newSize) {
+	static_cast<Impl::SoftwareContext*>(m_impl)->setSize(_newSize);
 }
-Vec2ui SoftwareContext::GetSize() const {
-	return static_cast<Impl::SoftwareContext*>(m_Impl)->GetSize();
-}
-
-void SoftwareContext::Clear(const Vec4ub& _color) {
-	static_cast<Impl::SoftwareContext*>(m_Impl)->Clear(_color);
+Vec2ui SoftwareContext::getSize() const {
+	return static_cast<Impl::SoftwareContext*>(m_impl)->getSize();
 }
 
-void SoftwareContext::BlitToScreen() {
-	static_cast<Impl::SoftwareContext*>(m_Impl)->BlitToScreen();
+void SoftwareContext::clear(const Vec4ub& _color) {
+	static_cast<Impl::SoftwareContext*>(m_impl)->clear(_color);
 }
 
-Vec4ub* SoftwareContext::GetPixelData() {
-	return static_cast<Impl::SoftwareContext*>(m_Impl)->GetPixelData();
+void SoftwareContext::blitToScreen() {
+	static_cast<Impl::SoftwareContext*>(m_impl)->blitToScreen();
+}
+
+Vec4ub* SoftwareContext::getPixelData() {
+	return static_cast<Impl::SoftwareContext*>(m_impl)->getPixelData();
 }
 
 }

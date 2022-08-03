@@ -22,9 +22,9 @@ int main(int argc, char** argv) {
 	OWL::FPSLimiter fps(60);
 	OWL::Timer time;
 
-	window.SetContext(context);
+	window.setContext(context);
 
-	OWL::OpenGLLoaderFunction openGLLoadFunc = context.GetLoaderFunction();
+	OWL::OpenGLLoaderFunction openGLLoadFunc = context.getLoaderFunction();
 
 	// load OpenGL functions using the macro defined above (uses the OWL::GLContext's GetProcAddress function):
 	GL_FUNC_LOAD(unsigned int, glCreateShader, unsigned int)
@@ -49,8 +49,8 @@ int main(int argc, char** argv) {
 	GL_FUNC_LOAD(void, glVertexAttribPointer, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, void*)
 	GL_FUNC_LOAD(void, glEnableVertexAttribArray, unsigned int)
 	GL_FUNC_LOAD(void, glViewport, unsigned int, unsigned int, unsigned int, unsigned int)
-	GL_FUNC_LOAD(void, glClearColor, float, float, float, float)
-	GL_FUNC_LOAD(void, glClear, unsigned int)
+	GL_FUNC_LOAD(void, glclearColor, float, float, float, float)
+	GL_FUNC_LOAD(void, glclear, unsigned int)
 	GL_FUNC_LOAD(int, glGetUniformLocation, unsigned int, const char*)
 	GL_FUNC_LOAD(void, glUniform2f, unsigned int, float, float)
 	GL_FUNC_LOAD(void, glDrawArrays, unsigned int, unsigned int, unsigned int)
@@ -141,42 +141,42 @@ int main(int argc, char** argv) {
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);  
 
-	while(window.IsRunning()) {
-		window.PollEvents();
-		fps.Start();
-		time.Start();
+	while(window.isRunning()) {
+		window.pollEvents();
+		fps.start();
+		time.start();
 		
-		if(time.GetDeltaTime() > 0.0f) t += time.GetDeltaTime();
+		if(time.getDeltaTime() > 0.0f) t += time.getDeltaTime();
 
-		if(window.Keyboard.GetKeyData().Enum == window.Keyboard.M) {
-			window.Mouse.SetVisibility(!window.Mouse.IsVisible());
+		if(window.keyboard.GetKeyData().Enum == window.keyboard.M) {
+			window.mouse.SetVisibility(!window.mouse.IsVisible());
 		}
-		if(window.Keyboard.GetKeyData().Enum == window.Keyboard.F11) {
-			window.SetFullScreen(!window.IsFullScreen());
+		if(window.keyboard.GetKeyData().Enum == window.keyboard.F11) {
+			window.setFullScreen(!window.isFullScreen());
 		}
-		if(window.Keyboard.IsKeyPressed(window.Keyboard.Escape)) {
-			window.Close();
+		if(window.keyboard.IsKeyPressed(window.keyboard.Escape)) {
+			window.close();
 		}
 
 		float sint = std::sin(t) * 0.5f + 0.5f;
 
-		OWL::Vec2f mp = (OWL::Vec2f)window.Mouse.GetPosition() / (OWL::Vec2f)window.GetSize() * OWL::Vec2f(2.0f) - OWL::Vec2f(1.0f);
+		OWL::Vec2f mp = (OWL::Vec2f)window.mouse.getPosition() / (OWL::Vec2f)window.getSize() * OWL::Vec2f(2.0f) - OWL::Vec2f(1.0f);
 		mp.y = -mp.y;
 
-		glViewport(0, 0, window.GetSize().x, window.GetSize().y);
+		glViewport(0, 0, window.getSize().x, window.getSize().y);
 
-		glClearColor(sint, sint, sint, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glclearColor(sint, sint, sint, 1.0f);
+		glclear(GL_COLOR_BUFFER_BIT);
 
 		glUniform2f(glGetUniformLocation(shaderID, "u_Offset"), mp.x, mp.y);
-		glUniform2f(glGetUniformLocation(shaderID, "u_Aspect"), 1.0f/window.GetAspect(), 1.0f);
+		glUniform2f(glGetUniformLocation(shaderID, "u_Aspect"), 1.0f/window.getAspect(), 1.0f);
 
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 
-		context.SwapBuffers();
+		context.swapBuffers();
 
-		fps.End();
-		time.End();
+		fps.end();
+		time.end();
 	}
 
 	glDeleteVertexArrays(1, &vaID);

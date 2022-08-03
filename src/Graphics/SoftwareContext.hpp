@@ -12,19 +12,19 @@ public:
 	SoftwareContext() {}
 	virtual ~SoftwareContext() {}
 
-	virtual bool Create() {return false;}
-	virtual bool Validate() {return false;}
+	virtual bool create() {return false;}
+	virtual bool validate() {return false;}
 	
-	virtual void Destroy() {}
+	virtual void destroy() {}
 
-	virtual void SetSize(Vec2ui _newSize) {}
-	virtual Vec2ui GetSize() const {return Vec2ui(0);}
+	virtual void setSize(Vec2ui _newSize) {}
+	virtual Vec2ui getSize() const {return Vec2ui(0);}
 
-	virtual void Clear(const Vec4ub& _color) {}
+	virtual void clear(const Vec4ub& _color) {}
 
-	virtual void BlitToScreen() {}
+	virtual void blitToScreen() {}
 
-	virtual Vec4ub* GetPixelData() {return nullptr;}
+	virtual Vec4ub* getPixelData() {return nullptr;}
 };
 }
 }

@@ -10,7 +10,7 @@
 
 namespace OWL {
 
-void OWL_API Sleep(unsigned int _milliseconds) {
+void OWL_API sleep(unsigned int _milliseconds) {
 	std::this_thread::sleep_for(std::chrono::milliseconds(_milliseconds));
 }
 
@@ -24,53 +24,53 @@ public:
 	}
 
 public:
-	std::chrono::steady_clock::time_point m_S, m_E;
+	std::chrono::steady_clock::time_point m_s, m_e;
 };
 }
 
 
 FPSLimiter::FPSLimiter(unsigned int _desiredFPS) {
-	m_FPS = _desiredFPS;
-	m_Impl = new Impl::Timer();
+	m_fps = _desiredFPS;
+	m_impl = new Impl::Timer();
 }
 FPSLimiter::~FPSLimiter() {
-	delete m_Impl;
+	delete m_impl;
 }
-void FPSLimiter::SetDesiredFPS(unsigned int _desiredFPS) {
-	m_FPS = _desiredFPS;
+void FPSLimiter::setDesiredFPS(unsigned int _desiredFPS) {
+	m_fps = _desiredFPS;
 }
-unsigned int FPSLimiter::GetDesiredFPS() const {
-	return m_FPS;
+unsigned int FPSLimiter::getDesiredFPS() const {
+	return m_fps;
 }
-void FPSLimiter::Start() {
-	m_Impl->m_S = std::chrono::steady_clock::now();
+void FPSLimiter::start() {
+	m_impl->m_s = std::chrono::steady_clock::now();
 }
-void FPSLimiter::End() {
-	m_Impl->m_E = std::chrono::steady_clock::now();
-	auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(m_Impl->m_E - m_Impl->m_S).count();
-	float delay = (1000.0f / static_cast<float>(m_FPS)) - static_cast<float>(ms);
+void FPSLimiter::end() {
+	m_impl->m_e = std::chrono::steady_clock::now();
+	auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(m_impl->m_e - m_impl->m_s).count();
+	float delay = (1000.0f / static_cast<float>(m_fps)) - static_cast<float>(ms);
 	if(delay > 0) {
-		Sleep(delay);
+		sleep(delay);
 	}
 }
 
 
 Timer::Timer() {
-	m_Impl = new Impl::Timer();
+	m_impl = new Impl::Timer();
 }
 Timer::~Timer() {
-	delete m_Impl;
+	delete m_impl;
 }
-void Timer::Start() {
-	m_Impl->m_S = std::chrono::steady_clock::now();
+void Timer::start() {
+	m_impl->m_s = std::chrono::steady_clock::now();
 }
-void Timer::End() {
-	m_Impl->m_E = std::chrono::steady_clock::now();
-	auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(m_Impl->m_E - m_Impl->m_S).count();
-	m_DeltaTime = static_cast<float>(ms) / 1000.0f;
+void Timer::end() {
+	m_impl->m_e = std::chrono::steady_clock::now();
+	auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(m_impl->m_e - m_impl->m_s).count();
+	m_deltaTime = static_cast<float>(ms) / 1000.0f;
 }
-float Timer::GetDeltaTime() const {
-	return m_DeltaTime;
+float Timer::getDeltaTime() const {
+	return m_deltaTime;
 }
 
 }

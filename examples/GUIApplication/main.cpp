@@ -21,7 +21,7 @@ int main(int argc, char** argv) {
 	OWL::SoftwareContext context;
 	/* Initializing a window */
 	OWL::Window window;
-	window.SetContext(context);
+	window.setContext(context);
 	
 	/* Creating a color palette */
 	OWL::Vec4ub colorPalette[5] = {
@@ -37,76 +37,76 @@ int main(int argc, char** argv) {
 	OWL::Vec2ui size;
 
 	/* Main Loop */
-	while(window.IsRunning()) {
+	while(window.isRunning()) {
 		/* Polling an event */
-		window.PollEvents();
+		window.pollEvents();
 
 		/* Resizing the context's pixel array to the window's size */
-		context.SetSize(window.GetSize());
-		context.Clear(colorPalette[4]);
+		context.setSize(window.getSize());
+		context.clear(colorPalette[4]);
 
 		/* Drawing the rectangles */
-		position.x = context.GetSize().x * 0.05f;
-		position.y = context.GetSize().y * 0.05f;
+		position.x = context.getSize().x * 0.05f;
+		position.y = context.getSize().y * 0.05f;
 
-		size.x = context.GetSize().x * 0.2f;
-		size.y = context.GetSize().y * 0.2f;
+		size.x = context.getSize().x * 0.2f;
+		size.y = context.getSize().y * 0.2f;
 
-		DrawRect(context.GetPixelData(), context.GetSize(), position, size, colorPalette[2]);
-		DrawRect(context.GetPixelData(), context.GetSize(), position + OWL::Vec2i(2), OWL::Vec2i(10), colorPalette[3]);
-
-
-		position.x = context.GetSize().x * 0.05f;
-		position.y = context.GetSize().y * 0.3f;
-
-		size.x = context.GetSize().x * 0.2f;
-		size.y = context.GetSize().y * 0.65f;
-
-		DrawRect(context.GetPixelData(), context.GetSize(), position, size, colorPalette[1]);
-		DrawRect(context.GetPixelData(), context.GetSize(), position + OWL::Vec2i(2), OWL::Vec2i(10), colorPalette[3]);
+		DrawRect(context.getPixelData(), context.getSize(), position, size, colorPalette[2]);
+		DrawRect(context.getPixelData(), context.getSize(), position + OWL::Vec2i(2), OWL::Vec2i(10), colorPalette[3]);
 
 
-		position.x = context.GetSize().x * 0.3f;
-		position.y = context.GetSize().y * 0.05f;
+		position.x = context.getSize().x * 0.05f;
+		position.y = context.getSize().y * 0.3f;
 
-		size.x = context.GetSize().x * 0.4f;
-		size.y = context.GetSize().y * 0.9f;
+		size.x = context.getSize().x * 0.2f;
+		size.y = context.getSize().y * 0.65f;
 
-		DrawRect(context.GetPixelData(), context.GetSize(), position, size, colorPalette[0]);
-		DrawRect(context.GetPixelData(), context.GetSize(), position + OWL::Vec2i(2), OWL::Vec2i(10), colorPalette[3]);
+		DrawRect(context.getPixelData(), context.getSize(), position, size, colorPalette[1]);
+		DrawRect(context.getPixelData(), context.getSize(), position + OWL::Vec2i(2), OWL::Vec2i(10), colorPalette[3]);
+
+
+		position.x = context.getSize().x * 0.3f;
+		position.y = context.getSize().y * 0.05f;
+
+		size.x = context.getSize().x * 0.4f;
+		size.y = context.getSize().y * 0.9f;
+
+		DrawRect(context.getPixelData(), context.getSize(), position, size, colorPalette[0]);
+		DrawRect(context.getPixelData(), context.getSize(), position + OWL::Vec2i(2), OWL::Vec2i(10), colorPalette[3]);
 		
 
-		position.x = context.GetSize().x * 0.75f;
-		position.y = context.GetSize().y * 0.05f;
+		position.x = context.getSize().x * 0.75f;
+		position.y = context.getSize().y * 0.05f;
 
-		size.x = context.GetSize().x * 0.2f;
-		size.y = context.GetSize().y * 0.3f;
+		size.x = context.getSize().x * 0.2f;
+		size.y = context.getSize().y * 0.3f;
 
-		DrawRect(context.GetPixelData(), context.GetSize(), position, size, colorPalette[1]);
-		DrawRect(context.GetPixelData(), context.GetSize(), position + OWL::Vec2i(2), OWL::Vec2i(10), colorPalette[3]);
+		DrawRect(context.getPixelData(), context.getSize(), position, size, colorPalette[1]);
+		DrawRect(context.getPixelData(), context.getSize(), position + OWL::Vec2i(2), OWL::Vec2i(10), colorPalette[3]);
 		
 
-		position.x = context.GetSize().x * 0.75f;
-		position.y = context.GetSize().y * 0.4f;
+		position.x = context.getSize().x * 0.75f;
+		position.y = context.getSize().y * 0.4f;
 
-		size.x = context.GetSize().x * 0.2f;
-		size.y = context.GetSize().y * 0.3f;
+		size.x = context.getSize().x * 0.2f;
+		size.y = context.getSize().y * 0.3f;
 
-		DrawRect(context.GetPixelData(), context.GetSize(), position, size, colorPalette[2]);
-		DrawRect(context.GetPixelData(), context.GetSize(), position + OWL::Vec2i(2), OWL::Vec2i(10), colorPalette[3]);
+		DrawRect(context.getPixelData(), context.getSize(), position, size, colorPalette[2]);
+		DrawRect(context.getPixelData(), context.getSize(), position + OWL::Vec2i(2), OWL::Vec2i(10), colorPalette[3]);
 		
 
-		position.x = context.GetSize().x * 0.75f;
-		position.y = context.GetSize().y * 0.75f;
+		position.x = context.getSize().x * 0.75f;
+		position.y = context.getSize().y * 0.75f;
 
-		size.x = context.GetSize().x * 0.2f;
-		size.y = context.GetSize().y * 0.2f;
+		size.x = context.getSize().x * 0.2f;
+		size.y = context.getSize().y * 0.2f;
 
-		DrawRect(context.GetPixelData(), context.GetSize(), position, size, colorPalette[1]);
-		DrawRect(context.GetPixelData(), context.GetSize(), position + OWL::Vec2i(2), OWL::Vec2i(10), colorPalette[3]);
+		DrawRect(context.getPixelData(), context.getSize(), position, size, colorPalette[1]);
+		DrawRect(context.getPixelData(), context.getSize(), position + OWL::Vec2i(2), OWL::Vec2i(10), colorPalette[3]);
 
 		/* Blitting context's pixel data to window's screen */
-		context.BlitToScreen();
+		context.blitToScreen();
 	}
 
 	return 0;

@@ -15,12 +15,12 @@ namespace OWL {
 
 class OWL_API OSInfo {
 public:
-	static OSInfo* Get();
+	static OSInfo* get();
 
 public:
 	#if defined OWL_SYSTEM_WINDOWS
-		HINSTANCE InstanceHandle;
-		HMODULE Opengl32ModuleHandle;
+		HINSTANCE instanceHandle;
+		HMODULE opengl32ModuleHandle;
 	#elif defined OWL_SYSTEM_LINUX
 		
 	#else
@@ -29,7 +29,7 @@ public:
 
 private:
 	OSInfo();
-	static OSInfo* m_Instance;
+	static OSInfo* m_instance;
 };
 
 }
