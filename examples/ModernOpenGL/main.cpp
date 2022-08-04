@@ -17,15 +17,22 @@
 #define GL_STATIC_DRAW 0x88E4
 
 int main(int argc, char** argv) {
+	printf("a!\n");
 	OWL::OpenGLContext context;
+	printf("a!\n");
 	OWL::Window window;
+	printf("a!\n");
 	OWL::FPSLimiter fps(60);
+	printf("a!\n");
 	OWL::Timer time;
 
+	printf("a!\n");
 	window.setContext(context);
 
+	printf("a!\n");
 	OWL::OpenGLLoaderFunction openGLLoadFunc = context.getLoaderFunction();
 
+	printf("b!\n");
 	// load OpenGL functions using the macro defined above (uses the OWL::GLContext's GetProcAddress function):
 	GL_FUNC_LOAD(unsigned int, glCreateShader, unsigned int)
 	GL_FUNC_LOAD(void, glShaderSource, unsigned int, unsigned int, const char**, unsigned int)
@@ -55,6 +62,7 @@ int main(int argc, char** argv) {
 	GL_FUNC_LOAD(void, glUniform2f, unsigned int, float, float)
 	GL_FUNC_LOAD(void, glDrawArrays, unsigned int, unsigned int, unsigned int)
 
+	printf("c!\n");
 	float t = 0.0f;
 
 	float vertices[] = {
