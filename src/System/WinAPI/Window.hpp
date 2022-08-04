@@ -39,11 +39,11 @@ inline LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 
 class OWL_API WinAPIWindow: public Window {
 public:
-	WinAPIWindow(Vec2ui _size, std::string _title, keyboard* _keyboardImpl, mouse* _mouseImpl, gamepads* _gamepadsImpl) {
+	WinAPIWindow(Vec2ui _size, std::string _title, Keyboard* _keyboardImpl, Mouse* _mouseImpl, Gamepads* _gamepadsImpl) {
 		m_isRunning = true;
 		m_isFullScreen = false;
 		m_hwnd = nullptr;
-		m_ContextImpl = nullptr;
+		m_contextImpl = nullptr;
 
 		m_keyboardImpl = _keyboardImpl;
 		m_keyboardImpl->m_windowImpl = this;
@@ -60,7 +60,7 @@ public:
 		m_window.lpfnWndProc = WndProc;
 		m_window.cbClsExtra = 0;
 		m_window.cbWndExtra = 0;
-		m_window.hInstance = OSInfo::Get()->InstanceHandle;
+		m_window.hInstance = OSInfo::get()->instanceHandle;
 		m_window.hIcon = LoadIcon(m_window.hInstance, MAKEINTRESOURCE(460));
 		m_window.hCursor = LoadCursor(NULL, IDC_ARROW);
 		m_window.hbrBackground = reinterpret_cast<HBRUSH>(COLOR_WINDOW + 1);
@@ -85,7 +85,7 @@ public:
 
 		destroy();
 
-		m_hwnd = CreateWindowEx(WS_EX_CLIENTEDGE, m_className, m_title.c_str(), WS_OVERLAPPEDWINDOW, 0, 0, _size.x, _size.y, NULL, NULL, OSInfo::Get()->InstanceHandle, NULL);
+		m_hwnd = CreateWindowEx(WS_EX_CLIENTEDGE, m_className, m_title.c_str(), WS_OVERLAPPEDWINDOW, 0, 0, _size.x, _size.y, NULL, NULL, OSInfo::get()->instanceHandle, NULL);
 
 		if(m_hwnd == NULL) {
 			printf("Error creating the window!\n");
@@ -103,9 +103,9 @@ public:
 	}
 	virtual void destroy() {
 		if(m_hwnd != nullptr) {
-			if(m_ContextImpl != nullptr) {
-				m_ContextImpl->destroy();
-				m_ContextImpl = nullptr;
+			if(m_contextImpl != nullptr) {
+				m_contextImpl->destroy();
+				m_contextImpl = nullptr;
 			}
 
 			DestroyWindow(m_hwnd);
@@ -123,23 +123,23 @@ public:
 		// Vec2i winPosition = getPosition();
 		// bool winFullScreen = isFullScreen();
 		// destroy();
-		// m_ContextImpl = &_context;
-		// m_ContextImpl->m_windowImpl = this;
-		// m_ContextImpl->create();
+		// m_contextImpl = &_context;
+		// m_contextImpl->m_windowImpl = this;
+		// m_contextImpl->create();
 		// create(winPosition, winSize, m_title, winFullScreen);
-		// m_ContextImpl->validate();
+		// m_contextImpl->validate();
 
 		// This is an improper, but good looking
 		// implementation of context switching.
-		if(m_ContextImpl != nullptr) {
-			m_ContextImpl->destroy();
-			m_ContextImpl = nullptr;
+		if(m_contextImpl != nullptr) {
+			m_contextImpl->destroy();
+			m_contextImpl = nullptr;
 		}
-		m_ContextImpl = &_context;
-		m_ContextImpl->m_windowImpl = this;
+		m_contextImpl = &_context;
+		m_contextImpl->m_windowImpl = this;
 
-		m_ContextImpl->create();
-		m_ContextImpl->validate();
+		m_contextImpl->create();
+		m_contextImpl->validate();
 	}
 
 	virtual void pollEvents() {

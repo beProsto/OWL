@@ -20,7 +20,7 @@ int main() {
 /* WinAPI */
 #include <OWL/OS/Windows.hpp>
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
-	OWL::OSInfo::Get()->InstanceHandle = hInstance;
+	OWL::OSInfo::get()->instanceHandle = hInstance;
 
 	AllocConsole();
 	FILE *fpstdin = stdin, *fpstdout = stdout, *fpstderr = stderr;

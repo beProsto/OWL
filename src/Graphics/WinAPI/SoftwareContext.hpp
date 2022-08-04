@@ -22,7 +22,7 @@ public:
 		return true;
 	}
 	virtual bool validate() {
-		m_hdc = GetDC(static_cast<WinAPIWindow*>(m_windowImpl)->m_Hwnd);
+		m_hdc = GetDC(static_cast<WinAPIWindow*>(m_windowImpl)->m_hwnd);
 
 		m_data = new unsigned char[0];
 		m_size = OWL::Vec2ui(0);
@@ -31,7 +31,7 @@ public:
 	}
 
 	virtual void destroy() {
-		ReleaseDC(static_cast<WinAPIWindow*>(m_windowImpl)->m_Hwnd, m_hdc);
+		ReleaseDC(static_cast<WinAPIWindow*>(m_windowImpl)->m_hwnd, m_hdc);
 		delete[] m_data;
 		m_size = OWL::Vec2ui(0);
 	}

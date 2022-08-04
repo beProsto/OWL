@@ -22,7 +22,7 @@ public:
 		return true;
 	}
 	virtual bool validate() {
-		m_hdc = GetDC(static_cast<WinAPIWindow*>(m_windowImpl)->m_Hwnd);
+		m_hdc = GetDC(static_cast<WinAPIWindow*>(m_windowImpl)->m_hwnd);
 		
 		PIXELFORMATDESCRIPTOR pfd;
 		int iFormat;
@@ -42,16 +42,16 @@ public:
 		m_hrc = wglCreateContext(m_hdc);
 		wglMakeCurrent(m_hdc, m_hrc);
 
-		OSInfo::Get()->Opengl32ModuleHandle = LoadLibraryA("opengl32.dll");
+		OSInfo::get()->opengl32ModuleHandle = LoadLibraryA("opengl32.dll");
 
 		return true;
 	}
 
 	virtual void destroy() {
-		FreeLibrary(OSInfo::Get()->Opengl32ModuleHandle);
+		FreeLibrary(OSInfo::get()->opengl32ModuleHandle);
 		wglMakeCurrent(NULL, NULL);
 		wglDeleteContext(m_hrc);
-		ReleaseDC(static_cast<WinAPIWindow*>(m_windowImpl)->m_Hwnd, m_hdc);
+		ReleaseDC(static_cast<WinAPIWindow*>(m_windowImpl)->m_hwnd, m_hdc);
 	}
 
 	virtual OpenGLLoaderFunction getLoaderFunction() {
@@ -64,13 +64,13 @@ public:
 				(p == (void*)0x3) ||
 				(p == (void*)-1)
 			) {
-				p = (void *)::GetProcAddress(OSInfo::Get()->Opengl32ModuleHandle, name);
+				p = (void *)::GetProcAddress(OSInfo::get()->opengl32ModuleHandle, name);
 			}
 			return p;
 		};
 	}
 	virtual void swapBuffers() {
-		::swapBuffers(m_hdc);
+		::SwapBuffers(m_hdc);
 	}
 
 public:

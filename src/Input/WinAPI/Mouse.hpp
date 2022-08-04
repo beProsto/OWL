@@ -10,11 +10,11 @@ namespace Impl {
 class OWL_API WinAPIMouse: public Mouse {
 public:
 	WinAPIMouse() {
-		m_buttonMap[OWL::mouse::Button::Left] = VK_LBUTTON;
-		m_buttonMap[OWL::mouse::Button::Middle] = VK_MBUTTON;
-		m_buttonMap[OWL::mouse::Button::Right] = VK_RBUTTON;
-		m_buttonMap[OWL::mouse::Button::Backward] = VK_XBUTTON1;
-		m_buttonMap[OWL::mouse::Button::Forward] = VK_XBUTTON2;
+		m_buttonMap[OWL::Mouse::Button::Left] = VK_LBUTTON;
+		m_buttonMap[OWL::Mouse::Button::Middle] = VK_MBUTTON;
+		m_buttonMap[OWL::Mouse::Button::Right] = VK_RBUTTON;
+		m_buttonMap[OWL::Mouse::Button::Backward] = VK_XBUTTON1;
+		m_buttonMap[OWL::Mouse::Button::Forward] = VK_XBUTTON2;
 
 		m_visible = true;
 		m_wheel = 0;
@@ -35,13 +35,13 @@ public:
 		POINT p;
 		p.x = _position.x;
 		p.y = _position.y;
-		ClientToScreen(static_cast<WinAPIWindow*>(m_windowImpl)->m_Hwnd, &p);
+		ClientToScreen(static_cast<WinAPIWindow*>(m_windowImpl)->m_hwnd, &p);
 		SetCursorPos(p.x, p.y);
 	}
 	virtual Vec2i getPosition() const {
 		POINT p;
 		GetCursorPos(&p);
-		ScreenToClient(static_cast<WinAPIWindow*>(m_windowImpl)->m_Hwnd, &p);
+		ScreenToClient(static_cast<WinAPIWindow*>(m_windowImpl)->m_hwnd, &p);
 		return Vec2<int>(p.x, p.y);
 	}
 
@@ -58,8 +58,8 @@ public:
 		m_wheel = 0;
 	}
 	virtual void pollSpecificEvents() {
-		if(static_cast<WinAPIWindow*>(m_windowImpl)->m_Event.message == WM_MOUSEWHEEL) {
-			m_wheel = GET_WHEEL_DELTA_WPARAM(static_cast<WinAPIWindow*>(m_windowImpl)->m_Event.wParam);
+		if(static_cast<WinAPIWindow*>(m_windowImpl)->m_event.message == WM_MOUSEWHEEL) {
+			m_wheel = GET_WHEEL_DELTA_WPARAM(static_cast<WinAPIWindow*>(m_windowImpl)->m_event.wParam);
 		}
 	}
 
