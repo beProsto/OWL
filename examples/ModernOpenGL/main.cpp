@@ -56,8 +56,8 @@ int main(int argc, char** argv) {
 	GL_FUNC_LOAD(void, glVertexAttribPointer, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, void*)
 	GL_FUNC_LOAD(void, glEnableVertexAttribArray, unsigned int)
 	GL_FUNC_LOAD(void, glViewport, unsigned int, unsigned int, unsigned int, unsigned int)
-	GL_FUNC_LOAD(void, glclearColor, float, float, float, float)
-	GL_FUNC_LOAD(void, glclear, unsigned int)
+	GL_FUNC_LOAD(void, glClearColor, float, float, float, float)
+	GL_FUNC_LOAD(void, glClear, unsigned int)
 	GL_FUNC_LOAD(int, glGetUniformLocation, unsigned int, const char*)
 	GL_FUNC_LOAD(void, glUniform2f, unsigned int, float, float)
 	GL_FUNC_LOAD(void, glDrawArrays, unsigned int, unsigned int, unsigned int)
@@ -173,8 +173,8 @@ int main(int argc, char** argv) {
 
 		glViewport(0, 0, window.getSize().x, window.getSize().y);
 
-		glclearColor(sint, sint, sint, 1.0f);
-		glclear(GL_COLOR_BUFFER_BIT);
+		glClearColor(sint, sint, sint, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
 
 		glUniform2f(glGetUniformLocation(shaderID, "u_Offset"), mp.x, mp.y);
 		glUniform2f(glGetUniformLocation(shaderID, "u_Aspect"), 1.0f/window.getAspect(), 1.0f);
