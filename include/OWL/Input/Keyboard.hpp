@@ -127,7 +127,7 @@ public:
 		Home,
 		PageUp,
 		Delete,
-		end,
+		End,
 		PageDown,
 		BackQuote,
 		Count

@@ -109,7 +109,7 @@ public:
 		m_keyMap[OWL::Keyboard::Key::Home] = VK_HOME;
 		m_keyMap[OWL::Keyboard::Key::PageUp] = VK_PRIOR;
 		m_keyMap[OWL::Keyboard::Key::Delete] = VK_DELETE;
-		m_keyMap[OWL::Keyboard::Key::end] = VK_END;
+		m_keyMap[OWL::Keyboard::Key::End] = VK_END;
 		m_keyMap[OWL::Keyboard::Key::PageDown] = VK_NEXT;
 		m_keyMap[OWL::Keyboard::Key::BackQuote] = VK_OEM_3;
 	}
