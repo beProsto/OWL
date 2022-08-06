@@ -15,11 +15,11 @@ Mouse::~Mouse() {
 	delete m_impl;
 }
 
-void Mouse::SetVisibility(bool _visible) {
-	m_impl->SetVisibility(_visible);
+void Mouse::setVisibility(bool _visible) {
+	m_impl->setVisibility(_visible);
 }
-bool Mouse::IsVisible() const {
-	return m_impl->IsVisible();
+bool Mouse::isVisible() const {
+	return m_impl->isVisible();
 }
 
 void Mouse::setPosition(const Vec2i& _position) {

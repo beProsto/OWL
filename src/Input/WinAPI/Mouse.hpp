@@ -23,11 +23,11 @@ public:
 
 	}
 
-	virtual void SetVisibility(bool _visible) {
+	virtual void setVisibility(bool _visible) {
 		ShowCursor(_visible);
 		m_visible = _visible;
 	}
-	virtual bool IsVisible() const {
+	virtual bool isVisible() const {
 		return m_visible;
 	}
 

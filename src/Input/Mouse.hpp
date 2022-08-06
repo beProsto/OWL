@@ -11,8 +11,8 @@ public:
 	Mouse() {}
 	virtual ~Mouse() {}
 
-	virtual void SetVisibility(bool _visible) {}
-	virtual bool IsVisible() const {return false;}
+	virtual void setVisibility(bool _visible) {}
+	virtual bool isVisible() const {return false;}
 
 	virtual void setPosition(const Vec2i& _position) {}
 	virtual Vec2i getPosition() const {return Vec2i{};}

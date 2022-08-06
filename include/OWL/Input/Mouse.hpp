@@ -15,8 +15,8 @@ public:
 	Mouse();
 	~Mouse();
 
-	void SetVisibility(bool _visible);
-	bool IsVisible() const;
+	void setVisibility(bool _visible);
+	bool isVisible() const;
 
 	void setPosition(const Vec2i& _position);
 	Vec2i getPosition() const;

@@ -157,7 +157,7 @@ int main(int argc, char** argv) {
 		if(time.getDeltaTime() > 0.0f) t += time.getDeltaTime();
 
 		if(window.keyboard.getKeyData().keyEnum == window.keyboard.M) {
-			window.mouse.SetVisibility(!window.mouse.IsVisible());
+			window.mouse.setVisibility(!window.mouse.isVisible());
 		}
 		if(window.keyboard.getKeyData().keyEnum == window.keyboard.F11) {
 			window.setFullScreen(!window.isFullScreen());

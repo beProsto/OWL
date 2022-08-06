@@ -101,7 +101,7 @@ These are all the keys in it:
 - `Home`
 - `PageUp`
 - `Delete`
-- `end`
+- `End`
 - `PageDown`
 - `BackQuote`
 
