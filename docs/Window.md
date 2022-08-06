@@ -23,6 +23,6 @@ OWL::Window window;
 - `isFullScreen()` - Returns true, if the window is fullscreen - false otherwise.
 
 `Window` class has these public variables:
-- `mouse` - instance of mouse, contains mouse functionality. 
-- `keyboard` - instance of keyboard, contains keyboard functionality.
-- `gamepads` - instance of gamepads, contains gamepad functionality.
+- `mouse` - instance of Mouse, contains mouse functionality. 
+- `keyboard` - instance of Keyboard, contains keyboard functionality.
+- `gamepads` - instance of Gamepads, contains gamepad functionality.
