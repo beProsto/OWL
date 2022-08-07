@@ -10,7 +10,7 @@ Window::Window(Vec2ui _size, std::string _title) {
 	#if defined OWL_SYSTEM_WINDOWS
 		m_impl = new Impl::WinAPIWindow(_size, _title, keyboard.m_impl, mouse.m_impl, gamepads.m_impl);
 	#elif defined OWL_SYSTEM_LINUX
-		
+		m_impl = new Impl::X11Window(_size, _title, keyboard.m_impl, mouse.m_impl, gamepads.m_impl);
 	#endif
 }
 

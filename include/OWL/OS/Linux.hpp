@@ -9,5 +9,6 @@
 	#include <X11/keysymdef.h>
 	#include <X11/cursorfont.h>
 	#include <X11/Xatom.h>
+	#include <linux/joystick.h>
 
 #endif

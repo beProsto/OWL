@@ -56,7 +56,8 @@ public:
 
 #if defined OWL_SYSTEM_WINDOWS
 	#include "WinAPI/Window.hpp"
+
 #elif defined OWL_SYSTEM_LINUX
-	#include "Wayland/Window.hpp"
 	#include "X11/Window.hpp"
+
 #endif
