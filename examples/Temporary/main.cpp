@@ -85,20 +85,29 @@
 int main(int argc, char** argv) {
 	printf("Hello, Temporary!\n");
 
-	OWL::Window window;
-	OWL::OpenGLContext gl;
-	window.setContext(gl);
+	OWL::Timer time;
+	OWL::FPSLimiter fps(10);
+	fps.start();
+	time.start();
+	printf("Process\n");
+	fps.end();
+	time.end();
+	printf("It took %f secs!\n", time.getDeltaTime());
+
+	// OWL::Window window;
+	// OWL::OpenGLContext gl;
+	// window.setContext(gl);
 
 
-	while(window.isRunning()) {
-		window.pollEvents();
+	// while(window.isRunning()) {
+	// 	window.pollEvents();
 
-		glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+	// 	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+	// 	glClear(GL_COLOR_BUFFER_BIT);
 
-		gl.swapBuffers();
+	// 	gl.swapBuffers();
 
-	}
+	// }
 	
 	return 0;
 }
