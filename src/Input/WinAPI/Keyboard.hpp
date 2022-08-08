@@ -218,7 +218,7 @@ public:
 			case VK_HOME: return OWL::Keyboard::Key::Home;
 			case VK_PRIOR: return OWL::Keyboard::Key::PageUp;
 			case VK_DELETE: return OWL::Keyboard::Key::Delete;
-			case VK_END: return OWL::Keyboard::Key::end;
+			case VK_END: return OWL::Keyboard::Key::End;
 			case VK_NEXT: return OWL::Keyboard::Key::PageDown;
 			case VK_OEM_3: return OWL::Keyboard::Key::BackQuote;
 			default: return OWL::Keyboard::None;
