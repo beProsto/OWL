@@ -24,26 +24,28 @@ public:
 	}
 
 	virtual void setVisibility(bool _visible) {
-		if(_visible && _visible != m_visible) {
-			Cursor cursor;
-			cursor = XCreateFontCursor(static_cast<X11Window*>(m_windowImpl)->m_display, XC_left_ptr);
-			XDefineCursor(static_cast<X11Window*>(m_windowImpl)->m_display, static_cast<X11Window*>(m_windowImpl)->m_window, cursor);
-			XFreeCursor(static_cast<X11Window*>(m_windowImpl)->m_display, cursor);
-		}
-		else if(!_visible && _visible != m_visible) {
-			Cursor invisibleCursor;
-			Pixmap bitmapNoData;
-			XColor black;
-			static char noData[] = {0, 0, 0, 0, 0, 0, 0, 0};
-			black.red = black.green = black.blue = 0;
+		if(_visible != m_visible) {
+			if(_visible) {
+				Cursor cursor;
+				cursor = XCreateFontCursor(static_cast<X11Window*>(m_windowImpl)->m_display, XC_left_ptr);
+				XDefineCursor(static_cast<X11Window*>(m_windowImpl)->m_display, static_cast<X11Window*>(m_windowImpl)->m_window, cursor);
+				XFreeCursor(static_cast<X11Window*>(m_windowImpl)->m_display, cursor);
+			}
+			else if(!_visible) {
+				Cursor invisibleCursor;
+				Pixmap bitmapNoData;
+				XColor black;
+				static char noData[] = {0, 0, 0, 0, 0, 0, 0, 0};
+				black.red = black.green = black.blue = 0;
 
-			bitmapNoData = XCreateBitmapFromData(static_cast<X11Window*>(m_windowImpl)->m_display, static_cast<X11Window*>(m_windowImpl)->m_window, noData, 8, 8);
-			invisibleCursor = XCreatePixmapCursor(static_cast<X11Window*>(m_windowImpl)->m_display, bitmapNoData, bitmapNoData, &black, &black, 0, 0);
-			XDefineCursor(static_cast<X11Window*>(m_windowImpl)->m_display, static_cast<X11Window*>(m_windowImpl)->m_window, invisibleCursor);
-			XFreeCursor(static_cast<X11Window*>(m_windowImpl)->m_display, invisibleCursor);
-			XFreePixmap(static_cast<X11Window*>(m_windowImpl)->m_display, bitmapNoData);
+				bitmapNoData = XCreateBitmapFromData(static_cast<X11Window*>(m_windowImpl)->m_display, static_cast<X11Window*>(m_windowImpl)->m_window, noData, 8, 8);
+				invisibleCursor = XCreatePixmapCursor(static_cast<X11Window*>(m_windowImpl)->m_display, bitmapNoData, bitmapNoData, &black, &black, 0, 0);
+				XDefineCursor(static_cast<X11Window*>(m_windowImpl)->m_display, static_cast<X11Window*>(m_windowImpl)->m_window, invisibleCursor);
+				XFreeCursor(static_cast<X11Window*>(m_windowImpl)->m_display, invisibleCursor);
+				XFreePixmap(static_cast<X11Window*>(m_windowImpl)->m_display, bitmapNoData);
+			}
+			m_visible = _visible;
 		}
-		m_visible = _visible;
 	}
 	virtual bool isVisible() const {
 		return m_visible;
