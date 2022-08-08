@@ -18,7 +18,7 @@ It has 2 functions:
 				- `B`
 				- `X`
 				- `Y`
-				- `start`
+				- `Start`
 				- `Back`
 				- `ShoulderLeft`
 				- `ShoulderRight`
