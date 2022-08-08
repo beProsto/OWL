@@ -30,7 +30,9 @@ public:
 #if !defined _OWL_INCLUDE_WITHOUT_IMPLEMENTATION
 #if defined OWL_SYSTEM_WINDOWS
 	#include "WinAPI/Keyboard.hpp"
+
 #elif defined OWL_SYSTEM_LINUX
+	#include "X11/Keyboard.hpp"
 
 #endif
 #endif

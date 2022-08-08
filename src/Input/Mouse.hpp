@@ -35,13 +35,9 @@ public:
 #if !defined _OWL_INCLUDE_WITHOUT_IMPLEMENTATION
 #if defined OWL_SYSTEM_WINDOWS
 	#include "WinAPI/Mouse.hpp"
-#elif defined OWL_SYSTEM_LINUX
 
-		// 	m_buttonMap[0] = 1<<8;
-		// 	m_buttonMap[1] = 1<<9;
-		// 	m_buttonMap[2] = 1<<10;
-		// 	m_buttonMap[3] = 1<<15;
-		// 	m_buttonMap[4] = 1<<16;
+#elif defined OWL_SYSTEM_LINUX
+	#include "X11/Mouse.hpp"
 
 #endif
 #endif

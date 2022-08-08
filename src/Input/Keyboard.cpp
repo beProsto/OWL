@@ -7,7 +7,9 @@ namespace OWL {
 Keyboard::Keyboard() {
 	#if defined OWL_SYSTEM_WINDOWS
 		m_impl = new Impl::WinAPIKeyboard;
+
 	#elif defined OWL_SYSTEM_LINUX
+		m_impl = new Impl::X11Keyboard;
 
 	#endif
 }

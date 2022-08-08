@@ -7,7 +7,9 @@ namespace OWL {
 Mouse::Mouse() {
 	#if defined OWL_SYSTEM_WINDOWS
 		m_impl = new Impl::WinAPIMouse;
+		
 	#elif defined OWL_SYSTEM_LINUX
+		m_impl = new Impl::X11Mouse;
 
 	#endif
 }

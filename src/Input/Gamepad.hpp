@@ -50,7 +50,9 @@ public:
 #if !defined _OWL_INCLUDE_WITHOUT_IMPLEMENTATION
 #if defined OWL_SYSTEM_WINDOWS
 	#include "WinAPI/Gamepad.hpp"
+
 #elif defined OWL_SYSTEM_LINUX
+	#include "X11/Gamepad.hpp"
 
 #endif
 #endif
