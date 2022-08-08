@@ -48,7 +48,7 @@ public:
 				m_gamepads[i].m_buttons[OWL::Gamepad::X] = (state.Gamepad.wButtons & XINPUT_GAMEPAD_X) != 0;
 				m_gamepads[i].m_buttons[OWL::Gamepad::Y] = (state.Gamepad.wButtons & XINPUT_GAMEPAD_Y) != 0;
 				
-				m_gamepads[i].m_buttons[OWL::Gamepad::start] = (state.Gamepad.wButtons & XINPUT_GAMEPAD_START) != 0;
+				m_gamepads[i].m_buttons[OWL::Gamepad::Start] = (state.Gamepad.wButtons & XINPUT_GAMEPAD_START) != 0;
 				m_gamepads[i].m_buttons[OWL::Gamepad::Back] = (state.Gamepad.wButtons & XINPUT_GAMEPAD_BACK) != 0;
 
 				m_gamepads[i].m_buttons[OWL::Gamepad::ShoulderLeft] = (state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER) != 0;

@@ -144,7 +144,7 @@ int main(int argc, char** args) {
 		DrawTriggerRep(context.getPixelData(), context.getSize(), window.gamepads[0].getRightTrigger(), uiSize, 0.95, 0.1, 0.25);
 
 		DrawButtonRep(context.getPixelData(), context.getSize(), window.gamepads[0].isButtonPressed(OWL::Gamepad::Back),  uiSize, 1.f / 2.f - 0.12 / 2.f, 0.2f, 0.12);
-		DrawButtonRep(context.getPixelData(), context.getSize(), window.gamepads[0].isButtonPressed(OWL::Gamepad::start), uiSize, 1.f / 2.f + 0.12 / 2.f, 0.2f, 0.12);
+		DrawButtonRep(context.getPixelData(), context.getSize(), window.gamepads[0].isButtonPressed(OWL::Gamepad::Start), uiSize, 1.f / 2.f + 0.12 / 2.f, 0.2f, 0.12);
 		DrawButtonRep(context.getPixelData(), context.getSize(), window.gamepads[0].isButtonPressed(OWL::Gamepad::Logo),  uiSize, 1.f / 2.f,              0.2f, 0.12);
 
 		bool buttonsABXY[4] = {

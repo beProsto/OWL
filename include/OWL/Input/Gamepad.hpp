@@ -36,7 +36,7 @@ public:
 		ShoulderLeft = 4,
 		ShoulderRight = 5,
 		Back = 6,
-		start = 7,
+		Start = 7,
 		Logo = 8,
 		ThumbLeft = 9,
 		ThumbRight = 10,
