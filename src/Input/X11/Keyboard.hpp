@@ -7,9 +7,9 @@
 
 namespace OWL {
 namespace Impl {
-class OWL_API WinAPIKeyboard: public Keyboard {
+class OWL_API X11Keyboard: public Keyboard {
 public:
-	WinAPIKeyboard() {
+	X11Keyboard() {
 	// 	m_keyMap[OWL::Keyboard::Key::ShiftLeft] = VK_LSHIFT;
 	// 	m_keyMap[OWL::Keyboard::Key::ShiftRight] = VK_RSHIFT;
 	// 	m_keyMap[OWL::Keyboard::Key::CtrlLeft] = VK_LCONTROL;
@@ -113,13 +113,13 @@ public:
 	// 	m_keyMap[OWL::Keyboard::Key::PageDown] = VK_NEXT;
 	// 	m_keyMap[OWL::Keyboard::Key::BackQuote] = VK_OEM_3;
 	}
-	virtual ~WinAPIKeyboard() {
+	virtual ~X11Keyboard() {
 
 	}
 
 	unsigned int translateFromVirtualKey(unsigned int _key) {
-		switch(_key) {
-	// 		case VK_LSHIFT: return OWL::Keyboard::Key::ShiftLeft;
+		// switch(_key) {
+			// case 1: return OWL::Keyboard::Key::ShiftLeft;
 	// 		case VK_RSHIFT: return OWL::Keyboard::Key::ShiftRight;
 	// 		case VK_LCONTROL: return OWL::Keyboard::Key::CtrlLeft;
 	// 		case VK_RCONTROL: return OWL::Keyboard::Key::CtrlRight;
@@ -221,8 +221,8 @@ public:
 	// 		case VK_END: return OWL::Keyboard::Key::end;
 	// 		case VK_NEXT: return OWL::Keyboard::Key::PageDown;
 	// 		case VK_OEM_3: return OWL::Keyboard::Key::BackQuote;
-			default: return OWL::Keyboard::None;
-		}
+			// default: return OWL::Keyboard::None;
+		// }
 	}
 
 	virtual bool isKeyPressed(unsigned int _key) const {
@@ -232,7 +232,7 @@ public:
 public:
 	virtual void pollPreparation() {
 		m_keyData.keyChar = '\0';
-		m_keyData.keyEnum = OWL::Keyboard::None;
+		// m_keyData.keyEnum = OWL::Keyboard::None;
 	}
 	virtual void pollSpecificEvents() {
 

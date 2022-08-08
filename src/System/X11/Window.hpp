@@ -5,36 +5,50 @@
 
 #include "../Window.hpp"
 
+#define OWL_X11_WINDOW_EVENT_MASKS ExposureMask | ButtonPressMask | ButtonReleaseMask | EnterWindowMask | LeaveWindowMask | PointerMotionMask | PointerMotionHintMask | Button1MotionMask | Button2MotionMask | Button3MotionMask | Button4MotionMask | Button5MotionMask | ButtonMotionMask | KeymapStateMask | KeyPressMask | KeyReleaseMask
+
 namespace OWL {
 namespace Impl {
 
 class OWL_API X11Window: public Window {
 public:
 	X11Window(Vec2ui _size, std::string _title, Keyboard* _keyboardImpl, Mouse* _mouseImpl, Gamepads* _gamepadsImpl) {
-		m_Running = true;
-		m_FullScreen = false;
+		m_isRunning = true;
+		m_isFullScreen = false;
+		m_contextImpl = nullptr;
 
-		*m_Section = XCreateSimpleWindow(m_Display, RootWindow(m_Display, *m_ScreenID), _position.x, _position.y, m_Size.x, m_Size.y, 1, 0, 0);
-		XSelectInput(m_Display, *m_Section, OWL_X11_WINDOW_EVENT_MASKS);
-		XMapWindow(m_Display, *m_Section);
+		m_keyboardImpl = _keyboardImpl;
+		m_keyboardImpl->m_windowImpl = this;
+
+		m_mouseImpl = _mouseImpl;
+		m_mouseImpl->m_windowImpl = this;
+
+		m_gamepadsImpl = _gamepadsImpl;
+		m_gamepadsImpl->m_windowImpl = this;
+
+		m_window = XCreateSimpleWindow(m_display, RootWindow(m_display, m_screenID), 0, 0, _size.x, _size.y, 1, 0, 0);
+		XSelectInput(m_display, m_window, OWL_X11_WINDOW_EVENT_MASKS);
+		XMapWindow(m_display, m_window);
 
 		XSetLocaleModifiers("");
-		m_XIM = XOpenIM(m_Display, 0, 0, 0);
-		if(!m_XIM){
-		XSetLocaleModifiers("@im=none");
-		m_XIM = XOpenIM(m_Display, 0, 0, 0);
+		m_xIM = XOpenIM(m_display, 0, 0, 0);
+		if(!m_xIM) {
+			XSetLocaleModifiers("@im=none");
+			m_xIM = XOpenIM(m_display, 0, 0, 0);
 		}
-		m_XIC = XCreateIC(m_XIM,
-		XNInputStyle,   XIMPreeditNothing | XIMStatusNothing,
-		XNClientWindow, m_Section,
-		XNFocusWindow,  m_Section,
-		NULL);
-		XSetICFocus(m_XIC);
+		m_xIC = XCreateIC(
+			m_xIM,
+			XNInputStyle,   XIMPreeditNothing | XIMStatusNothing,
+			XNClientWindow, m_window,
+			XNFocusWindow, m_window,
+			NULL
+		);
+		XSetICFocus(m_xIC);
 
-		SetTitle(_title);
+		setTitle(_title);
 
-		m_WMDelete = XInternAtom(m_Display, "WM_DELETE_WINDOW", false);
-		XSetWMProtocols(m_Display, m_Section, &m_WMDelete, 1);
+		m_deleteWM = XInternAtom(m_display, "WM_DELETE_WINDOW", false);
+		XSetWMProtocols(m_display, m_window, &m_deleteWM, 1);
 	}
 	virtual ~X11Window() {
 		
@@ -66,23 +80,18 @@ public:
 	virtual bool isFullScreen() const {return false;}
 
 public:
-	Context* m_Context;
+	::XEvent m_event;
+	::XIM m_xIM;
+	::XIC m_xIC;
+	::Atom m_deleteWM;
 
-	js_event m_JSEvent;
-	unsigned int m_MaxGamepads;
+	::Display* m_display;
+	::Window m_window;
+	int m_screenID;
 
-	::XEvent m_Event;
-	::XIM m_XIM;
-	::XIC m_XIC;
-	::Atom m_WMDelete;
-
-	::Display* m_Display;
-	::Window m_Section;
-	int m_ScreenID;
-
-	std::string m_Title;
-	bool m_Running;
-	bool m_FullScreen;
+	std::string m_title;
+	bool m_isRunning;
+	bool m_isFullScreen;
 };
 
 }

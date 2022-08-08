@@ -1,15 +1,15 @@
 #pragma once
 
-#include "../mouse.hpp"
+#include "../Mouse.hpp"
 #include "../../System/Window.hpp"
 
 #include <OWL/OS/Windows.hpp>
 
 namespace OWL {
 namespace Impl {
-class OWL_API WinAPIMouse: public Mouse {
+class OWL_API X11Mouse: public Mouse {
 public:
-	WinAPIMouse() {
+	X11Mouse() {
 		m_buttonMap[OWL::Mouse::Button::Left] = 1<<8;
 		m_buttonMap[OWL::Mouse::Button::Middle] = 1<<9;
 		m_buttonMap[OWL::Mouse::Button::Right] = 1<<10;
@@ -19,7 +19,7 @@ public:
 		m_visible = true;
 		m_wheel = 0;
 	}
-	virtual ~WinAPIMouse() {
+	virtual ~X11Mouse() {
 
 	}
 

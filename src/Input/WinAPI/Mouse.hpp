@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../mouse.hpp"
+#include "../Mouse.hpp"
 #include "../../System/Window.hpp"
 
 #include <OWL/OS/Windows.hpp>
