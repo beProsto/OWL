@@ -121,6 +121,11 @@ int main(int argc, char** argv) {
 			window.setSize(OWL::Vec2ui(150, 500));
 		}
 
+		if(window.keyboard.getKeyData().keyChar == 's') {
+			printf("S pressed\n");
+			window.mouse.setVisibility(!window.mouse.isVisible());
+		}
+
 		if(window.keyboard.getKeyData().keyChar != '\0') {
 			text += window.keyboard.getKeyData().keyChar;
 			std::wcout << text << std::endl;
@@ -137,9 +142,9 @@ int main(int argc, char** argv) {
 			window.setFullScreen(!window.isFullScreen());
 		}
 
-		if(!window.isFocused()) {
-			printf("unfocused :c\n");
-		}
+		// if(!window.isFocused()) {
+		// 	printf("unfocused :c\n");
+		// }
 
 	// 	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 	// 	glClear(GL_COLOR_BUFFER_BIT);
