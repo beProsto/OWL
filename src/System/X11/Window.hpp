@@ -26,7 +26,11 @@ public:
 		m_gamepadsImpl = _gamepadsImpl;
 		m_gamepadsImpl->m_windowImpl = this;
 
+		m_display = XOpenDisplay(0);
+		m_screenID = DefaultScreen(m_display);
+
 		m_window = XCreateSimpleWindow(m_display, XRootWindow(m_display, m_screenID), 0, 0, _size.x, _size.y, 1, 0, 0);
+		
 		XSelectInput(m_display, m_window, OWL_X11_WINDOW_EVENT_MASKS);
 		XMapWindow(m_display, m_window);
 
@@ -72,7 +76,7 @@ public:
 	virtual std::string getTitle() const {return "";}
 
 	virtual void close() {}
-	virtual bool isRunning() const {return false;}
+	virtual bool isRunning() const {return m_isRunning;}
 
 	virtual bool isFocused() const {return false;}
 

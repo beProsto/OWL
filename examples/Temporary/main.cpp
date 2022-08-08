@@ -94,12 +94,13 @@ int main(int argc, char** argv) {
 	time.end();
 	printf("It took %f secs!\n", time.getDeltaTime());
 
-	// OWL::Window window;
+	OWL::Window window;
+	printf("EA szzorts \n");
 	// OWL::OpenGLContext gl;
 	// window.setContext(gl);
 
 
-	// while(window.isRunning()) {
+	while(window.isRunning()) {
 	// 	window.pollEvents();
 
 	// 	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
@@ -107,7 +108,7 @@ int main(int argc, char** argv) {
 
 	// 	gl.swapBuffers();
 
-	// }
+	}
 	
 	return 0;
 }
