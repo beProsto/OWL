@@ -10,11 +10,11 @@ namespace Impl {
 class OWL_API WinAPIMouse: public Mouse {
 public:
 	WinAPIMouse() {
-		// m_buttonMap[OWL::Mouse::Button::Left] = VK_LBUTTON;
-		// m_buttonMap[OWL::Mouse::Button::Middle] = VK_MBUTTON;
-		// m_buttonMap[OWL::Mouse::Button::Right] = VK_RBUTTON;
-		// m_buttonMap[OWL::Mouse::Button::Backward] = VK_XBUTTON1;
-		// m_buttonMap[OWL::Mouse::Button::Forward] = VK_XBUTTON2;
+		m_buttonMap[OWL::Mouse::Button::Left] = 1<<8;
+		m_buttonMap[OWL::Mouse::Button::Middle] = 1<<9;
+		m_buttonMap[OWL::Mouse::Button::Right] = 1<<10;
+		m_buttonMap[OWL::Mouse::Button::Backward] = 1<<15;
+		m_buttonMap[OWL::Mouse::Button::Forward] = 1<<16;
 
 		m_visible = true;
 		m_wheel = 0;
