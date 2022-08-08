@@ -66,7 +66,34 @@ public:
 		XCloseDisplay(m_display);
 	}
 	
-	virtual void setContext(Context& _context) {}
+	virtual void setContext(Context& _context) {
+		// // THIS IS THE PROPER WAY TO GO ABOUT THIS
+		// // BUT IT LOOKS BAD
+		// // SO ONLY USE THIS IMPLEMENTATION
+		// // IF REQUIRED BY DIRECT3D
+		// // (VULKAN DOESN'T AS FAR AS I'M AWARE)
+		// Vec2ui winSize = getSize();
+		// Vec2i winPosition = getPosition();
+		// bool winFullScreen = isFullScreen();
+		// destroy();
+		// m_contextImpl = &_context;
+		// m_contextImpl->m_windowImpl = this;
+		// m_contextImpl->create();
+		// create(winPosition, winSize, m_title, winFullScreen);
+		// m_contextImpl->validate();
+
+		// This is an improper, but good looking
+		// implementation of context switching.
+		if(m_contextImpl != nullptr) {
+			m_contextImpl->destroy();
+			m_contextImpl = nullptr;
+		}
+		m_contextImpl = &_context;
+		m_contextImpl->m_windowImpl = this;
+
+		m_contextImpl->create();
+		m_contextImpl->validate();
+	}
 
 	virtual void pollEvents() {
 		m_mouseImpl->pollPreparation();
