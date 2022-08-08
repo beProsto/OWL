@@ -64,6 +64,10 @@ public:
 	virtual void setContext(Context& _context) {}
 
 	virtual void pollEvents() {
+		m_mouseImpl->pollPreparation();
+		m_keyboardImpl->pollPreparation();
+		m_gamepadsImpl->pollPreparation();
+
 		while(XPending(m_display) > 0) {
 			XNextEvent(m_display, &m_event);
 			if(XFilterEvent(&m_event, 0L)) {
@@ -75,6 +79,10 @@ public:
 					close();
 				}
 			}
+
+			m_mouseImpl->pollSpecificEvents();
+			m_keyboardImpl->pollSpecificEvents();
+			// m_gamepadsImpl->pollSpecificEvents(); // No need
 		}
 	}
 
