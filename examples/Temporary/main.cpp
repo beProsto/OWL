@@ -3,6 +3,9 @@
 #include <OWL/Time.hpp>
 #include <OWL/OpenGL.hpp>
 
+#include <iostream>
+#include <string>
+
 // #include <SDL2/SDL.h>
 // #include <emscripten/html5.h>
 
@@ -99,15 +102,51 @@ int main(int argc, char** argv) {
 	// OWL::OpenGLContext gl;
 	// window.setContext(gl);
 
+	std::wstring text;
 
 	while(window.isRunning()) {
+		fps.start();
 		window.pollEvents();
+
+		if(window.keyboard.isKeyPressed(OWL::Keyboard::Escape)) {
+			window.close();
+		}
+
+		if(window.keyboard.isKeyPressed(OWL::Keyboard::A)) {
+			printf("A pressed\n");
+			window.setPosition(OWL::Vec2i(150, 500));
+		}
+		if(window.keyboard.isKeyPressed(OWL::Keyboard::B)) {
+			printf("B pressed\n");
+			window.setSize(OWL::Vec2ui(150, 500));
+		}
+
+		if(window.keyboard.getKeyData().keyChar != '\0') {
+			text += window.keyboard.getKeyData().keyChar;
+			std::wcout << text << std::endl;
+		}
+
+		if(window.keyboard.isKeyPressed(OWL::Keyboard::C)) {
+			printf("C %d : %d\n", window.getPosition().x, window.getPosition().y);
+		}
+		if(window.keyboard.isKeyPressed(OWL::Keyboard::D)) {
+			printf("D %d : %d\n", window.getSize().x, window.getSize().y);
+		}
+
+		if(window.keyboard.isKeyPressed(OWL::Keyboard::F11)) {
+			window.setFullScreen(!window.isFullScreen());
+		}
+
+		if(!window.isFocused()) {
+			printf("unfocused :c\n");
+		}
 
 	// 	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 	// 	glClear(GL_COLOR_BUFFER_BIT);
 
 	// 	gl.swapBuffers();
 
+		fps.end();
 	}
 	
 	return 0;
