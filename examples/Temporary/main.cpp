@@ -142,6 +142,9 @@ int main(int argc, char** argv) {
 			window.setFullScreen(!window.isFullScreen());
 		}
 
+		if(window.keyboard.isKeyPressed(OWL::Keyboard::Space)) {
+			printf("M: X=%d Y=%d W=%d\n", window.mouse.getPosition().x, window.mouse.getPosition().y, window.mouse.getWheelRotation());
+		}
 		// if(!window.isFocused()) {
 		// 	printf("unfocused :c\n");
 		// }

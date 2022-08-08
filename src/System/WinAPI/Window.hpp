@@ -39,20 +39,11 @@ inline LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 
 class OWL_API WinAPIWindow: public Window {
 public:
-	WinAPIWindow(Vec2ui _size, std::string _title, Keyboard* _keyboardImpl, Mouse* _mouseImpl, Gamepads* _gamepadsImpl) {
+	WinAPIWindow(Vec2ui _size, std::string _title) {
 		m_isRunning = true;
 		m_isFullScreen = false;
 		m_hwnd = nullptr;
 		m_contextImpl = nullptr;
-
-		m_keyboardImpl = _keyboardImpl;
-		m_keyboardImpl->m_windowImpl = this;
-
-		m_mouseImpl = _mouseImpl;
-		m_mouseImpl->m_windowImpl = this;
-
-		m_gamepadsImpl = _gamepadsImpl;
-		m_gamepadsImpl->m_windowImpl = this;
 
 		m_className = "WinAPI_Window_ClassName";
 		m_window.cbSize = sizeof(WNDCLASSEX);

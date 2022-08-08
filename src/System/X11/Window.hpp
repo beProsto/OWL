@@ -7,26 +7,17 @@
 
 // ExposureMask | ButtonPressMask | ButtonReleaseMask | EnterWindowMask | LeaveWindowMask | PointerMotionMask | PointerMotionHintMask | Button1MotionMask | Button2MotionMask | Button3MotionMask | Button4MotionMask | Button5MotionMask | ButtonMotionMask | KeymapStateMask | KeyPressMask | KeyReleaseMask
 
-#define OWL_X11_WINDOW_EVENT_MASKS KeymapStateMask | KeyPressMask | KeyReleaseMask
+#define OWL_X11_WINDOW_EVENT_MASKS FocusChangeMask | KeyPressMask | ButtonPressMask
 
 namespace OWL {
 namespace Impl {
 
 class OWL_API X11Window: public Window {
 public:
-	X11Window(Vec2ui _size, std::string _title, Keyboard* _keyboardImpl, Mouse* _mouseImpl, Gamepads* _gamepadsImpl) {
+	X11Window(Vec2ui _size, std::string _title) {
 		m_isRunning = true;
 		m_isFullScreen = false;
 		m_contextImpl = nullptr;
-
-		m_keyboardImpl = _keyboardImpl;
-		m_keyboardImpl->m_windowImpl = this;
-
-		m_mouseImpl = _mouseImpl;
-		m_mouseImpl->m_windowImpl = this;
-
-		m_gamepadsImpl = _gamepadsImpl;
-		m_gamepadsImpl->m_windowImpl = this;
 
 		m_display = XOpenDisplay(0);
 		m_screenID = DefaultScreen(m_display);

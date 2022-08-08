@@ -50,10 +50,15 @@ public:
 	}
 
 	virtual void setPosition(const Vec2i& _position) {
-
+		XWarpPointer(static_cast<X11Window*>(m_windowImpl)->m_display, 0L, static_cast<X11Window*>(m_windowImpl)->m_window, 0, 0, 0, 0, _position.x, _position.y);
 	}
 	virtual Vec2i getPosition() const {
-		return Vec2i(0);
+		int xReturned, yReturned;
+
+		int tmpInt; ::Window tmpRoot, tmpWin;
+		XQueryPointer(static_cast<X11Window*>(m_windowImpl)->m_display, static_cast<X11Window*>(m_windowImpl)->m_window, &tmpRoot, &tmpWin, &tmpInt, &tmpInt, &xReturned, &yReturned, (unsigned int*)&tmpInt);
+
+		return OWL::Vec2i(xReturned, yReturned);
 	}
 
 	virtual int getWheelRotation() const {
@@ -61,7 +66,12 @@ public:
 	}
 
 	virtual bool isButtonPressed(unsigned int _button) const {
-		return false;
+		unsigned int buttonPressed;
+
+		int tmpInt; ::Window tmpRoot, tmpWin;
+		XQueryPointer(static_cast<X11Window*>(m_windowImpl)->m_display, static_cast<X11Window*>(m_windowImpl)->m_window, &tmpRoot, &tmpWin, &tmpInt, &tmpInt, &tmpInt, &tmpInt, &buttonPressed);
+		
+		return (buttonPressed & m_buttonMap[_button]);
 	}
 
 public:
@@ -69,7 +79,14 @@ public:
 		m_wheel = 0;
 	}
 	virtual void pollSpecificEvents() {
-
+		if(static_cast<X11Window*>(m_windowImpl)->m_event.type == ButtonPress) {
+			if(static_cast<X11Window*>(m_windowImpl)->m_event.xbutton.button == Button4) {
+				m_wheel += 1;
+			}
+			else if(static_cast<X11Window*>(m_windowImpl)->m_event.xbutton.button == Button5) {
+				m_wheel -= 1;
+			}
+		}
 	}
 
 public:

@@ -8,12 +8,21 @@ namespace OWL {
 
 Window::Window(Vec2ui _size, std::string _title) {
 	#if defined OWL_SYSTEM_WINDOWS
-		m_impl = new Impl::WinAPIWindow(_size, _title, keyboard.m_impl, mouse.m_impl, gamepads.m_impl);
+		m_impl = new Impl::WinAPIWindow(_size, _title);
 
 	#elif defined OWL_SYSTEM_LINUX
-		m_impl = new Impl::X11Window(_size, _title, keyboard.m_impl, mouse.m_impl, gamepads.m_impl);
+		m_impl = new Impl::X11Window(_size, _title);
 
 	#endif
+
+	m_impl->m_keyboardImpl = keyboard.m_impl;
+	keyboard.m_impl->m_windowImpl = m_impl;
+
+	m_impl->m_mouseImpl = mouse.m_impl;
+	mouse.m_impl->m_windowImpl = m_impl;
+
+	m_impl->m_gamepadsImpl = gamepads.m_impl;
+	gamepads.m_impl->m_windowImpl = m_impl;
 }
 
 Window::~Window() {
