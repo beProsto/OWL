@@ -63,7 +63,20 @@ public:
 	
 	virtual void setContext(Context& _context) {}
 
-	virtual void pollEvents() {}
+	virtual void pollEvents() {
+		while(XPending(m_display) > 0) {
+			XNextEvent(m_display, &m_event);
+			if(XFilterEvent(&m_event, 0L)) {
+				continue;
+			}
+
+			if(m_event.type == ClientMessage) {
+				if(m_event.xclient.data.l[0] == m_deleteWM) {
+					close();
+				}
+			}
+		}
+	}
 
 	virtual void setPosition(const Vec2i& _position) {}
 	virtual Vec2i getPosition() const {return Vec2i{};}
@@ -75,8 +88,12 @@ public:
 	virtual void setTitle(std::string _title) {}
 	virtual std::string getTitle() const {return "";}
 
-	virtual void close() {}
-	virtual bool isRunning() const {return m_isRunning;}
+	virtual void close() {
+		m_isRunning = false;
+	}
+	virtual bool isRunning() const {
+		return m_isRunning;
+	}
 
 	virtual bool isFocused() const {return false;}
 
