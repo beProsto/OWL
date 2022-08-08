@@ -50,7 +50,7 @@ public:
 	}
 
 	virtual bool isButtonPressed(unsigned int _button) const {
-		return GetKeyState(m_buttonMap[_button]) & 0x100;;
+		return GetKeyState(m_buttonMap[_button]) & 0x100;
 	}
 
 public:

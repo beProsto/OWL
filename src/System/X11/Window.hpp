@@ -11,7 +11,30 @@ namespace Impl {
 class OWL_API X11Window: public Window {
 public:
 	X11Window(Vec2ui _size, std::string _title, Keyboard* _keyboardImpl, Mouse* _mouseImpl, Gamepads* _gamepadsImpl) {
+		m_Running = true;
+		m_FullScreen = false;
 
+		*m_Section = XCreateSimpleWindow(m_Display, RootWindow(m_Display, *m_ScreenID), _position.x, _position.y, m_Size.x, m_Size.y, 1, 0, 0);
+		XSelectInput(m_Display, *m_Section, OWL_X11_WINDOW_EVENT_MASKS);
+		XMapWindow(m_Display, *m_Section);
+
+		XSetLocaleModifiers("");
+		m_XIM = XOpenIM(m_Display, 0, 0, 0);
+		if(!m_XIM){
+		XSetLocaleModifiers("@im=none");
+		m_XIM = XOpenIM(m_Display, 0, 0, 0);
+		}
+		m_XIC = XCreateIC(m_XIM,
+		XNInputStyle,   XIMPreeditNothing | XIMStatusNothing,
+		XNClientWindow, m_Section,
+		XNFocusWindow,  m_Section,
+		NULL);
+		XSetICFocus(m_XIC);
+
+		SetTitle(_title);
+
+		m_WMDelete = XInternAtom(m_Display, "WM_DELETE_WINDOW", false);
+		XSetWMProtocols(m_Display, m_Section, &m_WMDelete, 1);
 	}
 	virtual ~X11Window() {
 		
