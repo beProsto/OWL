@@ -12,9 +12,9 @@ int main(int argc, char** argv) {
 		window.pollEvents();
 		fps.start();
 
-		// if(window.keyboard.getKeyData().KeyEnum == window.keyboard.F11) {
-		// 	window.setFullScreen(!window.isFullScreen());
-		// }
+		if(window.keyboard.getKeyData().keyEnum == window.keyboard.F11) {
+			window.setFullScreen(!window.isFullScreen());
+		}
 		if(window.keyboard.isKeyPressed(window.keyboard.Escape)) {
 			window.close();
 		}

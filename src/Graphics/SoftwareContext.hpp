@@ -31,6 +31,8 @@ public:
 
 #if defined OWL_SYSTEM_WINDOWS
 	#include "WinAPI/SoftwareContext.hpp"
+
 #elif defined OWL_SYSTEM_LINUX
+	#include "X11/SoftwareContext.hpp"
 
 #endif

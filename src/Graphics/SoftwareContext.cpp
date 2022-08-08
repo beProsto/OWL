@@ -7,7 +7,9 @@ namespace OWL {
 SoftwareContext::SoftwareContext() {
 	#if defined OWL_SYSTEM_WINDOWS
 		m_impl = new Impl::WinAPISoftwareContext;
+
 	#elif defined OWL_SYSTEM_LINUX
+		m_impl = new Impl::X11SoftwareContext;
 
 	#endif
 }

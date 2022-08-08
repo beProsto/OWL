@@ -7,7 +7,9 @@ namespace OWL {
 OpenGLContext::OpenGLContext() {
 	#if defined OWL_SYSTEM_WINDOWS
 		m_impl = new Impl::WinAPIOpenGLContext;
+
 	#elif defined OWL_SYSTEM_LINUX
+		m_impl = new Impl::X11OpenGLContext;
 
 	#endif
 }
