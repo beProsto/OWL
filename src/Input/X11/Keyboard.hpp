@@ -118,9 +118,9 @@ public:
 	}
 
 	unsigned int translateFromVirtualKey(unsigned int _key) {
-		// switch(_key) {
-			// case 1: return OWL::Keyboard::Key::ShiftLeft;
-	// 		case VK_RSHIFT: return OWL::Keyboard::Key::ShiftRight;
+		switch(_key) {
+			// case VK_LSHIFT: return OWL::Keyboard::Key::ShiftLeft;
+			// case VK_RSHIFT: return OWL::Keyboard::Key::ShiftRight;
 	// 		case VK_LCONTROL: return OWL::Keyboard::Key::CtrlLeft;
 	// 		case VK_RCONTROL: return OWL::Keyboard::Key::CtrlRight;
 	// 		case VK_RETURN: return OWL::Keyboard::Key::Enter;
@@ -221,18 +221,18 @@ public:
 	// 		case VK_END: return OWL::Keyboard::Key::end;
 	// 		case VK_NEXT: return OWL::Keyboard::Key::PageDown;
 	// 		case VK_OEM_3: return OWL::Keyboard::Key::BackQuote;
-			// default: return OWL::Keyboard::None;
-		// }
+			default: return OWL::Keyboard::None;
+		}
 	}
 
 	virtual bool isKeyPressed(unsigned int _key) const {
-
+		return false;
 	}
 
 public:
 	virtual void pollPreparation() {
 		m_keyData.keyChar = '\0';
-		// m_keyData.keyEnum = OWL::Keyboard::None;
+		m_keyData.keyEnum = OWL::Keyboard::None;
 	}
 	virtual void pollSpecificEvents() {
 

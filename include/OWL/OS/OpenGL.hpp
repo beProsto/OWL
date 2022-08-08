@@ -16,7 +16,11 @@ namespace OWL {
 
 #elif defined OWL_SYSTEM_LINUX
 	#include <OWL/OS/Linux.hpp>
+	#define Bool int
+	#define Status int
 	#include <GL/gl.h>
 	#include <GL/glx.h>
+	#undef Status
+	#undef Bool
 
 #endif

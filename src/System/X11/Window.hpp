@@ -26,7 +26,7 @@ public:
 		m_gamepadsImpl = _gamepadsImpl;
 		m_gamepadsImpl->m_windowImpl = this;
 
-		m_window = XCreateSimpleWindow(m_display, RootWindow(m_display, m_screenID), 0, 0, _size.x, _size.y, 1, 0, 0);
+		m_window = XCreateSimpleWindow(m_display, XRootWindow(m_display, m_screenID), 0, 0, _size.x, _size.y, 1, 0, 0);
 		XSelectInput(m_display, m_window, OWL_X11_WINDOW_EVENT_MASKS);
 		XMapWindow(m_display, m_window);
 
