@@ -12,6 +12,8 @@
 		#include <X11/cursorfont.h>
 		#include <X11/Xatom.h>
 		#include <linux/joystick.h>
+		#include <fcntl.h>
+		#include <unistd.h>
 
 		#undef Bool
 		#undef None
