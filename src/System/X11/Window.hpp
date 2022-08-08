@@ -17,6 +17,7 @@ public:
 	X11Window(Vec2ui _size, std::string _title) {
 		m_isRunning = true;
 		m_isFullScreen = false;
+		m_isFocused = true;
 		m_contextImpl = nullptr;
 
 		m_display = XOpenDisplay(0);
@@ -83,6 +84,12 @@ public:
 					close();
 				}
 			}
+			else if(m_event.type == FocusIn) {
+				m_isFocused = true;
+			}
+			else if(m_event.type == FocusOut) {
+				m_isFocused = false;
+			}
 
 			m_mouseImpl->pollSpecificEvents();
 			m_keyboardImpl->pollSpecificEvents();
@@ -137,10 +144,7 @@ public:
 	}
 
 	virtual bool isFocused() const {
-		::Window focused;
-		int revert_to;
-		XGetInputFocus(m_display, &focused, &revert_to);
-		return focused == m_window;
+		return m_isFocused;
 	}
 
 	virtual void setFullScreen(bool _fullScreen) {		
@@ -183,6 +187,7 @@ public:
 	std::string m_title;
 	bool m_isRunning;
 	bool m_isFullScreen;
+	bool m_isFocused;
 };
 
 }

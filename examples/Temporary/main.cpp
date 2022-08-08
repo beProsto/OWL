@@ -144,10 +144,17 @@ int main(int argc, char** argv) {
 
 		if(window.keyboard.isKeyPressed(OWL::Keyboard::Space)) {
 			printf("M: X=%d Y=%d W=%d\n", window.mouse.getPosition().x, window.mouse.getPosition().y, window.mouse.getWheelRotation());
+			printf("L(%d)M(%d)R(%d)F(%d)B(%d)\n", 
+				window.mouse.isButtonPressed(OWL::Mouse::Left),
+				window.mouse.isButtonPressed(OWL::Mouse::Middle),
+				window.mouse.isButtonPressed(OWL::Mouse::Right),
+				window.mouse.isButtonPressed(OWL::Mouse::Forward),
+				window.mouse.isButtonPressed(OWL::Mouse::Backward)
+			);
 		}
-		// if(!window.isFocused()) {
-		// 	printf("unfocused :c\n");
-		// }
+		if(!window.isFocused()) {
+			printf("unfocused :c\n");
+		}
 
 	// 	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 	// 	glClear(GL_COLOR_BUFFER_BIT);
