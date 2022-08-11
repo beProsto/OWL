@@ -37,8 +37,8 @@ public:
 			// Simply get the state of the controller from XInput.
 			if((m_gamepads[i].m_isConnected = (XInputGetState(i, &state) == ERROR_SUCCESS))) {
 				// Controller is connected
-				m_gamepads[i].m_leftStick = stickNorm(state.Gamepad.sThumbLX, state.Gamepad.sThumbLY);
-				m_gamepads[i].m_rightStick = stickNorm(state.Gamepad.sThumbRX, state.Gamepad.sThumbRY);
+				m_gamepads[i].m_leftStick = stickNorm(state.Gamepad.sThumbLX, -state.Gamepad.sThumbLY);
+				m_gamepads[i].m_rightStick = stickNorm(state.Gamepad.sThumbRX, -state.Gamepad.sThumbRY);
 				
 				m_gamepads[i].m_leftTrigger = (float)state.Gamepad.bLeftTrigger / 255;
 				m_gamepads[i].m_rightTrigger = (float)state.Gamepad.bRightTrigger / 255;

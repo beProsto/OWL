@@ -39,7 +39,6 @@ void DrawStickRep(OWL::Vec4ub* _canvas, const OWL::Vec2i& _size, const OWL::Vec2
 	OWL::Vec2f positioning;
 	// positioning = ((OWL::Vec2f)window.mouse.getPosition() / (OWL::Vec2f)window.getSize() - OWL::Vec2f(0.5f)) * OWL::Vec2f(2.0f);
 	positioning = _gamepad;
-	positioning.y = -positioning.y;
 
 	OWL::Vec4ub col = colorPalette[4];
 	if(_pressed) col = colorPalette[2];
