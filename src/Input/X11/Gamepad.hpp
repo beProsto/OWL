@@ -14,9 +14,6 @@ struct OWL_API X11GamepadMetaData {
 	Vec2f rightStickInternal = Vec2f(0.0f);
 };
 
-// THIS IS CURRENTLY MID-DEVELOPEMENT
-// THE DEBUG MESSAGES HAVE TO BE HERE FOR AT LEAST A FEW COMMITS
-
 class OWL_API X11Gamepads: public Gamepads {
 public:
 	X11Gamepads() {
@@ -26,6 +23,7 @@ public:
 	}
 	virtual ~X11Gamepads() {
 		delete[] m_gamepads;
+		delete[] m_meta;
 	}
 
 	virtual void setCount(unsigned int _gamepadsCount) {
@@ -34,6 +32,7 @@ public:
 			delete[] m_meta;
 
 			m_gamepadsCount = _gamepadsCount;
+
 			m_gamepads = new Gamepad[m_gamepadsCount]();
 			m_meta = new X11GamepadMetaData[m_gamepadsCount];
 		}
