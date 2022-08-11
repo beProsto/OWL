@@ -14,6 +14,9 @@ struct OWL_API X11GamepadMetaData {
 	Vec2f rightStickInternal = Vec2f(0.0f);
 };
 
+// THIS IS CURRENTLY MID-DEVELOPEMENT
+// THE DEBUG MESSAGES HAVE TO BE HERE FOR AT LEAST A FEW COMMITS
+
 class OWL_API X11Gamepads: public Gamepads {
 public:
 	X11Gamepads() {
@@ -64,11 +67,6 @@ public:
 
 			if(errno == ENODEV || m_meta[i].js == -1) {
 				m_meta[i].js = open(std::string("/dev/input/js" + std::to_string(i)).c_str(), O_NONBLOCK);
-				printf("CANT OPEN GAMEPAD %d\n", i);
-			}
-			else {
-
-				printf("OPENED GAMEPAD %d\n", i);
 			}
 		}
 	}
