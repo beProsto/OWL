@@ -23,6 +23,13 @@ public:
 	}
 	virtual bool validate() {
 
+		// m_visualInfo->visual = DefaultVisual(static_cast<X11Window*>(m_windowImpl)->m_display, static_cast<X11Window*>(m_windowImpl)->m_screenID);
+		
+		XMatchVisualInfo(static_cast<X11Window*>(m_windowImpl)->m_display, static_cast<X11Window*>(m_windowImpl)->m_screenID, 32, 0, m_visualInfo);
+		
+		m_glXContext = glXCreateContext(static_cast<X11Window*>(m_windowImpl)->m_display, m_visualInfo, 0, true);
+		glXMakeCurrent(static_cast<X11Window*>(m_windowImpl)->m_display, static_cast<X11Window*>(m_windowImpl)->m_window, m_glXContext);
+
 		return true;
 	}
 
@@ -32,7 +39,7 @@ public:
 
 	virtual OpenGLLoaderFunction getLoaderFunction() {
 		return [](const char* name) {
-			void *p = nullptr;
+			void *p = (void*)glXGetProcAddress((unsigned char*)name);
 			return p;
 		};
 	}
@@ -41,6 +48,10 @@ public:
 	}
 
 public:
+	::XVisualInfo* m_visualInfo;
+	bool m_Created;
+
+	::GLXContext m_glXContext;
 
 };
 }
