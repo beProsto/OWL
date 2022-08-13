@@ -31,7 +31,10 @@ public:
 	}
 
 	virtual OpenGLLoaderFunction getLoaderFunction() {
-
+		return [](const char* name) {
+			void *p = nullptr;
+			return p;
+		};
 	}
 	virtual void swapBuffers() {
 
