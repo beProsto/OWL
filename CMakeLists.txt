@@ -5,7 +5,7 @@ project(OWL VERSION 0.2022.2)
 set(CMAKE_BUILD_TYPE Release)
 
 # include basic cmake project config
-include(CMakeUtility.txt)
+include(CMakeUtility.cmake)
 
 # include_directories and link_libraries work on all targets defined BELOW them
 include_directories(include)
