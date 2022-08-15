@@ -37,11 +37,20 @@ elseif(OWL_SYSTEM_WINDOWS)
 	)
 
 elseif(OWL_SYSTEM_LINUX)
-	link_libraries(
-		X11
-		GL
-		GLX
-	)
+	if(NOT X11_OFF)
+		link_libraries(
+			X11
+			GL
+			GLX
+		)
+
+	endif()
+	if(NOT WAYLAND_OFF)
+		link_libraries(
+			wayland-client
+		)
+
+	endif()
 
 endif()
 
