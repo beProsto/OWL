@@ -10,12 +10,16 @@ elseif(UNIX)
 
 endif()
 
+
 # Sets the executable type
 if(OWL_SYSTEM_WINDOWS)
 	set(OWL_EXE_TYPE WIN32)
+
 else()
 	set(OWL_EXE_TYPE )
+
 endif()
+
 
 # Generates a basic html file for our emscripten/wasm build targets (examples)
 function(OWL_GenerateHtml name)

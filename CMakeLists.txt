@@ -37,17 +37,17 @@ elseif(OWL_SYSTEM_WINDOWS)
 	)
 
 elseif(OWL_SYSTEM_LINUX)
+	if(NOT WAYLAND_OFF)
+		link_libraries(
+			wayland-client
+		)
+
+	endif()
 	if(NOT X11_OFF)
 		link_libraries(
 			X11
 			GL
 			GLX
-		)
-
-	endif()
-	if(NOT WAYLAND_OFF)
-		link_libraries(
-			wayland-client
 		)
 
 	endif()
@@ -64,6 +64,17 @@ else()
 	target_compile_definitions(OWL PRIVATE OWL_BUILD_SHARED)
 
 endif()
+
+# 
+if(WAYLAND_OFF)
+	target_compile_definitions(OWL PRIVATE OWL_WAYLAND_OFF)
+
+endif()
+if(X11_OFF)
+	target_compile_definitions(OWL PRIVATE OWL_X11_OFF)
+
+endif()
+
 
 # If the user didn't turn building examples off, we create them, linking the new OWL library to them:
 if(NOT BUILD_EXAMPLES STREQUAL "NO")
