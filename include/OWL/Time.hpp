@@ -33,11 +33,11 @@ public:
 	void start();
 	void end();
 
-	float getDeltaTime() const;
+	double getDeltaTime() const;
 
 private:
 	Impl::Timer* m_impl;
-	float m_deltaTime;
+	double m_deltaTime;
 };
 
 }
