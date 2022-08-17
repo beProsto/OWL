@@ -150,11 +150,11 @@ int main(int argc, char** argv) {
 	glEnableVertexAttribArray(1);  
 
 	while(window.isRunning()) {
-		window.pollEvents();
-		fps.start();
 		time.start();
+		window.pollEvents();
+		// fps.start();
 		
-		if(time.getDeltaTime() > 0.0f) t += time.getDeltaTime();
+		t += time.getDeltaTime();
 
 		if(window.keyboard.getKeyData().keyEnum == window.keyboard.M) {
 			window.mouse.setVisibility(!window.mouse.isVisible());
@@ -183,7 +183,7 @@ int main(int argc, char** argv) {
 
 		context.swapBuffers();
 
-		fps.end();
+		// fps.end();
 		time.end();
 	}
 
