@@ -19,7 +19,7 @@
 int main(int argc, char** argv) {
 	OWL::OpenGLContext context;
 	OWL::Window window;
-	OWL::FPSLimiter fps(60);
+	OWL::FPSLimiter fps(75);
 	OWL::Timer time;
 
 	window.setContext(context);
@@ -145,7 +145,7 @@ int main(int argc, char** argv) {
 
 	while(window.isRunning()) {
 		time.start();
-		// fps.start();
+		fps.start();
 		window.pollEvents();
 		
 		t += time.getDeltaTime();
