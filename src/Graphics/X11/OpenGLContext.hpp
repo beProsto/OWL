@@ -25,10 +25,10 @@ public:
 
 		// m_visualInfo->visual = DefaultVisual(static_cast<X11Window*>(m_windowImpl)->m_display, static_cast<X11Window*>(m_windowImpl)->m_screenID);
 		
-		XMatchVisualInfo(static_cast<X11Window*>(m_windowImpl)->m_display, static_cast<X11Window*>(m_windowImpl)->m_screenID, 32, 0, m_visualInfo);
+		// XMatchVisualInfo(static_cast<X11Window*>(m_windowImpl)->m_display, static_cast<X11Window*>(m_windowImpl)->m_screenID, 32, 0, m_visualInfo);
 		
-		m_glXContext = glXCreateContext(static_cast<X11Window*>(m_windowImpl)->m_display, m_visualInfo, 0, true);
-		glXMakeCurrent(static_cast<X11Window*>(m_windowImpl)->m_display, static_cast<X11Window*>(m_windowImpl)->m_window, m_glXContext);
+		// m_glXContext = glXCreateContext(static_cast<X11Window*>(m_windowImpl)->m_display, m_visualInfo, 0, true);
+		// glXMakeCurrent(static_cast<X11Window*>(m_windowImpl)->m_display, static_cast<X11Window*>(m_windowImpl)->m_window, m_glXContext);
 
 		return true;
 	}
