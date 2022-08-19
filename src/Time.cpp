@@ -47,7 +47,7 @@ void FPSLimiter::start() {
 }
 void FPSLimiter::end() {
 	m_impl->m_e = std::chrono::steady_clock::now();
-	double ms = std::chrono::duration_cast<std::chrono::milliseconds>(m_impl->m_e - m_impl->m_s).count();
+	double ms = std::chrono::duration_cast<std::chrono::nanoseconds>(m_impl->m_e - m_impl->m_s).count();
 	double delay = (1000.0 / static_cast<double>(m_fps)) - static_cast<double>(ms);
 	if(delay > 0.0) {
 		sleep(delay);
@@ -66,7 +66,7 @@ void Timer::start() {
 }
 void Timer::end() {
 	m_impl->m_e = std::chrono::steady_clock::now();
-	double ms = std::chrono::duration_cast<std::chrono::milliseconds>(m_impl->m_e - m_impl->m_s).count();
+	double ms = std::chrono::duration_cast<std::chrono::nanoseconds>(m_impl->m_e - m_impl->m_s).count();
 	m_deltaTime = static_cast<double>(ms) / 1000.0;
 }
 double Timer::getDeltaTime() const {
