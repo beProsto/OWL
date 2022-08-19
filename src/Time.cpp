@@ -10,8 +10,11 @@
 
 namespace OWL {
 
-void OWL_API sleep(unsigned int _milliseconds) {
-	std::this_thread::sleep_for(std::chrono::milliseconds(_milliseconds));
+using Duration = std::chrono::duration<double, std::milli>;
+using Clock = std::chrono::steady_clock;
+
+void OWL_API sleep(double _milliseconds) {
+	std::this_thread::sleep_for(Duration(_milliseconds));
 }
 
 
@@ -23,8 +26,18 @@ public:
 	~Timer() {
 	}
 
+	inline void start() {
+		m_s = Clock::now();
+	}
+	inline void end() {
+		m_e = Clock::now();
+	}
+	inline double getDelta() {
+		return std::chrono::duration_cast<Duration>(m_e - m_s).count();
+	}
+
 public:
-	std::chrono::steady_clock::time_point m_s, m_e;
+	Clock::time_point m_s, m_e;
 };
 }
 
@@ -43,12 +56,12 @@ unsigned int FPSLimiter::getDesiredFPS() const {
 	return m_fps;
 }
 void FPSLimiter::start() {
-	m_impl->m_s = std::chrono::steady_clock::now();
+	m_impl->start();
 }
 void FPSLimiter::end() {
-	m_impl->m_e = std::chrono::steady_clock::now();
-	double ms = std::chrono::duration_cast<std::chrono::nanoseconds>(m_impl->m_e - m_impl->m_s).count();
-	double delay = (1000.0 / static_cast<double>(m_fps)) - static_cast<double>(ms);
+	m_impl->end();
+	double ms = m_impl->getDelta();
+	double delay = 1000.0 / static_cast<double>(m_fps) - ms;
 	if(delay > 0.0) {
 		sleep(delay);
 	}
@@ -62,12 +75,11 @@ Timer::~Timer() {
 	delete m_impl;
 }
 void Timer::start() {
-	m_impl->m_s = std::chrono::steady_clock::now();
+	m_impl->start();
 }
 void Timer::end() {
-	m_impl->m_e = std::chrono::steady_clock::now();
-	double ms = std::chrono::duration_cast<std::chrono::nanoseconds>(m_impl->m_e - m_impl->m_s).count();
-	m_deltaTime = static_cast<double>(ms) / 1000.0;
+	m_impl->end();
+	m_deltaTime = m_impl->getDelta() / 1000.0;
 }
 double Timer::getDeltaTime() const {
 	return m_deltaTime;
