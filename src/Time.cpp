@@ -17,7 +17,6 @@ void OWL_API sleep(double _milliseconds) {
 	std::this_thread::sleep_for(Duration(_milliseconds));
 }
 
-
 namespace Impl {
 class OWL_API Timer {
 public:

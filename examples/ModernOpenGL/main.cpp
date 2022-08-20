@@ -177,7 +177,7 @@ int main(int argc, char** argv) {
 
 		context.swapBuffers();
 
-		// fps.end();
+		fps.end();
 		time.end();
 	}
 
