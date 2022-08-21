@@ -21,17 +21,10 @@ Or you can simply download the repository by going [here](https://github.com/beP
 In this section I'll give you a tour around creating and compiling your own simple OWL application
 
 ## Project layout:
-You can layout your project in any way you'd like, but we're going with this folder/directory layout:
-- Project
-	- OWL
-		- \<owl files\>
-	- \<source files\>
+You can layout your project in any way you'd like, just remember to put the include/ directory of OWL as one of the include directories for your project.
 
 ## Creating the main source file:
 Just create a simple `main.cpp` or any other way you'd like to call it;
-- Project
-	- OWL
-	- main.cpp
 
 ## Filling main.cpp up:
 We'll just make it a simple "Hello, World!" window.
@@ -41,43 +34,45 @@ We'll just make it a simple "Hello, World!" window.
 #include <OWL/time.hpp>
 
 // This is how a Main function looks like with OWL
-int Main(const std::vector<std::string>& args) {
+int main(int argc, char** argv) {
+	// We create a simple OWL window.
+	OWL::Window window;
 	// We define a software context
 	// That means it is ought to draw 
 	// using the CPU rather than the GPU.
 	OWL::SoftwareContext context;
-	// We create a simple OWL window and bind the context to it.
-	OWL::Window window(&context);
+	// We set the window to use this context.
+	window.setContext(context);
 
 	// We create an FPS limiter, it will limit the app's performance 
-	// to the given ammount of franes per second.
+	// to the given ammount of frames per second.
 	OWL::FPSLimiter fps(60);
 
 	// This is the main loop, our programme's every step is defined here.
-	while(window.IsRunning()) {
+	while(window.isRunning()) {
 		// At the start of every frame we check for any new events.
-		window.PollEvents();
+		window.pollEvents();
 		// Update the fps limiter.
-		fps.Start();
+		fps.start();
 
 		// If the user presses F11, we toggle fullscreen.
-		if(window.Keyboard.GetKeyData().KeyEnum == window.Keyboard.F11) {
-			window.SetFullScreen(!window.IsFullScreen());
+		if(window.keyboard.getKeyData().enum == OWL::keyboard::F11) {
+			window.setFullScreen(!window.isFullScreen());
 		}
-		// If the user presses Escape, we cloase the app.
-		if(window.Keyboard.GetKeyData().KeyEnum == window.Keyboard.Escape) {
-			window.Close();
+		// If the user presses Escape, we close the app.
+		if(window.keyboard.isKeyPressed(OWL::keyboard::Escape)) {
+			window.close();
 		}
 
 		// We want our context to fit exactly to the window.
-		context.Resize(window.GetSize());
+		context.setSize(window.getSize());
 		// We clear our context's canvas with a given RGBA colour.
-		context.Clear(OWL::Vec4ub(255, 100, 45, 255)); /* Clears the screen in orange color */
+		context.clear(OWL::Vec4ub(255, 100, 45, 255)); /* clears the screen in orange color */
 
-		// We blit the context (put the context image) to the screen.
-		context.BlitToScreen();
+		// We blit the context (put the context's image) to the screen.
+		context.blitToScreen();
 		// Update the fps limiter.
-		fps.End();
+		fps.end();
 	}
 
 	return 0;
@@ -87,10 +82,10 @@ int Main(const std::vector<std::string>& args) {
 Who's to say that we can't have some fun with it, like for instance, put a square on the screen;
 ```cpp
 // Draws a blue rectangle 
-for(unsigned int i = 25; i < min(50, context.GetSize().x); i++) {
-	for(unsigned int j = 60; j < min(170, context.GetSize().y); j++) {
+for(unsigned int i = 25; i < min(50, context.getSize().x); i++) {
+	for(unsigned int j = 60; j < min(170, context.getSize().y); j++) {
 		// Draws a blue pixel
-		context.GetPixelData()[j*context.GetSize().x+i] = OWL::Vec4b(60, 90, 200, 255); 
+		context.getPixelData()[j*context.getSize().x+i] = OWL::Vec4b(60, 90, 200, 255); 
 	}
 }
 ```
