@@ -162,7 +162,7 @@ int main(int argc, char** argv) {
 			printf("D %d : %d\n", window.getSize().x, window.getSize().y);
 		}
 
-		if(window.keyboard.isKeyPressed(OWL::Keyboard::F11)) {
+		if(window.keyboard.getKeyData().keyEnum == OWL::Keyboard::F11) {
 			window.setFullScreen(!window.isFullScreen());
 		}
 
