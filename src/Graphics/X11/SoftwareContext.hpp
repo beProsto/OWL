@@ -32,8 +32,6 @@ public:
 	virtual bool validate() {
 		m_image = XCreateImage(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_visual, DefaultDepth(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_screenID), ZPixmap, 0, reinterpret_cast<char*>(m_data), 0, 0, 32, 0);
 		
-		XClearWindow(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_window);
-		XMapRaised(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_window);
 		return true;
 	}
 

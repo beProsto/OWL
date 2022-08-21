@@ -51,6 +51,9 @@ public:
 			&m_windowAttribs
 		);
 
+		XClearWindow(m_display, m_window);
+		XMapRaised(m_display, m_window);
+
 		XSetLocaleModifiers("");
 		m_xIM = XOpenIM(m_display, 0, 0, 0);
 		if(!m_xIM) {

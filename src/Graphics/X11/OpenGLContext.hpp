@@ -55,8 +55,6 @@ public:
 		m_glXContext = glXCreateContext(Win(m_windowImpl)->m_display, m_visualInfo, 0, true);
 		glXMakeCurrent(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_window, m_glXContext);
 
-		XClearWindow(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_window);
-		XMapRaised(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_window);
 		return true;
 	}
 
