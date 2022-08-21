@@ -46,8 +46,9 @@ elseif(OWL_SYSTEM_LINUX)
 	if(NOT X11_OFF)
 		link_libraries(
 			X11
+			Xext
 			GL
-			GLX
+			GLU
 		)
 
 	endif()

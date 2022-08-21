@@ -24,7 +24,7 @@ public:
 		int versionGLX[2] = {0, 0}; /* Order: major[0], minor[1] */ 
 		glXQueryVersion(Win(m_windowImpl)->m_display, &versionGLX[0], &versionGLX[1]);
 
-		printf("GLX VERSION: %d.%d\n", versionGLX[0], versionGLX[1]);
+		// printf("OWL: GLX version: %d.%d\n", versionGLX[0], versionGLX[1]);
 
 		int attribsGLX[] = {
 			GLX_RGBA,
@@ -42,7 +42,7 @@ public:
 		};
 		m_visualInfo = glXChooseVisual(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_screenID, attribsGLX);
 		if(m_visualInfo == nullptr) {
-			printf("Couldn't choose visual!\n");
+			printf("OWL: glXChooseVisual doesn't work!\n");
 			return false;
 		}
 
@@ -71,7 +71,7 @@ public:
 		};
 	}
 	virtual void swapBuffers() {
-
+		glXSwapBuffers(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_window);
 	}
 
 public:
