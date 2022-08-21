@@ -16,26 +16,40 @@ class OWL_API X11Window: public Window {
 public:
 	X11Window(Vec2ui _size, std::string _title) {
 		m_isRunning = true;
-		m_isFullScreen = false;
 		m_isFocused = true;
 		m_contextImpl = nullptr;
 
 		m_display = XOpenDisplay(0);
 		m_screenID = DefaultScreen(m_display);
 
+		m_visual = DefaultVisual(m_display, m_screenID);
+		m_depth = 0;
+
 		create(_size, _title);
 	}
 	virtual ~X11Window() {
 		destroy();
+		XCloseDisplay(m_display);
 	}
 
 	virtual bool create(Vec2ui _size, std::string _title) {
 		m_title = "";
-
-		m_window = XCreateSimpleWindow(m_display, XRootWindow(m_display, m_screenID), 0, 0, _size.x, _size.y, 1, 0, 0);
+		m_isFullScreen = false;
 		
-		XSelectInput(m_display, m_window, OWL_X11_WINDOW_EVENT_MASKS);
-		XMapWindow(m_display, m_window);
+		m_windowAttribs.border_pixel = WhitePixel(m_display, m_screenID);
+		m_windowAttribs.background_pixel = BlackPixel(m_display, m_screenID);
+		m_windowAttribs.override_redirect = true;
+		m_windowAttribs.colormap = XCreateColormap(m_display, XRootWindow(m_display, m_screenID), m_visual, AllocNone);
+		m_windowAttribs.event_mask = OWL_X11_WINDOW_EVENT_MASKS;
+
+		m_window = XCreateWindow(
+			m_display, XRootWindow(m_display, m_screenID), 
+			0, 0, 
+			_size.x, _size.y, 
+			0, m_depth, InputOutput, m_visual, 
+			CWBackPixel | CWColormap | CWBorderPixel | CWEventMask, 
+			&m_windowAttribs
+		);
 
 		XSetLocaleModifiers("");
 		m_xIM = XOpenIM(m_display, 0, 0, 0);
@@ -60,39 +74,44 @@ public:
 		return true;
 	}
 	virtual void destroy() {
-		XDestroyIC(m_xIC);
-		XCloseIM(m_xIM);
-		XDestroyWindow(m_display, m_window);
-		XCloseDisplay(m_display);
-	}
-	
-	virtual void setContext(Context& _context) {
-		// // THIS IS THE PROPER WAY TO GO ABOUT THIS
-		// // BUT IT LOOKS BAD
-		// // SO ONLY USE THIS IMPLEMENTATION
-		// // IF REQUIRED BY DIRECT3D
-		// // (VULKAN DOESN'T AS FAR AS I'M AWARE)
-		// Vec2ui winSize = getSize();
-		// Vec2i winPosition = getPosition();
-		// bool winFullScreen = isFullScreen();
-		// destroy();
-		// m_contextImpl = &_context;
-		// m_contextImpl->m_windowImpl = this;
-		// m_contextImpl->create();
-		// create(winPosition, winSize, m_title, winFullScreen);
-		// m_contextImpl->validate();
-
-		// This is an improper, but good looking
-		// implementation of context switching.
 		if(m_contextImpl != nullptr) {
 			m_contextImpl->destroy();
 			m_contextImpl = nullptr;
 		}
+		XDestroyIC(m_xIC);
+		XCloseIM(m_xIM);
+		XDestroyWindow(m_display, m_window);
+	}
+	
+	virtual void setContext(Context& _context) {
+		Vec2ui winSize = getSize();
+		Vec2i winPosition = getPosition();
+		bool winFullScreen = isFullScreen();
+		std::string winTitle = getTitle();
+
+		destroy();
+		
 		m_contextImpl = &_context;
 		m_contextImpl->m_windowImpl = this;
-
+		
 		m_contextImpl->create();
+		create(winSize, winTitle);
 		m_contextImpl->validate();
+
+		setPosition(winPosition);
+		setFullScreen(winFullScreen);
+
+		// // This is an improper, but good looking
+		// // implementation of context switching.
+		// if(m_contextImpl != nullptr) {
+		// 	m_contextImpl->destroy();
+		// 	m_contextImpl = nullptr;
+		// }
+		// m_contextImpl = &_context;
+		// m_contextImpl->m_windowImpl = this;
+
+		// m_contextImpl->create();
+		// m_contextImpl->validate();
 	}
 
 	virtual void pollEvents() {
@@ -202,10 +221,14 @@ public:
 	}
 
 public:
+	::XSetWindowAttributes m_windowAttribs;
 	::XEvent m_event;
 	::XIM m_xIM;
 	::XIC m_xIC;
 	::Atom m_deleteWM;
+	::Visual* m_visual; /* set via context */
+	int m_depth; /* set via context */
+
 
 	::Display* m_display;
 	::Window m_window;

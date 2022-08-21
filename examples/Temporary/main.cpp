@@ -97,11 +97,18 @@ int main(int argc, char** argv) {
 	time.end();
 	printf("It took %f secs!\n", time.getDeltaTime());
 
+
 	OWL::Window window;
 	printf("EA szzorts \n");
-	// OWL::OpenGLContext gl;
-	// window.setContext(gl);
+	
+	OWL::SoftwareContext sc;
+	OWL::OpenGLContext gl;
 
+	window.setContext(sc);
+
+	bool cont = false;
+
+	
 	std::wstring text;
 
 	while(window.isRunning()) {
@@ -124,6 +131,23 @@ int main(int argc, char** argv) {
 		if(window.keyboard.getKeyData().keyChar == 's') {
 			printf("S pressed\n");
 			window.mouse.setVisibility(!window.mouse.isVisible());
+		}
+
+		if(window.keyboard.getKeyData().keyChar == 'g') {
+			cont = !cont;
+			if(cont) window.setContext(gl);
+			else window.setContext(sc);
+		}
+
+		if(!cont) {
+			sc.setSize(window.getSize());
+			sc.clear(OWL::Vec4ub(255, 255, 0, 255));
+			sc.blitToScreen();
+		}
+		else {
+			glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+			glClear(GL_COLOR_BUFFER_BIT);
+			gl.swapBuffers();
 		}
 
 		if(window.keyboard.getKeyData().keyChar != '\0') {
