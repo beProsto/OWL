@@ -1,5 +1,5 @@
 # KeyEnums
-The `Key` enums are a part of the `keyboard` class - they are used by the `isKeyPressed()` function to check whether or not is the key behind a certain enum pressed, and are used in the `KeyData` structure, as the `enum` value. The structure is returned by the `getKeyData()` function.
+The `Key` enums are a part of the `keyboard` class - they are used by the `isKeyPressed()` function to check whether or not is the key behind a certain enum pressed, and are used in the `KeyData` structure, as the `keyEnum` value. The structure is returned by the `getKeyData()` function.
 
 These are all the keys in it:
 - `ShiftLeft`
@@ -108,5 +108,5 @@ These are all the keys in it:
 __Example of usage:__
 ```cpp
 std::cout << "Apostrophe key's state: " << window.keyboard.isKeyPressed(OWL::keyboard::Apostrophe) << "\n";
-std::cout << "Is B being typeed in: " << ((window.keyboard.getKeyData().enum == OWL::keyboard::B) ? "yes" : "no") << "\n"; // We should see an pattern of interpolating "yes"'s and "no"'s if the button is pressed.
+std::cout << "Is B being typeed in: " << ((window.keyboard.getKeyData().keyEnum == OWL::keyboard::B) ? "yes" : "no") << "\n"; // We should see an pattern of interpolating "yes"'s and "no"'s if the button is pressed.
 ```
