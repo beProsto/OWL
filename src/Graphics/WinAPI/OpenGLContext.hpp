@@ -24,7 +24,7 @@ public:
 		return true;
 	}
 	virtual bool validate() {
-		m_hdc = GetDC(static_cast<WinAPIWindow*>(m_windowImpl)->m_hwnd);
+		m_hdc = GetDC(Win(m_windowImpl)->m_hwnd);
 		
 		PIXELFORMATDESCRIPTOR pfd;
 		int iFormat;
@@ -53,7 +53,7 @@ public:
 		FreeLibrary(OSInfo::get()->opengl32ModuleHandle);
 		wglMakeCurrent(NULL, NULL);
 		wglDeleteContext(m_hrc);
-		ReleaseDC(static_cast<WinAPIWindow*>(m_windowImpl)->m_hwnd, m_hdc);
+		ReleaseDC(Win(m_windowImpl)->m_hwnd, m_hdc);
 	}
 
 	virtual OpenGLLoaderFunction getLoaderFunction() {
