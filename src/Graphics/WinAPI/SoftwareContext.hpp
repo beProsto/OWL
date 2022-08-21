@@ -9,6 +9,8 @@
 
 namespace OWL {
 namespace Impl {
+#define Win(x) static_cast<WinAPIWindow*>(x)
+
 class OWL_API WinAPISoftwareContext: public SoftwareContext {
 public:
 	WinAPISoftwareContext() {
@@ -22,7 +24,7 @@ public:
 		return true;
 	}
 	virtual bool validate() {
-		m_hdc = GetDC(static_cast<WinAPIWindow*>(m_windowImpl)->m_hwnd);
+		m_hdc = GetDC(Win(m_windowImpl)->m_hwnd);
 
 		m_data = new unsigned char[0];
 		m_size = OWL::Vec2ui(0);
@@ -31,7 +33,7 @@ public:
 	}
 
 	virtual void destroy() {
-		ReleaseDC(static_cast<WinAPIWindow*>(m_windowImpl)->m_hwnd, m_hdc);
+		ReleaseDC(Win(m_windowImpl)->m_hwnd, m_hdc);
 		delete[] m_data;
 		m_size = OWL::Vec2ui(0);
 	}

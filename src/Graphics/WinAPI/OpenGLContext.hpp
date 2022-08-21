@@ -9,6 +9,8 @@
 
 namespace OWL {
 namespace Impl {
+#define Win(x) static_cast<WinAPIWindow*>(x)
+
 class OWL_API WinAPIOpenGLContext: public OpenGLContext {
 public:
 	WinAPIOpenGLContext() {
