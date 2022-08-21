@@ -9,6 +9,8 @@
 
 namespace OWL {
 namespace Impl {
+#define Win(x) static_cast<X11Window*>(x)
+
 class OWL_API X11SoftwareContext: public SoftwareContext {
 public:
 	X11SoftwareContext() {
@@ -19,15 +21,19 @@ public:
 	}
 
 	virtual bool create()  {
-		return true;
-	}
-	virtual bool validate() {
 		m_data = new unsigned char[0];
 		m_size = OWL::Vec2ui(0);
 
-		m_visual = DefaultVisual(static_cast<X11Window*>(m_windowImpl)->m_display, static_cast<X11Window*>(m_windowImpl)->m_screenID);
-		m_image = XCreateImage(static_cast<X11Window*>(m_windowImpl)->m_display, m_visual, DefaultDepth(static_cast<X11Window*>(m_windowImpl)->m_display, static_cast<X11Window*>(m_windowImpl)->m_screenID), ZPixmap, 0, reinterpret_cast<char*>(m_data), 0, 0, 32, 0);
+		Win(m_windowImpl)->m_visual = DefaultVisual(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_screenID);
+		Win(m_windowImpl)->m_depth = 0;
+
+		return true;
+	}
+	virtual bool validate() {
+		m_image = XCreateImage(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_visual, DefaultDepth(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_screenID), ZPixmap, 0, reinterpret_cast<char*>(m_data), 0, 0, 32, 0);
 		
+		XClearWindow(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_window);
+		XMapRaised(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_window);
 		return true;
 	}
 
@@ -45,7 +51,7 @@ public:
 			m_data = new unsigned char[m_size.x * m_size.y * 4];
 			
 			XFree(m_image);
-			m_image = XCreateImage(static_cast<X11Window*>(m_windowImpl)->m_display, m_visual, DefaultDepth(static_cast<X11Window*>(m_windowImpl)->m_display, static_cast<X11Window*>(m_windowImpl)->m_screenID), ZPixmap, 0, reinterpret_cast<char*>(m_data), m_size.x, m_size.y, 32, 0);
+			m_image = XCreateImage(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_visual, DefaultDepth(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_screenID), ZPixmap, 0, reinterpret_cast<char*>(m_data), m_size.x, m_size.y, 32, 0);
 		}
 	}
 	virtual Vec2ui getSize() const {
@@ -70,7 +76,7 @@ public:
 			m_data[i+2] = red; /* red */
 		}
 
-		XPutImage(static_cast<X11Window*>(m_windowImpl)->m_display, static_cast<X11Window*>(m_windowImpl)->m_window, DefaultGC(static_cast<X11Window*>(m_windowImpl)->m_display, static_cast<X11Window*>(m_windowImpl)->m_screenID), m_image, 0, 0, 0, 0, m_size.x, m_size.y);
+		XPutImage(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_window, DefaultGC(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_screenID), m_image, 0, 0, 0, 0, m_size.x, m_size.y);
 	}
 
 	virtual Vec4ub* getPixelData() {
@@ -81,7 +87,6 @@ public:
 	Vec2<unsigned int> m_size;
 	unsigned char* m_data;
 
-	::Visual* m_visual;
 	::XImage* m_image;
 };
 }

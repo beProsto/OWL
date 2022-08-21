@@ -144,6 +144,11 @@ int main(int argc, char** argv) {
 			sc.clear(OWL::Vec4ub(255, 255, 0, 255));
 			sc.blitToScreen();
 		}
+		else {
+			glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+			glClear(GL_COLOR_BUFFER_BIT);
+			gl.swapBuffers();
+		}
 
 		if(window.keyboard.getKeyData().keyChar != '\0') {
 			text += window.keyboard.getKeyData().keyChar;
