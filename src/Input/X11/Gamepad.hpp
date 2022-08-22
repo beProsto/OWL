@@ -7,7 +7,6 @@
 
 namespace OWL {
 namespace Impl {
-
 struct OWL_API X11GamepadMetaData {
 	int js = -1;
 	Vec2f leftStickInternal = Vec2f(0.0f);

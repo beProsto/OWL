@@ -3,6 +3,7 @@
 #include "../OpenGLContext.hpp"
 #include "../../System/Window.hpp"
 
+#include <OWL/System/Info.hpp>
 #include <OWL/OS/Linux.hpp>
 
 #include <OWL/OS/OpenGL.hpp>
@@ -22,7 +23,7 @@ public:
 
 	virtual bool create()  {
 		int versionGLX[2] = {0, 0}; /* Order: major[0], minor[1] */ 
-		glXQueryVersion(Win(m_windowImpl)->m_display, &versionGLX[0], &versionGLX[1]);
+		glXQueryVersion(OSInfo::get()->displayX11, &versionGLX[0], &versionGLX[1]);
 
 		// printf("OWL: GLX version: %d.%d\n", versionGLX[0], versionGLX[1]);
 
@@ -40,7 +41,7 @@ public:
 			GLX_SAMPLES,        0,
 			0L
 		};
-		m_visualInfo = glXChooseVisual(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_screenID, attribsGLX);
+		m_visualInfo = glXChooseVisual(OSInfo::get()->displayX11, OSInfo::get()->screenIdX11, attribsGLX);
 		if(m_visualInfo == nullptr) {
 			printf("OWL: glXChooseVisual doesn't work!\n");
 			return false;
@@ -52,14 +53,14 @@ public:
 		return true;
 	}
 	virtual bool validate() {
-		m_glXContext = glXCreateContext(Win(m_windowImpl)->m_display, m_visualInfo, 0, true);
-		glXMakeCurrent(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_window, m_glXContext);
+		m_glXContext = glXCreateContext(OSInfo::get()->displayX11, m_visualInfo, 0, true);
+		glXMakeCurrent(OSInfo::get()->displayX11, Win(m_windowImpl)->m_window, m_glXContext);
 
 		return true;
 	}
 
 	virtual void destroy() {
-		glXDestroyContext(Win(m_windowImpl)->m_display, m_glXContext);
+		glXDestroyContext(OSInfo::get()->displayX11, m_glXContext);
 	}
 
 	virtual OpenGLLoaderFunction getLoaderFunction() {
@@ -69,7 +70,7 @@ public:
 		};
 	}
 	virtual void swapBuffers() {
-		glXSwapBuffers(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_window);
+		glXSwapBuffers(OSInfo::get()->displayX11, Win(m_windowImpl)->m_window);
 	}
 
 public:

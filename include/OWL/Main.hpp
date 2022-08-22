@@ -35,7 +35,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 /* X11 */
 #include <OWL/OS/Linux.hpp>
 int main(int argc, char** argv) {
-	return OWLMain(argc, argv);
+	// WIP
+	OWL::OSInfo::get()->windowingSubsystem = OWL::WindowingSubsystem::X11;
+
+	OWL::OSInfo::get()->displayX11 = XOpenDisplay(0);
+	OWL::OSInfo::get()->screenIdX11 = DefaultScreen(OWL::OSInfo::get()->displayX11);
+	int ret = OWLMain(argc, argv);
+	XCloseDisplay(OWL::OSInfo::get()->displayX11);
+	return ret;
 }
 
 #else

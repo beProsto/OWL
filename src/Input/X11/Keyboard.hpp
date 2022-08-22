@@ -7,6 +7,8 @@
 
 namespace OWL {
 namespace Impl {
+#define Win(x) static_cast<X11Window*>(x)
+
 class OWL_API X11Keyboard: public Keyboard {
 public:
 	X11Keyboard() {
@@ -230,8 +232,8 @@ public:
 		bool returnedBool = false;
 
 		char keys[1024];
-		XQueryKeymap(static_cast<X11Window*>(m_windowImpl)->m_display, keys);
-		::KeyCode key = XKeysymToKeycode(static_cast<X11Window*>(m_windowImpl)->m_display, m_keyMap[_key]);
+		XQueryKeymap(OSInfo::get()->displayX11, keys);
+		::KeyCode key = XKeysymToKeycode(OSInfo::get()->displayX11, m_keyMap[_key]);
 		returnedBool = !!(keys[key>>3] & (1<<(key&7)));
 
 		return returnedBool;
@@ -243,12 +245,12 @@ public:
 		m_keyData.keyEnum = OWL::Keyboard::None;
 	}
 	virtual void pollSpecificEvents() {
-		if(static_cast<X11Window*>(m_windowImpl)->m_event.type == KeyPress) {
+		if(Win(m_windowImpl)->m_event.type == KeyPress) {
 			int status;
 			KeySym keysym = NoSymbol;
 			wchar_t text[32] = {};
 
-			XwcLookupString(static_cast<X11Window*>(m_windowImpl)->m_xIC, &static_cast<X11Window*>(m_windowImpl)->m_event.xkey, text, sizeof(text) - 1, &keysym, &status);
+			XwcLookupString(Win(m_windowImpl)->m_xIC, &Win(m_windowImpl)->m_event.xkey, text, sizeof(text) - 1, &keysym, &status);
 
 			if(status == XLookupChars || status == XLookupBoth) {
 				if(text[0] == '\r') {
@@ -262,8 +264,8 @@ public:
 				m_keyData = KeyData{'\0', translateFromVirtualKey(keysym)};
 			}
 		}
-		else if(static_cast<X11Window*>(m_windowImpl)->m_event.type == MappingNotify) {
-			XRefreshKeyboardMapping(&static_cast<X11Window*>(m_windowImpl)->m_event.xmapping);
+		else if(Win(m_windowImpl)->m_event.type == MappingNotify) {
+			XRefreshKeyboardMapping(&Win(m_windowImpl)->m_event.xmapping);
 		}
 	}
 

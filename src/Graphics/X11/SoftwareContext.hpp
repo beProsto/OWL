@@ -3,6 +3,7 @@
 #include "../SoftwareContext.hpp"
 #include "../../System/Window.hpp"
 
+#include <OWL/System/Info.hpp>
 #include <OWL/OS/Linux.hpp>
 
 #include <stdio.h>
@@ -24,13 +25,13 @@ public:
 		m_data = new unsigned char[0];
 		m_size = OWL::Vec2ui(0);
 
-		Win(m_windowImpl)->m_visual = DefaultVisual(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_screenID);
+		Win(m_windowImpl)->m_visual = DefaultVisual(OSInfo::get()->displayX11, OSInfo::get()->screenIdX11);
 		Win(m_windowImpl)->m_depth = 0;
 
 		return true;
 	}
 	virtual bool validate() {
-		m_image = XCreateImage(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_visual, DefaultDepth(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_screenID), ZPixmap, 0, reinterpret_cast<char*>(m_data), 0, 0, 32, 0);
+		m_image = XCreateImage(OSInfo::get()->displayX11, Win(m_windowImpl)->m_visual, DefaultDepth(OSInfo::get()->displayX11, OSInfo::get()->screenIdX11), ZPixmap, 0, reinterpret_cast<char*>(m_data), 0, 0, 32, 0);
 		
 		return true;
 	}
@@ -49,7 +50,7 @@ public:
 			m_data = new unsigned char[m_size.x * m_size.y * 4];
 			
 			XFree(m_image);
-			m_image = XCreateImage(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_visual, DefaultDepth(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_screenID), ZPixmap, 0, reinterpret_cast<char*>(m_data), m_size.x, m_size.y, 32, 0);
+			m_image = XCreateImage(OSInfo::get()->displayX11, Win(m_windowImpl)->m_visual, DefaultDepth(OSInfo::get()->displayX11, OSInfo::get()->screenIdX11), ZPixmap, 0, reinterpret_cast<char*>(m_data), m_size.x, m_size.y, 32, 0);
 		}
 	}
 	virtual Vec2ui getSize() const {
@@ -74,7 +75,7 @@ public:
 			m_data[i+2] = red; /* red */
 		}
 
-		XPutImage(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_window, DefaultGC(Win(m_windowImpl)->m_display, Win(m_windowImpl)->m_screenID), m_image, 0, 0, 0, 0, m_size.x, m_size.y);
+		XPutImage(OSInfo::get()->displayX11, Win(m_windowImpl)->m_window, DefaultGC(OSInfo::get()->displayX11, OSInfo::get()->screenIdX11), m_image, 0, 0, 0, 0, m_size.x, m_size.y);
 	}
 
 	virtual Vec4ub* getPixelData() {
