@@ -59,7 +59,7 @@ public:
 	}
 
 	virtual void destroy() {
-
+		glXDestroyContext(Win(m_windowImpl)->m_display, m_glXContext);
 	}
 
 	virtual OpenGLLoaderFunction getLoaderFunction() {
@@ -74,10 +74,7 @@ public:
 
 public:
 	::XVisualInfo* m_visualInfo;
-	bool m_Created;
-
 	::GLXContext m_glXContext;
-
 };
 }
 }
