@@ -42,8 +42,7 @@ elseif(OWL_SYSTEM_LINUX)
 			wayland-client
 		)
 
-	endif()
-	if(NOT X11_OFF)
+	elseif(NOT X11_OFF)
 		link_libraries(
 			X11
 			Xext
@@ -55,8 +54,8 @@ elseif(OWL_SYSTEM_LINUX)
 
 endif()
 
-# Depending on the library type, we need to use a correct definition
-if(LIBTYPE STREQUAL "STATIC")
+# Depending on the library type, we set a correct macro
+if(OWL_BUILD_STATIC)
 	add_library(OWL STATIC ${lib_srcs})
 	target_compile_definitions(OWL PRIVATE OWL_BUILD_STATIC)
 
@@ -66,19 +65,18 @@ else()
 
 endif()
 
-# 
-if(WAYLAND_OFF)
+# Depending on the disabled subwindowing system, we set a correct macro
+if(OWL_WAYLAND_OFF)
 	target_compile_definitions(OWL PRIVATE OWL_WAYLAND_OFF)
 
-endif()
-if(X11_OFF)
+elseif(OWL_X11_OFF)
 	target_compile_definitions(OWL PRIVATE OWL_X11_OFF)
 
 endif()
 
 
 # If the user didn't turn building examples off, we create them, linking the new OWL library to them:
-if(NOT BUILD_EXAMPLES STREQUAL "NO")
+if(OWL_EXAMPLES_ON)
 	link_libraries(OWL)
 	
 	OWL_AddExample(GUIApplication)
