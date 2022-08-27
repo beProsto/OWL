@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
 
 #else
 /* Other */
-#error OWL: Unsupported platform! (Only linux and windows supported currently!)
+#error OWL: Unsupported platform! (Only Linux and Windows supported currently!)
 
 #endif
 
