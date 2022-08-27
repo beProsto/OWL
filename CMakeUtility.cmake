@@ -19,15 +19,15 @@ endif()
 
 
 # Determines the preffered windowing subsystem on linux
-if(DISABLE_WAYLAND STREQUAL "YES")
-	set(OWL_WAYLAND_OFF TRUE)
-	set(OWL_X11_ON TRUE)
-
-elseif(DISABLE_X11 STREQUAL "YES")
-	set(OWL_WAYLAND_ON TRUE)
-	set(OWL_X11_OFF TRUE)
-
-endif()
+# if(DISABLE_WAYLAND STREQUAL "YES")
+# 	set(OWL_WAYLAND_OFF TRUE)
+# 	set(OWL_X11_ON TRUE)
+#
+# elseif(DISABLE_X11 STREQUAL "YES")
+# 	set(OWL_WAYLAND_ON TRUE)
+# 	set(OWL_X11_OFF TRUE)
+#
+# endif()
 
 
 # Determines if building examples is enabled
