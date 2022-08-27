@@ -69,6 +69,7 @@ void FPSLimiter::end() {
 
 Timer::Timer() {
 	m_impl = new Impl::Timer();
+	m_deltaTime = 0.0;
 }
 Timer::~Timer() {
 	delete m_impl;
