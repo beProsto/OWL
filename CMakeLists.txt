@@ -17,12 +17,8 @@ file(GLOB_RECURSE lib_srcs
 	"src/*.cpp"
 )
 
-if(OWL_SYSTEM_EMSCRIPTEN)
-	# WASM doesn't have a concept of a dynamic library
-	set(OWL_BUILD_STATIC TRUE)
-	add_link_options(-s USE_SDL=2)
-
-elseif(OWL_SYSTEM_WINDOWS)
+# OS-Dependant library links
+if(OWL_SYSTEM_WINDOWS)
 	link_libraries(
 		opengl32
 		glu32
@@ -82,10 +78,6 @@ endif()
 # If the user didn't turn building examples off, we create them, linking the new OWL library to them:
 if(OWL_EXAMPLES_ON)
 	link_libraries(OWL)
-	
-	if(OWL_SYSTEM_EMSCRIPTEN)
-		OWL_AddExample(EmTemp)
-	endif()
 	
 	OWL_AddExample(GUIApplication)
 	OWL_AddExample(ModernOpenGL)

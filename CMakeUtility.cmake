@@ -1,8 +1,4 @@
-# Determines the System
-if(EMSCRIPTEN)
-	set(OWL_SYSTEM_EMSCRIPTEN TRUE)
-
-elseif(WIN32)
+if(WIN32)
 	set(OWL_SYSTEM_WINDOWS TRUE)
 
 elseif(UNIX)
@@ -50,31 +46,6 @@ else()
 endif()
 
 
-# Generates a basic html file for our emscripten/wasm build targets (examples)
-function(OWL_GenerateHtml name)
-	set(base 
-		"<meta charset=\"utf-8\">"
-		"<title>OWL ${name}</title>"
-		"<canvas id=\"canvas\" style=\"position:absolute\;top:0px\;left:0px\;margin:0px\;border:0\;width:100%\;height:100%\;overflow:hidden\;display:block\;\"></canvas>"
-		"<script>var Module={"
-			"print:(t)=>{console.log(t)},"
-			"printErr:(text)=>{"
-				"if(arguments.length>1)text=Array.prototype.slice.call(arguments).join(' ')\;"
-				"if(0){dump(text+'\\n')}"
-			"},"
-			"canvas:(()=>{"
-				"var canvas=document.getElementById('canvas')\;"
-				"return canvas"
-			"})()"
-		"}\;</script>"
-		
-		"<script src=\"./${name}.js\"></script>"
-	)
-
-	file(WRITE ${CMAKE_BINARY_DIR}/${name}.html ${base})
-endfunction()
-
-
 # Adds an executable target for our examples
 function(OWL_AddExample name)
 	file(GLOB_RECURSE ${name}_srcs
@@ -86,9 +57,5 @@ function(OWL_AddExample name)
 
 	if(OWL_BUILD_STATIC)
 		target_compile_definitions(${name} PRIVATE OWL_BUILD_STATIC)
-	endif()
-
-	if(OWL_SYSTEM_EMSCRIPTEN)
-		OWL_GenerateHtml(${name})
 	endif()
 endfunction()
