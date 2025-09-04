@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.10)
 # NOT A FULL RELEASE YET
 project(OWL VERSION 0.2022.2)
 # I'm sorry but it has to be this way 😔
